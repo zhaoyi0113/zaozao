@@ -1,4 +1,4 @@
-package com.education;
+package com.education.ws;
 
 import org.glassfish.jersey.server.ResourceConfig;
 
