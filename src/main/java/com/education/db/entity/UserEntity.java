@@ -1,5 +1,7 @@
 package com.education.db.entity;
 
+import com.education.ws.UserRegisterBean;
+
 import javax.persistence.*;
 
 /**
@@ -14,6 +16,16 @@ public class UserEntity {
     private String password;
     private String gender;
     private int age;
+
+    public UserEntity() {
+    }
+
+    public UserEntity(UserRegisterBean u){
+        userName = u.getUserName();
+        password = u.getPassword();
+        gender = u.getGender();
+        age = u.getAge();
+    }
 
     @Id
     @GeneratedValue

@@ -44,6 +44,7 @@ public class DBConnection {
         Session session = sessionThread.get();
         if (session != null) {
             session.close();
+            sessionThread.remove();
         }
     }
 

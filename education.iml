@@ -84,5 +84,8 @@
     <orderEntry type="library" exported="" name="Gradle: org.hibernate.javax.persistence:hibernate-jpa-2.0-api:1.0.1.Final" level="project" />
     <orderEntry type="library" exported="" name="Gradle: org.hibernate.common:hibernate-commons-annotations:4.0.2.Final" level="project" />
     <orderEntry type="library" exported="" name="Gradle: org.hibernate:hibernate-entitymanager:4.2.2.Final" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: mysql:mysql-connector-java:5.1.25" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: com.google.code.gson:gson:2.4" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: javax.servlet:servlet-api:2.5" level="project" />
   </component>
 </module>
