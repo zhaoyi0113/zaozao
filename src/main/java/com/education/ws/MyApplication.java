@@ -8,7 +8,7 @@ import javax.ws.rs.core.MediaType;
 /**
  * Created by yzzhao on 10/31/15.
  */
-@ApplicationPath("/")
+@ApplicationPath("/zaozao")
 @Path("/hello")
 public class MyApplication extends ResourceConfig {
 

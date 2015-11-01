@@ -27,4 +27,12 @@ public class RegisterBean {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    @Override
+    public String toString() {
+        StringBuffer buffer =new StringBuffer();
+        buffer.append("userName=").append(userName).append("\nPassword=").append(password);
+        return buffer.toString();
+    }
+
 }
