@@ -1,0 +1,12 @@
+<div ng-controller="UserEditController">
+
+    <form name="user_edit">
+        Name:<input ng-model="user.userName" name="userName" type="text" required /><br/>
+        Email: <input ng-model="user.email" name="userEmail" type="text" required /><br/>
+        Phone: <input ng-model="user.phone" name="userPhone" type="text" /><br/>
+        Age: <input ng-model="user.age" name="userAge" type="text" /><br/>
+        <button ng-click="submit()">Submit</button>
+        <button ng-click="cancel()">Cancel</button>
+    </form>
+
+</div>

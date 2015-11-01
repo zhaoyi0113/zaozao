@@ -6,6 +6,9 @@ import javax.ws.rs.FormParam;
  * Created by yzzhao on 10/31/15.
  */
 public class UserRegisterBean {
+
+    private int userId;
+
     @FormParam("userName")
     private String userName;
 
@@ -17,6 +20,15 @@ public class UserRegisterBean {
 
     @FormParam("age")
     private int age;
+
+    @FormParam("phone")
+    private String phone;
+
+    @FormParam("email")
+    private String email;
+
+    @FormParam("birthdate")
+    private String birthdate;
 
     public String getUserName() {
         return userName;
@@ -50,11 +62,42 @@ public class UserRegisterBean {
         this.age = age;
     }
 
-    @Override
-    public String toString() {
-        StringBuffer buffer = new StringBuffer();
-        buffer.append("userName=").append(userName).append("\nPassword=").append(password).append("\nGender=").append(gender).append("\nAge=").append(age);
-        return buffer.toString();
+    public int getUserId() {
+        return userId;
     }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getBirthdate() {
+        return birthdate;
+    }
+
+    public void setBirthdate(String birthdate) {
+        this.birthdate = birthdate;
+    }
+//    @Override
+//    public String toString() {
+//        StringBuffer buffer = new StringBuffer();
+//        buffer.append("userName=").append(userName).append("\nPassword=").append(password).append("\nGender=").append(gender).append("\nAge=").append(age);
+//        return buffer.toString();
+//    }
 
 }

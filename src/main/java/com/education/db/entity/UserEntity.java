@@ -3,6 +3,7 @@ package com.education.db.entity;
 import com.education.ws.UserRegisterBean;
 
 import javax.persistence.*;
+import java.util.Date;
 
 /**
  * Created by yzzhao on 11/1/15.
@@ -16,11 +17,15 @@ public class UserEntity {
     private String password;
     private String gender;
     private int age;
+    private String phone;
+    private Date birthDate;
+    private String email;
+
 
     public UserEntity() {
     }
 
-    public UserEntity(UserRegisterBean u){
+    public UserEntity(UserRegisterBean u) {
         userName = u.getUserName();
         password = u.getPassword();
         gender = u.getGender();
@@ -74,4 +79,30 @@ public class UserEntity {
         this.age = age;
     }
 
+    @Column(name = "phone")
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    @Column(name = "birthdate")
+    public Date getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(Date birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    @Column(name = "email")
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 }
