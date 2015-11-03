@@ -17,5 +17,15 @@ define(['angular'], function(angular) {
             }
             return null;
         }
+
+        this.updateUser = function(user){
+            for(var i=0; i<this.userList.length; i++){
+                var u = this.userList[i];
+                if(u.userId === user.userId){
+                    this.userList[i] = user;
+                    break;
+                }
+            }
+        }
     });
 });
