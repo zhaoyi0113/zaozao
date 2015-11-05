@@ -9,7 +9,7 @@ public class UserRegisterBean {
 
     private int userId;
 
-    @FormParam("userName")
+    @FormParam("user_name")
     private String userName;
 
     @FormParam("password")
@@ -93,11 +93,13 @@ public class UserRegisterBean {
     public void setBirthdate(String birthdate) {
         this.birthdate = birthdate;
     }
-//    @Override
-//    public String toString() {
-//        StringBuffer buffer = new StringBuffer();
-//        buffer.append("userName=").append(userName).append("\nPassword=").append(password).append("\nGender=").append(gender).append("\nAge=").append(age);
-//        return buffer.toString();
-//    }
+    @Override
+    public String toString() {
+        StringBuffer buffer = new StringBuffer();
+        buffer.append("userName=").append(userName).append("\nPassword=").append(password).append("\nGender=").
+                append(gender).append("\nAge=").append(age).append("\nemail=").append(email).append("\nphone=")
+                .append(phone);
+        return buffer.toString();
+    }
 
 }

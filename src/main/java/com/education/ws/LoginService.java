@@ -9,6 +9,7 @@ import org.hibernate.Session;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.ws.rs.FormParam;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Context;
@@ -33,6 +34,23 @@ public class LoginService {
             return Response.ok().entity("login success").build();
         }
         return Response.status(Response.Status.BAD_REQUEST).entity("login filed.").build();
+    }
+
+    @GET
+    @Path("/check")
+    public Response isLogin(@Context HttpServletRequest request){
+        if(WSUtility.whetherLogin(request)){
+            return Response.ok().entity("login").build();
+        }
+        return Response.status(Response.Status.BAD_REQUEST).build();
+    }
+
+    @GET
+    @Path("/logout")
+    public Response logout(@Context HttpServletRequest request){
+        HttpSession session = request.getSession();
+        session.invalidate();;
+        return Response.ok().build();
     }
 
     public boolean validateUser(String userName, String password){

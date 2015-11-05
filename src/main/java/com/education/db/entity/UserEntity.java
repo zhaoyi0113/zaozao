@@ -30,6 +30,8 @@ public class UserEntity {
         password = u.getPassword();
         gender = u.getGender();
         age = u.getAge();
+        email = u.getEmail();
+        phone= u.getPhone();
     }
 
     @Id

@@ -21,7 +21,7 @@ public class UserRegisterService {
     private static final Logger logger = Logger.getLogger(UserRegisterService.class.getName());
 
     @POST
-    @Path("/new")
+    @Path("/newuser")
     @Produces(MediaType.TEXT_PLAIN)
     /**
      * http://localhost:8080/education/zaozao/register/new

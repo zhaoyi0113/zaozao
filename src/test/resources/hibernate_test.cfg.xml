@@ -16,5 +16,6 @@
         <property name="show_sql">true</property>
 
         <mapping class="com.education.db.entity.UserEntity"/>
+        <mapping class="com.education.db.entity.CourseEntity"/>
     </session-factory>
 </hibernate-configuration>

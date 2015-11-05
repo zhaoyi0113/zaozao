@@ -2,13 +2,16 @@ package com.education.ws;
 
 import com.education.db.DBConnection;
 import com.education.db.entity.UserEntity;
+import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -28,7 +31,11 @@ public class UserQuery {
     @Path("/allusers")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public String queryAllUsers() {
+    public String queryAllUsers(@Context HttpServletRequest request) {
+        if(!WSUtility.whetherLogin(request)){
+            Gson gson = new Gson();
+            return gson.toJson("Not Login");
+        }
         try {
             List<UserRegisterBean> allUsers = getAllUsers();
             GsonBuilder builder = new GsonBuilder();

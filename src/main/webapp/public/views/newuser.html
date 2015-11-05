@@ -1,4 +1,14 @@
-<div ng-controller="NewUserController">
-
+<div>
+    <form name="add_user">
+        Name:<input ng-model="user.userName" name="userName" type="text" required /><br/>
+        Password: <input ng-model="user.password" name="password" type="password"/><br/>
+        Email: <input ng-model="user.email" name="userEmail" type="text" required /><br/>
+        Phone: <input ng-model="user.phone" name="userPhone" type="text" /><br/>
+        Age: <input ng-model="user.age" name="userAge" type="text" /><br/>
+        Birthdate: <input ng-model='user.birthdate' name="userBirthdate" type="datetime" /><br/>
+        Gender:  <input ng-model='user.gender' name="userGender" type="checkbox" /><br/>
+        <button ng-click="submit()">Submit</button>
+        <button ng-click="cancel()">Cancel</button>
+    </form>
 
 </div>

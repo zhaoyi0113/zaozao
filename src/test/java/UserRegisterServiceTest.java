@@ -1,5 +1,6 @@
 import com.education.db.DBConnection;
 import com.education.db.DBUtil;
+import com.education.ws.ResponseStatus;
 import com.education.ws.UserQuery;
 import com.education.ws.UserRegisterService;
 import com.education.ws.UserRegisterBean;
@@ -53,11 +54,11 @@ public class UserRegisterServiceTest {
         bean.setUserName("张三");
         bean.setPassword("123456");
         bean.setGender("1");
-        UserRegisterService.ResponseStatus status = register.registerUser(bean);
-        Assert.assertEquals(UserRegisterService.ResponseStatus.SUCCESS, status);
+        ResponseStatus status = register.registerUser(bean);
+        Assert.assertEquals(ResponseStatus.SUCCESS, status);
 
         status = register.registerUser(bean);
-        Assert.assertEquals(UserRegisterService.ResponseStatus.USER_EXISTED, status);
+        Assert.assertEquals(ResponseStatus.USER_EXISTED, status);
 
     }
 }

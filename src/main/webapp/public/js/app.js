@@ -20,7 +20,11 @@ define(['angular', 'ui-router', 'home'], function(angular){
         }).state('home.adduser',{
             url: '/adduser',
             templateUrl: '/education/public/views/newuser.html',
-            controller: 'UserController'
+            controller: 'NewUserController'
+        }).state('home.login', {
+            url: '/login',
+            templateUrl: '/education/public/views/login.html',
+            controller: 'LoginController'
         });
         $urlRouterProvider.otherwise('/home');
     });
