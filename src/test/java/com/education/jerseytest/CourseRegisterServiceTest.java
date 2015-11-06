@@ -24,16 +24,15 @@ import java.util.Map;
 /**
  * Created by yzzhao on 11/3/15.
  */
-public class CourseRegisterServiceTest extends JerseyTest {
+public class CourseRegisterServiceTest extends AbstractJerseyTest {
     @Before
     public void before() {
-        System.setProperty("HIBERNATE_CFG_FILE", "hibernate_test.cfg.xml");
-        Session session = DBConnection.getCurrentSession();
-        DBUtil.clearTable(session, "course");
+        clearTable("caurse");
     }
 
     @Override
     protected Application configure() {
+
         return new ResourceConfig(CourseRegisterService.class);
 
     }

@@ -40,9 +40,9 @@ public class LoginService {
     @Path("/check")
     public Response isLogin(@Context HttpServletRequest request){
         if(WSUtility.whetherLogin(request)){
-            return Response.ok().entity("login").build();
+            return Response.ok().entity("1").build();
         }
-        return Response.status(Response.Status.BAD_REQUEST).build();
+        return Response.ok().entity("0").build();
     }
 
     @GET

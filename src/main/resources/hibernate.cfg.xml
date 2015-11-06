@@ -15,5 +15,6 @@
 
         <mapping class="com.education.db.entity.UserEntity"/>
         <mapping class="com.education.db.entity.CourseEntity"/>
+        <mapping class="com.education.db.entity.CourseTypeEntity"/>
     </session-factory>
 </hibernate-configuration>

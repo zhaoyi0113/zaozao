@@ -9,7 +9,14 @@ define(['angular'], function (angular) {
 
             $http.get('http://' + $location.host() + ":" + $location.port() + '/education/zaozao/login/check')
                 .success(function(e) {
-                    $scope.login=true;
+                    var ret = JSON.stringify(e);
+                    if(e === '1') {
+                        console.log('login success');
+                        $scope.login = true;
+                    } else {
+                        console.log('login fail');
+                        $scope.login=false;
+                    }
                 }).error(function(e){
                     $scope.login=false;
                 });
@@ -39,7 +46,8 @@ define(['angular'], function (angular) {
                     .success(function(e){
                         $state.go('home');
                     });
-            }
+            };
+
         }]);
 
 
