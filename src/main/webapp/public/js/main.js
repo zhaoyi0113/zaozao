@@ -4,7 +4,8 @@ require.config({
         angular: '/education/bower_components/angular/angular.min',
         app: 'app',
         'ui-router': '/education/bower_components/angular-ui-router/release/angular-ui-router.min',
-        home: 'home'
+        home: 'home',
+        'angular-file-upload': '/education/bower_components/angular-file-upload/dist/angular-file-upload.min'
     },
     shim: {
         'angular': {
@@ -12,6 +13,9 @@ require.config({
         },
         'ui-router':{
             deps: ['angular']
+        },
+        'angular-file-upload':{
+            exports: 'angular-file-upload'
         }
     }
 });

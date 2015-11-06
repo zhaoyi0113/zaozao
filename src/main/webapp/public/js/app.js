@@ -25,6 +25,14 @@ define(['angular', 'ui-router', 'home'], function(angular){
             url: '/login',
             templateUrl: '/education/public/views/login.html',
             controller: 'LoginController'
+        }).state('home.course',{
+            url: '/course',
+            templateUrl: '/education/public/views/course.html',
+            controller: 'CourseController'
+        }).state('home.newcourse',{
+            url: '/newcourse',
+            templateUrl: '/education/public/views/newcourse.html',
+            controller: 'NewCourseController'
         });
         $urlRouterProvider.otherwise('/home');
     });

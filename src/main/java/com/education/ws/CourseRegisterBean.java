@@ -65,7 +65,7 @@ public class CourseRegisterBean {
     @Override
     public String toString() {
         StringBuffer buffer =new StringBuffer();
-        buffer.append("name="+name+",content="+content+",category="+category+",pictures="+picturePaths);
+        buffer.append("name="+name+",content="+content+",category="+category+",pictures="+picturePaths+",date"+date);
         return buffer.toString();
     }
 }

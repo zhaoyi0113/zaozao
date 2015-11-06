@@ -1,7 +1,7 @@
-define(['angular','user', 'login'], function(angular){
+define(['angular','user', 'login','course'], function(angular){
 
     'use strict';
-    var home = angular.module("homeModule", ['userModule', 'loginModule']);
+    var home = angular.module("homeModule", ['userModule', 'loginModule', 'courseModule']);
     home.controller('HomeController', ['$scope', '$http', function($scope, $http){
         console.log('home');
         $scope.tabs=[{
@@ -13,6 +13,10 @@ define(['angular','user', 'login'], function(angular){
         },{
             url: '.login',
             label: 'Login/Logout'
-        }];
+        },{
+            url: '.course',
+            label: 'Course'
+        }
+        ];
     }]);
 });
