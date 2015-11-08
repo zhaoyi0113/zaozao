@@ -8,6 +8,7 @@ define(['angular','angular-file-upload','directives'], function(angular){
             var str = JSON.stringify(e);
             var json = JSON.parse(str);
             console.log('get all course ', json);
+                $scope.courses = json;
         }).error(function(e){
 
         });
@@ -20,8 +21,19 @@ define(['angular','angular-file-upload','directives'], function(angular){
         '$httpParamSerializer',
         function($scope, $http, $location, $state, FileUploader, $httpParamSerializer){
             $scope.uploader = new FileUploader({
-                url: ''
+                url: 'http://'+$location.host()+":"+$location.port()+'/education/zaozao/course/uploadfile',
+                formData: []
             });
+
+            //$scope.uploader.bind('beforeupload', function (event, item) {
+            //
+            //    var index = uploader.getIndexOfItem(item);
+            //
+            //    item.formData.push({title: index});
+            //});
+
+            //$scope.uploader.formData.push({id:'aaa'});
+
             $http.get('http://'+$location.host()+":"+$location.port()+'/education/zaozao/coursetype')
                 .success(function(e){
                     var str = JSON.stringify(e);
@@ -38,26 +50,46 @@ define(['angular','angular-file-upload','directives'], function(angular){
                 }).error(function(e){
 
                 });
+            $scope.uploader.onCompleteAll = function() {
+                console.info('onCompleteAll');
+                $state.go('home.course');
+            };
+            $scope.uploader.onBeforeUploadItem = function(item) {
+                console.info('onBeforeUploadItem', item);
+                item.formData.push({id: 'aaa'});
+                item.formData.push({name: $scope.name});
+                item.formData.push({content: $scope.content});
+                item.formData.push({category: $scope.category});
+                item.formData.push({date: $scope.date});
+            };
+
             $scope.submit = function(){
-                var req = {
-                    method: 'POST',
-                    url: 'http://'+$location.host()+":"+$location.port()+'/education/zaozao/course/new',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
-                    },
-                    data: $httpParamSerializer({
-                        name: $scope.name,
-                        content: $scope.content,
-                        category: $scope.category,
-                        date: $scope.date
-                    })
-                };
-                $http(req).success(function(e){
-                    $state.go('home.course');
 
-                }).error(function(e){
+                $scope.uploader.uploadAll();
 
-                });
+                //var req = {
+                //    method: 'POST',
+                //    url: 'http://'+$location.host()+":"+$location.port()+'/education/zaozao/course/new',
+                //    headers: {
+                //        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+                //    },
+                //    data: $httpParamSerializer({
+                //        name: $scope.name,
+                //        content: $scope.content,
+                //        category: $scope.category,
+                //        date: $scope.date
+                //    })
+                //};
+                //$http(req).success(function(e){
+                //
+                //    $scope.uploader.formData.push({id: 'aaa'});
+                //    $scope.uploader.uploadAll();
+                //    $state.go('home.course');
+                //
+                //}).error(function(e){
+                //
+                //});
+
             }
         }]);
 });

@@ -1,6 +1,17 @@
 <div>
     Course List:<br>
-
+    <table>
+        <tr ng-repeat="course in courses" ng-model="course">
+            <hr/>
+            <td>
+                <hr/>
+                <strong>{{course.name}}</strong><br>
+                {{course.category}}<br>
+                {{course.content}}<br>
+            </td>
+        </tr>
+    </table>
+    <hr/>
     <button ng-click="newCourse()">New Course</button>
 </div>
 

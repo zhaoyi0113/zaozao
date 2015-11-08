@@ -36,6 +36,7 @@ dependencies {
     compile 'com.google.code.gson:gson:2.4'
     testCompile 'org.glassfish.jersey.test-framework.providers:jersey-test-framework-provider-jetty:2.22.1'
     providedCompile 'javax.servlet:servlet-api:2.5'
+    compile 'org.glassfish.jersey.media:jersey-media-multipart:2.22.1'
 
     def tomcatVersion = '7.0.65'
     tomcat "org.apache.tomcat.embed:tomcat-embed-core:${tomcatVersion}",

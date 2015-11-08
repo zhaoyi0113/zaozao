@@ -90,5 +90,7 @@
     <orderEntry type="library" scope="TEST" name="Gradle: org.glassfish.jersey.test-framework:jersey-test-framework-core:2.22.1" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: org.ow2.asm:asm-debug-all:5.0.4" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: junit:junit:4.12" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: org.glassfish.jersey.media:jersey-media-multipart:2.22.1" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: org.jvnet.mimepull:mimepull:1.9.6" level="project" />
   </component>
 </module>

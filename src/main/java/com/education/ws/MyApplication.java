@@ -1,5 +1,6 @@
 package com.education.ws;
 
+import org.glassfish.jersey.media.multipart.MultiPartFeature;
 import org.glassfish.jersey.server.ResourceConfig;
 
 import javax.ws.rs.*;
@@ -14,6 +15,7 @@ public class MyApplication extends ResourceConfig {
 
     public MyApplication(){
         packages("com.education");
+        register(MultiPartFeature.class);
     }
 
     @GET
