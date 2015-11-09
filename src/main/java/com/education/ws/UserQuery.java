@@ -6,6 +6,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.GET;
@@ -28,11 +29,13 @@ public class UserQuery {
 
     private static final Logger logger = Logger.getLogger(UserQuery.class.getName());
 
+    private LoginCheckService loginCheck;
+
     @Path("/allusers")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public String queryAllUsers(@Context HttpServletRequest request) {
-        if(!WSUtility.whetherLogin(request)){
+        if(!getLoginCheck().whetherLogin(request)){
             Gson gson = new Gson();
             return gson.toJson("Not Login");
         }
@@ -109,4 +112,12 @@ public class UserQuery {
         return bean;
     }
 
+    public LoginCheckService getLoginCheck() {
+        return loginCheck;
+    }
+
+    @Autowired(required = true)
+    public void setLoginCheck(LoginCheckService loginCheck) {
+        this.loginCheck = loginCheck;
+    }
 }

@@ -1,4 +1,4 @@
-define(['angular', 'ui-router', 'home'], function(angular){
+define(['angular', 'ui-router', 'jquery-ui', 'home'], function(angular){
     'use strict';
 
     console.log('app');
@@ -33,6 +33,10 @@ define(['angular', 'ui-router', 'home'], function(angular){
             url: '/newcourse',
             templateUrl: '/education/public/views/newcourse.html',
             controller: 'NewCourseController'
+        }).state('home.courseedit',{
+            url: '/courseedit?courseId',
+            templateUrl: '/education/public/views/courseedit.html',
+            controller: 'CourseEditController'
         });
         $urlRouterProvider.otherwise('/home');
     });

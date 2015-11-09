@@ -4,7 +4,11 @@
         Category: <select ng-model="category" required
                           ng-options="category as category for category in categories"/><br>
         Content: <br><textarea cols="100" rows="10" ng-model="content" required></textarea><br>
-        Date: <input ng-model="date" type="date" required/><br>
+        <!--Date: <input ng-model="date" type="date" required/><br>-->
+        Date:
+            <datetimepicker ng-model="date" data-format="yyyy-MM-dd"
+                            date-options="dateOptions"
+                            date-disabled="isDisabledDate(date, mode)"></datetimepicker>
         File: <input type="file" nv-file-select="" uploader="uploader" />
         <ul ng-repeat="item in uploader.queue">
             <li>

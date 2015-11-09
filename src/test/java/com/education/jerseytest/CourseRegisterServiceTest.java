@@ -17,6 +17,9 @@ import javax.ws.rs.core.Application;
 import javax.ws.rs.core.Form;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,7 +30,7 @@ import java.util.Map;
 public class CourseRegisterServiceTest extends AbstractJerseyTest {
     @Before
     public void before() {
-        clearTable("caurse");
+        clearTable("course");
     }
 
     @Override
@@ -61,6 +64,18 @@ public class CourseRegisterServiceTest extends AbstractJerseyTest {
 
         response = target("course/allnames").request().get();
         entity = response.readEntity(String.class);
+
+    }
+
+    @Test
+    public void testDateFormat(){
+        String str = "2015-November-Wednesday";
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-DD");
+        try {
+            Date date = format.parse(str);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
     }
 }

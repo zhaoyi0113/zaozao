@@ -29,6 +29,10 @@ public class CourseRegisterBean {
         this.date = date;
     }
 
+    /**
+     * Get the course name
+     * @return
+     */
     public String getName() {
         return name;
     }

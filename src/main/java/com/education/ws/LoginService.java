@@ -5,6 +5,7 @@ import com.education.db.DBConnection;
 import com.education.db.entity.UserEntity;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -25,6 +26,8 @@ public class LoginService {
 
     private static final Logger logger = Logger.getLogger(LoginService.class.getName());
 
+    private LoginCheckService loginCheck;
+
     @POST
     public Response login(@Context HttpServletRequest request, @FormParam("userName") String userName, @FormParam("password") String password) {
         System.out.println("login " + userName);
@@ -39,7 +42,7 @@ public class LoginService {
     @GET
     @Path("/check")
     public Response isLogin(@Context HttpServletRequest request){
-        if(WSUtility.whetherLogin(request)){
+        if(getLoginCheck().whetherLogin(request)){
             return Response.ok().entity("1").build();
         }
         return Response.ok().entity("0").build();
@@ -66,5 +69,12 @@ public class LoginService {
         return false;
     }
 
+    public LoginCheckService getLoginCheck() {
+        return loginCheck;
+    }
 
+    @Autowired(required = true)
+    public void setLoginCheck(LoginCheckService loginCheck) {
+        this.loginCheck = loginCheck;
+    }
 }

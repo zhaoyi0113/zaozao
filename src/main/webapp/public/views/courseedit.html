@@ -1,0 +1,18 @@
+<div>
+
+    <form name="course_edit" class="course_edit">
+        Name:<input ng-model="course.name" type="text" required /><br/>
+        Category: <input ng-model="course.category" type="text" required /><br/>
+        Date: <!--<input ng-model="course.date" type="date" required />-->
+
+            <input ui-date="dateOptions" ng-model="course.date" required ui-date-format="yy-MM-DD" /><br/>
+
+        Content: <br>
+        <textarea cols="100" rows="10" ng-model="course.content" required></textarea><br>
+        File: <input type="file" nv-file-select="" uploader="uploader" /><br>
+        <img src="{{course.imageurl}}"/><br>
+        <button ng-click="submit()">Submit</button>
+        <button ng-click="cancel()">Cancel</button>
+    </form>
+
+</div>
