@@ -187,6 +187,14 @@ public class CourseRegisterService {
         return Response.ok().build();
     }
 
+    @DELETE
+    @Path("/{id}")
+    public Response deleteCourse(@PathParam("id") String id){
+        CourseEntity course = courseRepository.findOne(Integer.parseInt(id));
+        courseRepository.delete(course);
+        return Response.ok().build();
+    }
+
     private int createCourse(CourseRegisterBean bean) {
         CourseEntity entity = new CourseEntity(bean);
         CourseEntity save = courseRepository.save(entity);

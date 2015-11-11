@@ -1,54 +1,76 @@
-define(['angular','angular-file-upload','directives','angular-ui-date','angular-bootstrap','angular-ui-bootstrap-datetimepicker'], function(angular){
+define(['angular', 'angular-file-upload', 'directives', 'angular-ui-date', 'angular-bootstrap', 'angular-ui-bootstrap-datetimepicker'], function (angular) {
     'use strict';
-    var course = angular.module("courseModule", ['angularFileUpload', 'ngThumbModel','ui.bootstrap', 'ui.bootstrap.datetimepicker']);
-    course.controller('CourseController', ['$scope', '$http','$location','$state',
-        function($scope, $http,$location, $state){
-        $http.get('http://'+$location.host()+":"+$location.port()+'/education/zaozao/course/queryall')
-        .success(function(e){
-            var str = JSON.stringify(e);
-            var json = JSON.parse(str);
-            console.log('get all course ', json);
-            $scope.courses = json;
-        }).error(function(e){
+    var course = angular.module("courseModule",
+        ['angularFileUpload', 'ngThumbModel', 'ui.bootstrap', 'ui.bootstrap.datetimepicker']);
+    course.controller('CourseController', ['$scope', '$http', '$location', '$state',
+        function ($scope, $http, $location, $state) {
+            $http.get('http://' + $location.host() + ":" + $location.port() + '/education/zaozao/course/queryall')
+                .success(function (e) {
+                    var str = JSON.stringify(e);
+                    var json = JSON.parse(str);
+                    console.log('get all course ', json);
+                    $scope.courses = json;
+                }).error(function (e) {
 
-        });
-        $scope.newCourse = function(){
-            $state.go('home.newcourse')
-        }
-    }]);
+                });
+            $scope.newCourse = function () {
+                $state.go('home.newcourse')
+            }
 
-    course.controller('NewCourseController', ['$scope', '$http', '$location', '$state','FileUploader',
+            $scope.delete = function(id){
+                $http.delete('http://' + $location.host() + ":" + $location.port() + '/education/zaozao/course/'+id)
+                    .success(function (e) {
+                        console.log('delete success');
+                        var i=0;
+                        var course = null;
+                        for(i=0;i<$scope.courses.length;i++){
+                            if(id === $scope.courses[i].id){
+                                course = $scope.courses[i];
+                                break;
+                            }
+                        }
+                        if(course !== null){
+                            $scope.courses.splice(i, 1);
+                        }
+
+                    }).error(function(e){
+                        console.log(e);
+                    });
+            };
+        }]);
+
+    course.controller('NewCourseController', ['$scope', '$http', '$location', '$state', 'FileUploader',
         '$httpParamSerializer',
-        function($scope, $http, $location, $state, FileUploader, $httpParamSerializer){
+        function ($scope, $http, $location, $state, FileUploader, $httpParamSerializer) {
             $scope.uploader = new FileUploader({
-                url: 'http://'+$location.host()+":"+$location.port()+'/education/zaozao/course/uploadfile',
+                url: 'http://' + $location.host() + ":" + $location.port() + '/education/zaozao/course/uploadfile',
                 formData: []
             });
             $scope.dateOptions = {
                 startingDay: 1,
                 showWeeks: true
             };
-            $http.get('http://'+$location.host()+":"+$location.port()+'/education/zaozao/coursetype')
-                .success(function(e){
+            $http.get('http://' + $location.host() + ":" + $location.port() + '/education/zaozao/coursetype')
+                .success(function (e) {
                     var str = JSON.stringify(e);
                     var json = JSON.parse(str);
                     $scope.categories = new Array();
-                    for(var i=0; i<json.length;i++){
+                    for (var i = 0; i < json.length; i++) {
                         $scope.categories[i] = json[i].name;
                     }
-                    if($scope.categories.lenght>0){
+                    if ($scope.categories.lenght > 0) {
                         $scope.defaultCategory = $scope.categories[0];
                     }
                     console.log('get course type ', $scope.categories);
 
-                }).error(function(e){
+                }).error(function (e) {
 
                 });
-            $scope.uploader.onCompleteAll = function() {
+            $scope.uploader.onCompleteAll = function () {
                 console.info('onCompleteAll');
                 $state.go('home.course');
             };
-            $scope.uploader.onBeforeUploadItem = function(item) {
+            $scope.uploader.onBeforeUploadItem = function (item) {
                 console.info('onBeforeUploadItem', item);
                 item.formData.push({name: $scope.name});
                 item.formData.push({content: $scope.content});
@@ -56,70 +78,72 @@ define(['angular','angular-file-upload','directives','angular-ui-date','angular-
                 item.formData.push({date: $scope.date});
             };
 
-            $scope.submit = function(){
+            $scope.submit = function () {
                 console.log('create new course ', $scope.date);
                 $scope.uploader.uploadAll();
             }
         }]);
 
-    course.controller('CourseEditController', ['$scope', '$http','$stateParams','$state','$location',
-        'FileUploader','$httpParamSerializer',
-        function($scope, $http, $stateParams, $state, $location,FileUploader, $httpParamSerializer){
+    course.controller('CourseEditController', ['$scope', '$http', '$stateParams', '$state', '$location',
+        'FileUploader', '$httpParamSerializer',
+        function ($scope, $http, $stateParams, $state, $location, FileUploader, $httpParamSerializer) {
 
             console.log('edit course id=', $stateParams.courseId);
 
-            $http.get('http://'+$location.host()+":"+$location.port()+'/education/zaozao/course/querycourse/'+$stateParams.courseId)
-                .success(function(e){
+            $http.get('http://' + $location.host() + ":" + $location.port() + '/education/zaozao/course/querycourse/' + $stateParams.courseId)
+                .success(function (e) {
                     var json = JSON.parse(JSON.stringify(e));
                     $scope.course = json;
                     console.log('course:', $scope.course);
-                    $scope.course.imageurl = 'http://'+$location.host()+":"+$location.port()+
-                        '/education/public/resources/courses/'+$scope.course.id+'/'+$scope.course.picture_paths;
+                    $scope.course.imageurl = 'http://' + $location.host() + ":" + $location.port() +
+                        '/education/public/resources/courses/' + $scope.course.id + '/' + $scope.course.picture_paths;
 
-                }).error(function(e){
-                    console.log('error:',e);
+                }).error(function (e) {
+                    console.log('error:', e);
                     var ret = JSON.stringify(e);
                     var json = JSON.parse(ret);
-                    if('-10' === json.status){
+                    if ('-10' === json.status) {
                         $state.go('home.login');
                     }
                 });
             $scope.uploader = new FileUploader({
-                url: 'http://'+$location.host()+":"+$location.port()+'/education/zaozao/course/upload_resource',
+                url: 'http://' + $location.host() + ":" + $location.port() + '/education/zaozao/course/upload_resource',
                 formData: []
             });
 
-            $scope.submit = function(){
+            $scope.submit = function () {
                 console.log('edit course');
                 var req = {
                     method: 'POST',
-                    url: 'http://'+$location.host()+":"+$location.port()+'/education/zaozao/course/edit',
+                    url: 'http://' + $location.host() + ":" + $location.port() + '/education/zaozao/course/edit',
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
                     },
-                    data: $httpParamSerializer({ id: $scope.course.id,
+                    data: $httpParamSerializer({
+                        id: $scope.course.id,
                         name: $scope.course.name,
                         content: $scope.course.content,
                         category: $scope.course.category,
-                        date: $scope.course.date})
+                        date: $scope.course.date
+                    })
                 };
-                $http(req).success(function(e){
+                $http(req).success(function (e) {
                     console.log('edit success');
-                }).error(function(e){
-                    console.log('edit failed ',e);
+                }).error(function (e) {
+                    console.log('edit failed ', e);
                 });
                 $scope.uploader.uploadAll();
 
             }
-            $scope.cancel = function(){
+            $scope.cancel = function () {
                 $state.go('home.course');
             }
 
-            $scope.uploader.onCompleteAll = function() {
+            $scope.uploader.onCompleteAll = function () {
                 console.info('onCompleteAll');
                 $state.go('home.course');
             };
-            $scope.uploader.onBeforeUploadItem = function(item) {
+            $scope.uploader.onBeforeUploadItem = function (item) {
                 console.info('onBeforeUploadItem', item);
                 item.formData.push({id: $scope.course.id});
                 item.formData.push({name: $scope.course.name});
@@ -127,5 +151,15 @@ define(['angular','angular-file-upload','directives','angular-ui-date','angular-
                 item.formData.push({category: $scope.course.category});
                 item.formData.push({date: $scope.course.date});
             };
-    }]);
+        }]);
+
+    course.constructor("deleteCourse", ['$scope', '$http', '$state', '$location',
+        function ($scope, $http, $state, $location) {
+            $http.delete('http://' + $location.host() + ":" + $location.port() + '/education/zaozao/course')
+                .success(function (e) {
+                    console.log('delete success');
+                }).error(function (e) {
+                    console.log(e);
+                });
+        }]);
 });
