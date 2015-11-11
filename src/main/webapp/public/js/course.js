@@ -58,13 +58,13 @@ define(['angular','angular-file-upload','directives','angular-ui-date','angular-
 
             $scope.submit = function(){
                 console.log('create new course ', $scope.date);
-                //$scope.uploader.uploadAll();
+                $scope.uploader.uploadAll();
             }
         }]);
 
     course.controller('CourseEditController', ['$scope', '$http','$stateParams','$state','$location',
-        'FileUploader',
-        function($scope, $http, $stateParams, $state, $location,FileUploader){
+        'FileUploader','$httpParamSerializer',
+        function($scope, $http, $stateParams, $state, $location,FileUploader, $httpParamSerializer){
 
             console.log('edit course id=', $stateParams.courseId);
 
@@ -85,11 +85,30 @@ define(['angular','angular-file-upload','directives','angular-ui-date','angular-
                     }
                 });
             $scope.uploader = new FileUploader({
-                url: 'http://'+$location.host()+":"+$location.port()+'/education/zaozao/course/edit',
+                url: 'http://'+$location.host()+":"+$location.port()+'/education/zaozao/course/upload_resource',
                 formData: []
             });
 
             $scope.submit = function(){
+                console.log('edit course');
+                var req = {
+                    method: 'POST',
+                    url: 'http://'+$location.host()+":"+$location.port()+'/education/zaozao/course/edit',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+                    },
+                    data: $httpParamSerializer({ id: $scope.course.id,
+                        name: $scope.course.name,
+                        content: $scope.course.content,
+                        category: $scope.course.category,
+                        date: $scope.course.date})
+                };
+                $http(req).success(function(e){
+                    console.log('edit success');
+                }).error(function(e){
+                    console.log('edit failed ',e);
+                });
+                $scope.uploader.uploadAll();
 
             }
             $scope.cancel = function(){

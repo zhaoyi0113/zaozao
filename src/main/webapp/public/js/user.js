@@ -3,7 +3,8 @@ define(['angular','user_service','ui-router'], function(angular) {
 
     var user = angular.module("userModule", ['userService','ui.router']);
 
-    user.controller('UserController', ['$scope', '$http', '$location','UserService', function($scope, $http, $location, userSrv){
+    user.controller('UserController', ['$scope', '$http', '$location','UserService','$state',
+        function($scope, $http, $location, userSrv, $state){
         console.log('user');
         $scope.headers=['Name', 'Email', 'Phone','Edit'];
         $scope.users = {};
@@ -15,6 +16,8 @@ define(['angular','user_service','ui-router'], function(angular) {
                 console.log("json:", json);
                 $scope.users = json;
                 userSrv.setUserList(json);
+            }else{
+                $state.go('home.login');
             }
 
         }).error(function(e){

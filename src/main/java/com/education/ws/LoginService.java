@@ -3,6 +3,7 @@ package com.education.ws;
 
 import com.education.db.DBConnection;
 import com.education.db.entity.UserEntity;
+import com.google.gson.Gson;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,9 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
+import java.util.Hashtable;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Logger;
 
 /**
@@ -76,5 +79,14 @@ public class LoginService {
     @Autowired(required = true)
     public void setLoginCheck(LoginCheckService loginCheck) {
         this.loginCheck = loginCheck;
+    }
+
+    public static String buildNotLoginJson(){
+        Map<String, String> entity = new Hashtable<>();
+        entity.put("status", "" + ResponseStatus.NOT_LOGIN.value());
+        entity.put("message", "not login");
+        Gson gson = new Gson();
+        String json = gson.toJson(entity);
+        return json;
     }
 }

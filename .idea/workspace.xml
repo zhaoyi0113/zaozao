@@ -2,57 +2,380 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="74eccf14-10ad-4f15-b271-ac92db29d3ee" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/public/resources/courses/22/88888" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/public/resources/courses/21/fdsaf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__aopalliance_aopalliance_1_0.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__commons_logging_commons_logging_1_1_3.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_glassfish_hk2_class_model_2_4_0_b31.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_glassfish_hk2_config_types_2_4_0_b31.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_glassfish_hk2_external_asm_all_repackaged_2_4_0_b31.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_glassfish_hk2_external_bean_validator_2_4_0_b31.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_glassfish_hk2_hk2_2_4_0_b31.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_glassfish_hk2_hk2_config_2_4_0_b31.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_glassfish_hk2_hk2_core_2_4_0_b31.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_glassfish_hk2_hk2_runlevel_2_4_0_b31.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_glassfish_hk2_spring_bridge_2_4_0_b31.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_glassfish_jersey_ext_jersey_spring3_2_22_1.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_jvnet_tiger_types_1_4.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_springframework_spring_aop_3_2_13_RELEASE.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_springframework_spring_beans_3_2_13_RELEASE.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_springframework_spring_context_3_2_13_RELEASE.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_springframework_spring_context_support_3_2_13_RELEASE.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_springframework_spring_core_3_2_13_RELEASE.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_springframework_spring_expression_3_2_13_RELEASE.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_springframework_spring_jdbc_3_2_13_RELEASE.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_springframework_spring_orm_3_2_13_RELEASE.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_springframework_spring_tx_3_2_13_RELEASE.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_springframework_spring_web_3_2_13_RELEASE.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/education/ws/LoginCheckService.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/applicationContext.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/public/views/courseedit.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/black-tie/images/animated-overlay.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/blitzer/images/animated-overlay.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/cupertino/images/animated-overlay.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/dark-hive/images/animated-overlay.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/dot-luv/images/animated-overlay.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/eggplant/images/animated-overlay.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/flick/images/animated-overlay.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/hot-sneaks/images/animated-overlay.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/humanity/images/animated-overlay.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/le-frog/images/animated-overlay.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/mint-choc/images/animated-overlay.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/overcast/images/animated-overlay.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/redmond/images/animated-overlay.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/start/images/animated-overlay.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/sunny/images/animated-overlay.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/vader/images/animated-overlay.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/public/resources/courses/2/course1" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/public/resources/courses/3/course2" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/sunny/images/ui-bg_diagonals-medium_20_d34d17_40x40.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/le-frog/images/ui-bg_diagonals-small_0_aaaaaa_40x40.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/hot-sneaks/images/ui-bg_diagonals-small_40_db4865_40x40.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/hot-sneaks/images/ui-bg_diagonals-small_50_93c3cd_40x40.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/hot-sneaks/images/ui-bg_diagonals-small_50_ff3853_40x40.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/hot-sneaks/images/ui-bg_diagonals-small_75_ccd232_40x40.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/dot-luv/images/ui-bg_diagonals-thick_15_0b3e6f_40x40.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/le-frog/images/ui-bg_diagonals-thick_15_444444_40x40.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/blitzer/images/ui-bg_diagonals-thick_75_f3d8d8_40x40.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/black-tie/images/ui-bg_diagonals-thick_8_333333_40x40.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/cupertino/images/ui-bg_diagonals-thick_90_eeeeee_40x40.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/le-frog/images/ui-bg_diagonals-thick_95_ffdc2e_40x40.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/dot-luv/images/ui-bg_dots-medium_30_0b58a2_4x4.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/hot-sneaks/images/ui-bg_dots-medium_80_ffff38_4x4.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/dot-luv/images/ui-bg_dots-small_20_333333_2x2.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/dot-luv/images/ui-bg_dots-small_30_a32d00_2x2.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/dot-luv/images/ui-bg_dots-small_40_00498f_2x2.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/blitzer/images/ui-bg_dots-small_65_a6a6a6_2x2.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/blitzer/images/ui-bg_flat_0_333333_40x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/base/images/ui-bg_flat_0_aaaaaa_40x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/dot-luv/images/ui-bg_flat_0_aaaaaa_40x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/eggplant/images/ui-bg_flat_0_aaaaaa_40x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/flick/images/ui-bg_flat_0_aaaaaa_40x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/mint-choc/images/ui-bg_flat_0_aaaaaa_40x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/overcast/images/ui-bg_flat_0_aaaaaa_40x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/redmond/images/ui-bg_flat_0_aaaaaa_40x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/vader/images/ui-bg_flat_0_aaaaaa_40x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/eggplant/images/ui-bg_flat_0_eeeeee_40x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/flick/images/ui-bg_flat_0_eeeeee_40x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/overcast/images/ui-bg_flat_0_eeeeee_40x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/cupertino/images/ui-bg_flat_15_cd0a0a_40x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/dark-hive/images/ui-bg_flat_30_cccccc_40x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/sunny/images/ui-bg_flat_30_cccccc_40x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/dot-luv/images/ui-bg_flat_40_292929_40x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/dark-hive/images/ui-bg_flat_50_5c5c5c_40x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/sunny/images/ui-bg_flat_50_5c5c5c_40x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/eggplant/images/ui-bg_flat_55_994d53_40x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/start/images/ui-bg_flat_55_999999_40x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/overcast/images/ui-bg_flat_55_c0402a_40x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/overcast/images/ui-bg_flat_55_eeeeee_40x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/eggplant/images/ui-bg_flat_55_fafafa_40x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/redmond/images/ui-bg_flat_55_fbec88_40x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/flick/images/ui-bg_flat_55_ffffff_40x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/black-tie/images/ui-bg_flat_65_ffffff_40x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/blitzer/images/ui-bg_flat_65_ffffff_40x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/humanity/images/ui-bg_flat_75_aaaaaa_40x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/start/images/ui-bg_flat_75_aaaaaa_40x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/hot-sneaks/images/ui-bg_flat_75_ba9217_40x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/base/images/ui-bg_flat_75_ffffff_40x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/blitzer/images/ui-bg_flat_75_ffffff_40x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/flick/images/ui-bg_flat_75_ffffff_40x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/hot-sneaks/images/ui-bg_flat_75_ffffff_40x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/cupertino/images/ui-bg_glass_100_e4f1fb_1x400.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/humanity/images/ui-bg_glass_100_f5f0e5_1x400.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/overcast/images/ui-bg_glass_100_f8f8f8_1x400.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/mint-choc/images/ui-bg_glass_15_5f391b_1x400.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/humanity/images/ui-bg_glass_25_cb842e_1x400.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/overcast/images/ui-bg_glass_35_dddddd_1x400.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/black-tie/images/ui-bg_glass_40_111111_1x400.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/dark-hive/images/ui-bg_glass_40_ffc73d_1x400.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/start/images/ui-bg_glass_45_0078ae_1x400.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/cupertino/images/ui-bg_glass_50_3baae3_1x400.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/black-tie/images/ui-bg_glass_55_1c1c1c_1x400.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/start/images/ui-bg_glass_55_f8da4e_1x400.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/le-frog/images/ui-bg_glass_55_fbf5d0_1x400.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/blitzer/images/ui-bg_glass_55_fbf8ee_1x400.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/base/images/ui-bg_glass_55_fbf9ee_1x400.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/overcast/images/ui-bg_glass_60_eeeeee_1x400.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/base/images/ui-bg_glass_65_ffffff_1x400.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/flick/images/ui-bg_glass_65_ffffff_1x400.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/humanity/images/ui-bg_glass_70_ede4d4_1x400.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/start/images/ui-bg_glass_75_79c9ec_1x400.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/redmond/images/ui-bg_glass_75_d0e5f5_1x400.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/base/images/ui-bg_glass_75_dadada_1x400.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/base/images/ui-bg_glass_75_e6e6e6_1x400.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/cupertino/images/ui-bg_glass_80_d7ebf9_1x400.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/redmond/images/ui-bg_glass_85_dfeffc_1x400.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/base/images/ui-bg_glass_95_fef1ec_1x400.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/redmond/images/ui-bg_glass_95_fef1ec_1x400.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/vader/images/ui-bg_glass_95_fef1ec_1x400.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/vader/images/ui-bg_gloss-wave_16_121212_500x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/dot-luv/images/ui-bg_gloss-wave_20_111111_500x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/mint-choc/images/ui-bg_gloss-wave_20_1c160d_500x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/mint-choc/images/ui-bg_gloss-wave_25_453326_500x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/eggplant/images/ui-bg_gloss-wave_30_3d3644_500x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/mint-choc/images/ui-bg_gloss-wave_30_44372c_500x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/sunny/images/ui-bg_gloss-wave_45_817865_500x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/start/images/ui-bg_gloss-wave_45_e14f1c_500x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/start/images/ui-bg_gloss-wave_50_6eac2c_500x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/redmond/images/ui-bg_gloss-wave_55_5c9ccc_500x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/sunny/images/ui-bg_gloss-wave_60_fece2f_500x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/sunny/images/ui-bg_gloss-wave_70_ffdd57_500x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/start/images/ui-bg_gloss-wave_75_2191c0_500x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/sunny/images/ui-bg_gloss-wave_90_fff9e5_500x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/blitzer/images/ui-bg_highlight-hard_100_eeeeee_1x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/cupertino/images/ui-bg_highlight-hard_100_f2f5f7_1x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/humanity/images/ui-bg_highlight-hard_100_f4f0ec_1x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/blitzer/images/ui-bg_highlight-hard_100_f6f6f6_1x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/black-tie/images/ui-bg_highlight-hard_100_f9f9f9_1x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/vader/images/ui-bg_highlight-hard_15_888888_1x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/dark-hive/images/ui-bg_highlight-hard_20_0972a5_1x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/le-frog/images/ui-bg_highlight-hard_30_285c00_1x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/black-tie/images/ui-bg_highlight-hard_40_aaaaaa_1x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/vader/images/ui-bg_highlight-hard_55_555555_1x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/humanity/images/ui-bg_highlight-hard_65_fee4bd_1x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/cupertino/images/ui-bg_highlight-hard_70_000000_1x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/humanity/images/ui-bg_highlight-hard_75_f5f5b5_1x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/eggplant/images/ui-bg_highlight-soft_100_dcd9de_1x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/cupertino/images/ui-bg_highlight-soft_100_deedf7_1x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/eggplant/images/ui-bg_highlight-soft_100_eae6ea_1x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/flick/images/ui-bg_highlight-soft_100_f6f6f6_1x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/sunny/images/ui-bg_highlight-soft_100_feeebd_1x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/blitzer/images/ui-bg_highlight-soft_15_cc0000_1x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/mint-choc/images/ui-bg_highlight-soft_20_201913_1x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/mint-choc/images/ui-bg_highlight-soft_20_619226_1x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/flick/images/ui-bg_highlight-soft_25_0073ea_1x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/eggplant/images/ui-bg_highlight-soft_25_30273a_1x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/cupertino/images/ui-bg_highlight-soft_25_ffef8f_1x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/dark-hive/images/ui-bg_highlight-soft_33_003147_1x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/le-frog/images/ui-bg_highlight-soft_33_3a8104_1x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/dark-hive/images/ui-bg_highlight-soft_35_222222_1x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/vader/images/ui-bg_highlight-soft_35_adadad_1x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/dark-hive/images/ui-bg_highlight-soft_44_444444_1x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/eggplant/images/ui-bg_highlight-soft_45_5f5964_1x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/le-frog/images/ui-bg_highlight-soft_50_4eb305_1x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/black-tie/images/ui-bg_highlight-soft_50_aaaaaa_1x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/flick/images/ui-bg_highlight-soft_50_dddddd_1x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/le-frog/images/ui-bg_highlight-soft_60_4ca20b_1x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/vader/images/ui-bg_highlight-soft_60_dddddd_1x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/base/images/ui-bg_highlight-soft_75_cccccc_1x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/dark-hive/images/ui-bg_highlight-soft_80_eeeeee_1x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/redmond/images/ui-bg_inset-hard_100_f5f8f9_1x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/redmond/images/ui-bg_inset-hard_100_fcfdfd_1x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/start/images/ui-bg_inset-hard_100_fcfdfd_1x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/black-tie/images/ui-bg_inset-hard_45_cd0a0a_1x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/black-tie/images/ui-bg_inset-hard_55_ffeb80_1x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/overcast/images/ui-bg_inset-hard_75_999999_1x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/humanity/images/ui-bg_inset-soft_100_f4f0ec_1x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/mint-choc/images/ui-bg_inset-soft_10_201913_1x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/le-frog/images/ui-bg_inset-soft_10_285c00_1x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/vader/images/ui-bg_inset-soft_15_121212_1x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/sunny/images/ui-bg_inset-soft_30_ffffff_1x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/overcast/images/ui-bg_inset-soft_50_c9c9c9_1x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/dark-hive/images/ui-bg_loop_25_000000_21x21.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/hot-sneaks/images/ui-bg_white-lines_85_f7f7ba_40x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/blitzer/images/ui-icons_004276_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/dot-luv/images/ui-icons_00498f_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/flick/images/ui-icons_0073ea_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/start/images/ui-icons_0078ae_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/start/images/ui-icons_056b93_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/redmond/images/ui-icons_217bc0_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/base/images/ui-icons_222222_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/black-tie/images/ui-icons_222222_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/dark-hive/images/ui-icons_222222_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/mint-choc/images/ui-icons_222222_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/cupertino/images/ui-icons_2694e8_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/base/images/ui-icons_2e83ff_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/cupertino/images/ui-icons_2e83ff_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/redmond/images/ui-icons_2e83ff_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/overcast/images/ui-icons_3383bb_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/sunny/images/ui-icons_3d3d3d_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/cupertino/images/ui-icons_3d80b3_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/base/images/ui-icons_444444_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/base/images/ui-icons_454545_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/eggplant/images/ui-icons_454545_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/flick/images/ui-icons_454545_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/hot-sneaks/images/ui-icons_454545_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/overcast/images/ui-icons_454545_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/redmond/images/ui-icons_469bdd_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/dark-hive/images/ui-icons_4b8e0b_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/black-tie/images/ui-icons_4ca300_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/le-frog/images/ui-icons_4eb305_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/base/images/ui-icons_555555_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/flick/images/ui-icons_666666_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/vader/images/ui-icons_666666_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/redmond/images/ui-icons_6da8d5_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/overcast/images/ui-icons_70b2e1_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/cupertino/images/ui-icons_72a7cf_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/le-frog/images/ui-icons_72b42d_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/eggplant/images/ui-icons_734d99_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/base/images/ui-icons_777620_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/base/images/ui-icons_777777_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/base/images/ui-icons_888888_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/hot-sneaks/images/ui-icons_88a206_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/eggplant/images/ui-icons_8d78a5_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/dot-luv/images/ui-icons_98d2fb_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/overcast/images/ui-icons_999999_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/mint-choc/images/ui-icons_9bcc60_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/dot-luv/images/ui-icons_9ccdfc_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/dark-hive/images/ui-icons_a83300_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/eggplant/images/ui-icons_a8a3ae_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/vader/images/ui-icons_aaaaaa_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/mint-choc/images/ui-icons_add978_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/black-tie/images/ui-icons_bbbbbb_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/vader/images/ui-icons_bbbbbb_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/sunny/images/ui-icons_bd7b00_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/hot-sneaks/images/ui-icons_c02669_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/humanity/images/ui-icons_c47a23_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/vader/images/ui-icons_c98000_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/humanity/images/ui-icons_cb672b_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/base/images/ui-icons_cc0000_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/blitzer/images/ui-icons_cc0000_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/dark-hive/images/ui-icons_cccccc_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/vader/images/ui-icons_cccccc_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/base/images/ui-icons_cd0a0a_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/le-frog/images/ui-icons_cd0a0a_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/redmond/images/ui-icons_cd0a0a_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/vader/images/ui-icons_cd0a0a_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/sunny/images/ui-icons_d19405_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/redmond/images/ui-icons_d8e7f3_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/start/images/ui-icons_d8e7f3_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/start/images/ui-icons_e0fdff_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/hot-sneaks/images/ui-icons_e1e463_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/mint-choc/images/ui-icons_e3ddc9_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/sunny/images/ui-icons_eb990f_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/eggplant/images/ui-icons_ebccce_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/sunny/images/ui-icons_ed9f26_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/black-tie/images/ui-icons_ededed_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/humanity/images/ui-icons_f08000_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/mint-choc/images/ui-icons_f1fd86_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/vader/images/ui-icons_f29a00_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/humanity/images/ui-icons_f35f07_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/start/images/ui-icons_f5e175_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/start/images/ui-icons_f7a50d_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/redmond/images/ui-icons_f9bd01_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/sunny/images/ui-icons_fadc7a_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/overcast/images/ui-icons_fbc856_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/start/images/ui-icons_fcd113_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/flick/images/ui-icons_ff0084_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/humanity/images/ui-icons_ff7519_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/black-tie/images/ui-icons_ffcf29_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/sunny/images/ui-icons_ffe180_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/hot-sneaks/images/ui-icons_ffeb33_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/base/images/ui-icons_ffffff_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/black-tie/images/ui-icons_ffffff_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/blitzer/images/ui-icons_ffffff_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/cupertino/images/ui-icons_ffffff_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/dark-hive/images/ui-icons_ffffff_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/dot-luv/images/ui-icons_ffffff_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/eggplant/images/ui-icons_ffffff_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/flick/images/ui-icons_ffffff_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/hot-sneaks/images/ui-icons_ffffff_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/humanity/images/ui-icons_ffffff_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/le-frog/images/ui-icons_ffffff_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/mint-choc/images/ui-icons_ffffff_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/education/db/dao/CourseDao.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/education/db/jpa/CourseRepository.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/base/accordion.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/base/all.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/base/autocomplete.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/base/base.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/base/button.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/base/core.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/base/datepicker.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/base/dialog.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/base/draggable.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/ui/effect-drop.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/base/jquery-ui.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/black-tie/jquery-ui.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/blitzer/jquery-ui.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/cupertino/jquery-ui.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/dark-hive/jquery-ui.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/dot-luv/jquery-ui.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/eggplant/jquery-ui.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/flick/jquery-ui.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/hot-sneaks/jquery-ui.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/humanity/jquery-ui.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/le-frog/jquery-ui.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/mint-choc/jquery-ui.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/overcast/jquery-ui.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/redmond/jquery-ui.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/smoothness/jquery-ui.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/start/jquery-ui.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/sunny/jquery-ui.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/vader/jquery-ui.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/base/jquery-ui.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/black-tie/jquery-ui.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/blitzer/jquery-ui.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/cupertino/jquery-ui.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/dark-hive/jquery-ui.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/dot-luv/jquery-ui.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/eggplant/jquery-ui.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/flick/jquery-ui.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/hot-sneaks/jquery-ui.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/humanity/jquery-ui.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/le-frog/jquery-ui.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/mint-choc/jquery-ui.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/overcast/jquery-ui.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/redmond/jquery-ui.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/start/jquery-ui.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/sunny/jquery-ui.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/vader/jquery-ui.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/base/menu.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/base/progressbar.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/base/resizable.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/base/selectable.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/base/selectmenu.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/base/slider.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/base/sortable.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/ui/sortable.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/base/spinner.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/ui/spinner.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/base/tabs.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/base/theme.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/black-tie/theme.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/blitzer/theme.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/cupertino/theme.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/dark-hive/theme.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/dot-luv/theme.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/eggplant/theme.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/flick/theme.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/hot-sneaks/theme.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/humanity/theme.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/le-frog/theme.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/mint-choc/theme.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/overcast/theme.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/redmond/theme.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/start/theme.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/sunny/theme.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/vader/theme.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/bower_components/jquery-ui/themes/base/tooltip.css" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__commons_logging_commons_logging_1_1_3.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_glassfish_grizzly_grizzly_framework_2_3_23.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_glassfish_grizzly_grizzly_http_2_3_23.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_glassfish_grizzly_grizzly_http_server_2_3_23.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_glassfish_jersey_containers_jersey_container_grizzly2_http_2_22_1.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_slf4j_slf4j_api_1_5_2.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_slf4j_slf4j_nop_1_5_2.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_springframework_spring_aop_3_2_13_RELEASE.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_springframework_spring_beans_3_2_13_RELEASE.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_springframework_spring_context_3_2_13_RELEASE.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_springframework_spring_core_3_2_13_RELEASE.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_springframework_spring_expression_3_2_13_RELEASE.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_springframework_spring_jdbc_3_2_13_RELEASE.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_springframework_spring_orm_3_2_13_RELEASE.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_springframework_spring_tx_3_2_13_RELEASE.xml" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.2/taskArtifacts/cache.properties.lock" afterPath="$PROJECT_DIR$/.gradle/2.2/taskArtifacts/cache.properties.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.2/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/2.2/taskArtifacts/fileHashes.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.2/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/2.2/taskArtifacts/fileSnapshots.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.2/taskArtifacts/outputFileStates.bin" afterPath="$PROJECT_DIR$/.gradle/2.2/taskArtifacts/outputFileStates.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.2/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/.gradle/2.2/taskArtifacts/taskArtifacts.bin" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/education/db/entity/CourseEntity.java" afterPath="$PROJECT_DIR$/src/main/java/com/education/db/entity/CourseEntity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/education/ws/CourseRegisterBean.java" afterPath="$PROJECT_DIR$/src/main/java/com/education/ws/CourseRegisterBean.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/education/ws/CourseRegisterService.java" afterPath="$PROJECT_DIR$/src/main/java/com/education/ws/CourseRegisterService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/education/jerseytest/CourseRegisterServiceTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/education/jerseytest/CourseRegisterServiceTest.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/artifacts/Gradle___com_children_video_education___education_1_0_SNAPSHOT_war.xml" afterPath="$PROJECT_DIR$/.idea/artifacts/Gradle___com_children_video_education___education_1_0_SNAPSHOT_war.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/artifacts/Gradle___com_children_video_education___education_1_0_SNAPSHOT_war__exploded_.xml" afterPath="$PROJECT_DIR$/.idea/artifacts/Gradle___com_children_video_education___education_1_0_SNAPSHOT_war__exploded_.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/education/ws/LoginService.java" afterPath="$PROJECT_DIR$/src/main/java/com/education/ws/LoginService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/education/ws/ResponseStatus.java" afterPath="$PROJECT_DIR$/src/main/java/com/education/ws/ResponseStatus.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/education/ws/UserQuery.java" afterPath="$PROJECT_DIR$/src/main/java/com/education/ws/UserQuery.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/public/js/app.js" afterPath="$PROJECT_DIR$/src/main/webapp/public/js/app.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/education/ws/WSUtility.java" afterPath="$PROJECT_DIR$/src/main/java/com/education/ws/WSUtility.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/applicationContext.xml" afterPath="$PROJECT_DIR$/src/main/resources/applicationContext.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.gradle" afterPath="$PROJECT_DIR$/build.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/public/views/course.html" afterPath="$PROJECT_DIR$/src/main/webapp/public/views/course.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/public/js/course.js" afterPath="$PROJECT_DIR$/src/main/webapp/public/js/course.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/public/views/courseedit.html" afterPath="$PROJECT_DIR$/src/main/webapp/public/views/courseedit.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/education.iml" afterPath="$PROJECT_DIR$/education.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/index.html" afterPath="$PROJECT_DIR$/src/main/webapp/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/stylesheet/main.css" afterPath="$PROJECT_DIR$/src/main/webapp/stylesheet/main.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/public/js/main.js" afterPath="$PROJECT_DIR$/src/main/webapp/public/js/main.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/public/views/newcourse.html" afterPath="$PROJECT_DIR$/src/main/webapp/public/views/newcourse.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/web.xml" afterPath="$PROJECT_DIR$/src/main/resources/web.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" afterPath="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/public/js/user.js" afterPath="$PROJECT_DIR$/src/main/webapp/public/js/user.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="education.iws" />
@@ -173,17 +496,68 @@
         <entry file="file://$PROJECT_DIR$/src/main/webapp/public/js/course.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="0" column="90" selection-start-line="0" selection-start-column="90" selection-end-line="0" selection-end-column="90" />
+              <caret line="106" column="48" selection-start-line="106" selection-start-column="48" selection-end-line="106" selection-end-column="48" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="web.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/web.xml">
+      <file leaf-file-name="build.gradle" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/build.gradle">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-7.714286">
-              <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+            <state vertical-scroll-proportion="-13.714286">
+              <caret line="23" column="28" selection-start-line="23" selection-start-column="28" selection-end-line="23" selection-end-column="28" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CourseRegisterService.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/education/ws/CourseRegisterService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.52682924">
+              <caret line="196" column="27" selection-start-line="196" selection-start-column="27" selection-end-line="196" selection-end-column="27" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#10563#10564#0" expanded="true" />
+                <element signature="e#10595#10596#0" expanded="true" />
+                <element signature="e#10648#10649#0" expanded="true" />
+                <element signature="e#10690#10691#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CourseDao.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/education/db/dao/CourseDao.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="56" column="7" selection-start-line="56" selection-start-column="7" selection-end-line="56" selection-end-column="7" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CourseEntity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/education/db/entity/CourseEntity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="30" column="33" selection-start-line="30" selection-start-column="33" selection-end-line="30" selection-end-column="33" />
+              <folding>
+                <element signature="e#823#824#0" expanded="true" />
+                <element signature="e#848#849#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CourseRegisterBean.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/education/ws/CourseRegisterBean.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -192,53 +566,18 @@
       <file leaf-file-name="applicationContext.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/resources/applicationContext.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-3.5357144">
-              <caret line="11" column="8" selection-start-line="11" selection-start-column="8" selection-end-line="11" selection-end-column="8" />
+            <state vertical-scroll-proportion="-4.357143">
+              <caret line="57" column="90" selection-start-line="57" selection-start-column="90" selection-end-line="57" selection-end-column="90" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/public/js/main.js">
+      <file leaf-file-name="settings.gradle" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/settings.gradle">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-4.785714">
-              <caret line="13" column="31" selection-start-line="13" selection-start-column="9" selection-end-line="13" selection-end-column="31" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CourseRegisterService.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/education/ws/CourseRegisterService.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="237" column="25" selection-start-line="237" selection-start-column="25" selection-end-line="237" selection-end-column="25" />
-              <folding>
-                <element signature="e#8539#8540#0" expanded="true" />
-                <element signature="e#8572#8573#0" expanded="true" />
-                <element signature="e#8667#8668#0" expanded="true" />
-                <element signature="e#8711#8712#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="app.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/public/js/app.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="12" column="4" selection-start-line="12" selection-start-column="4" selection-end-line="12" selection-end-column="4" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="WSUtility.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/education/ws/WSUtility.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.4650456">
-              <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+            <state vertical-scroll-proportion="-0.0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -429,7 +768,7 @@
     </option>
     <option name="modificationStamps">
       <map>
-        <entry key="$PROJECT_DIR$" value="2893289965000" />
+        <entry key="$PROJECT_DIR$" value="2893414322000" />
         <entry key="$PROJECT_DIR$/../jerseytest" value="2890793937000" />
         <entry key="$PROJECT_DIR$/../springdemo" value="1445515863000" />
       </map>
@@ -452,20 +791,14 @@
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/javax.servlet/servlet-api/2.5/5959582d97d8b61f4d154ca9e495aafd16726e34/servlet-api-2.5.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.codehaus.groovy/groovy-all/2.3.11/fdf089bfd5d0b7e86100ac599741f65732fc21d5/groovy-all-2.3.11-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.codehaus.groovy/groovy-all/2.3.11/f6b34997d04c1538ce451d3955298f46fdb4dbd4/groovy-all-2.3.11.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.glassfish.jersey.containers/jersey-container-grizzly2-http/2.22.1/73b0123e906042dd3a4b444415a564aa774b93e4/jersey-container-grizzly2-http-2.22.1-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.glassfish.jersey.containers/jersey-container-grizzly2-http/2.22.1/b5f242eda78b8bba30e814cefeecec110dd4a1a5/jersey-container-grizzly2-http-2.22.1.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.eclipse.jetty/jetty-server/9.2.3.v20140905/61729d3a1994eadb26b1c147f996636928fac875/jetty-server-9.2.3.v20140905-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.eclipse.jetty/jetty-server/9.2.3.v20140905/d97a5394990b8c7fce2d35e68543c8f9faedca55/jetty-server-9.2.3.v20140905.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.glassfish.jersey.containers/jersey-container-jetty-http/2.22.1/dffde723424a9a7df4057a42b4926c86610a45a4/jersey-container-jetty-http-2.22.1-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.glassfish.jersey.containers/jersey-container-jetty-http/2.22.1/ed2d61d3a5332207da65181eb269ad31c6dac864/jersey-container-jetty-http-2.22.1.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.glassfish.jersey.media/jersey-media-json-jackson/2.22.1/ef007f8e8201899de55fa30c25714c95e2874d92/jersey-media-json-jackson-2.22.1-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.glassfish.jersey.media/jersey-media-json-jackson/2.22.1/bafe1f7295308eacfb933c8edbcee4bcb5c73b9/jersey-media-json-jackson-2.22.1.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.glassfish.jersey.containers/jersey-container-servlet/2.22.1/3a544bf5dd6033cd67f178848ef28fcfe2e3bee5/jersey-container-servlet-2.22.1-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.glassfish.jersey.containers/jersey-container-servlet/2.22.1/5a4c27e0271867c212c8cdf730db56898f106041/jersey-container-servlet-2.22.1.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/c3p0/c3p0/0.9.1.2/19c1ce22da84ce300fcbd59590601f78d3d99e20/c3p0-0.9.1.2-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/c3p0/c3p0/0.9.1.2/4ea71601f844c4b90d22195bbdb58979281bb8b6/c3p0-0.9.1.2.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.slf4j/slf4j-nop/1.5.2/b65314b2f82d0b74de487ed7ffc524c60bb123df/slf4j-nop-1.5.2-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.slf4j/slf4j-nop/1.5.2/d5c30d1ea6ccd176666368a4e3962e11f70d4e58/slf4j-nop-1.5.2.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.hibernate/hibernate-core/4.2.2.Final/9631fa8b5107057fdd589dbd042f874494bbd51/hibernate-core-4.2.2.Final-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.hibernate/hibernate-core/4.2.2.Final/de89e3ae3f0422e4e5514acebd3b5b40be522164/hibernate-core-4.2.2.Final.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.hibernate/hibernate-entitymanager/4.2.2.Final/46606b5a1b3e1d3682b146fe6f52678bd434c92b/hibernate-entitymanager-4.2.2.Final-sources.jar" />
@@ -478,36 +811,18 @@
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.glassfish.jersey.media/jersey-media-multipart/2.22.1/c68e535f2395fa961a0903dac0ae32641768d4b6/jersey-media-multipart-2.22.1.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.glassfish.jersey.ext/jersey-spring3/2.22.1/928928c11822c92458f5303ddd584d2ff436858c/jersey-spring3-2.22.1-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.glassfish.jersey.ext/jersey-spring3/2.22.1/ea277b814925572c2c3bd0ee4a9106a2869596a7/jersey-spring3-2.22.1.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-core/3.2.13.RELEASE/4f868a2885dbf7d1656c17e2e672f87617020107/spring-core-3.2.13.RELEASE-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-core/3.2.13.RELEASE/c419ec49b76c9c260c417d9f97d234069fad404b/spring-core-3.2.13.RELEASE.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-web/3.2.13.RELEASE/33271f078332554c64808b33cb4164cde274be7e/spring-web-3.2.13.RELEASE-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-web/3.2.13.RELEASE/77490ac80fe3618d5db42714dc051798384af628/spring-web-3.2.13.RELEASE.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-orm/3.2.13.RELEASE/ad051ebefb52c64770496780c6aecf50e1dfc61/spring-orm-3.2.13.RELEASE-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-orm/3.2.13.RELEASE/2c7080de245d45e0ebdac39ebe0cf175bb5dbec6/spring-orm-3.2.13.RELEASE.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-context-support/3.2.13.RELEASE/8e9c9c2d10b90509a73f60c5fea252ce453af0c8/spring-context-support-3.2.13.RELEASE-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-context-support/3.2.13.RELEASE/12fa95535823783d307b9cedf4c82b7f4e78529/spring-context-support-3.2.13.RELEASE.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-beans/3.2.13.RELEASE/208dcd08283bc9f09eff76a232eddda3e58bedeb/spring-beans-3.2.13.RELEASE-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-beans/3.2.13.RELEASE/bbac7d9b8583a0d54e14aa23715cd7fbeb5f5c47/spring-beans-3.2.13.RELEASE.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-aop/3.2.13.RELEASE/3d22d3752cad8ef5b39088c5e6308247bd5f1998/spring-aop-3.2.13.RELEASE-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-aop/3.2.13.RELEASE/1f7d6b590ca7abc95b4bfc19ba307b0dc5fe2170/spring-aop-3.2.13.RELEASE.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-context/3.2.13.RELEASE/309b3e79782db09c60b228c36682f07be1ad9af9/spring-context-3.2.13.RELEASE-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-context/3.2.13.RELEASE/64f675d9c83ac4637bd32a5250e20fc5c42e4e8e/spring-context-3.2.13.RELEASE.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.glassfish.hk2.external/javax.inject/2.4.0-b31/3f3417458ef757515a0491635d66ce2757147be/javax.inject-2.4.0-b31-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.glassfish.hk2.external/javax.inject/2.4.0-b31/4bb71bbdae1064675e36d057bd2c95a00e2e84b/javax.inject-2.4.0-b31.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.glassfish.grizzly/grizzly-http-server/2.3.23/478593d7f8fe37597d740b61d83ab729c051ac1f/grizzly-http-server-2.3.23-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.glassfish.grizzly/grizzly-http-server/2.3.23/4aaf209163d8dca1bfb1907f19c7fd1f2f3ebbf9/grizzly-http-server-2.3.23.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.glassfish.jersey.core/jersey-common/2.22.1/413fe43b2fe5281a598f17a7f2d7ba20043b46e4/jersey-common-2.22.1-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.glassfish.jersey.core/jersey-common/2.22.1/b5811d8385766f35d10d204952f3d5b57ee2fb60/jersey-common-2.22.1.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.glassfish.jersey.core/jersey-server/2.22.1/d7008c5f47359d52da12f96ebbdc8fff20f8100d/jersey-server-2.22.1-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.glassfish.jersey.core/jersey-server/2.22.1/20eee7b976e7005a40f05c0965dd76a308689e98/jersey-server-2.22.1.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/javax.ws.rs/javax.ws.rs-api/2.0.1/a20db7429fd8dfff74335ec867472b71c345049b/javax.ws.rs-api-2.0.1-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/javax.ws.rs/javax.ws.rs-api/2.0.1/104e9c2b5583cfcfeac0402316221648d6d8ea6b/javax.ws.rs-api-2.0.1.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.data/spring-data-jpa/1.9.0.RELEASE/69ccd3fe2f7cae5b4757b5aa625441df06598df9/spring-data-jpa-1.9.0.RELEASE-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.data/spring-data-jpa/1.9.0.RELEASE/54eb2e41ceba320dcbd67c19e8a50cb9af4160a5/spring-data-jpa-1.9.0.RELEASE.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.eclipse.jetty/jetty-http/9.2.3.v20140905/dc2ef5004516fe6ed0f7891c6516e37c223d99e6/jetty-http-9.2.3.v20140905-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.eclipse.jetty/jetty-http/9.2.3.v20140905/455d59ae94ca0dbb26412395e6db62c2b5df1150/jetty-http-9.2.3.v20140905.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.eclipse.jetty/jetty-io/9.2.3.v20140905/e85d93b62933e1b83a4c3755c3bb5b6885b5ee96/jetty-io-9.2.3.v20140905-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.eclipse.jetty/jetty-io/9.2.3.v20140905/2a4003a81ac95f29764a353ba7c5f5a40c3cee60/jetty-io-9.2.3.v20140905.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.eclipse.jetty/jetty-continuation/9.1.1.v20140108/5cf5cef57280e0f0c0ca0c6ce39ffc20e16e9706/jetty-continuation-9.1.1.v20140108-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.eclipse.jetty/jetty-continuation/9.1.1.v20140108/5c93a8bdad9e33eacd07060dc725044daf28a2a2/jetty-continuation-9.1.1.v20140108.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.glassfish.jersey.core/jersey-common/2.22.1/413fe43b2fe5281a598f17a7f2d7ba20043b46e4/jersey-common-2.22.1-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.glassfish.jersey.core/jersey-common/2.22.1/b5811d8385766f35d10d204952f3d5b57ee2fb60/jersey-common-2.22.1.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.glassfish.jersey.ext/jersey-entity-filtering/2.22.1/6e0a185cfdd0512e6aaa8c11e7b84a55b02cee47/jersey-entity-filtering-2.22.1-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.glassfish.jersey.ext/jersey-entity-filtering/2.22.1/edf2e7d68cac1b59bff4ac86bcfec078405b011e/jersey-entity-filtering-2.22.1.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.jaxrs/jackson-jaxrs-base/2.5.4/d5250ec29ff53fb456598492ba349dd4a98fa879/jackson-jaxrs-base-2.5.4-sources.jar" />
@@ -518,8 +833,10 @@
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-annotations/2.5.4/7a93b60f5d2d43024f34e15893552ee6defdb971/jackson-annotations-2.5.4.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.glassfish.jersey.containers/jersey-container-servlet-core/2.22.1/af7d7414663a3b6716e499f13a44b7a7447683c9/jersey-container-servlet-core-2.22.1-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.glassfish.jersey.containers/jersey-container-servlet-core/2.22.1/d3fb3002ebb5fb5ef4cce370641dbb10bf993b8/jersey-container-servlet-core-2.22.1.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.slf4j/slf4j-api/1.5.2/adb8025f5df9de833ee4b75dc0db65949a27da8c/slf4j-api-1.5.2-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.slf4j/slf4j-api/1.5.2/e34106d9d126209c508655456857ec903b5636f8/slf4j-api-1.5.2.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.glassfish.jersey.core/jersey-server/2.22.1/d7008c5f47359d52da12f96ebbdc8fff20f8100d/jersey-server-2.22.1-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.glassfish.jersey.core/jersey-server/2.22.1/20eee7b976e7005a40f05c0965dd76a308689e98/jersey-server-2.22.1.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/javax.ws.rs/javax.ws.rs-api/2.0.1/a20db7429fd8dfff74335ec867472b71c345049b/javax.ws.rs-api-2.0.1-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/javax.ws.rs/javax.ws.rs-api/2.0.1/104e9c2b5583cfcfeac0402316221648d6d8ea6b/javax.ws.rs-api-2.0.1.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/antlr/antlr/2.7.7/83cd2cd674a217ade95a4bb83a8a14f351f48bd0/antlr-2.7.7.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jboss.logging/jboss-logging/3.1.0.GA/119d7007b7459ddfd016fc0977b9a07f53d24b3d/jboss-logging-3.1.0.GA-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jboss.logging/jboss-logging/3.1.0.GA/c71f2856e7b60efe485db39b37a31811e6c84365/jboss-logging-3.1.0.GA.jar" />
@@ -537,38 +854,42 @@
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.glassfish.hk2/hk2/2.4.0-b31/9fcb854aa8c2a7118d493fd1862ee4e28136b53c/hk2-2.4.0-b31.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.glassfish.hk2/spring-bridge/2.4.0-b31/ad856ce75c3203a0fe9469ba3bb3543314e7815f/spring-bridge-2.4.0-b31-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.glassfish.hk2/spring-bridge/2.4.0-b31/bf99db410556ce77fc036eafc51e94c621cde5a8/spring-bridge-2.4.0-b31.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-jdbc/3.2.13.RELEASE/c9ad60a9106b6465ae2a3de91435f9f148199b63/spring-jdbc-3.2.13.RELEASE-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-jdbc/3.2.13.RELEASE/1686fb843bede65993ef0b14a3bb6f575219e1b5/spring-jdbc-3.2.13.RELEASE.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-tx/3.2.13.RELEASE/dbdd53c011d3c7efa7235bd5041f678f17e4e112/spring-tx-3.2.13.RELEASE-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-tx/3.2.13.RELEASE/c3f112a97311342a1ef9c41e5784891107f32636/spring-tx-3.2.13.RELEASE.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/aopalliance/aopalliance/1.0/4a4b6d692e17846a9f3da036438a7ac491d3c814/aopalliance-1.0-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/aopalliance/aopalliance/1.0/235ba8b489512805ac13a8f9ea77a1ca5ebe3e8/aopalliance-1.0.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-expression/3.2.13.RELEASE/6b5304cb55d0db2ab87871769007f3a543670c12/spring-expression-3.2.13.RELEASE-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-expression/3.2.13.RELEASE/d9cd7ddd3016e672988c2602e3961c582ab01390/spring-expression-3.2.13.RELEASE.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.glassfish.grizzly/grizzly-http/2.3.23/e725d1c194054d7c40957bd6e3a89ef87b783a0f/grizzly-http-2.3.23-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.glassfish.grizzly/grizzly-http/2.3.23/287ea2c8a765b14fbc494749570ff3889ecd7b83/grizzly-http-2.3.23.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.data/spring-data-commons/1.11.0.RELEASE/8228bdae541de11a0a11d61e7d9b5cb499ab39e/spring-data-commons-1.11.0.RELEASE-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.data/spring-data-commons/1.11.0.RELEASE/935cd4ab0a1a07358d7f0c9c808f9113dc177bd8/spring-data-commons-1.11.0.RELEASE.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.aspectj/aspectjrt/1.8.6/4cc5b7ac5c2c314fbb00c76bd2924c75f7c1ca5d/aspectjrt-1.8.6-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.aspectj/aspectjrt/1.8.6/a7db7ea5f7bb18a1cbd9f24edd0e666504800be/aspectjrt-1.8.6.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.slf4j/slf4j-api/1.7.12/58697792617f38bf86d8e26bc004aac505e516a9/slf4j-api-1.7.12-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.slf4j/slf4j-api/1.7.12/8e20852d05222dc286bf1c71d78d0531e177c317/slf4j-api-1.7.12.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.slf4j/jcl-over-slf4j/1.7.12/1f2ab7827a222427f8b8f20ee703fd5c5cfc055e/jcl-over-slf4j-1.7.12-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.slf4j/jcl-over-slf4j/1.7.12/adef7a9e1263298255fdb5cb107ff171d07c82f3/jcl-over-slf4j-1.7.12.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.eclipse.jetty/jetty-util/9.2.3.v20140905/1b0a5495390de3764aac93fc43489658d939d9bc/jetty-util-9.2.3.v20140905-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.eclipse.jetty/jetty-util/9.2.3.v20140905/ad4ea7a0bbc00c55484ed00314150c9586b10947/jetty-util-9.2.3.v20140905.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/javax.annotation/javax.annotation-api/1.2/ad18a02db08eaee697f812e333f692fc51129e4a/javax.annotation-api-1.2-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/javax.annotation/javax.annotation-api/1.2/479c1e06db31c432330183f5cae684163f186146/javax.annotation-api-1.2.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.glassfish.jersey.bundles.repackaged/jersey-guava/2.22.1/7f44d37f1ef08f60da3bf64bc6321dfd9a290c/jersey-guava-2.22.1-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.glassfish.jersey.bundles.repackaged/jersey-guava/2.22.1/2b79eb893818539370899c24893fac9b2fdc4dbd/jersey-guava-2.22.1.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.glassfish.hk2/hk2-api/2.4.0-b31/30533e43e086736f22e4fbf2549e9ef87f9dcacc/hk2-api-2.4.0-b31-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.glassfish.hk2/hk2-api/2.4.0-b31/c4b5f6c426f8e412e606332b93b7cf745a9a12c5/hk2-api-2.4.0-b31.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.glassfish.hk2.external/javax.inject/2.4.0-b31/3f3417458ef757515a0491635d66ce2757147be/javax.inject-2.4.0-b31-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.glassfish.hk2.external/javax.inject/2.4.0-b31/4bb71bbdae1064675e36d057bd2c95a00e2e84b/javax.inject-2.4.0-b31.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.glassfish.hk2/hk2-locator/2.4.0-b31/95dc5556edcffebf22ea42a2d90fc53f1e3c52b8/hk2-locator-2.4.0-b31-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.glassfish.hk2/hk2-locator/2.4.0-b31/436d6e1ad2b0a3aee939c6e05983b007b3578142/hk2-locator-2.4.0-b31.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.glassfish.hk2/osgi-resource-locator/1.0.1/b5685f8eaa7d83351b185a82a92abcd1b8b87fc8/osgi-resource-locator-1.0.1-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.glassfish.hk2/osgi-resource-locator/1.0.1/4ed2b2d4738aed5786cfa64cba5a332779c4c708/osgi-resource-locator-1.0.1.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.glassfish.jersey.core/jersey-client/2.22.1/716e13f2c2653980eac46d6c8b8fcf8b09fbc986/jersey-client-2.22.1-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.glassfish.jersey.core/jersey-client/2.22.1/e39297ef90f4b9bdf0a61b6fa73ae275c1b6e8f1/jersey-client-2.22.1.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.glassfish.jersey.media/jersey-media-jaxb/2.22.1/21e542bdae055225515787b0b724b87349961d9d/jersey-media-jaxb-2.22.1-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.glassfish.jersey.media/jersey-media-jaxb/2.22.1/1bc910febfe9e07f741920ff5ac24bb8a59f649f/jersey-media-jaxb-2.22.1.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/javax.validation/validation-api/1.1.0.Final/7d49b53caed9bd81d172807c3e096d24f3c57090/validation-api-1.1.0.Final-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/javax.validation/validation-api/1.1.0.Final/8613ae82954779d518631e05daa73a6a954817d5/validation-api-1.1.0.Final.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-core/2.5.4/c906e414014890b228358bfcbeeb6b29afa62276/jackson-core-2.5.4-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-core/2.5.4/a57a2df1a23ca1ee32f129173ba7f5feaa9ac24/jackson-core-2.5.4.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-databind/2.5.4/5d94b8a16dc19bddcf5394af6d23f32b62ed71dd/jackson-databind-2.5.4-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-databind/2.5.4/5dfa42af84584b4a862ea488da84bbbebbb06c35/jackson-databind-2.5.4.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.module/jackson-module-jaxb-annotations/2.5.4/60a86bf9ea853a07739193324365c469106ba213/jackson-module-jaxb-annotations-2.5.4-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.module/jackson-module-jaxb-annotations/2.5.4/52c516db26a89b726a1351f7f24347c640204343/jackson-module-jaxb-annotations-2.5.4.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.glassfish.jersey.core/jersey-client/2.22.1/716e13f2c2653980eac46d6c8b8fcf8b09fbc986/jersey-client-2.22.1-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.glassfish.jersey.core/jersey-client/2.22.1/e39297ef90f4b9bdf0a61b6fa73ae275c1b6e8f1/jersey-client-2.22.1.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.glassfish.jersey.media/jersey-media-jaxb/2.22.1/21e542bdae055225515787b0b724b87349961d9d/jersey-media-jaxb-2.22.1-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.glassfish.jersey.media/jersey-media-jaxb/2.22.1/1bc910febfe9e07f741920ff5ac24bb8a59f649f/jersey-media-jaxb-2.22.1.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/javax.validation/validation-api/1.1.0.Final/7d49b53caed9bd81d172807c3e096d24f3c57090/validation-api-1.1.0.Final-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/javax.validation/validation-api/1.1.0.Final/8613ae82954779d518631e05daa73a6a954817d5/validation-api-1.1.0.Final.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.glassfish.hk2/hk2-utils/2.4.0-b31/e55847de62f0961723a40bb23729f80b7b1b676e/hk2-utils-2.4.0-b31-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.glassfish.hk2/hk2-utils/2.4.0-b31/2c5cb698cfec8dde859c3db854178d03bf7248a6/hk2-utils-2.4.0-b31.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.glassfish.hk2/config-types/2.4.0-b31/c74dc478883a50c289e09b7fe6deb8e0b4d75674/config-types-2.4.0-b31-sources.jar" />
@@ -581,8 +902,6 @@
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.glassfish.hk2/hk2-runlevel/2.4.0-b31/4cea9ab323c91c1caa37929a81ef590f60e96025/hk2-runlevel-2.4.0-b31.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.glassfish.hk2/class-model/2.4.0-b31/a349577108a007727b8d3eebc7de0d6aa24fbe8d/class-model-2.4.0-b31-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.glassfish.hk2/class-model/2.4.0-b31/48bddd7277e3503b9e98c258e6d12d796a083a22/class-model-2.4.0-b31.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.glassfish.grizzly/grizzly-framework/2.3.23/90a0a56cd0e4745925084193c3945029a576a2d7/grizzly-framework-2.3.23-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.glassfish.grizzly/grizzly-framework/2.3.23/262913b1a7ec4156e7e6aa3f8854a4d1a54940b0/grizzly-framework-2.3.23.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/javax.inject/javax.inject/1/a00123f261762a7c5e0ec916a2c7c8298d29c400/javax.inject-1-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/javax.inject/javax.inject/1/6975da39a7040257bd51d21a231b76c915872d38/javax.inject-1.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.glassfish.hk2.external/aopalliance-repackaged/2.4.0-b31/9fc0fac210fb400e08453f6ead1f441e51cc3599/aopalliance-repackaged-2.4.0-b31-sources.jar" />
@@ -593,12 +912,26 @@
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.glassfish.hk2.external/bean-validator/2.4.0-b31/ea1ad76e25485b10c4249efcb54febdac5a5c193/bean-validator-2.4.0-b31.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.glassfish.hk2.external/asm-all-repackaged/2.4.0-b31/c8e38e29511be29886b1a0fbb7ffef602562bf06/asm-all-repackaged-2.4.0-b31-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.glassfish.hk2.external/asm-all-repackaged/2.4.0-b31/d50c5a3a8193e34bc679e4481d4055440a26f7cc/asm-all-repackaged-2.4.0-b31.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/commons-logging/commons-logging/1.1.3/28bb0405fddaf04f15058fbfbe01fe2780d7d3b6/commons-logging-1.1.3-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/commons-logging/commons-logging/1.1.3/f6f66e966c70a83ffbdb6f17a0919eaf7c8aca7f/commons-logging-1.1.3.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-beans/4.1.7.RELEASE/9f2d2a6e2c8c0263431172951c08fc762f21fa32/spring-beans-4.1.7.RELEASE-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-beans/4.1.7.RELEASE/e52148e9671e2918a2172c9cf56b77bede2042ce/spring-beans-4.1.7.RELEASE.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-core/4.1.7.RELEASE/252caceebeb7d9339e1d67f573cfcce45b809f4c/spring-core-4.1.7.RELEASE-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-core/4.1.7.RELEASE/9f8e34eef228f44bda771c9dc62e9f1efa82c92d/spring-core-4.1.7.RELEASE.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/commons-logging/commons-logging/1.2/ecf26c7507d67782a3bbd148d170b31dfad001aa/commons-logging-1.2-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/commons-logging/commons-logging/1.2/4bfc12adfe4842bf07b657f0369c4cb522955686/commons-logging-1.2.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-orm/4.1.7.RELEASE/19488f5187350c468663cbc66ab9f6d23b493c12/spring-orm-4.1.7.RELEASE-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-orm/4.1.7.RELEASE/d8923bdffe631904899875e719d8b363bc3deaea/spring-orm-4.1.7.RELEASE.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-context/4.1.7.RELEASE/f3c674e1c33fd986673473fb0266a74f1fb2507e/spring-context-4.1.7.RELEASE-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-context/4.1.7.RELEASE/8c6c02bcccfa23a74db59f7b7725e69e1af38f04/spring-context-4.1.7.RELEASE.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-aop/4.1.7.RELEASE/b2afe3ed87e14fad43344656b9212abe4b94f070/spring-aop-4.1.7.RELEASE-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-aop/4.1.7.RELEASE/127f005bac8ec1fbbbc5bb1595d78c6179394a46/spring-aop-4.1.7.RELEASE.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-tx/4.1.7.RELEASE/2a60e819e88273ec4666cb2e0081b835ce6bc3b9/spring-tx-4.1.7.RELEASE-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-tx/4.1.7.RELEASE/3465a5d3b24006d51482cf45abd13e347f64582a/spring-tx-4.1.7.RELEASE.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.javassist/javassist/3.18.1-GA/d8d089f3a8845cce22d3006e02ab1403dd73b5b6/javassist-3.18.1-GA-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.javassist/javassist/3.18.1-GA/d9a09f7732226af26bf99f19e2cffe0ae219db5b/javassist-3.18.1-GA.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.eclipse.jetty/jetty-util/9.2.3.v20140905/1b0a5495390de3764aac93fc43489658d939d9bc/jetty-util-9.2.3.v20140905-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.eclipse.jetty/jetty-util/9.2.3.v20140905/ad4ea7a0bbc00c55484ed00314150c9586b10947/jetty-util-9.2.3.v20140905.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-jdbc/4.1.7.RELEASE/3c17c8875730c7b4de791c3e357b5de5a34b4409/spring-jdbc-4.1.7.RELEASE-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-jdbc/4.1.7.RELEASE/5e4c9931acaf2857efe5f1ad27e4791c0855b8b2/spring-jdbc-4.1.7.RELEASE.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-expression/4.1.7.RELEASE/f31f68f812e3ba032b9dc5bc11a3adc0808c81b2/spring-expression-4.1.7.RELEASE-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-expression/4.1.7.RELEASE/9bc3b81d05961f042ea4a45e84d60cdc59ea51f5/spring-expression-4.1.7.RELEASE.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.bmuschko/gradle-tomcat-plugin/2.2.2/8f3f2e185e63ff76d5295462da4d042b30af5711/gradle-tomcat-plugin-2.2.2-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.bmuschko/gradle-tomcat-plugin/2.2.2/c1da7aec6566af2c39cf85e641ac0d3b2afa107b/gradle-tomcat-plugin-2.2.2.jar" />
                           </list>
@@ -681,10 +1014,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/test/java/UserRegisterTest.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/education/ws/UserRegister.java" />
-        <option value="$PROJECT_DIR$/src/main/webapp/public/views/user.html" />
-        <option value="$PROJECT_DIR$/src/main/java/com/education/ws/UserEditor.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/education/ws/UserEditBean.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/public/js/user_service.js" />
         <option value="$PROJECT_DIR$/src/main/java/com/education/ws/UserEditorService.java" />
@@ -694,15 +1023,11 @@
         <option value="$PROJECT_DIR$/src/main/java/com/education/db/entity/UserEntity.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/public/views/newuser.html" />
         <option value="$PROJECT_DIR$/src/test/java/UserRegisterServiceTest.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/education/db/entity/CourseEntity.java" />
         <option value="$PROJECT_DIR$/src/test/java/LoginServiceTest.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/education/ws/WSUtility.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/public/views/login.html" />
         <option value="$PROJECT_DIR$/src/main/webapp/public/views/userlist.html" />
-        <option value="$PROJECT_DIR$/src/main/webapp/public/js/user.js" />
         <option value="$PROJECT_DIR$/src/main/java/com/education/ws/CaurseTypeService.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/education/db/entity/CaurseTypeEntity.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" />
         <option value="$PROJECT_DIR$/src/test/resources/hibernate_test.cfg.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/education/db/entity/CourseTypeEntity.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/education/jerseytest/AbstractJerseyTest.java" />
@@ -716,22 +1041,30 @@
         <option value="$PROJECT_DIR$/src/main/webapp/bower_components/angular-file-upload/src/services/FileUploader.js" />
         <option value="$PROJECT_DIR$/src/main/webapp/public/views/course.html" />
         <option value="$PROJECT_DIR$/src/main/java/com/education/ws/ResponseStatus.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/education/ws/CourseRegisterBean.java" />
-        <option value="$PROJECT_DIR$/src/main/webapp/public/views/courseedit.html" />
         <option value="$PROJECT_DIR$/src/main/webapp/public/js/app.js" />
         <option value="$PROJECT_DIR$/src/test/java/com/education/jerseytest/CourseRegisterServiceTest.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/stylesheet/main.css" />
         <option value="$PROJECT_DIR$/src/main/webapp/index.html" />
         <option value="$PROJECT_DIR$/src/main/webapp/public/js/main.js" />
         <option value="$PROJECT_DIR$/src/main/webapp/public/views/newcourse.html" />
-        <option value="$PROJECT_DIR$/build.gradle" />
         <option value="$PROJECT_DIR$/src/main/java/com/education/ws/LoginCheckService.java" />
         <option value="$PROJECT_DIR$/src/main/resources/context.xml" />
         <option value="$PROJECT_DIR$/src/main/resources/web.xml" />
-        <option value="$PROJECT_DIR$/src/main/webapp/public/js/course.js" />
-        <option value="$PROJECT_DIR$/src/main/java/com/education/ws/CourseRegisterService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/education/ws/LoginService.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/education/ws/UserQuery.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/education/db/CourseDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/education/ws/WSUtility.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/education/ws/LoginService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/education/ws/CourseRegisterBean.java" />
+        <option value="$PROJECT_DIR$/src/main/webapp/public/js/user.js" />
+        <option value="$PROJECT_DIR$/src/main/java/com/education/db/dao/CourseDao.java" />
+        <option value="$PROJECT_DIR$/src/main/webapp/public/views/courseedit.html" />
+        <option value="$PROJECT_DIR$/src/main/java/com/education/db/jpa/CourseRepository.java" />
+        <option value="$PROJECT_DIR$/src/main/webapp/public/js/course.js" />
+        <option value="$PROJECT_DIR$/src/main/java/com/education/db/entity/CourseEntity.java" />
+        <option value="$PROJECT_DIR$/build.gradle" />
+        <option value="$PROJECT_DIR$/src/main/resources/applicationContext.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/education/ws/CourseRegisterService.java" />
       </list>
     </option>
   </component>
@@ -752,7 +1085,7 @@
   <component name="ProjectFrameBounds">
     <option name="y" value="23" />
     <option name="width" value="1440" />
-    <option name="height" value="805" />
+    <option name="height" value="813" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -777,8 +1110,8 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -808,6 +1141,32 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="education" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="education" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -856,6 +1215,192 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="education" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="education" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="courses" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="education" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="education" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="courses" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="22" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="education" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="education" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="courses" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="21" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="education" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="education" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="courses" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="3" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="education" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="education" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="courses" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="2" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -971,9 +1516,111 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="education" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="education" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="education" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="db" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jpa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="education" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="education" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="education" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="db" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="entity" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="education" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="education" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="education" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="db" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dao" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -985,6 +1632,7 @@
     <property name="extract.method.default.visibility" value="private" />
     <property name="FullScreen" value="false" />
     <property name="last_opened_file_path" value="$USER_HOME$/dev/safebox-backend" />
+    <property name="last_directory_selection" value="$PROJECT_DIR$/src/main/java/com/education/db" />
   </component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
@@ -1375,7 +2023,9 @@
       <workItem from="1446211903348" duration="77110000" />
       <workItem from="1446894653919" duration="56000" />
       <workItem from="1446894749978" duration="19904000" />
-      <workItem from="1447055527292" duration="7447000" />
+      <workItem from="1447055527292" duration="28073000" />
+      <workItem from="1447156703995" duration="8204000" />
+      <workItem from="1447205854843" duration="11551000" />
     </task>
     <task id="LOCAL-00001" summary="add login/register restful service">
       <created>1446361829595</created>
@@ -1419,11 +2069,17 @@
       <option name="project" value="LOCAL" />
       <updated>1446974414505</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="add spring dependencies">
+      <created>1447079598783</created>
+      <option name="number" value="00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1447079598783</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="104517000" />
+    <option name="totallyTimeSpent" value="144898000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1435,25 +2091,25 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1440" height="805" extended-state="6" />
+    <frame x="0" y="23" width="1440" height="813" extended-state="0" />
     <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32909605" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32805756" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32909605" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32896653" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32909605" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32896653" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32805756" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32805756" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3297568" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32896653" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32805756" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3295129" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1464,7 +2120,7 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32907802" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32805756" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -1486,7 +2142,8 @@
     <MESSAGE value="add course&#10;" />
     <MESSAGE value="add course type web service" />
     <MESSAGE value="new course html" />
-    <option name="LAST_COMMIT_MESSAGE" value="new course html" />
+    <MESSAGE value="add spring dependencies" />
+    <option name="LAST_COMMIT_MESSAGE" value="add spring dependencies" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1503,76 +2160,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/education/jerseytest/AbstractJerseyTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/education/jerseytest/CourseTypeServiceTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6367713">
-          <caret line="32" column="4" selection-start-line="32" selection-start-column="4" selection-end-line="32" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/public/js/user_service.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.67713004">
-          <caret line="28" column="9" selection-start-line="28" selection-start-column="9" selection-end-line="28" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/public/js/login.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="12" column="35" selection-start-line="12" selection-start-column="35" selection-end-line="12" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/public/views/home.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="21" selection-start-line="0" selection-start-column="21" selection-end-line="0" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/bower_components/angular-file-upload/examples/simple/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4725537">
-          <caret line="80" column="79" selection-start-line="80" selection-start-column="20" selection-end-line="80" selection-end-column="79" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/bower_components/angular-file-upload/examples/image-preview/directives.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="23" column="9" selection-start-line="23" selection-start-column="9" selection-end-line="23" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/public/js/directives.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.24215247">
-          <caret line="6" column="36" selection-start-line="6" selection-start-column="36" selection-end-line="6" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/public/views/newuser.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.38663486">
-          <caret line="9" column="51" selection-start-line="9" selection-start-column="8" selection-end-line="9" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/public/views/login.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.3333333">
-          <caret line="5" column="83" selection-start-line="5" selection-start-column="36" selection-end-line="5" selection-end-column="83" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/bower_components/angular-file-upload/examples/without-bootstrap/style.css">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.3325359">
@@ -1608,13 +2195,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/education/ws/CourseTypeService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="19" column="18" selection-start-line="19" selection-start-column="8" selection-end-line="19" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/bower_components/angular-file-upload/src/values/options.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1626,14 +2206,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-1.4594594">
           <caret line="432" column="22" selection-start-line="432" selection-start-column="22" selection-end-line="432" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.glassfish.jersey.media/jersey-media-multipart/2.22.1/7533d8df77552a64d631181b8377fdbd2c304a1c/jersey-media-multipart-2.22.1-sources.jar!/org/glassfish/jersey/media/multipart/FormDataMultiPart.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33333334">
-          <caret line="125" column="28" selection-start-line="125" selection-start-column="28" selection-end-line="125" selection-end-column="28" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1662,7 +2234,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-5.3333335">
           <caret line="8" column="70" selection-start-line="8" selection-start-column="16" selection-end-line="8" selection-end-column="70" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1670,22 +2241,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="11" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/education/ws/MyApplication.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="27" column="19" selection-start-line="27" selection-start-column="12" selection-end-line="27" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/public/views/course.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="7" column="18" selection-start-line="7" selection-start-column="18" selection-end-line="7" selection-end-column="18" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1693,7 +2248,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.2837838">
           <caret line="7" column="4" selection-start-line="7" selection-start-column="4" selection-end-line="7" selection-end-column="4" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1701,40 +2255,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.2027027">
           <caret line="5" column="70" selection-start-line="5" selection-start-column="70" selection-end-line="5" selection-end-column="70" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/education/db/entity/CourseEntity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/education/ws/CourseRegisterBean.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33333334">
-          <caret line="35" column="18" selection-start-line="35" selection-start-column="18" selection-end-line="35" selection-end-column="18" />
-          <folding>
-            <element signature="e#625#626#0" expanded="false" />
-            <element signature="e#652#653#0" expanded="false" />
-            <element signature="e#692#693#0" expanded="false" />
-            <element signature="e#724#725#0" expanded="false" />
-            <element signature="e#758#759#0" expanded="false" />
-            <element signature="e#788#789#0" expanded="false" />
-            <element signature="e#834#835#0" expanded="false" />
-            <element signature="e#872#873#0" expanded="false" />
-            <element signature="e#907#908#0" expanded="false" />
-            <element signature="e#938#939#0" expanded="false" />
-            <element signature="e#986#987#0" expanded="false" />
-            <element signature="e#1026#1027#0" expanded="false" />
-            <element signature="e#1065#1066#0" expanded="false" />
-            <element signature="e#1100#1101#0" expanded="false" />
-            <element signature="e#1156#1157#0" expanded="false" />
-            <element signature="e#1204#1205#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1749,16 +2269,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.16216215">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="n#!!doc" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/public/js/user.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="31" column="0" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -1766,18 +2276,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="75" column="21" selection-start-line="75" selection-start-column="21" selection-end-line="75" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/education/jerseytest/CourseRegisterServiceTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="32" column="26" selection-start-line="32" selection-start-column="26" selection-end-line="32" selection-end-column="26" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#905#906#0" expanded="false" />
-            <element signature="e#941#942#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1803,124 +2301,258 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/public/views/newcourse.html">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/education/ws/LoginCheckService.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="10" column="70" selection-start-line="10" selection-start-column="70" selection-end-line="10" selection-end-column="70" />
+          <caret line="13" column="11" selection-start-line="13" selection-start-column="11" selection-end-line="13" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/public/js/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.26984128">
+          <caret line="15" column="11" selection-start-line="15" selection-start-column="11" selection-end-line="15" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/public/js/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.16413374">
+          <caret line="12" column="4" selection-start-line="12" selection-start-column="4" selection-end-line="12" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/education/ws/WSUtility.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="2" column="27" selection-start-line="2" selection-start-column="27" selection-end-line="2" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.hibernate/hibernate-core/4.2.2.Final/de89e3ae3f0422e4e5514acebd3b5b40be522164/hibernate-core-4.2.2.Final.jar!/org/hibernate/SessionFactory.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.857143">
+          <caret line="26" column="17" selection-start-line="26" selection-start-column="17" selection-end-line="26" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="14" column="71" selection-start-line="14" selection-start-column="71" selection-end-line="14" selection-end-column="71" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/education/ws/LoginService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="89" column="20" selection-start-line="89" selection-start-column="20" selection-end-line="89" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/education/ws/UserEditorService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.125">
+          <caret line="68" column="39" selection-start-line="68" selection-start-column="39" selection-end-line="68" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/education/ws/MyApplication.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="27" column="21" selection-start-line="27" selection-start-column="21" selection-end-line="27" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/education/ws/UserQuery.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="56" column="33" selection-start-line="56" selection-start-column="33" selection-end-line="56" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/public/js/user.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="19" column="37" selection-start-line="19" selection-start-column="37" selection-end-line="19" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/public/views/course.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.30656934">
+          <caret line="7" column="18" selection-start-line="7" selection-start-column="18" selection-end-line="7" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/public/views/newcourse.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-10.222222">
+          <caret line="16" column="13" selection-start-line="12" selection-start-column="8" selection-end-line="16" selection-end-column="13" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/public/views/courseedit.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.6666665">
-          <caret line="7" column="90" selection-start-line="7" selection-start-column="90" selection-end-line="7" selection-end-column="90" />
-          <folding />
+        <state vertical-scroll-proportion="-11.222222">
+          <caret line="17" column="8" selection-start-line="17" selection-start-column="8" selection-end-line="17" selection-end-column="8" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/education/ws/LoginCheckService.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/education/db/DBConnection.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="13" column="11" selection-start-line="13" selection-start-column="11" selection-end-line="13" selection-end-column="11" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/web.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.714286">
-          <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="14" column="53" selection-start-line="14" selection-start-column="53" selection-end-line="14" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/education/jerseytest/CourseTypeServiceTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="19" column="46" selection-start-line="19" selection-start-column="46" selection-end-line="19" selection-end-column="46" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.glassfish.jersey.test-framework/jersey-test-framework-core/2.22.1/3871b23ef6bcb10c655fdf6cda6383b115506a84/jersey-test-framework-core-2.22.1-sources.jar!/org/glassfish/jersey/test/JerseyTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33333334">
+          <caret line="143" column="22" selection-start-line="143" selection-start-column="22" selection-end-line="143" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/education/ws/CourseTypeService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="19" column="18" selection-start-line="19" selection-start-column="8" selection-end-line="19" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/education/jerseytest/AbstractJerseyTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.27027026">
+          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/education/jerseytest/CourseRegisterServiceTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="55" column="31" selection-start-line="55" selection-start-column="31" selection-end-line="55" selection-end-column="31" />
+          <folding>
+            <element signature="e#905#906#0" expanded="false" />
+            <element signature="e#941#942#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/education/db/jpa/CourseRepository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.24657534">
+          <caret line="7" column="56" selection-start-line="7" selection-start-column="42" selection-end-line="7" selection-end-column="56" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/education/ws/CourseRegisterBean.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.data/spring-data-commons/1.11.0.RELEASE/8228bdae541de11a0a11d61e7d9b5cb499ab39e/spring-data-commons-1.11.0.RELEASE-sources.jar!/org/springframework/data/repository/CrudRepository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33333334">
+          <caret line="35" column="20" selection-start-line="35" selection-start-column="20" selection-end-line="35" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/settings.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="8.071428">
-          <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+        <state vertical-scroll-proportion="-13.714286">
+          <caret line="23" column="28" selection-start-line="23" selection-start-column="28" selection-end-line="23" selection-end-column="28" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/applicationContext.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.5357144">
-          <caret line="11" column="8" selection-start-line="11" selection-start-column="8" selection-end-line="11" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/public/js/app.js">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/education/db/entity/CourseEntity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="12" column="4" selection-start-line="12" selection-start-column="4" selection-end-line="12" selection-end-column="4" />
-          <folding />
+          <caret line="30" column="33" selection-start-line="30" selection-start-column="33" selection-end-line="30" selection-end-column="33" />
+          <folding>
+            <element signature="e#823#824#0" expanded="true" />
+            <element signature="e#848#849#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/public/js/main.js">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/education/db/dao/CourseDao.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.785714">
-          <caret line="13" column="31" selection-start-line="13" selection-start-column="9" selection-end-line="13" selection-end-column="31" />
-          <folding />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="56" column="7" selection-start-line="56" selection-start-column="7" selection-end-line="56" selection-end-column="7" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/public/js/course.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="90" selection-start-line="0" selection-start-column="90" selection-end-line="0" selection-end-column="90" />
+          <caret line="106" column="48" selection-start-line="106" selection-start-column="48" selection-end-line="106" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/applicationContext.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-4.357143">
+          <caret line="57" column="90" selection-start-line="57" selection-start-column="90" selection-end-line="57" selection-end-column="90" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/education/ws/CourseRegisterService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="237" column="25" selection-start-line="237" selection-start-column="25" selection-end-line="237" selection-end-column="25" />
+        <state vertical-scroll-proportion="0.52682924">
+          <caret line="196" column="27" selection-start-line="196" selection-start-column="27" selection-end-line="196" selection-end-column="27" />
           <folding>
-            <element signature="e#8539#8540#0" expanded="true" />
-            <element signature="e#8572#8573#0" expanded="true" />
-            <element signature="e#8667#8668#0" expanded="true" />
-            <element signature="e#8711#8712#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#10563#10564#0" expanded="true" />
+            <element signature="e#10595#10596#0" expanded="true" />
+            <element signature="e#10648#10649#0" expanded="true" />
+            <element signature="e#10690#10691#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/education/ws/UserQuery.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.375">
-          <caret line="37" column="27" selection-start-line="37" selection-start-column="27" selection-end-line="37" selection-end-column="27" />
-          <folding>
-            <element signature="e#3957#3958#0" expanded="true" />
-            <element signature="e#3990#3991#0" expanded="true" />
-            <element signature="e#4085#4086#0" expanded="true" />
-            <element signature="e#4129#4130#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/education/ws/LoginService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33333334">
-          <caret line="44" column="26" selection-start-line="44" selection-start-column="26" selection-end-line="44" selection-end-column="26" />
-          <folding>
-            <element signature="e#2302#2303#0" expanded="true" />
-            <element signature="e#2335#2336#0" expanded="true" />
-            <element signature="e#2430#2431#0" expanded="true" />
-            <element signature="e#2474#2475#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/education/ws/WSUtility.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4650456">
-          <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>

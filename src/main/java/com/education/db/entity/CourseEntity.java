@@ -18,16 +18,19 @@ public class CourseEntity {
     private String category;
     private String date;
 
-    public CourseEntity(){
+    public CourseEntity() {
 
     }
 
-    public CourseEntity(CourseRegisterBean bean){
+    public CourseEntity(CourseRegisterBean bean) {
         name = bean.getName();
         content = bean.getContent();
         picture_paths = bean.getPicturePaths();
         category = bean.getCategory();
         date = bean.getDate();
+        if (bean.getId() != null) {
+            id = Integer.parseInt(bean.getId());
+        }
     }
 
     @Id
@@ -68,7 +71,7 @@ public class CourseEntity {
         this.picture_paths = picture_paths;
     }
 
-    @Column(name="category")
+    @Column(name = "category")
     public String getCategory() {
         return category;
     }

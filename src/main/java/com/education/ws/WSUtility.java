@@ -1,5 +1,7 @@
 package com.education.ws;
 
+import org.hibernate.SessionFactory;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -8,7 +10,7 @@ import javax.servlet.http.HttpSession;
  */
 public final class WSUtility {
     private WSUtility(){
-
+        SessionFactory s;
     }
 
     public static boolean whetherLogin(HttpServletRequest request){

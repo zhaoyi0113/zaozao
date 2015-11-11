@@ -6,6 +6,9 @@ import javax.ws.rs.FormParam;
  * Created by yzzhao on 11/3/15.
  */
 public class CourseRegisterBean {
+    @FormParam("id")
+    private String id;
+
     @FormParam("name")
     private String name;
 
@@ -65,11 +68,18 @@ public class CourseRegisterBean {
         this.picturePaths = picturePaths;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     @Override
     public String toString() {
         StringBuffer buffer =new StringBuffer();
-        buffer.append("name="+name+",content="+content+",category="+category+",pictures="+picturePaths+",date"+date);
+        buffer.append("id="+id+",name="+name+",content="+content+",category="+category+",pictures="+picturePaths+",date"+date);
         return buffer.toString();
     }
 }
