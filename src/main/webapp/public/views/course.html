@@ -1,12 +1,22 @@
 <div>
     Course List:<br>
-    <table>
+    <table class="table">
+
+        <th ng-repeat="head in headers" ng-model="head"><p class="text-left">{{head}}</p></th>
+
         <tr ng-repeat="course in courses" ng-model="course">
             <hr/>
             <td>
-                <hr/>
-                <a ui-sref='home.courseedit({courseId: course.id})'><strong>{{course.name}}</strong></a><br>
-                {{course.category}} <button ng-click="delete(course.id)">Delete</button><br>
+                <a ui-sref='home.courseedit({courseId: course.id})'><strong>{{course.name}}</strong></a>
+            </td>
+            <td>
+                {{course.category}}
+            </td>
+            <td>
+                {{course.date}}
+            </td>
+            <td>
+                <button ng-click="delete(course.id)">Delete</button><br>
             </td>
         </tr>
     </table>

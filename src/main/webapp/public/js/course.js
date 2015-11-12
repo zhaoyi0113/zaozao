@@ -2,8 +2,10 @@ define(['angular', 'angular-file-upload', 'directives', 'angular-ui-date', 'angu
     'use strict';
     var course = angular.module("courseModule",
         ['angularFileUpload', 'ngThumbModel', 'ui.bootstrap', 'ui.bootstrap.datetimepicker']);
+
     course.controller('CourseController', ['$scope', '$http', '$location', '$state',
         function ($scope, $http, $location, $state) {
+            $scope.headers = ['Name', 'Category','Date','Delete'];
             $http.get('http://' + $location.host() + ":" + $location.port() + '/education/zaozao/course/queryall')
                 .success(function (e) {
                     var str = JSON.stringify(e);
