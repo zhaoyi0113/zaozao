@@ -1,15 +1,11 @@
 package com.education.ws;
 
 import com.education.db.DBConnection;
-import com.education.db.dao.CourseDao;
 import com.education.db.entity.CourseEntity;
 import com.education.db.jpa.CourseRepository;
 import com.google.gson.Gson;
 import jersey.repackaged.com.google.common.collect.Lists;
-import org.glassfish.jersey.media.multipart.FormDataBodyPart;
 import org.glassfish.jersey.media.multipart.FormDataMultiPart;
-import org.hibernate.Query;
-import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,8 +18,9 @@ import javax.ws.rs.core.Response;
 import java.io.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.*;
-import java.util.function.Consumer;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -42,9 +39,6 @@ public class CourseRegisterService {
 
     @Autowired
     private CourseRepository courseRepository;
-
-    @Autowired
-    private CourseDao courseDao;
 
     @Path("new")
     @POST
@@ -71,6 +65,7 @@ public class CourseRegisterService {
         bean.setName(multiPart.getField("name").getValue());
         bean.setCategory(multiPart.getField("category").getValue());
         bean.setDate(multiPart.getField("date").getValue());
+        System.out.println("get date "+bean.getDate());
         bean.setContent(multiPart.getField("content").getValue());
         bean.setPicturePaths(bean.getName());
         int id = createNewCourseWithBean(bean);
@@ -110,7 +105,7 @@ public class CourseRegisterService {
         try {
             int id = Integer.parseInt(courseId);
 
-            CourseEntity course = getCourseDao().getCourseById(id); //getCourseById(id);
+            CourseEntity course =courseRepository.findOne(id);// getCourseDao().getCourseById(id);
             String courseResourcePath = findCourseResourcesPath(course.getId());
             String json = buildCourseJsonData(course, courseResourcePath);
             return Response.ok().entity(json).build();
@@ -122,6 +117,13 @@ public class CourseRegisterService {
         }
     }
 
+    @Path("/findafter")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response findCoursesAfterNow(){
+        Date now = Calendar.getInstance().getTime();
+        List<CourseEntity> courses = courseRepository.findByDateAfter(now);
+        return Response.ok(courses).build();
+    }
 
     private String buildCourseJsonData(CourseEntity course, String courseResourcePath) {
         if (courseResourcePath != null) {
@@ -138,17 +140,14 @@ public class CourseRegisterService {
 
     @Path("query/allnames")
     @GET
+    @Produces(MediaType.APPLICATION_JSON)
     public Response getAllCourseNames() {
         try {
-            List<String> names = getCourseDao().getAllCourseNames();
-            Gson gson = new Gson();
-            String json = gson.toJson(names);
-            return Response.ok().entity(json).build();
+            List<String> names = courseRepository.findAllCourseNames();
+            return Response.ok().entity(names).build();
         } catch (Exception e) {
             logger.log(Level.SEVERE, e.getMessage(), e);
             return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
-        } finally {
-//            DBConnection.closeSession();
         }
     }
 
@@ -159,12 +158,16 @@ public class CourseRegisterService {
             String json = LoginService.buildNotLoginJson();
             return Response.status(Response.Status.BAD_REQUEST).entity(json).build();
         }
-//        getCourseDao().editCourse(new CourseEntity(bean));
         CourseEntity one = courseRepository.findOne(Integer.parseInt(bean.getId()));
         one.setContent(bean.getContent());
         one.setCategory(bean.getCategory());
-        one.setDate(bean.getDate());
-        System.out.println("save data "+one.getId()+":"+one.getContent());
+        SimpleDateFormat format = WSUtility.getDateFormat();
+        try {
+            System.out.println("get date "+bean.getDate());
+            one.setDate(format.parse(bean.getDate()));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         courseRepository.save(one);
         return Response.ok().build();
     }
@@ -173,7 +176,7 @@ public class CourseRegisterService {
     @POST
     public Response uploadResource(FormDataMultiPart multiPart){
         String id = multiPart.getField("id").getValue();
-        if(!getCourseDao().whetherCourseExist(id)){
+        if(!courseRepository.exists(Integer.parseInt(id))){
             return Response.status(Response.Status.BAD_REQUEST).entity("Can't find course "+id).build();
         }
         CourseEntity course = courseRepository.findOne(Integer.parseInt(id));
@@ -198,37 +201,7 @@ public class CourseRegisterService {
     private int createCourse(CourseRegisterBean bean) {
         CourseEntity entity = new CourseEntity(bean);
         CourseEntity save = courseRepository.save(entity);
-//        Session currentSession = DBConnection.getCurrentSession();
-//        currentSession.beginTransaction();
-//        int save = (int) currentSession.save(entity);
-//        currentSession.getTransaction().commit();
         return save.getId();
-    }
-
-    private static List<CourseEntity> getAllCourse() {
-        Session currentSession = DBConnection.getCurrentSession();
-        Query query = currentSession.createQuery("from CourseEntity");
-        List<CourseEntity> courses = query.list();
-        return courses;
-    }
-
-    private static CourseEntity getCourseById(int id) {
-        Session currentSession = DBConnection.getCurrentSession();
-        Query query = currentSession.createQuery("from CourseEntity where id=" + id);
-        List<CourseEntity> list = query.list();
-        if (list != null && !list.isEmpty()) {
-            CourseEntity course = list.get(0);
-            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-            try {
-                Date date = format.parse(course.getDate());
-                course.setDate(format.format(date));
-            } catch (ParseException e) {
-                e.printStackTrace();
-
-            }
-            return list.get(0);
-        }
-        return null;
     }
 
     private int createNewCourseWithBean(CourseRegisterBean bean) {
@@ -289,11 +262,4 @@ public class CourseRegisterService {
         this.loginCheck = loginCheck;
     }
 
-    public CourseDao getCourseDao() {
-        return courseDao;
-    }
-
-    public void setCourseDao(CourseDao courseDao) {
-        this.courseDao = courseDao;
-    }
 }

@@ -1,7 +1,7 @@
-define(['angular', 'angular-file-upload', 'directives', 'angular-ui-date', 'angular-bootstrap', 'angular-ui-bootstrap-datetimepicker'], function (angular) {
+define(['angular', 'angular-file-upload', 'directives', 'angular-ui-date','angular-bootstrap', 'angular-bootstrap-tpls'], function (angular) {
     'use strict';
     var course = angular.module("courseModule",
-        ['angularFileUpload', 'ngThumbModel', 'ui.bootstrap', 'ui.bootstrap.datetimepicker']);
+        ['angularFileUpload', 'ngThumbModel', 'ui.bootstrap']);
 
     course.controller('CourseController', ['$scope', '$http', '$location', '$state',
         function ($scope, $http, $location, $state) {
@@ -48,6 +48,11 @@ define(['angular', 'angular-file-upload', 'directives', 'angular-ui-date', 'angu
                 url: 'http://' + $location.host() + ":" + $location.port() + '/education/zaozao/course/uploadfile',
                 formData: []
             });
+            $scope.status = {};
+            $scope.status.opened=false;
+            $scope.open = function($event) {
+                $scope.status.opened = true;
+            };
             $scope.dateOptions = {
                 startingDay: 1,
                 showWeeks: true
@@ -77,6 +82,9 @@ define(['angular', 'angular-file-upload', 'directives', 'angular-ui-date', 'angu
                 item.formData.push({name: $scope.name});
                 item.formData.push({content: $scope.content});
                 item.formData.push({category: $scope.category});
+                var formatDate = ($scope.date.getFullYear()+"-"+$scope.date.getMonth()+"-"
+                    +$scope.date.getDay()+" "+$scope.date.getHours()+":"+
+                    $scope.date.getMinutes()+":"+$scope.date.getSeconds());
                 item.formData.push({date: $scope.date});
             };
 
@@ -91,7 +99,15 @@ define(['angular', 'angular-file-upload', 'directives', 'angular-ui-date', 'angu
         function ($scope, $http, $stateParams, $state, $location, FileUploader, $httpParamSerializer) {
 
             console.log('edit course id=', $stateParams.courseId);
-
+            $scope.dateOptions = {
+                startingDay: 1,
+                showWeeks: true
+            };
+            $scope.status={};
+            $scope.status.opened=false;
+            $scope.open = function($event) {
+                $scope.status.opened = true;
+            };
             $http.get('http://' + $location.host() + ":" + $location.port() + '/education/zaozao/course/querycourse/' + $stateParams.courseId)
                 .success(function (e) {
                     var json = JSON.parse(JSON.stringify(e));
@@ -114,7 +130,10 @@ define(['angular', 'angular-file-upload', 'directives', 'angular-ui-date', 'angu
             });
 
             $scope.submit = function () {
-                console.log('edit course');
+                var date=($scope.course.date.getFullYear()+"-"+$scope.course.date.getMonth()+"-"
+                    +$scope.course.date.getDay()+" "+$scope.course.date.getHours()+":"+
+                     $scope.course.date.getMinutes()+":"+$scope.course.date.getSeconds());
+                console.log('edit course ', date);
                 var req = {
                     method: 'POST',
                     url: 'http://' + $location.host() + ":" + $location.port() + '/education/zaozao/course/edit',
@@ -126,7 +145,7 @@ define(['angular', 'angular-file-upload', 'directives', 'angular-ui-date', 'angu
                         name: $scope.course.name,
                         content: $scope.course.content,
                         category: $scope.course.category,
-                        date: $scope.course.date
+                        date: date
                     })
                 };
                 $http(req).success(function (e) {

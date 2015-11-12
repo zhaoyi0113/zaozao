@@ -5,8 +5,8 @@ apply plugin: 'java'
 apply plugin: 'com.bmuschko.tomcat'
 apply plugin: 'war'
 apply plugin: 'groovy'
-apply plugin: 'application'
-
+//apply plugin: 'application'
+apply plugin: 'org.flywaydb.flyway'
 
 repositories {
     maven{
@@ -22,6 +22,21 @@ ext {
     springVersion = '3.2.13.RELEASE'
     jerseyVersion = "2.22.1"
     aspectjVersion = '1.7.4'
+
+    environment = project.hasProperty("env") ? env : 'src/main/resources'
+    environmentPah = environment
+    // read database envs
+    Properties props = new Properties()
+    props.load(new FileInputStream(file(environmentPah + "/database.properties")))
+    db_host = props.getProperty("db_host")
+    db_port = props.getProperty("db_port")
+    db_user = props.getProperty("db_user")
+    db_password = props.getProperty("db_password")
+    db_schema = "zaozao";//props.getProperty("db_schema")
+    flyway.url = "jdbc:mysql://" + db_host + ":" + db_port + "/" + db_schema + "?characterEncoding=utf8"
+    flyway.user = db_user
+    flyway.password = db_password
+    flyway.encoding = 'UTF-8'
 }
 
 dependencies {
@@ -38,6 +53,9 @@ dependencies {
         exclude group:'org.slf4j', module: 'slf4j-nop'
     }
     testCompile group: 'junit', name: 'junit', version: '4.11'
+    testCompile(group: 'org.springframework', name: 'spring-test', version: springVersion) {
+        exclude module: 'junit'
+    }
 
     //hibernate
     compile 'c3p0:c3p0:0.9.1.2'
@@ -86,5 +104,6 @@ buildscript {
 
     dependencies {
         classpath 'com.bmuschko:gradle-tomcat-plugin:2.2.2'
+        classpath 'org.flywaydb:flyway-gradle-plugin:3.2.1'
     }
 }

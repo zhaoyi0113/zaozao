@@ -84,6 +84,7 @@
           <element id="library" level="project" name="Gradle: org.slf4j:slf4j-api:1.7.12" />
           <element id="library" level="project" name="Gradle: org.springframework:spring-jdbc:4.1.7.RELEASE" />
           <element id="library" level="project" name="Gradle: org.springframework:spring-expression:4.1.7.RELEASE" />
+          <element id="library" level="project" name="Gradle: org.aspectj:aspectjweaver:1.7.4" />
         </element>
       </element>
       <element id="directory" name="META-INF">

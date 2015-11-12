@@ -35,9 +35,7 @@ public class CourseRegisterServiceTest extends AbstractJerseyTest {
 
     @Override
     protected Application configure() {
-
         return new ResourceConfig(CourseRegisterService.class);
-
     }
 
     @Test
@@ -69,13 +67,20 @@ public class CourseRegisterServiceTest extends AbstractJerseyTest {
 
     @Test
     public void testDateFormat(){
-        String str = "2015-November-Wednesday";
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-DD");
+        String str = "2015-11-13T16:00:00.000Z";
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         try {
-            Date date = format.parse(str);
-        } catch (ParseException e) {
+//            Date date = format.parse(str);
+            Date date =new Date();
+            System.out.println(format.format(date));
+        } catch (Exception e) {
             e.printStackTrace();
         }
+    }
 
+    @Test
+    public void testGetAllCourseNames(){
+        Response response = target("course/query/allnames").request().get();
+        Assert.assertEquals(200, response.getStatus());
     }
 }

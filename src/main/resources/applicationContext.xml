@@ -21,6 +21,8 @@
        "
         >
 
+    <context:property-placeholder location="classpath:database.properties"/>
+
     <context:annotation-config/>
     <context:component-scan base-package="com.education"/>
     <context:component-scan base-package="com.education.db.jpa"/>
@@ -30,9 +32,9 @@
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
         <property name="url"
-                  value="jdbc:mysql://localhost:3306/zaozao?useUnicode=true&amp;characterEncoding=utf8"/>
-        <property name="username" value="yzzhao"/>
-        <property name="password" value="install"/>
+                  value="jdbc:mysql://${db_host}:3306/${db_schema}?useUnicode=true&amp;characterEncoding=utf8"/>
+        <property name="username" value="${db_user}"/>
+        <property name="password" value="${db_password}"/>
     </bean>
 
     <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">

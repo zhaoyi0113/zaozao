@@ -1,8 +1,11 @@
 package com.education.db.entity;
 
 import com.education.ws.CourseRegisterBean;
+import com.education.ws.WSUtility;
 
 import javax.persistence.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Created by yzzhao on 11/3/15.
@@ -16,7 +19,7 @@ public class CourseEntity {
     private String content;
     private String picture_paths;
     private String category;
-    private String date;
+    private Date date;
 
     public CourseEntity() {
 
@@ -27,7 +30,13 @@ public class CourseEntity {
         content = bean.getContent();
         picture_paths = bean.getPicturePaths();
         category = bean.getCategory();
-        date = bean.getDate();
+        try{
+            SimpleDateFormat format = WSUtility.getDateFormat();
+            date = new Date();
+            format.format(date);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         if (bean.getId() != null) {
             id = Integer.parseInt(bean.getId());
         }
@@ -82,11 +91,11 @@ public class CourseEntity {
 
 
     @Column(name = "date")
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 }

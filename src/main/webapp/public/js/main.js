@@ -37,6 +37,9 @@ require.config({
         },
         'angular-ui-bootstrap-datetimepicker':{
             deps: ['angular','angular-bootstrap','angular-bootstrap-tpls']
+        },
+        'angular-bootstrap-tpls':{
+            deps: ['angular']
         }
     }
 });

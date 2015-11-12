@@ -114,5 +114,7 @@
     <orderEntry type="library" exported="" name="Gradle: org.springframework:spring-expression:4.1.7.RELEASE" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: org.glassfish.jersey.containers:jersey-container-jetty-http:2.22.1" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: org.eclipse.jetty:jetty-continuation:9.1.1.v20140108" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: org.aspectj:aspectjweaver:1.7.4" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: org.springframework:spring-test:3.2.13.RELEASE" level="project" />
   </component>
 </module>
