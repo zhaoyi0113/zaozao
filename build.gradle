@@ -37,6 +37,7 @@ ext {
     flyway.user = db_user
     flyway.password = db_password
     flyway.encoding = 'UTF-8'
+    flyway.setBaselineOnMigrate(true);
 }
 
 dependencies {
