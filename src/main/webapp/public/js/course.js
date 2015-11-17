@@ -113,9 +113,12 @@ define(['angular', 'angular-file-upload', 'directives', 'angular-ui-date','angul
                     var json = JSON.parse(JSON.stringify(e));
                     $scope.course = json;
                     console.log('course:', $scope.course);
-                    $scope.course.imageurl = 'http://' + $location.host() + ":" + $location.port() +
-                        '/education/public/resources/courses/' + $scope.course.id + '/' + $scope.course.picture_paths;
-
+                    if($scope.course.picture_paths != null){
+                        $scope.course.imageurl = 'http://' + $location.host() + ":" + $location.port() +
+                            '/education/public/resources/courses/' + $scope.course.id + '/' + $scope.course.picture_paths;
+                    }else{
+                        $scope.course.imageurl = null;
+                    }
                 }).error(function (e) {
                     console.log('error:', e);
                     var ret = JSON.stringify(e);
@@ -130,10 +133,14 @@ define(['angular', 'angular-file-upload', 'directives', 'angular-ui-date','angul
             });
 
             $scope.submit = function () {
-                var date=($scope.course.date.getFullYear()+"-"+$scope.course.date.getMonth()+"-"
+                console.log('edit course ', $scope.course.date.constructor);
+                var date= $scope.course.date;
+                if($scope.course.date instanceof String){
+                    date = ($scope.course.date.getFullYear()+"-"+$scope.course.date.getMonth()+"-"
                     +$scope.course.date.getDay()+" "+$scope.course.date.getHours()+":"+
                      $scope.course.date.getMinutes()+":"+$scope.course.date.getSeconds());
-                console.log('edit course ', date);
+                }
+
                 var req = {
                     method: 'POST',
                     url: 'http://' + $location.host() + ":" + $location.port() + '/education/zaozao/course/edit',
@@ -150,10 +157,16 @@ define(['angular', 'angular-file-upload', 'directives', 'angular-ui-date','angul
                 };
                 $http(req).success(function (e) {
                     console.log('edit success');
+                    if($scope.uploader.queue.length == 0){
+                        $state.go('home.course');
+                    }
                 }).error(function (e) {
                     console.log('edit failed ', e);
                 });
-                $scope.uploader.uploadAll();
+                console.log("upload length "+$scope.uploader.queue.length );
+                if($scope.uploader.queue.length > 0){
+                    $scope.uploader.uploadAll();
+                }
 
             }
             $scope.cancel = function () {

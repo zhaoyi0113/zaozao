@@ -39,7 +39,7 @@ require.config({
             deps: ['angular','angular-bootstrap','angular-bootstrap-tpls']
         },
         'angular-bootstrap-tpls':{
-            deps: ['angular']
+            deps: ['angular','angular-bootstrap']
         }
     }
 });
