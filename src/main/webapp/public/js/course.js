@@ -1,10 +1,12 @@
-define(['angular', 'angular-file-upload', 'directives', 'angular-ui-date','angular-bootstrap', 'angular-bootstrap-tpls'], function (angular) {
+define(['angular', 'angular-file-upload', 'directives', 'angular-ui-date','angular-bootstrap', 'angular-bootstrap-tpls'
+       ,'angular-route','ueditor-config','ueditor-all', 'angular-editor'], function (angular) {
     'use strict';
     var course = angular.module("courseModule",
-        ['angularFileUpload', 'ngThumbModel', 'ui.bootstrap']);
+        ['angularFileUpload', 'ngThumbModel', 'ui.bootstrap', 'ngRoute', 'ng.ueditor']);
 
     course.controller('CourseController', ['$scope', '$http', '$location', '$state',
         function ($scope, $http, $location, $state) {
+            window.UEDITOR_HOME_URL = 'http://' + $location.host() + ":" + $location.port() + '/education/zaozao/course/upload_resource';
             $scope.headers = ['Name', 'Category','Date','Delete'];
             $http.get('http://' + $location.host() + ":" + $location.port() + '/education/zaozao/course/queryall')
                 .success(function (e) {
@@ -95,7 +97,7 @@ define(['angular', 'angular-file-upload', 'directives', 'angular-ui-date','angul
         }]);
 
     course.controller('CourseEditController', ['$scope', '$http', '$stateParams', '$state', '$location',
-        'FileUploader', '$httpParamSerializer',
+        'FileUploader', '$httpParamSerializer', 
         function ($scope, $http, $stateParams, $state, $location, FileUploader, $httpParamSerializer) {
 
             console.log('edit course id=', $stateParams.courseId);
@@ -105,6 +107,19 @@ define(['angular', 'angular-file-upload', 'directives', 'angular-ui-date','angul
             };
             $scope.status={};
             $scope.status.opened=false;
+            $scope._simpleConfig = {
+                 //这里可以选择自己需要的工具按钮名称,此处仅选择如下五个
+                 toolbars: [
+                   ['FullScreen', 'Source', 'Undo', 'Redo', 'Bold', 'simpleupload']
+                 ],
+                 //focus时自动清空初始化时的内容
+                 autoClearinitialContent: true,
+                 //关闭字数统计
+                 wordCount: false,
+                 //关闭elementPath
+                 elementPathEnabled: false
+               };
+
             $scope.open = function($event) {
                 $scope.status.opened = true;
             };
@@ -133,7 +148,7 @@ define(['angular', 'angular-file-upload', 'directives', 'angular-ui-date','angul
             });
 
             $scope.submit = function () {
-                console.log('edit course ', $scope.course.date.constructor);
+                console.log('edit course ', $scope.course.content);
                 var date= $scope.course.date;
                 if($scope.course.date instanceof String){
                     date = ($scope.course.date.getFullYear()+"-"+$scope.course.date.getMonth()+"-"

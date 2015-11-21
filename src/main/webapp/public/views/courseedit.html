@@ -18,12 +18,13 @@
             </p>
         </div>
         <br>
-        <!--<datetimepicker ng-model="course.date" data-format="yyyy.MM.dd"
-                        date-options="dateOptions"
-                        date-disabled="isDisabledDate(course.date, mode)"></datetimepicker><br>-->
 
         Content: <br>
-        <textarea cols="100" rows="10" ng-model="course.content" required></textarea><br>
+        
+        <div class="ueditor" ng-model='course.content' config="_simpleConfig"> </div>
+        
+        <!-- <textarea cols="100" rows="10" ng-model="course.content" required></textarea><br> -->
+
         File: <input type="file" nv-file-select="" uploader="uploader" /><br>
         <ul ng-repeat="item in uploader.queue">
             <li>
