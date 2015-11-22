@@ -6,7 +6,8 @@ define(['angular', 'angular-file-upload', 'directives', 'angular-ui-date','angul
 
     course.controller('CourseController', ['$scope', '$http', '$location', '$state',
         function ($scope, $http, $location, $state) {
-            window.UEDITOR_HOME_URL = 'http://' + $location.host() + ":" + $location.port() + '/education/zaozao/course/upload_resource';
+            console.log("window.location:"+window.location.protocol);
+            //window.UEDITOR_HOME_URL = 'http://' + $location.host() + ":" + $location.port() + '/education/zaozao/course/upload_resource';
             $scope.headers = ['Name', 'Category','Date','Delete'];
             $http.get('http://' + $location.host() + ":" + $location.port() + '/education/zaozao/course/queryall')
                 .success(function (e) {
@@ -128,6 +129,7 @@ define(['angular', 'angular-file-upload', 'directives', 'angular-ui-date','angul
                     var json = JSON.parse(JSON.stringify(e));
                     $scope.course = json;
                     console.log('course:', $scope.course);
+                    console.log('content', $scope.course.content);
                     if($scope.course.picture_paths != null){
                         $scope.course.imageurl = 'http://' + $location.host() + ":" + $location.port() +
                             '/education/public/resources/courses/' + $scope.course.id + '/' + $scope.course.picture_paths;
