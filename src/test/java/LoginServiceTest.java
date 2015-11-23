@@ -8,22 +8,36 @@ import org.hibernate.Session;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.transaction.TransactionConfiguration;
 
 /**
  * Created by yzzhao on 11/1/15.
  */
+
+@ContextConfiguration(locations = {"classpath*:applicationContext.xml"})
+@RunWith(SpringJUnit4ClassRunner.class)
+@TransactionConfiguration(transactionManager = "transactionManager", defaultRollback = true)
 public class LoginServiceTest {
 
-    @Before
-    public void before() {
-        System.setProperty("HIBERNATE_CFG_FILE", "hibernate_test.cfg.xml");
-        Session session = DBConnection.getCurrentSession();
-        DBUtil.clearTable(session, "user");
-    }
+    @Autowired
+    private UserRegisterService register;
+
+    @Autowired
+    private LoginService login;
+
+//    @Before
+//    public void before() {
+//        System.setProperty("HIBERNATE_CFG_FILE", "hibernate_test.cfg.xml");
+//        Session session = DBConnection.getCurrentSession();
+//        DBUtil.clearTable(session, "user");
+//    }
 
     @Test
     public void loginTest() {
-        UserRegisterService register = new UserRegisterService();
         UserRegisterBean bean = new UserRegisterBean();
         bean.setAge(10);
         String user = "张三";
@@ -32,7 +46,6 @@ public class LoginServiceTest {
         bean.setPassword(password);
         bean.setGender("1");
         register.registerNewUser(bean);
-        LoginService login = new LoginService();
         boolean ret = login.validateUser(user, password);
         Assert.assertTrue(ret);
         ret = login.validateUser(user, "aaaaa");
@@ -41,7 +54,6 @@ public class LoginServiceTest {
 
     @Test
     public void failedLoginTest() {
-        LoginService login = new LoginService();
         boolean ret = login.validateUser("", "");
         Assert.assertFalse(ret);
         ret = login.validateUser(null, "");

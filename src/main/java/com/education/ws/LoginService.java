@@ -3,10 +3,12 @@ package com.education.ws;
 
 import com.education.db.DBConnection;
 import com.education.db.entity.UserEntity;
+import com.education.db.jpa.UserRepository;
 import com.google.gson.Gson;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -17,19 +19,25 @@ import javax.ws.rs.Path;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import java.util.Hashtable;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Consumer;
 import java.util.logging.Logger;
 
 /**
  * Created by yzzhao on 11/1/15.
  */
 @Path("/login")
+@Service
 public class LoginService {
 
     private static final Logger logger = Logger.getLogger(LoginService.class.getName());
 
     private LoginCheckService loginCheck;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @POST
     public Response login(@Context HttpServletRequest request, @FormParam("userName") String userName, @FormParam("password") String password) {
@@ -60,14 +68,16 @@ public class LoginService {
     }
 
     public boolean validateUser(String userName, String password){
-        Session currentSession = DBConnection.getCurrentSession();
-        Query query = currentSession.createQuery("from UserEntity where userName='" + userName+"'");
-        List<UserEntity> list = query.list();
-        if(list.size()<=0){
-            return false;
-        }
-        if(password.equals(list.get(0).getPassword())){
-            return true;
+//        Session currentSession = DBConnection.getCurrentSession();
+//        Query query = currentSession.createQuery("from UserEntity where userName='" + userName+"'");
+//        List<UserEntity> list = query.list();
+
+        Iterable<UserEntity> iterable = userRepository.findAll();//ByUserNameAndPassword(userName, password);
+        for(Iterator<UserEntity> iter = iterable.iterator(); iter.hasNext();){
+            UserEntity entity = iter.next();
+            if(entity.getPassword() != null && entity.getPassword().equals(password)){
+                return true;
+            }
         }
         return false;
     }
