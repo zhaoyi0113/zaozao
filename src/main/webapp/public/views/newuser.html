@@ -1,14 +1,31 @@
-<div>
-    <form name="add_user">
-        Name:<input ng-model="user.userName" name="userName" type="text" required /><br/>
-        Password: <input ng-model="user.password" name="password" type="password"/><br/>
-        Email: <input ng-model="user.email" name="userEmail" type="text" required /><br/>
-        Phone: <input ng-model="user.phone" name="userPhone" type="text" /><br/>
-        Age: <input ng-model="user.age" name="userAge" type="text" /><br/>
-        Birthdate: <input ng-model='user.birthdate' name="userBirthdate" type="datetime" /><br/>
-        Gender:  <input ng-model='user.gender' name="userGender" type="checkbox" /><br/>
-        <button ng-click="submit()">Submit</button>
-        <button ng-click="cancel()">Cancel</button>
-    </form>
+<form id = "form1" name="add_user">
+    <h1 class = "newuser">Add New User</h1>
+    <ul>
+        <li class = "label">Name</li>
+        <li><input ng-model="user.userName" name="userName" type="text" placeholder = "Enter your full name" required /></li>
+        <li class = "label">Password</li>
+        <li><input ng-model="user.password" name="password" type="password" placeholder = "Enter your password"/></li>
+        <li class = "label">Email</li>
+        <li><input ng-model="user.email" name="userEmail" type="text" placeholder = "Enter your email" required /></li>
+        <li class = "label">Phone</li>
+        <li><input ng-model="user.phone" name="userPhone" type="text" placeholder = "Enter your Phone number"/></li>
+        <li class = "label">Age</li>
+        <li><input ng-model="user.age" name="userAge" type="text" placeholder = "Enter your Age"/></li>
+        <li class = "Birthdate">Birthdate</li>
+        <li><input ng-model='user.birthdate' name="userBirthdate" type="datetime" placeholder = "Enter your Birthdate"/></li>
+        <li class = "label">Gender</li>
+        <li>
+            <label>
+                <input ng-model='user.gender' name="userGender" type="radio" value ="female"/>Female&nbsp;&nbsp;&nbsp;
+            </label>
+            <label>
+                <input ng-model='user.gender' name="userGender" type="radio" value ="male"/>Male
+            </label>
+        </li>
+        <li class = "submit">
+            <button ng-click="submit()" width ="200px">Submit</button>
+            <button ng-click="cancel()">Cancel</button>
+        </li>
+    </ul>
+</form>
 
-</div>

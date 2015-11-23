@@ -1,7 +1,72 @@
+.label{
+	text-align: center;
+	font-size: 13px;
+	font-weight: bold;
+	margin-top: 1.5em;
+	color: rgb(50,50,50);
+}
 
+#form1{
+	width:450px;
+	background:#fff;
+	text-align: left;
+    padding:12px 32px;
+    margin: 0 auto;
+    font-size: 12px;
+    line-height: 1.5em;
+}
 
 .main_menu{
     display: inline;
+}
+
+.userlist-text{
+	text-align: left;
+	color: rgb(0,0,255);
+	font-size:14px;
+}
+
+.userlist-head{
+	text-align: left;
+	font-size: 18px;
+}
+
+.newuser-head{
+     text-align: center;
+     color: #888;
+     font-family:.8em Arial, Tahoma, Verdana;
+     font-size:36px;
+     height:36px;
+}
+
+.newuser-content{
+	text-align: center;
+	font-family: Arial, Tahoma, Verdana;
+}
+
+.newuser-gender{
+	padding-left: 610px;
+	font: Arial, Tahoma, Verdana;
+}
+
+.newuser-button{
+	text-align: center;white-space: nowrap;
+}
+
+div,h1,form,fieldset,input{
+	text-align: center;
+	margin:0;
+	padding:0;
+	border:0;
+	outline:none;
+}
+
+.login-h1{
+	font-size: 35px;
+	color:#445668;
+	text-align: center;
+	margin: 0 0 35px 0;
+	text-shadow:0px 2px 0px #f2f2f2;
 }
 
 .new_course{
