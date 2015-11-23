@@ -11,13 +11,20 @@ require.config({
         jquery: '/education/bower_components/jquery/dist/jquery.min',
         'angular-bootstrap': '/education/bower_components/angular-bootstrap/ui-bootstrap.min',
         'angular-ui-bootstrap-datetimepicker':'/education/bower_components/angular-ui-bootstrap-datetimepicker/datetimepicker',
-        'angular-bootstrap-tpls': '/education/bower_components/angular-bootstrap/ui-bootstrap-tpls.min'
+        'angular-bootstrap-tpls': '/education/bower_components/angular-bootstrap/ui-bootstrap-tpls.min',
+        'angular-editor' : '/education/bower_components/angular-ueditor/dist/angular-ueditor.min',
+        'ueditor-config' : '/education/bower_components/ueditor-bower/ueditor.config',
+        'ueditor-all' : '/education/bower_components/ueditor-bower/ueditor.all',
+        'angular-route': '/education/bower_components/angular-route/angular-route.min'
     },
     shim: {
         'angular': {
             exports: 'angular'
         },
         'ui-router':{
+            deps: ['angular']
+        },
+        'angular-route':{
             deps: ['angular']
         },
         'angular-file-upload':{
@@ -39,7 +46,18 @@ require.config({
             deps: ['angular','angular-bootstrap','angular-bootstrap-tpls']
         },
         'angular-bootstrap-tpls':{
-            deps: ['angular']
+            deps: ['angular','angular-bootstrap']
+        }
+        ,
+        'ueditor-all':{
+            deps: ['ueditor-config']
+        },
+        // 'ueditor-config':{
+        //     exports: ['ueditor-config']
+        // },
+        
+        'angular-editor':{
+            deps: ['angular','ueditor-all','ueditor-config']
         }
     }
 });

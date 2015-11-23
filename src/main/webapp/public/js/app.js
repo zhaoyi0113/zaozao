@@ -1,4 +1,4 @@
-define(['angular', 'ui-router', 'jquery-ui', 'home'], function(angular){
+define(['angular', 'ui-router', 'jquery-ui' , 'home'], function(angular){
     'use strict';
 
     console.log('app');

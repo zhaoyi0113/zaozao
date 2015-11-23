@@ -75,6 +75,7 @@ public class CourseRegisterService {
             imageDir = WEBAPP_PUBLIC_RESOURCES_COURSES;
         }
         imageDir += "/" + id;
+        logger.info("create new id "+id);
         writeFile(file, imageDir, bean.getName());
         return Response.ok().build();
     }
@@ -225,6 +226,7 @@ public class CourseRegisterService {
                 dirFile.mkdirs();
             }
             FileOutputStream output = new FileOutputStream(dir + "/" + targetName);
+            logger.info("save file in "+dir+"/"+targetName);
             byte buffer[] = new byte[512];
             int read = input.read(buffer);
             while (read > 0) {
