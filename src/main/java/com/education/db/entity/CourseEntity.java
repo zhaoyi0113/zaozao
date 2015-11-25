@@ -32,8 +32,8 @@ public class CourseEntity {
         category = bean.getCategory();
         try{
             SimpleDateFormat format = WSUtility.getDateFormat();
-            date = new Date();
-            format.format(date);
+             date = format.parse(bean.getDate());
+            format.format(this.date);
         }catch (Exception e){
             e.printStackTrace();
         }

@@ -37,6 +37,10 @@ define(['angular', 'ui-router', 'jquery-ui' , 'home'], function(angular){
             url: '/courseedit?courseId',
             templateUrl: '/education/public/views/courseedit.html',
             controller: 'CourseEditController'
+        }).state('home.courseplan',{
+            url: '/courseplan',
+            templateUrl: '/education/public/views/courseplan.html',
+            controller: 'CoursePlanController'
         });
         $urlRouterProvider.otherwise('/home');
     });

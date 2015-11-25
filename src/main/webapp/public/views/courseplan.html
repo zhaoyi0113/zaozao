@@ -1,0 +1,12 @@
+<div>
+	<table class="table">
+        <th ng-repeat="head in headers" ng-model="head"><p class="text-center">{{head}}</p></th>
+        <tr ng-repeat="coursePlan in coursePlanList" ng-model="coursePlan">
+            <td>{{coursePlan.title}}</td>
+            <td>{{coursePlan.subTitle}}</td>
+            <td>{{coursePlan.content}}</td>
+            <td>{{coursePlan.price}}</td>
+            <td><a ui-sref='home.edit({userId: user.userId})'>edit</a></td>
+        </tr>
+    </table>
+</div>

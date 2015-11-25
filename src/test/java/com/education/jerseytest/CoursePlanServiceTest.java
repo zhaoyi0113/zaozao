@@ -19,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.Application;
 import javax.ws.rs.core.Form;
+import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
 
 /**
@@ -32,7 +33,7 @@ import javax.ws.rs.core.Response;
         DirtiesContextTestExecutionListener.class,
         TransactionDbUnitTestExecutionListener.class})
 @Transactional
-public class CoursePlanServiceTest extends JerseyTest{
+public class CoursePlanServiceTest extends JerseyTest {
 
     @Override
     protected Application configure() {
@@ -42,12 +43,8 @@ public class CoursePlanServiceTest extends JerseyTest{
     }
 
     @Test
-    public void testGetAllCoursePlans(){
-        Form form = new Form();
-        form.param("title", "test1");
-        form.param("sub_title", "sub1");
-        form.param("content", "content");
-        form.param("price", "400.5");
+    public void testGetAllCoursePlans() {
+        Form form = createNewCourseForm();
         Response response = target("courseplan").request().post(Entity.form(form));
         Assert.assertEquals(200, response.getStatus());
         CoursePlanEntity entity = response.readEntity(CoursePlanEntity.class);
@@ -60,5 +57,51 @@ public class CoursePlanServiceTest extends JerseyTest{
         Assert.assertEquals(200, response.getStatus());
 
 
+    }
+
+    private Form createNewCourseForm() {
+        Form form = new Form();
+        form.param("title", "test1");
+        form.param("sub_title", "sub1");
+        form.param("content", "content");
+        form.param("price", "400.5");
+        return form;
+    }
+
+    @Test
+    public void testDeleteCoursePlan() {
+        Form form = createNewCourseForm();
+        Response response = target("courseplan").request().post(Entity.form(form));
+        Assert.assertEquals(200, response.getStatus());
+        CoursePlanEntity entity = response.readEntity(CoursePlanEntity.class);
+        response = target("courseplan/" + entity.getId()).request().get();
+        entity = response.readEntity(CoursePlanEntity.class);
+        Assert.assertNotNull(entity);
+
+
+        response = target("courseplan/" + entity.getId()).request().delete();
+        Assert.assertEquals(200, response.getStatus());
+        response = target("courseplan/" + entity.getId()).request().get();
+        Assert.assertEquals(400, response.getStatus());
+    }
+
+    @Test
+    public void testEditCoursePlan() {
+        Form form = createNewCourseForm();
+        Response response = target("courseplan").request().post(Entity.form(form));
+        Assert.assertEquals(200, response.getStatus());
+        CoursePlanEntity entity = response.readEntity(CoursePlanEntity.class);
+
+        Form newform = new Form();
+        newform.param("title", "newtitle");
+        newform.param("sub_title", "sub1");
+        newform.param("content", "content");
+        newform.param("price", "400.5");
+        newform.param("id", entity.getId()+"");
+
+        response = target("courseplan/edit").request().post(Entity.form(newform));
+        Assert.assertEquals(200, response.getStatus());
+        entity = response.readEntity(CoursePlanEntity.class);
+        Assert.assertEquals("newtitle", entity.getTitle());
     }
 }

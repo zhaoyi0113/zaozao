@@ -38,4 +38,42 @@ public class CoursePlanService {
 
         return Response.ok(saved).build();
     }
+
+    @POST
+    @Path("/edit")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response editCoursePlan(@BeanParam CoursePlanBean bean){
+        CoursePlanEntity entity = coursePlanRepository.findOne(bean.getId());
+        if(entity != null){
+            entity.updateValues(bean);
+            coursePlanRepository.save(entity);
+            return Response.ok(bean).build();
+        }else{
+            throw new BadRequestException("Can't find course plan "+bean.getId()+", "+bean.getTitle());
+        }
+
+    }
+
+    @DELETE
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("{id}")
+    public Response removeCoursePlan(@PathParam("id") int id){
+        CoursePlanEntity entity = coursePlanRepository.findOne(id);
+        if(entity != null){
+            coursePlanRepository.delete(entity);
+            return Response.ok().build();
+        }
+        throw new BadRequestException("Can't find course plan "+id);
+    }
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("{id}")
+    public Response findCoursePlan(@PathParam("id") int id){
+        CoursePlanEntity entity = coursePlanRepository.findOne(id);
+        if(entity != null){
+            return Response.ok(entity).build();
+        }
+        throw new BadRequestException("Can't find course plan "+id);
+    }
 }

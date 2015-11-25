@@ -7,6 +7,9 @@ import javax.ws.rs.FormParam;
  */
 public class CoursePlanBean {
 
+    @FormParam("id")
+    private int id;
+
     @FormParam("title")
     private String title;
 
@@ -21,6 +24,14 @@ public class CoursePlanBean {
 
     public String getTitle() {
         return title;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public void setTitle(String title) {

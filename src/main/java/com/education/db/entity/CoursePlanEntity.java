@@ -24,6 +24,10 @@ public class CoursePlanEntity {
     }
 
     public CoursePlanEntity(CoursePlanBean bean){
+        updateValues(bean);
+    }
+
+    public final void updateValues(CoursePlanBean bean){
         setTitle(bean.getTitle());
         setContent(bean.getContent());
         setSubTitle(bean.getSubTitle());
