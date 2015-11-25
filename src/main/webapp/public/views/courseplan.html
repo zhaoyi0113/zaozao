@@ -6,7 +6,9 @@
             <td>{{coursePlan.subTitle}}</td>
             <td>{{coursePlan.content}}</td>
             <td>{{coursePlan.price}}</td>
-            <td><a ui-sref='home.edit({userId: user.userId})'>edit</a></td>
+            <td><a ui-sref='home.courseplan_edit({id: coursePlan.id})'>Edit</a></td>
+            <td><button ng-click='delete(coursePlan.id)'>Delete</button></td>
         </tr>
-    </table>
+    </table><br>
+    <a ui-sref='home.courseplan_new()'>Add New</a>
 </div>
