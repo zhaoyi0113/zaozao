@@ -1,12 +1,8 @@
-
-import com.education.db.DBConnection;
-import com.education.db.DBUtil;
 import com.education.ws.LoginService;
 import com.education.ws.UserRegisterBean;
 import com.education.ws.UserRegisterService;
-import org.hibernate.Session;
 import org.junit.Assert;
-import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +17,7 @@ import org.springframework.test.context.transaction.TransactionConfiguration;
 @ContextConfiguration(locations = {"classpath*:applicationContext.xml"})
 @RunWith(SpringJUnit4ClassRunner.class)
 @TransactionConfiguration(transactionManager = "transactionManager", defaultRollback = true)
+@Ignore
 public class LoginServiceTest {
 
     @Autowired

@@ -1,8 +1,8 @@
-define(['angular', 'angular-file-upload', 'directives', 'angular-ui-date','angular-bootstrap', 'angular-bootstrap-tpls'
-       ,'angular-route','ueditor-config','ueditor-all', 'angular-editor'], function (angular) {
+define(['angular', 'angular-file-upload', 'directives', 'angular-ui-date','angular-bootstrap','angular-bootstrap-tpls'
+       ,'ueditor-config','ueditor-all', 'angular-editor'], function (angular) {
     'use strict';
     var course = angular.module("courseModule",
-        ['angularFileUpload', 'ngThumbModel', 'ui.bootstrap', 'ngRoute', 'ng.ueditor']);
+        ['angularFileUpload', 'ngThumbModel', 'ui.bootstrap', 'ng.ueditor']);
 
     course.controller('CourseController', ['$scope', '$http', '$location', '$state',
         function ($scope, $http, $location, $state) {
@@ -47,12 +47,24 @@ define(['angular', 'angular-file-upload', 'directives', 'angular-ui-date','angul
     course.controller('NewCourseController', ['$scope', '$http', '$location', '$state', 'FileUploader',
         '$httpParamSerializer',
         function ($scope, $http, $location, $state, FileUploader, $httpParamSerializer) {
-            $scope.uploader = new FileUploader({
-                url: 'http://' + $location.host() + ":" + $location.port() + '/education/zaozao/course/uploadfile',
-                formData: []
-            });
+            // $scope.uploader = new FileUploader({
+            //     url: 'http://' + $location.host() + ":" + $location.port() + '/education/zaozao/course/uploadfile',
+            //     formData: []
+            // });
             $scope.status = {};
             $scope.status.opened=false;
+            $scope._simpleConfig = {
+                 //这里可以选择自己需要的工具按钮名称,此处仅选择如下五个
+                 toolbars: [
+                   ['FullScreen', 'Source', 'Undo', 'Redo', 'Bold', 'simpleupload']
+                 ],
+                 //focus时自动清空初始化时的内容
+                 autoClearinitialContent: true,
+                 //关闭字数统计
+                 wordCount: false,
+                 //关闭elementPath
+                 elementPathEnabled: false
+               };
             $scope.open = function($event) {
                 $scope.status.opened = true;
             };
@@ -76,24 +88,53 @@ define(['angular', 'angular-file-upload', 'directives', 'angular-ui-date','angul
                 }).error(function (e) {
 
                 });
-            $scope.uploader.onCompleteAll = function () {
-                console.info('onCompleteAll');
-                $state.go('home.course');
-            };
-            $scope.uploader.onBeforeUploadItem = function (item) {
-                console.info('onBeforeUploadItem', item);
-                item.formData.push({name: $scope.name});
-                item.formData.push({content: $scope.content});
-                item.formData.push({category: $scope.category});
-                var formatDate = ($scope.date.getFullYear()+"-"+$scope.date.getMonth()+"-"
-                    +$scope.date.getDay()+" "+$scope.date.getHours()+":"+
-                    $scope.date.getMinutes()+":"+$scope.date.getSeconds());
-                item.formData.push({date: $scope.date});
-            };
-
+            // $scope.uploader.onCompleteAll = function () {
+            //     console.info('onCompleteAll');
+            //     $state.go('home.course');
+            // };
+            // $scope.uploader.onBeforeUploadItem = function (item) {
+            //     console.info('onBeforeUploadItem', item);
+            //     item.formData.push({name: $scope.name});
+            //     item.formData.push({content: $scope.content});
+            //     item.formData.push({category: $scope.category});
+            //     var formatDate = ($scope.date.getFullYear()+"-"+$scope.date.getMonth()+"-"
+            //         +$scope.date.getDay()+" "+$scope.date.getHours()+":"+
+            //         $scope.date.getMinutes()+":"+$scope.date.getSeconds());
+            //     item.formData.push({date: $scope.date});
+            // };
+            var editor = UE.getEditor('container');
             $scope.submit = function () {
                 console.log('create new course ', $scope.date);
-                $scope.uploader.uploadAll();
+                //$scope.uploader.uploadAll();
+                var date= $scope.date;
+                if($scope.date instanceof String){
+                    date = ($scope.date.getFullYear()+"-"+$scope.date.getMonth()+"-"
+                    +$scope.date.getDay()+" "+$scope.date.getHours()+":"+
+                     $scope.date.getMinutes()+":"+$scope.date.getSeconds());
+                }
+                console.log('editor:',editor.getAllHtml());
+                var req = {
+                    method: 'POST',
+                    url: 'http://' + $location.host() + ":" + $location.port() + '/education/zaozao/course/new',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+                    },
+                    data: $httpParamSerializer({
+                        name: $scope.name,
+                        content: $scope.content,
+                        category: $scope.category,
+                        date: date
+                    })
+                };
+                $http(req).success(function (e) {
+                    console.log('edit success');
+                    
+                    //$state.go('home.course');
+                    
+                }).error(function (e) {
+                    console.log('edit failed ', e);
+                });
+
             }
         }]);
 

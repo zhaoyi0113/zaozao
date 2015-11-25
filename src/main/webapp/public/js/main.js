@@ -13,8 +13,8 @@ require.config({
         'angular-ui-bootstrap-datetimepicker':'/education/bower_components/angular-ui-bootstrap-datetimepicker/datetimepicker',
         'angular-bootstrap-tpls': '/education/bower_components/angular-bootstrap/ui-bootstrap-tpls.min',
         'angular-editor' : '/education/bower_components/angular-ueditor/dist/angular-ueditor.min',
-        'ueditor-config' : '/education/bower_components/ueditor-bower/ueditor.config',
-        'ueditor-all' : '/education/bower_components/ueditor-bower/ueditor.all',
+        'ueditor-config' : '/education/bower_components/ueditor/ueditor.config',
+        'ueditor-all' : '/education/bower_components/ueditor/ueditor.all',
         'angular-route': '/education/bower_components/angular-route/angular-route.min'
     },
     shim: {

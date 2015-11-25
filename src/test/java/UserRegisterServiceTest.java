@@ -7,6 +7,7 @@ import com.education.ws.UserRegisterBean;
 import org.hibernate.Session;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import javax.ws.rs.core.Response;
@@ -25,6 +26,7 @@ public class UserRegisterServiceTest {
     }
 
     @Test
+    @Ignore
     public void testRegisterUser(){
         UserRegisterService register = new UserRegisterService();
         UserRegisterBean bean = new UserRegisterBean();

@@ -23,7 +23,7 @@ public class UserEditorService {
     @Produces(MediaType.TEXT_PLAIN)
 //    @Consumes(MediaType.TEXT_PLAIN)
     public Response editUser(@BeanParam UserEditBean bean) {
-        System.out.println("user edit bean " + bean);
+        System.out.println("user edit formbean " + bean);
         UserEntity user = null;
         try {
             user = UserQuery.getUserEntityById(bean.getUserId());

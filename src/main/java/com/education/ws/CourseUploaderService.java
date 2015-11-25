@@ -35,11 +35,12 @@ public class CourseUploaderService {
     @Path("/ueditor-bower/controller")
     @POST
     @Consumes(MediaType.MULTIPART_FORM_DATA)
-    public Response uploadImage(@QueryParam("action") String action, FormDataMultiPart multiPart){
+    public Response uploadImage(@QueryParam("action") String action, FormDataMultiPart multiPart
+                                ){
         System.out.println("action "+action);
         Map<String, List<FormDataBodyPart>> fields = multiPart.getFields();
         for(Map.Entry<String, List<FormDataBodyPart>> entry : fields.entrySet()){
-            System.out.println(entry.getKey());
+            System.out.println(entry.getKey()+"="+entry.getValue());
         }
         System.out.println("filename="+multiPart.getField("filename"));
         System.out.println("file="+multiPart.getField("file"));
@@ -65,6 +66,7 @@ public class CourseUploaderService {
         resp.put("original", imageFile.getName());
         resp.put("name", imageFile.getName());
         resp.put("url", "public/resources/courses/tmp/"+imageFile.getName());
+        resp.put("imageUrl", "public/resources/courses/tmp/"+imageFile.getName());
         resp.put("size", read+"");
         resp.put("type", "jpg");
         resp.put("state", "SUCCESS");
