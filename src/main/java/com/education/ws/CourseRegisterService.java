@@ -4,6 +4,7 @@ import com.education.db.DBConnection;
 import com.education.db.entity.CourseEntity;
 import com.education.db.jpa.CourseRepository;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import jersey.repackaged.com.google.common.collect.Lists;
 import org.glassfish.jersey.media.multipart.FormDataMultiPart;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -86,7 +87,7 @@ public class CourseRegisterService {
         try {
             Iterable<CourseEntity> courseIterable = courseRepository.findAll();
             List<CourseEntity> allCourse = Lists.newArrayList(courseIterable); //getCourseDao().getAllCourses();
-            Gson gson = new Gson();
+            Gson gson = new GsonBuilder().setDateFormat(WSUtility.getDateFormatString()).create();
             String json = gson.toJson(allCourse);
             return Response.ok().entity(json).build();
         } catch (Exception e) {

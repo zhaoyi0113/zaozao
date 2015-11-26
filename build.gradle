@@ -32,7 +32,7 @@ ext {
     db_port = props.getProperty("db_port")
     db_user = props.getProperty("db_user")
     db_password = props.getProperty("db_password")
-    db_schema = "zaozao";//props.getProperty("db_schema")
+    db_schema = props.getProperty("db_schema")
     flyway.url = "jdbc:mysql://" + db_host + ":" + db_port + "/" + db_schema + "?characterEncoding=utf8"
     flyway.user = db_user
     flyway.password = db_password
@@ -81,6 +81,10 @@ dependencies {
     compile('org.springframework.data:spring-data-jpa:1.9.0.RELEASE')
     compile('org.aspectj:aspectjrt:' + aspectjVersion)
     compile('org.aspectj:aspectjweaver:' + aspectjVersion)
+
+
+    compile('com.github.springtestdbunit:spring-test-dbunit:1.2.0')
+    compile('org.dbunit:dbunit:2.5.0')
 
     def tomcatVersion = '7.0.65'
     tomcat "org.apache.tomcat.embed:tomcat-embed-core:${tomcatVersion}",

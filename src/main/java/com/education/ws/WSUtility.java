@@ -19,7 +19,13 @@ public final class WSUtility {
         return session.getAttribute("user_name") != null;
     }
 
+
+
     public static SimpleDateFormat getDateFormat(){
-        return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return new SimpleDateFormat(getDateFormatString());
+    }
+
+    public static String getDateFormatString() {
+        return "yyyy-MM-dd HH:mm:ss";
     }
 }

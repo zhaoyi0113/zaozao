@@ -23497,7 +23497,7 @@ UE.plugin.register('webapp', function (){
                         'cssfloat':node.getStyle('float'),
                         'url':node.getAttr("src"),
                         'logo':node.getAttr('logo_url')
-                    }));
+                    }),true);
                     node.parentNode.replaceChild(img,node);
                 }
             })
@@ -23531,7 +23531,7 @@ UE.plugin.register('webapp', function (){
                     var me = this,
                         str = createInsertStr(utils.extend(obj,{
                             align:'none'
-                        }), false);
+                        }), true);
                     me.execCommand("inserthtml",str);
                 },
                 queryCommandState:function () {

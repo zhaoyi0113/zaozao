@@ -2,7 +2,10 @@ package com.education.ws;
 
 import com.education.db.DBConnection;
 import com.education.db.entity.UserEntity;
+import com.education.db.jpa.UserRepository;
 import org.hibernate.Session;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import javax.ws.rs.BeanParam;
 import javax.ws.rs.POST;
@@ -16,9 +19,13 @@ import java.util.logging.Logger;
  * Created by yzzhao on 10/31/15.
  */
 @Path("/register")
+@Service
 public class UserRegisterService {
 
     private static final Logger logger = Logger.getLogger(UserRegisterService.class.getName());
+
+    @Autowired
+    private UserRepository userRepository;
 
     @POST
     @Path("/newuser")
@@ -43,15 +50,16 @@ public class UserRegisterService {
     }
 
     public ResponseStatus registerUser(UserRegisterBean registerBean) {
-        if(isExistedUser(registerBean.getUserName())){
-            return ResponseStatus.USER_EXISTED;
-        }
-        Session session = null;
-        session = DBConnection.getCurrentSession();
-        session.beginTransaction();
+//        if(isExistedUser(registerBean.getUserName())){
+//            return ResponseStatus.USER_EXISTED;
+//        }
+//        Session session = null;
+//        session = DBConnection.getCurrentSession();
+//        session.beginTransaction();
         UserEntity userEntity = new UserEntity(registerBean);
-        session.save(userEntity);
-        session.getTransaction().commit();
+        userRepository.save(userEntity);
+//        session.save(userEntity);
+//        session.getTransaction().commit();
         return ResponseStatus.SUCCESS;
     }
 

@@ -1,0 +1,14 @@
+<div>
+	<table class="table">
+        <th ng-repeat="head in headers" ng-model="head"><p class="text-center">{{head}}</p></th>
+        <tr ng-repeat="coursePlan in coursePlanList" ng-model="coursePlan">
+            <td>{{coursePlan.title}}</td>
+            <td>{{coursePlan.subTitle}}</td>
+            <td>{{coursePlan.content}}</td>
+            <td>{{coursePlan.price}}</td>
+            <td><a ui-sref='home.courseplan_edit({id: coursePlan.id})'>Edit</a></td>
+            <td><button ng-click='delete(coursePlan.id)'>Delete</button></td>
+        </tr>
+    </table><br>
+    <a ui-sref='home.courseplan_new()'>Add New</a>
+</div>
