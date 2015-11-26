@@ -1,19 +1,26 @@
+.ng-scope{
+	padding-bottom: 5px;
+	font-size: 12px;
+	font-weight: bold;
+	text-align: center;
+}
+
+.table tr:hover{
+	background-color: #eaf9ff;
+}
+
+{
+	font-size: 18px;
+	font-weight: bold;
+	text-align: center;
+}
+
 .label{
 	text-align: center;
 	font-size: 13px;
 	font-weight: bold;
 	margin-top: 1.5em;
 	color: rgb(50,50,50);
-}
-
-#form1{
-	width:450px;
-	background:#fff;
-	text-align: left;
-    padding:12px 32px;
-    margin: 0 auto;
-    font-size: 12px;
-    line-height: 1.5em;
 }
 
 .main_menu{
@@ -53,13 +60,7 @@
 	text-align: center;white-space: nowrap;
 }
 
-div,h1,form,fieldset,input{
-	text-align: center;
-	margin:0;
-	padding:0;
-	border:0;
-	outline:none;
-}
+
 
 .login-h1{
 	font-size: 35px;
