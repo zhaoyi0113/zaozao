@@ -42,9 +42,13 @@ define(['angular', 'ui-router', 'jquery-ui' , 'home'], function(angular){
             templateUrl: '/education/public/views/courseplan.html',
             controller: 'CoursePlanController'
         }).state('home.courseplan_new',{
-            url: 'home.courseplan_new',
+            url: '/courseplan_new',
             templateUrl: '/education/public/views/courseplan_new.html',
             controller:'CoursePlanNewController'
+        }).state('home.courseplan_edit',{
+            url: '/courseplan_edit?id',
+            templateUrl: '/education/public/views/courseplan_edit.html',
+            controller:'CoursePlanEditController'
         });
         $urlRouterProvider.otherwise('/home');
     });

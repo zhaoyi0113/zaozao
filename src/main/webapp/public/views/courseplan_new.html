@@ -1,3 +1,25 @@
 <div>
-	
+	<form name='courseplan'>
+		<table>
+	        
+	        <tr>
+	            <td>Title</td>
+	            <td><input type='text' ng-model='title' required></input></td>
+	        </tr>
+	        <tr>
+	        	<td>Sub Title</td>
+	        	<td><input type='text' ng-model='sub_title' required></input></td>
+	        </tr>
+	        <tr>
+	        	<td>Content</td>
+	        	<td><textarea ng-model='content' required></textarea>
+	        </tr>
+	        <tr>
+	        	<td>Price</td>
+	        	<td><input type='text' ng-model='price' required/>
+	        </tr>
+	    </table><br>
+	    <a ui-sref='home.courseplan'>Cancel</a>
+	    <button ng-click='create()' ng-disabled="courseplan.$invalid">new</button>
+	</form>
 </div>

@@ -1,0 +1,25 @@
+<div>
+	<form name='courseplan_edit'>
+		<table>
+	        
+	        <tr>
+	            <td>Title</td>
+	            <td><input type='text' ng-model='coursePlan.title' required></input></td>
+	        </tr>
+	        <tr>
+	        	<td>Sub Title</td>
+	        	<td><input type='text' ng-model='coursePlan.subTitle' required></input></td>
+	        </tr>
+	        <tr>
+	        	<td>Content</td>
+	        	<td><textarea ng-model='coursePlan.content' required></textarea>
+	        </tr>
+	        <tr>
+	        	<td>Price</td>
+	        	<td><input type='text' ng-model='coursePlan.price' required/>
+	        </tr>
+	    </table><br>
+	    <a ui-sref='home.courseplan'>Cancel</a>
+	    <button ng-click='save()' ng-disabled="courseplan.$invalid">Save</button>
+	</form>
+</div>
