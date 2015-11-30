@@ -1,10 +1,14 @@
 <div>
     <p ng-show="loginFailed">Login Failed</p>
+    
     <form name="form" ng-show="!login">
-        Name:<input ng-model="username" name="userName" type="text" required /><br/>
-        Password: <input ng-model="password" name="password" type="password" required/><br/>
-        <button ng-click="submit()" ng-disabled="username ==='' || password === ''">Submit</button>
-        <button ng-click="cancel()">Cancel</button>
+            <p>Name:<input ng-model="username" name="userName" type="text" required /></p>
+            <p>Password: <input ng-model="password" name="password" type="password" required/></p>
+            <p>
+            	<button ng-click="submit()" ng-disabled="username ==='' || password === ''">Submit</button>
+        		<button ng-click="cancel()">Cancel</button>
+            </p>
+    	</ul>
     </form>
     <button ng-click="logout()" ng-show="login">Logout</button>
 </div>

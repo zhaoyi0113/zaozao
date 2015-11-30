@@ -1,31 +1,28 @@
-<form id = "form1" name="add_user">
-    <h1 class = "newuser">Add New User</h1>
-    <ul>
-        <li class = "label">Name</li>
-        <li><input ng-model="user.userName" name="userName" type="text" placeholder = "Enter your full name" required /></li>
-        <li class = "label">Password</li>
-        <li><input ng-model="user.password" name="password" type="password" placeholder = "Enter your password"/></li>
-        <li class = "label">Email</li>
-        <li><input ng-model="user.email" name="userEmail" type="text" placeholder = "Enter your email" required /></li>
-        <li class = "label">Phone</li>
-        <li><input ng-model="user.phone" name="userPhone" type="text" placeholder = "Enter your Phone number"/></li>
-        <li class = "label">Age</li>
-        <li><input ng-model="user.age" name="userAge" type="text" placeholder = "Enter your Age"/></li>
-        <li class = "label">Birthdate</li>
-        <li><input ng-model='user.birthdate' name="userBirthdate" type="datetime" placeholder = "Enter your Birthdate"/></li>
-        <li class = "label">Gender</li>
-        <li>
+<form name="add_user">
+    <h1 class="newuser-head">Add New User</h1>
+        <p class = "label">Name:
+            <input class = "input" ng-model="user.userName" name="userName" type="text" placeholder = "Enter your full name" required /></p>
+        <p class = "label">Password:
+            <input class = "input" ng-model="user.password" name="password" type="password" placeholder = "Enter your password"/></p>
+        <p class = "label">Email:
+            <input class = "input" ng-model="user.email" name="userEmail" type="text" placeholder = "Enter your email" required /></p>
+        <p class = "label">Phone:
+            <input class = "input" ng-model="user.phone" name="userPhone" type="text" placeholder = "Enter your Phone number"/></p>
+        <p class = "label">Age:
+            <input class = "input" ng-model="user.age" name="userAge" type="text" placeholder = "Enter your Age"/></p>
+        <p class = "label">Birthdate:
+            <input class = "input" ng-model='user.birthdate' name="userBirthdate" type="datetime" placeholder = "Enter your Birthdate"/></p>
+        <p class = "label">Gender:
             <label>
-                <input ng-model='user.gender' name="userGender" type="radio" value ="female"/>Female&nbsp;&nbsp;&nbsp;
+                <input class = "input" ng-model='user.gender' name="userGender" type="radio" value ="female"/>Female&nbsp;&nbsp;&nbsp;
             </label>
             <label>
-                <input ng-model='user.gender' name="userGender" type="radio" value ="male"/>Male
+                <input class = "input" ng-model='user.gender' name="userGender" type="radio" value ="male"/>Male
             </label>
-        </li>
-        <li class = "submit">
+        </p>
+        <p class = "submit">
             <button ng-click="submit()" width ="200px">Submit</button>
             <button ng-click="cancel()">Cancel</button>
-        </li>
-    </ul>
+        </p>
 </form>
 
