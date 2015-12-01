@@ -18,7 +18,7 @@ public class CoursePlanEntity {
 
     private String content;
 
-    private double price;
+    private String price;
 
     public CoursePlanEntity() {
     }
@@ -31,7 +31,7 @@ public class CoursePlanEntity {
         setTitle(bean.getTitle());
         setContent(bean.getContent());
         setSubTitle(bean.getSubTitle());
-        setPrice(Double.parseDouble(bean.getPrice()));
+        setPrice((bean.getPrice()));
     }
 
     @Id
@@ -73,11 +73,11 @@ public class CoursePlanEntity {
     }
 
     @Column(name = "price")
-    public double getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 }

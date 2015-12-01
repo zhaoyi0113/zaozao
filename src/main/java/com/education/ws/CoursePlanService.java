@@ -27,7 +27,8 @@ public class CoursePlanService {
         ArrayList<CoursePlanEntity> list = Lists.newArrayList(iterable);
         Gson gson = new Gson();
         String json = gson.toJson(list);
-        return Response.ok(json).build();
+        return Response.ok(json).header("Access-Control-Allow-Origin","*")
+                .header("Access-Control-Allow-Methods","*").build();
     }
 
     @POST
