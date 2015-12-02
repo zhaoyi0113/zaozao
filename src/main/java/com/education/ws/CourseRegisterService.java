@@ -100,10 +100,10 @@ public class CourseRegisterService {
     @GET
     public Response getCourseById(@Context HttpServletRequest request,
                                   @PathParam("courseId") String courseId) {
-        if (!loginCheck.whetherLogin(request)) {
-            String json = LoginService.buildNotLoginJson();
-            return Response.status(Response.Status.BAD_REQUEST).entity(json).build();
-        }
+//        if (!loginCheck.whetherLogin(request)) {
+//            String json = LoginService.buildNotLoginJson();
+//            return Response.status(Response.Status.BAD_REQUEST).entity(json).build();
+//        }
         try {
             int id = Integer.parseInt(courseId);
 
@@ -135,7 +135,7 @@ public class CourseRegisterService {
                 course.setPicture_paths(files[0].getName());
             }
         }
-        Gson gson = new Gson();
+        Gson gson = new GsonBuilder().setDateFormat(WSUtility.getDateFormatString()).create();
         String json = gson.toJson(course);
         return json;
     }
@@ -156,10 +156,10 @@ public class CourseRegisterService {
     @Path("/edit")
     @POST
     public Response editCourse(@Context HttpServletRequest request, @BeanParam CourseRegisterBean bean) {
-        if (!loginCheck.whetherLogin(request)) {
-            String json = LoginService.buildNotLoginJson();
-            return Response.status(Response.Status.BAD_REQUEST).entity(json).build();
-        }
+//        if (!loginCheck.whetherLogin(request)) {
+//            String json = LoginService.buildNotLoginJson();
+//            return Response.status(Response.Status.BAD_REQUEST).entity(json).build();
+//        }
         CourseEntity one = courseRepository.findOne(Integer.parseInt(bean.getId()));
         one.setContent(bean.getContent());
         one.setCategory(bean.getCategory());

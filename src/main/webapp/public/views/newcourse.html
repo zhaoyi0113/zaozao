@@ -6,8 +6,11 @@
                           ng-options="category as category for category in categories"/><br>
         Content: 
         <br>
-        <div class="ueditor" nodetype='2' ng-model='content' config="_simpleConfig" id='editor' >
+        <!-- <div class="ueditor" nodetype='2' ng-model='content' config="_simpleConfig" id='editor' >
 
+        </div> -->
+        <div>
+            <textarea class="form-control" ng-model='content'></textarea>
         </div>
         <br>
         <!--Date: <input ng-model="date" type="date" required/><br>-->
