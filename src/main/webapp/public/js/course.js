@@ -74,14 +74,14 @@ define(['angular', 'angular-file-upload', 'directives', 'angular-ui-date','angul
             };
             $http.get('http://' + $location.host() + ":" + $location.port() + '/education/zaozao/coursetype')
                 .success(function (e) {
-                    var str = JSON.stringify(e);
-                    var json = JSON.parse(str);
-                    $scope.categories = new Array();
-                    for (var i = 0; i < json.length; i++) {
-                        $scope.categories[i] = json[i].name;
-                    }
+                    // var str = JSON.stringify(e);
+                    // var json = JSON.parse(str);
+                    $scope.categories = e;
+                    // for (var i = 0; i < json.length; i++) {
+                    //     $scope.categories[i] = json[i].name;
+                    // }
                     if ($scope.categories.lenght > 0) {
-                        $scope.defaultCategory = $scope.categories[0];
+                        $scope.category = $scope.categories[0];
                     }
                     console.log('get course type ', $scope.categories);
 
