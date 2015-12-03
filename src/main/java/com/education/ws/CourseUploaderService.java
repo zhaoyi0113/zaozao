@@ -2,7 +2,9 @@ package com.education.ws;
 
 import com.google.gson.Gson;
 import org.glassfish.jersey.media.multipart.FormDataBodyPart;
+import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
 import org.glassfish.jersey.media.multipart.FormDataMultiPart;
+import org.glassfish.jersey.media.multipart.FormDataParam;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -16,40 +18,36 @@ import java.util.logging.Logger;
 /**
  * Created by yzzhao on 11/22/15.
  */
-@Path("/bower_components")
+@Path("/fileupload")
 public class CourseUploaderService {
 
     private static final Logger logger = Logger.getLogger(CourseUploaderService.class.getName());
 
-    @Path("/ueditor-bower/controller")
-    @GET
-    public Response controller(@QueryParam("action") String action, @QueryParam("noCache") String noCache){
-        System.out.println("upload resource "+action+", noCache:"+noCache);
-        Gson gson = new Gson();
-        InputStream inputStream = getClass().getResourceAsStream("/editor/config.json");
-        Map json = gson.fromJson(new InputStreamReader(inputStream), Map.class);
-
-        return Response.ok(gson.toJson(json)).build();
+    @PUT
+    @Path("/manager")
+    public Response controller(){
+        System.out.println("controller");
+        return Response.ok().build();
     }
 
-    @Path("/ueditor-bower/controller")
     @POST
     @Consumes(MediaType.MULTIPART_FORM_DATA)
-    public Response uploadImage(@QueryParam("action") String action, FormDataMultiPart multiPart
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response uploadImage( FormDataMultiPart multiPart,
+                                 @FormDataParam("imgFile") FormDataContentDisposition disposition,
+                                 @QueryParam("dir") String type
                                 ){
-        System.out.println("action "+action);
+        System.out.println("upload image type "+type);
         Map<String, List<FormDataBodyPart>> fields = multiPart.getFields();
         for(Map.Entry<String, List<FormDataBodyPart>> entry : fields.entrySet()){
             System.out.println(entry.getKey()+"="+entry.getValue());
         }
-        System.out.println("filename="+multiPart.getField("filename"));
-        System.out.println("file="+multiPart.getField("file"));
-        System.out.println("upfile="+multiPart.getField("upfile"));
-        InputStream input = multiPart.getField("upfile").getValueAs(InputStream.class);
+        System.out.println("filename="+disposition.getFileName());
+        InputStream input = multiPart.getField("imgFile").getValueAs(InputStream.class);
 
         File tmpDir = new File(CourseRegisterService.WEBAPP_PUBLIC_RESOURCES_COURSES+"/tmp");
         tmpDir.mkdirs();
-        File imageFile = new File(tmpDir.getPath()+"/"+System.currentTimeMillis());
+        File imageFile = new File(tmpDir.getPath()+"/"+System.currentTimeMillis()+"_"+disposition.getFileName());
 
         byte buffer[] = new byte[512];
         int read = 0;
@@ -62,17 +60,12 @@ public class CourseUploaderService {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Map<String, String> resp = new Hashtable<>();
-        resp.put("original", imageFile.getName());
-        resp.put("name", imageFile.getName());
+        Map<String, Object> resp = new Hashtable<>();
         resp.put("url", "public/resources/courses/tmp/"+imageFile.getName());
-        resp.put("imageUrl", "public/resources/courses/tmp/"+imageFile.getName());
-        resp.put("size", read+"");
-        resp.put("type", "jpg");
-        resp.put("state", "SUCCESS");
+        resp.put("error", 0);
         Gson gson = new Gson();
         String json = gson.toJson(resp);
         System.out.println("resp:"+json);
-        return Response.ok(json).build();
+        return Response.ok(resp).build();
     }
 }

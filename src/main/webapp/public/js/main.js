@@ -15,7 +15,10 @@ require.config({
         'angular-editor' : '/education/bower_components/angular-ueditor/dist/angular-ueditor.min',
         'ueditor-config' : '/education/bower_components/ueditor/ueditor.config',
         'ueditor-all' : '/education/bower_components/ueditor/ueditor.all',
-        'angular-route': '/education/bower_components/angular-route/angular-route.min'
+        'angular-route': '/education/bower_components/angular-route/angular-route.min',
+        'kindeditor' : '/education/bower_components/angular-kindeditor/kindeditor/kindeditor-all-min',
+        'kindeditor-zh' : '/education/bower_components/angular-kindeditor/kindeditor/lang/zh-CN',
+        'angular-kindeditor' : '/education/bower_components/angular-kindeditor/src/angular-kindeditor'
     },
     shim: {
         'angular': {
@@ -58,6 +61,16 @@ require.config({
         
         'angular-editor':{
             deps: ['angular','ueditor-all','ueditor-config']
+        },
+        'kindeditor' :{
+            deps: ['jquery']
+        },
+        'kindeditor-zh':{
+            deps: ['kindeditor'],
+            exports: 'kindeditor-zh'
+        },
+        'angular-kindeditor':{
+            deps: ['angular', 'kindeditor']
         }
     }
 });

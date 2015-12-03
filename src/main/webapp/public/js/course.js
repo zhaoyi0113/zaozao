@@ -1,8 +1,9 @@
 define(['angular', 'angular-file-upload', 'directives', 'angular-ui-date','angular-bootstrap','angular-bootstrap-tpls'
-       ,'ueditor-config','ueditor-all', 'angular-editor'], function (angular) {
+       ,'ueditor-config','ueditor-all', 'angular-editor', 'kindeditor','kindeditor-zh',
+       'angular-kindeditor'], function (angular) {
     'use strict';
     var course = angular.module("courseModule",
-        ['angularFileUpload', 'ngThumbModel', 'ui.bootstrap', 'ng.ueditor']);
+        ['angularFileUpload', 'ngThumbModel', 'ui.bootstrap', 'ng.ueditor','ngKeditor']);
 
     course.controller('CourseController', ['$scope', '$http', '$location', '$state',
         function ($scope, $http, $location, $state) {
@@ -45,14 +46,23 @@ define(['angular', 'angular-file-upload', 'directives', 'angular-ui-date','angul
         }]);
 
     course.controller('NewCourseController', ['$scope', '$http', '$location', '$state', 'FileUploader',
-        '$httpParamSerializer',
+        '$httpParamSerializer', 
         function ($scope, $http, $location, $state, FileUploader, $httpParamSerializer) {
             // $scope.uploader = new FileUploader({
             //     url: 'http://' + $location.host() + ":" + $location.port() + '/education/zaozao/course/uploadfile',
             //     formData: []
             // });
+            $scope.kindeditor_config={width: '100px',
+                uploadJson: 'http://' + $location.host() + ":" + $location.port() + 
+                '/education/zaozao/fileupload',
+                allowFileManager:true,
+                allowUpload : true,
+                fileManagerJson : 'http://' + $location.host() + ":" + $location.port() + 
+                '/education/zaozao/fileupload/manager'
+                };
             $scope.status = {};
             $scope.status.opened=false;
+
             $scope._simpleConfig = {
                  //这里可以选择自己需要的工具按钮名称,此处仅选择如下五个
                  toolbars: [
@@ -88,21 +98,7 @@ define(['angular', 'angular-file-upload', 'directives', 'angular-ui-date','angul
                 }).error(function (e) {
 
                 });
-            // $scope.uploader.onCompleteAll = function () {
-            //     console.info('onCompleteAll');
-            //     $state.go('home.course');
-            // };
-            // $scope.uploader.onBeforeUploadItem = function (item) {
-            //     console.info('onBeforeUploadItem', item);
-            //     item.formData.push({name: $scope.name});
-            //     item.formData.push({content: $scope.content});
-            //     item.formData.push({category: $scope.category});
-            //     var formatDate = ($scope.date.getFullYear()+"-"+$scope.date.getMonth()+"-"
-            //         +$scope.date.getDay()+" "+$scope.date.getHours()+":"+
-            //         $scope.date.getMinutes()+":"+$scope.date.getSeconds());
-            //     item.formData.push({date: $scope.date});
-            // };
-            //var editor = UE.getEditor('container');
+            
             $scope.submit = function () {
                 console.log('create new course ', $scope.date);
                 //$scope.uploader.uploadAll();
@@ -138,8 +134,9 @@ define(['angular', 'angular-file-upload', 'directives', 'angular-ui-date','angul
             }
         }]);
 
+    var editContent;
     course.controller('CourseEditController', ['$scope', '$http', '$stateParams', '$state', '$location',
-        'FileUploader', '$httpParamSerializer', 
+        'FileUploader', '$httpParamSerializer',
         function ($scope, $http, $stateParams, $state, $location, FileUploader, $httpParamSerializer) {
 
             console.log('edit course id=', $stateParams.courseId);
@@ -147,6 +144,14 @@ define(['angular', 'angular-file-upload', 'directives', 'angular-ui-date','angul
                 startingDay: 1,
                 showWeeks: true
             };
+            $scope.kindeditor_config={width: '100px',
+                uploadJson: 'http://' + $location.host() + ":" + $location.port() + 
+                '/education/zaozao/fileupload',
+                allowFileManager:true,
+                allowUpload : true,
+                fileManagerJson : 'http://' + $location.host() + ":" + $location.port() + 
+                '/education/zaozao/fileupload/manager'
+                };
             $scope.status={};
             $scope.status.opened=false;
             $scope._simpleConfig = {
@@ -165,6 +170,7 @@ define(['angular', 'angular-file-upload', 'directives', 'angular-ui-date','angul
             $scope.open = function($event) {
                 $scope.status.opened = true;
             };
+            console.log('content');
             $http.get('http://' + $location.host() + ":" + $location.port() + '/education/zaozao/course/querycourse/' + $stateParams.courseId)
                 .success(function (e) {
                     var json = JSON.parse(JSON.stringify(e));
@@ -177,6 +183,8 @@ define(['angular', 'angular-file-upload', 'directives', 'angular-ui-date','angul
                     }else{
                         $scope.course.imageurl = null;
                     }
+                    //$scope.content=$scope.course.content;
+                    editContent.cmd.inserthtml($scope.course.content);
                 }).error(function (e) {
                     console.log('error:', e);
                     var ret = JSON.stringify(e);
@@ -193,7 +201,7 @@ define(['angular', 'angular-file-upload', 'directives', 'angular-ui-date','angul
             $scope.submit = function () {
                 console.log('edit course ', $scope.course.date);
                 var date= $scope.course.date;
-                if($scope.course.date.getFullYear() !== null){
+                if($scope.course.date.getFullYear !== undefined){
                     date = ($scope.course.date.getFullYear()+"-"+$scope.course.date.getMonth()+"-"
                     +$scope.course.date.getDay()+" "+$scope.course.date.getHours()+":"+
                      $scope.course.date.getMinutes()+":"+$scope.course.date.getSeconds());
@@ -254,4 +262,56 @@ define(['angular', 'angular-file-upload', 'directives', 'angular-ui-date','angul
                     console.log(e);
                 });
         }]);
+
+    course.directive('coursekeditor', function () {
+
+            var linkFn = function (scope, elm, attr, ctrl) {
+
+                if (typeof KindEditor === 'undefined') {
+                    console.error('Please import the local resources of kindeditor!');
+                    return;
+                }
+
+                var _config = {
+                    width: '100%',
+                    autoHeightMode: false,
+                    afterCreate: function () {
+                        this.loadPlugin('autoheight');
+                    }
+                };
+
+                var editorId = elm[0],
+                    editorConfig = scope.config || _config;
+
+                editorConfig.afterChange = function () {
+                    if (!scope.$$phase) {
+                        ctrl.$setViewValue(this.html());
+                        // exception happens here when angular is 1.2.28
+                        // scope.$apply();
+                    }
+                };
+                var keditor;
+                if (KindEditor) {
+                    keditor=KindEditor.create(editorId, editorConfig);
+                    editContent = keditor;
+                    // console.log('watch ', attr.coursekeditor);
+                    // keditor.cmd.inserthtml(editContent);
+                    // scope.$watch(editContent, function(value){
+                    //     console.log('new value ',value);
+                    //     //keditor.cmd.inserthtml(value);
+                    // });
+                }
+
+                ctrl.$parsers.push(function (viewValue) {
+                    ctrl.$setValidity('keditor', viewValue);
+                    return viewValue;
+                });
+            };
+
+            return {
+                require: 'ngModel',
+                scope: { config: '=config' },
+                link: linkFn
+            };
+        });
 });
