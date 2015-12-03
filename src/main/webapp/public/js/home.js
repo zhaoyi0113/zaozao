@@ -1,4 +1,4 @@
-define(['angular','user', 'login','course','courseplan', 'kindeditor','kindeditor-zh'], function(angular){
+define(['angular','user', 'login','course','courseplan'], function(angular){
 
     'use strict';
     var home = angular.module("homeModule", 

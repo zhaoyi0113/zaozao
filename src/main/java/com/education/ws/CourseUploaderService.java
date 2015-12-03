@@ -5,6 +5,8 @@ import org.glassfish.jersey.media.multipart.FormDataBodyPart;
 import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
 import org.glassfish.jersey.media.multipart.FormDataMultiPart;
 import org.glassfish.jersey.media.multipart.FormDataParam;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -19,9 +21,16 @@ import java.util.logging.Logger;
  * Created by yzzhao on 11/22/15.
  */
 @Path("/fileupload")
+@Service
 public class CourseUploaderService {
 
     private static final Logger logger = Logger.getLogger(CourseUploaderService.class.getName());
+
+    @Value("#{config['course_image_path']}")
+    private String courseImagePath;
+
+    @Value("#{config['course_image_url']}")
+    private String courseImageUrl;
 
     @PUT
     @Path("/manager")
@@ -45,7 +54,7 @@ public class CourseUploaderService {
         System.out.println("filename="+disposition.getFileName());
         InputStream input = multiPart.getField("imgFile").getValueAs(InputStream.class);
 
-        File tmpDir = new File(CourseRegisterService.WEBAPP_PUBLIC_RESOURCES_COURSES+"/tmp");
+        File tmpDir = new File(courseImagePath);
         tmpDir.mkdirs();
         File imageFile = new File(tmpDir.getPath()+"/"+System.currentTimeMillis()+"_"+disposition.getFileName());
 
@@ -61,7 +70,7 @@ public class CourseUploaderService {
             e.printStackTrace();
         }
         Map<String, Object> resp = new Hashtable<>();
-        resp.put("url", "public/resources/courses/tmp/"+imageFile.getName());
+        resp.put("url",courseImageUrl+imageFile.getName());
         resp.put("error", 0);
         Gson gson = new Gson();
         String json = gson.toJson(resp);
