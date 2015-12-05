@@ -20,6 +20,8 @@ public class CourseEntity {
     private String picture_paths;
     private String category;
     private Date date;
+    private String videoPath;
+    private String titleImagePath;
 
     public CourseEntity() {
 
@@ -30,6 +32,8 @@ public class CourseEntity {
         content = bean.getContent();
         picture_paths = bean.getPicturePaths();
         category = bean.getCategory();
+        videoPath = bean.getVideoPath();
+        titleImagePath = bean.getTitleImagePath();
         try{
             SimpleDateFormat format = WSUtility.getDateFormat();
              date = format.parse(bean.getDate());
@@ -96,6 +100,25 @@ public class CourseEntity {
     }
 
     public void setDate(Date date) {
+
         this.date = date;
+    }
+
+    @Column(name="video_path")
+    public String getVideoPath() {
+        return videoPath;
+    }
+
+    public void setVideoPath(String videoPath) {
+        this.videoPath = videoPath;
+    }
+
+    @Column(name="title_image_path")
+    public String getTitleImagePath() {
+        return titleImagePath;
+    }
+
+    public void setTitleImagePath(String titleImagePath) {
+        this.titleImagePath = titleImagePath;
     }
 }

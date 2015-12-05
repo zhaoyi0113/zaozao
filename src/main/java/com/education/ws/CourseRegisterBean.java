@@ -24,6 +24,10 @@ public class CourseRegisterBean {
     @FormParam("date")
     private String date;
 
+    private String titleImagePath;
+
+    private String videoPath;
+
     public String getDate() {
         return date;
     }
@@ -74,6 +78,22 @@ public class CourseRegisterBean {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getTitleImagePath() {
+        return titleImagePath;
+    }
+
+    public void setTitleImagePath(String titleImagePath) {
+        this.titleImagePath = titleImagePath;
+    }
+
+    public String getVideoPath() {
+        return videoPath;
+    }
+
+    public void setVideoPath(String videoPath) {
+        this.videoPath = videoPath;
     }
 
     @Override

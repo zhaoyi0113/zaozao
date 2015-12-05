@@ -3,7 +3,15 @@
     <form name="add_course" class="new_course">
         Name:  <input ng-model="name" type="text" required/><br>
         Category: <select ng-model="category" required
-                          ng-options="category as category for category in categories"/><br>
+                          ng-options="category as category for category in categories"/>
+        <br>
+        Title Image: <input type="file" nv-file-select="" uploader="uploader" required/>
+        <!-- <ul ng-repeat="item in uploader.queue">
+            <li>
+                <div  ng-thumb="{ file: item._file, height: 100 }"></div>
+            </li>
+        </ul>  -->
+
         Content: 
         <br>
         <!-- <div class="ueditor" nodetype='2' ng-model='content' config="_simpleConfig" id='editor' >
@@ -16,24 +24,19 @@
         </div> -->
         <br>
         <!--Date: <input ng-model="date" type="date" required/><br>-->
-        Date:
+        Date:<br>
         <div class="col-md-6">
-            <p class="input-group">
-                <input type="text" class="form-control" uib-datepicker-popup="yyyy-MM-dd" datepicker-options="dateOptions" required
+            <p>
+                <input type="text" uib-datepicker-popup="yyyy-MM-dd" datepicker-options="dateOptions" required
                        ng-model="date" is-open="status.opened" />
-            <span class="input-group-btn">
                     <button type="button" class="btn btn-default" ng-click="open($event)">
                         <i class="glyphicon glyphicon-calendar"></i></button>
-                  </span>
+                  
                 <br/>
             </p>
         </div><br>
-        <!-- File: <input type="file" nv-file-select="" uploader="uploader" />
-        <ul ng-repeat="item in uploader.queue">
-            <li>
-                <div  ng-thumb="{ file: item._file, height: 100 }"></div>
-            </li>
-        </ul> -->
+        
         <button ng-click="submit()" ng-disabled="add_course.$invalid">Submit</button>
+        <button ng-click="cancel()">Cancel</button>
     </form>
 </div>

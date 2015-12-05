@@ -48,10 +48,10 @@ define(['angular', 'angular-file-upload', 'directives', 'angular-ui-date','angul
     course.controller('NewCourseController', ['$scope', '$http', '$location', '$state', 'FileUploader',
         '$httpParamSerializer', 
         function ($scope, $http, $location, $state, FileUploader, $httpParamSerializer) {
-            // $scope.uploader = new FileUploader({
-            //     url: 'http://' + $location.host() + ":" + $location.port() + '/education/zaozao/course/uploadfile',
-            //     formData: []
-            // });
+            $scope.uploader = new FileUploader({
+                url: 'http://' + $location.host() + ":" + $location.port() + '/education/zaozao/course/uploadfile',
+                formData: []
+            });
             $scope.kindeditor_config={width: '100px',
                 uploadJson: 'http://' + $location.host() + ":" + $location.port() + 
                 '/education/zaozao/fileupload',
@@ -63,18 +63,18 @@ define(['angular', 'angular-file-upload', 'directives', 'angular-ui-date','angul
             $scope.status = {};
             $scope.status.opened=false;
 
-            $scope._simpleConfig = {
-                 //这里可以选择自己需要的工具按钮名称,此处仅选择如下五个
-                 toolbars: [
-                   ['FullScreen', 'Source', 'Undo', 'Redo', 'Bold', 'simpleupload']
-                 ],
-                 //focus时自动清空初始化时的内容
-                 autoClearinitialContent: true,
-                 //关闭字数统计
-                 wordCount: false,
-                 //关闭elementPath
-                 elementPathEnabled: false
-               };
+            // $scope._simpleConfig = {
+            //      //这里可以选择自己需要的工具按钮名称,此处仅选择如下五个
+            //      toolbars: [
+            //        ['FullScreen', 'Source', 'Undo', 'Redo', 'Bold', 'simpleupload']
+            //      ],
+            //      //focus时自动清空初始化时的内容
+            //      autoClearinitialContent: true,
+            //      //关闭字数统计
+            //      wordCount: false,
+            //      //关闭elementPath
+            //      elementPathEnabled: false
+            //    };
             $scope.open = function($event) {
                 $scope.status.opened = true;
             };
@@ -102,9 +102,9 @@ define(['angular', 'angular-file-upload', 'directives', 'angular-ui-date','angul
             $scope.submit = function () {
                 console.log('create new course ', $scope.date);
                 //$scope.uploader.uploadAll();
-                var date= $scope.date;
+                $scope.formatedDate = $scope.date;
                 if($scope.date.getFullYear() !== null){
-                    date = ($scope.date.getFullYear()+"-"+$scope.date.getMonth()+"-"
+                    $scope.formatedDate = ($scope.date.getFullYear()+"-"+$scope.date.getMonth()+"-"
                     +$scope.date.getDay()+" "+$scope.date.getHours()+":"+
                      $scope.date.getMinutes()+":"+$scope.date.getSeconds());
                 }
@@ -119,19 +119,37 @@ define(['angular', 'angular-file-upload', 'directives', 'angular-ui-date','angul
                         name: $scope.name,
                         content: $scope.content,
                         category: $scope.category,
-                        date: date
+                        date: $scope.formatedDate
                     })
                 };
-                $http(req).success(function (e) {
-                    console.log('edit success');
+                // $http(req).success(function (e) {
+                //     console.log('edit success');
                     
-                    $state.go('home.course');
+                //     $state.go('home.course');
                     
-                }).error(function (e) {
-                    console.log('edit failed ', e);
-                });
-
+                // }).error(function (e) {
+                //     console.log('edit failed ', e);
+                // });
+                $scope.uploader.uploadAll();
             }
+
+            $scope.cancel = function () {
+                $state.go('home.course');
+            }
+            $scope.uploader.onCompleteAll = function () {
+                console.info('onCompleteAll');
+                $state.go('home.course');
+            };
+            $scope.uploader.onBeforeUploadItem = function (item) {
+                console.info('onBeforeUploadItem', item);
+                item.formData.push({name: $scope.name});
+                item.formData.push({content: $scope.content});
+                item.formData.push({category: $scope.category});
+                item.formData.push({date: $scope.formatedDate});
+            };
+            $scope.uploader.onErrorItem = function(fileItem, response, status, headers) {
+                console.info('onErrorItem', fileItem, response, status, headers);
+            };
         }]);
 
     var editContent;
@@ -170,7 +188,17 @@ define(['angular', 'angular-file-upload', 'directives', 'angular-ui-date','angul
             $scope.open = function($event) {
                 $scope.status.opened = true;
             };
-            console.log('content');
+            $http.get('http://' + $location.host() + ":" + $location.port() + '/education/zaozao/coursetype')
+                .success(function (e) {
+                    $scope.categories = e;
+                    if ($scope.categories.lenght > 0) {
+                        $scope.category = $scope.categories[0];
+                    }
+                    console.log('get course type ', $scope.categories);
+
+                }).error(function (e) {
+
+                });
             $http.get('http://' + $location.host() + ":" + $location.port() + '/education/zaozao/course/querycourse/' + $stateParams.courseId)
                 .success(function (e) {
                     var json = JSON.parse(JSON.stringify(e));

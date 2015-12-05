@@ -2,26 +2,28 @@
 
     <form name="course_edit" class="course_edit">
         Name:<input ng-model="course.name" type="text" required /><br/>
-        Category: <input ng-model="course.category" type="text" required /><br/>
+        Category: <select ng-model="course.category" required
+                          ng-options="category as category for category in categories"/><br>
         Date: <!--<input ng-model="course.date" type="date" required />-->
 
         <!--<uib-datepicker ng-model="dt"></uib-datepicker><br>-->
+        <br>
         <div class="col-md-6">
-            <p class="input-group">
-            <input type="text" class="form-control" uib-datepicker-popup="yyyy-MM-dd" datepicker-options="dateOptions" required
+            <p>
+            <input type="text" uib-datepicker-popup="yyyy-MM-dd" datepicker-options="dateOptions" required
                     ng-model="course.date" is-open="status.opened" />
-            <span class="input-group-btn">
-                    <button type="button" class="btn btn-default" ng-click="open($event)">
+            <button type="button" class="btn btn-default" ng-click="open($event)">
                         <i class="glyphicon glyphicon-calendar"></i></button>
-                  </span>
+                  
             <br/>
             </p>
         </div>
         <br>
-
+        <div class='col-md-12'>
         Content: <br>
+
         <textarea id='content_keditor' coursekeditor ng-model="course.content" data-config="kindeditor_config" cols="100%" rows="20"></textarea>
-        
+        </div>
          <!-- <div>
          <textarea ng-model='course.content' rows="20"  class="form-control"></textarea>
         </div> -->

@@ -6,8 +6,11 @@ import com.education.db.jpa.CourseRepository;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import jersey.repackaged.com.google.common.collect.Lists;
+import org.glassfish.jersey.media.multipart.FormDataBodyPart;
 import org.glassfish.jersey.media.multipart.FormDataMultiPart;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,6 +25,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -31,6 +35,7 @@ import java.util.logging.Logger;
 @Path("course")
 @EnableTransactionManagement
 @Transactional
+@Service
 public class CourseRegisterService {
 
     private static final Logger logger = Logger.getLogger(CourseRegisterService.class.getName());
@@ -40,6 +45,9 @@ public class CourseRegisterService {
 
     @Autowired
     private CourseRepository courseRepository;
+
+    @Value("#{config['course_image_path']}")
+    private String courseImagePath;
 
     @Path("new")
     @POST
@@ -51,8 +59,6 @@ public class CourseRegisterService {
         } catch (Exception e) {
             logger.log(Level.SEVERE, e.getMessage(), e);
             return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
-        } finally {
-            DBConnection.closeSession();
         }
         return Response.ok().build();
     }
@@ -66,18 +72,16 @@ public class CourseRegisterService {
         bean.setName(multiPart.getField("name").getValue());
         bean.setCategory(multiPart.getField("category").getValue());
         bean.setDate(multiPart.getField("date").getValue());
-        System.out.println("get date "+bean.getDate());
         bean.setContent(multiPart.getField("content").getValue());
-        bean.setPicturePaths(bean.getName());
-        int id = createNewCourseWithBean(bean);
-        InputStream file = multiPart.getField("file").getValueAs(InputStream.class);
-        String imageDir = System.getProperty("COURSE_IMAGE_DIR");
-        if (imageDir == null) {
-            imageDir = WEBAPP_PUBLIC_RESOURCES_COURSES;
-        }
-        imageDir += "/" + id;
-        logger.info("create new id "+id);
-        writeFile(file, imageDir, bean.getName());
+
+        FormDataBodyPart multiPartFile = multiPart.getField("file");
+
+        InputStream file = multiPartFile.getValueAs(InputStream.class);
+        String imageDir = courseImagePath;
+        String fileName = multiPartFile.getContentDisposition().getFileName();
+        writeFile(file, imageDir, fileName);
+        bean.setTitleImagePath(fileName);
+        createCourse(bean);
         return Response.ok().build();
     }
 
@@ -197,6 +201,10 @@ public class CourseRegisterService {
     public Response deleteCourse(@PathParam("id") String id){
         CourseEntity course = courseRepository.findOne(Integer.parseInt(id));
         courseRepository.delete(course);
+        if(course.getTitleImagePath() != null) {
+            String filePath = courseImagePath + "/" + course.getTitleImagePath();
+            deleteFile(filePath);
+        }
         return Response.ok().build();
     }
 
@@ -206,22 +214,14 @@ public class CourseRegisterService {
         return save.getId();
     }
 
-    private int createNewCourseWithBean(CourseRegisterBean bean) {
-        System.out.println("create new course " + bean);
-        logger.info("create new course " + bean);
-        try {
-            int id = createCourse(bean);
-            return id;
-        } catch (Exception e) {
-            logger.log(Level.SEVERE, e.getMessage(), e);
-        } finally {
-            DBConnection.closeSession();
-        }
-        return -1;
+    private static void deleteFile(String filePath){
+        File file = new File(filePath);
+        file.delete();
     }
 
     private static void writeFile(InputStream input, String dir, String targetName) {
         try {
+            System.out.println("write to file "+dir+","+targetName);
             File dirFile = new File(dir);
             if (!dirFile.exists()) {
                 dirFile.mkdirs();
