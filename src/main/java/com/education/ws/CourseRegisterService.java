@@ -25,7 +25,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -48,6 +47,9 @@ public class CourseRegisterService {
 
     @Value("#{config['course_image_path']}")
     private String courseImagePath;
+
+    @Value("#{config['course_image_url']}")
+    private String courseImageUrl;
 
     @Path("new")
     @POST
@@ -104,16 +106,22 @@ public class CourseRegisterService {
     @GET
     public Response getCourseById(@Context HttpServletRequest request,
                                   @PathParam("courseId") String courseId) {
-//        if (!loginCheck.whetherLogin(request)) {
-//            String json = LoginService.buildNotLoginJson();
-//            return Response.status(Response.Status.BAD_REQUEST).entity(json).build();
-//        }
         try {
             int id = Integer.parseInt(courseId);
 
             CourseEntity course =courseRepository.findOne(id);// getCourseDao().getCourseById(id);
-            String courseResourcePath = findCourseResourcesPath(course.getId());
-            String json = buildCourseJsonData(course, courseResourcePath);
+
+            CourseRegisterBean bean = new CourseRegisterBean();
+            bean.setName(course.getName());
+            bean.setId(String.valueOf(course.getId()));
+            bean.setCategory(course.getCategory());
+            bean.setContent(course.getContent());
+            bean.setTitleImagePath(updateCourseTitleImagePath(course));
+
+            bean.setDate(WSUtility.dateToString(course.getDate()));
+
+            Gson gson = new GsonBuilder().setDateFormat(WSUtility.getDateFormatString()).create();
+            String json = gson.toJson(bean);
             return Response.ok().entity(json).build();
         } catch (Exception e) {
             logger.log(Level.SEVERE, e.getMessage(), e);
@@ -186,13 +194,28 @@ public class CourseRegisterService {
             return Response.status(Response.Status.BAD_REQUEST).entity("Can't find course "+id).build();
         }
         CourseEntity course = courseRepository.findOne(Integer.parseInt(id));
-        InputStream file = multiPart.getField("file").getValueAs(InputStream.class);
-        String imageDir = System.getProperty("COURSE_IMAGE_DIR");
-        if (imageDir == null) {
-            imageDir = WEBAPP_PUBLIC_RESOURCES_COURSES;
+        course.setCategory(multiPart.getField("category").getValue());
+        course.setName(multiPart.getField("name").getValue());
+        course.setContent(multiPart.getField("content").getValue());
+        try{
+            SimpleDateFormat format = WSUtility.getDateFormat();
+            Date date = format.parse(multiPart.getField("date").getValue());
+            format.format(date);
+            course.setDate(date);
+        }catch (Exception e){
+            e.printStackTrace();
         }
-        imageDir += "/" + id;
-        writeFile(file, imageDir, course.getName());
+        FormDataBodyPart multiPartFile = multiPart.getField("file");
+        InputStream file = multiPartFile.getValueAs(InputStream.class);
+        String imageDir = courseImagePath;
+        String fileName = multiPartFile.getContentDisposition().getFileName();
+        if(course.getTitleImagePath()!=null){
+            deleteFile(courseImagePath+"/"+course.getTitleImagePath());
+        }
+        course.setTitleImagePath(multiPartFile.getContentDisposition().getFileName());
+        writeFile(file, imageDir, fileName);
+        courseRepository.save(course);
+
         return Response.ok().build();
     }
 
@@ -255,6 +278,9 @@ public class CourseRegisterService {
         return null;
     }
 
+    private String updateCourseTitleImagePath(CourseEntity course){
+        return (this.courseImageUrl+"/"+course.getTitleImagePath());
+    }
 
     public LoginCheckService getLoginCheck() {
         return loginCheck;
