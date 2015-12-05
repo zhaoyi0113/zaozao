@@ -6,6 +6,7 @@ import com.github.springtestdbunit.TransactionDbUnitTestExecutionListener;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.test.JerseyTest;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -33,6 +34,7 @@ import javax.ws.rs.core.Response;
         DirtiesContextTestExecutionListener.class,
         TransactionDbUnitTestExecutionListener.class})
 @Transactional
+@Ignore
 public class CoursePlanServiceTest extends JerseyTest {
 
     @Override
@@ -51,7 +53,7 @@ public class CoursePlanServiceTest extends JerseyTest {
         Assert.assertNotNull(entity);
         Assert.assertEquals("test1", entity.getTitle());
         Assert.assertEquals("sub1", entity.getSubTitle());
-        Assert.assertEquals(400.5, entity.getPrice(), 0.05);
+        Assert.assertEquals(400.5, entity.getPrice());
 
         response = target("courseplan").request().get();
         Assert.assertEquals(200, response.getStatus());
