@@ -12,6 +12,7 @@ import org.glassfish.jersey.media.multipart.FormDataBodyPart;
 import org.glassfish.jersey.media.multipart.FormDataMultiPart;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,7 +28,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -115,8 +115,14 @@ public class CourseRegisterService {
     @Path("query")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response queryCourse(@QueryParam("category") String category){
-        List<CourseRegisterBean> list = courseService.queryCourseByCategory(category);
+    public Response queryCourse(@QueryParam("category") String category, @QueryParam("history") String history){
+        List<CourseRegisterBean> list = null;
+        if(history == null){
+            list = courseService.queryCourseByCategoryAfterNow(category);
+        }else {
+            list = courseService.queryCourseByCategoryBeforeNow(category);
+        }
+        System.out.println("query course "+list.size());
         return Response.ok(list).header("Access-Control-Allow-Origin","*")
                 .header("Access-Control-Allow-Methods","*").build();
     }

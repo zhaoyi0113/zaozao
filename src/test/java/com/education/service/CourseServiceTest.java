@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by yzzhao on 12/5/15.
@@ -19,7 +18,7 @@ public class CourseServiceTest extends AbstractServiceTest{
 
     @Test
     public void testQueryCourseByCategory(){
-        List maps = courseService.queryCourseByCategory("");
+        List maps = courseService.queryCourseByCategoryAfterNow("");
         Assert.assertEquals(0, maps.size());
     }
 
