@@ -3,6 +3,8 @@ package com.education.ws;
 import com.education.db.DBConnection;
 import com.education.db.entity.CourseEntity;
 import com.education.db.jpa.CourseRepository;
+import com.education.service.CourseService;
+import com.education.ws.util.WSUtility;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import jersey.repackaged.com.google.common.collect.Lists;
@@ -25,6 +27,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -51,6 +54,12 @@ public class CourseRegisterService {
     @Value("#{config['course_image_url']}")
     private String courseImageUrl;
 
+    @Autowired
+    private WSUtility wsUtility;
+
+    @Autowired
+    private CourseService courseService;
+
     @Path("new")
     @POST
     public Response createNewCourse(@BeanParam CourseRegisterBean bean) {
@@ -75,6 +84,7 @@ public class CourseRegisterService {
         bean.setCategory(multiPart.getField("category").getValue());
         bean.setDate(multiPart.getField("date").getValue());
         bean.setContent(multiPart.getField("content").getValue());
+        bean.setIntroduction(multiPart.getField("introduction").getValue());
 
         FormDataBodyPart multiPartFile = multiPart.getField("file");
 
@@ -93,13 +103,22 @@ public class CourseRegisterService {
         try {
             Iterable<CourseEntity> courseIterable = courseRepository.findAll();
             List<CourseEntity> allCourse = Lists.newArrayList(courseIterable); //getCourseDao().getAllCourses();
-            Gson gson = new GsonBuilder().setDateFormat(WSUtility.getDateFormatString()).create();
+            Gson gson = new GsonBuilder().setDateFormat(wsUtility.getDateFormatString()).create();
             String json = gson.toJson(allCourse);
             return Response.ok().entity(json).build();
         } catch (Exception e) {
             logger.log(Level.SEVERE, e.getMessage(), e);
             return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
         }
+    }
+
+    @Path("query")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response queryCourse(@QueryParam("category") String category){
+        List<CourseRegisterBean> list = courseService.queryCourseByCategory(category);
+        return Response.ok(list).header("Access-Control-Allow-Origin","*")
+                .header("Access-Control-Allow-Methods","*").build();
     }
 
     @Path("/querycourse/{courseId}")
@@ -111,16 +130,8 @@ public class CourseRegisterService {
 
             CourseEntity course =courseRepository.findOne(id);// getCourseDao().getCourseById(id);
 
-            CourseRegisterBean bean = new CourseRegisterBean();
-            bean.setName(course.getName());
-            bean.setId(String.valueOf(course.getId()));
-            bean.setCategory(course.getCategory());
-            bean.setContent(course.getContent());
-            bean.setTitleImagePath(updateCourseTitleImagePath(course));
-
-            bean.setDate(WSUtility.dateToString(course.getDate()));
-
-            Gson gson = new GsonBuilder().setDateFormat(WSUtility.getDateFormatString()).create();
+            CourseRegisterBean bean = new CourseRegisterBean(course, wsUtility);
+            Gson gson = new GsonBuilder().setDateFormat(wsUtility.getDateFormatString()).create();
             String json = gson.toJson(bean);
             return Response.ok().entity(json).build();
         } catch (Exception e) {
@@ -139,19 +150,6 @@ public class CourseRegisterService {
         return Response.ok(courses).build();
     }
 
-    private String buildCourseJsonData(CourseEntity course, String courseResourcePath) {
-        if (courseResourcePath != null) {
-            File dir = new File(courseResourcePath);
-            File[] files = dir.listFiles();
-            if (files != null && files.length > 0) {
-                course.setPicture_paths(files[0].getName());
-            }
-        }
-        Gson gson = new GsonBuilder().setDateFormat(WSUtility.getDateFormatString()).create();
-        String json = gson.toJson(course);
-        return json;
-    }
-
     @Path("query/allnames")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -168,14 +166,11 @@ public class CourseRegisterService {
     @Path("/edit")
     @POST
     public Response editCourse(@Context HttpServletRequest request, @BeanParam CourseRegisterBean bean) {
-//        if (!loginCheck.whetherLogin(request)) {
-//            String json = LoginService.buildNotLoginJson();
-//            return Response.status(Response.Status.BAD_REQUEST).entity(json).build();
-//        }
         CourseEntity one = courseRepository.findOne(Integer.parseInt(bean.getId()));
         one.setContent(bean.getContent());
         one.setCategory(bean.getCategory());
-        SimpleDateFormat format = WSUtility.getDateFormat();
+        one.setIntroduction(bean.getIntroduction());
+        SimpleDateFormat format = wsUtility.getDateFormat();
         try {
             System.out.println("get date "+bean.getDate());
             one.setDate(format.parse(bean.getDate()));
@@ -198,7 +193,7 @@ public class CourseRegisterService {
         course.setName(multiPart.getField("name").getValue());
         course.setContent(multiPart.getField("content").getValue());
         try{
-            SimpleDateFormat format = WSUtility.getDateFormat();
+            SimpleDateFormat format = wsUtility.getDateFormat();
             Date date = format.parse(multiPart.getField("date").getValue());
             format.format(date);
             course.setDate(date);
@@ -266,29 +261,8 @@ public class CourseRegisterService {
 
     }
 
-    private static String findCourseResourcesPath(int courseId) {
-        String imageDir = System.getProperty("COURSE_IMAGE_DIR");
-        if (imageDir == null) {
-            imageDir = WEBAPP_PUBLIC_RESOURCES_COURSES;
-        }
-        File dir = new File(imageDir + "/" + courseId);
-        if (dir.exists()) {
-            return dir.getPath();
-        }
-        return null;
-    }
-
     private String updateCourseTitleImagePath(CourseEntity course){
         return (this.courseImageUrl+"/"+course.getTitleImagePath());
-    }
-
-    public LoginCheckService getLoginCheck() {
-        return loginCheck;
-    }
-
-    @Autowired(required = true)
-    public void setLoginCheck(LoginCheckService loginCheck) {
-        this.loginCheck = loginCheck;
     }
 
 }

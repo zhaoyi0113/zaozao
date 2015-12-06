@@ -1,7 +1,7 @@
 package com.education.db.entity;
 
 import com.education.ws.CourseRegisterBean;
-import com.education.ws.WSUtility;
+import com.education.ws.util.WSUtility;
 
 import javax.persistence.*;
 import java.text.SimpleDateFormat;
@@ -16,6 +16,7 @@ public class CourseEntity {
 
     private int id;
     private String name;
+    private String introduction;
     private String content;
     private String picture_paths;
     private String category;
@@ -34,16 +35,11 @@ public class CourseEntity {
         category = bean.getCategory();
         videoPath = bean.getVideoPath();
         titleImagePath = bean.getTitleImagePath();
-        try{
-            SimpleDateFormat format = WSUtility.getDateFormat();
-             date = format.parse(bean.getDate());
-            format.format(this.date);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
+        date = WSUtility.stringToDate(bean.getDate());
         if (bean.getId() != null) {
             id = Integer.parseInt(bean.getId());
         }
+        introduction = bean.getIntroduction();
     }
 
     @Id
@@ -93,7 +89,6 @@ public class CourseEntity {
         this.category = category;
     }
 
-
     @Column(name = "date")
     public Date getDate() {
         return date;
@@ -119,6 +114,16 @@ public class CourseEntity {
     }
 
     public void setTitleImagePath(String titleImagePath) {
+
         this.titleImagePath = titleImagePath;
+    }
+
+    @Column(name="introduction")
+    public String getIntroduction() {
+        return introduction;
+    }
+
+    public void setIntroduction(String introduction) {
+        this.introduction = introduction;
     }
 }

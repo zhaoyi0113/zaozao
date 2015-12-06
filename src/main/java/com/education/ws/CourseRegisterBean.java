@@ -1,5 +1,8 @@
 package com.education.ws;
 
+import com.education.db.entity.CourseEntity;
+import com.education.ws.util.WSUtility;
+
 import javax.ws.rs.FormParam;
 
 /**
@@ -27,6 +30,22 @@ public class CourseRegisterBean {
     private String titleImagePath;
 
     private String videoPath;
+
+    @FormParam("introduction")
+    private String introduction;
+
+    public CourseRegisterBean(){}
+
+    public CourseRegisterBean(CourseEntity entity, WSUtility wsUtility){
+        this.name = entity.getName();
+        this.category = entity.getCategory();
+        this.date = wsUtility.dateToString(entity.getDate());
+        this.content = entity.getContent();
+        this.titleImagePath = wsUtility.getImagePath(entity.getTitleImagePath());
+        this.videoPath = entity.getVideoPath();
+        this.introduction = entity.getIntroduction();
+        this.id = String.valueOf(entity.getId());
+    }
 
     public String getDate() {
         return date;
@@ -94,6 +113,14 @@ public class CourseRegisterBean {
 
     public void setVideoPath(String videoPath) {
         this.videoPath = videoPath;
+    }
+
+    public String getIntroduction() {
+        return introduction;
+    }
+
+    public void setIntroduction(String introduction) {
+        this.introduction = introduction;
     }
 
     @Override

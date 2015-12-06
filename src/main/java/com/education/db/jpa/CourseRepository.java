@@ -1,5 +1,6 @@
 package com.education.db.jpa;
 import com.education.db.entity.CourseEntity;
+import com.education.ws.CourseRegisterBean;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
@@ -15,4 +16,8 @@ public interface CourseRepository extends CrudRepository<CourseEntity, Integer>{
     List<String> findAllCourseNames();
 
     List<CourseEntity> findByDateAfter(Date date);
+
+    List<CourseEntity> findByCategory(String category);
+
+    List<CourseEntity> findByCategoryAndDateAfter(String category, Date date);
 }

@@ -5,6 +5,9 @@
         Category: <select ng-model="category" required
                           ng-options="category as category for category in categories"/>
         <br>
+        Introduction:<br>
+        <textarea ng-model="introduction" cols="100%" rows="5"></textarea>
+        <br>
         Title Image: <input type="file" nv-file-select="" uploader="uploader" required/>
         <!-- <ul ng-repeat="item in uploader.queue">
             <li>

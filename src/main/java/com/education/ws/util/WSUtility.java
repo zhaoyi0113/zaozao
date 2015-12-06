@@ -1,6 +1,8 @@
-package com.education.ws;
+package com.education.ws.util;
 
 import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -10,19 +12,23 @@ import java.util.Date;
 /**
  * Created by yzzhao on 11/5/15.
  */
-public final class WSUtility {
-    private WSUtility(){
-        SessionFactory s;
-    }
+@Component
+public class WSUtility {
 
-    public static boolean whetherLogin(HttpServletRequest request){
+    @Value("#{config['course_image_path']}")
+    private String courseImagePath;
+
+    @Value("#{config['course_image_url']}")
+    private String courseImageUrl;
+
+    public boolean whetherLogin(HttpServletRequest request){
         HttpSession session = request.getSession();
         return session.getAttribute("user_name") != null;
     }
 
-    public static String dateToString(Date date){
+    public String dateToString(Date date){
         try{
-            SimpleDateFormat format = WSUtility.getDateFormat();
+            SimpleDateFormat format = getDateFormat();
             return format.format(date);
         }catch (Exception e){
             e.printStackTrace();
@@ -30,9 +36,9 @@ public final class WSUtility {
         return null;
     }
 
-    private static Date stringToDate(String dateStr){
+    public static Date stringToDate(String dateStr){
         try{
-            SimpleDateFormat format = WSUtility.getDateFormat();
+            SimpleDateFormat format = getDateFormat();
             Date date = format.parse(dateStr);
             format.format(date);
             return date;
@@ -42,12 +48,15 @@ public final class WSUtility {
         return null;
     }
 
-
     public static SimpleDateFormat getDateFormat(){
         return new SimpleDateFormat(getDateFormatString());
     }
 
     public static String getDateFormatString() {
         return "yyyy-MM-dd HH:mm:ss";
+    }
+
+    public String getImagePath(String fileName){
+        return courseImageUrl+"/"+fileName;
     }
 }

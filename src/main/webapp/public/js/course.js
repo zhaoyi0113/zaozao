@@ -1,6 +1,6 @@
 define(['angular', 'angular-file-upload', 'directives', 'angular-ui-date','angular-bootstrap','angular-bootstrap-tpls'
        ,'ueditor-config','ueditor-all', 'angular-editor', 'kindeditor','kindeditor-zh',
-       'angular-kindeditor'], function (angular) {
+       'angular-kindeditor','angular-datepicker'], function (angular) {
     'use strict';
     var course = angular.module("courseModule",
         ['angularFileUpload', 'ngThumbModel', 'ui.bootstrap', 'ng.ueditor','ngKeditor']);
@@ -104,8 +104,9 @@ define(['angular', 'angular-file-upload', 'directives', 'angular-ui-date','angul
                 //$scope.uploader.uploadAll();
                 $scope.formatedDate = $scope.date;
                 if($scope.date.getFullYear() !== null){
-                    $scope.formatedDate = ($scope.date.getFullYear()+"-"+$scope.date.getMonth()+"-"
-                    +$scope.date.getDay()+" "+$scope.date.getHours()+":"+
+                    $scope.formatedDate = ($scope.date.getFullYear()+"-"
+                        +($scope.date.getMonth()+1)+"-"
+                    +$scope.date.getDate()+" "+$scope.date.getHours()+":"+
                      $scope.date.getMinutes()+":"+$scope.date.getSeconds());
                 }
                 //console.log('editor:',editor.getAllHtml());
@@ -119,7 +120,8 @@ define(['angular', 'angular-file-upload', 'directives', 'angular-ui-date','angul
                         name: $scope.name,
                         content: $scope.content,
                         category: $scope.category,
-                        date: $scope.formatedDate
+                        date: $scope.formatedDate,
+                        introduction: $scope.introduction
                     })
                 };
                 // $http(req).success(function (e) {
@@ -146,6 +148,7 @@ define(['angular', 'angular-file-upload', 'directives', 'angular-ui-date','angul
                 item.formData.push({content: $scope.content});
                 item.formData.push({category: $scope.category});
                 item.formData.push({date: $scope.formatedDate});
+                item.formData.push({introduction: $scope.introduction});
             };
             $scope.uploader.onErrorItem = function(fileItem, response, status, headers) {
                 console.info('onErrorItem', fileItem, response, status, headers);
@@ -211,6 +214,7 @@ define(['angular', 'angular-file-upload', 'directives', 'angular-ui-date','angul
                     }else{
                         $scope.course.imageurl = null;
                     }
+                    
                     //$scope.content=$scope.course.content;
                     editContent.cmd.inserthtml($scope.course.content);
                 }).error(function (e) {
@@ -230,8 +234,9 @@ define(['angular', 'angular-file-upload', 'directives', 'angular-ui-date','angul
                 console.log('edit course ', $scope.course.date);
                 $scope.formatedDate = $scope.course.date;
                 if($scope.course.date.getFullYear !== undefined){
-                    $scope.formatedDate = ($scope.course.date.getFullYear()+"-"+$scope.course.date.getMonth()+"-"
-                    +$scope.course.date.getDay()+" "+$scope.course.date.getHours()+":"+
+                    $scope.formatedDate = ($scope.course.date.getFullYear()+"-"
+                        +($scope.course.date.getMonth()+1)+"-"
+                    +$scope.course.date.getDate()+" "+$scope.course.date.getHours()+":"+
                      $scope.course.date.getMinutes()+":"+$scope.course.date.getSeconds());
                 }
                 console.log('course date '+$scope.formatedDate);
@@ -247,7 +252,8 @@ define(['angular', 'angular-file-upload', 'directives', 'angular-ui-date','angul
                             name: $scope.course.name,
                             content: $scope.course.content,
                             category: $scope.course.category,
-                            date: $scope.formatedDate
+                            date: $scope.formatedDate,
+                            introduction: $scope.course.introduction
                         })
                     };
                     $http(req).success(function (e) {
@@ -276,6 +282,7 @@ define(['angular', 'angular-file-upload', 'directives', 'angular-ui-date','angul
                 console.info('onBeforeUploadItem', item);
                 item.formData.push({id: $scope.course.id});
                 item.formData.push({name: $scope.course.name});
+                item.formData.push({introduction: $scope.course.introduction});
                 item.formData.push({content: $scope.course.content});
                 item.formData.push({category: $scope.course.category});
                 item.formData.push({date: $scope.formatedDate});

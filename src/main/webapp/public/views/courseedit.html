@@ -19,7 +19,11 @@
             </p>
         </div>
         <br>
-        Title Image: <input type="file" nv-file-select="" uploader="uploader" required/>
+        <div class='col-md-6'>
+            Introduction:<br>
+            <textarea ng-model="course.introduction" cols="100%" rows="5"></textarea>
+        </div>
+        Title Image: <input type="file" nv-file-select="" uploader="uploader"/>
 
         <image ng-src="{{course.imageurl}}"/>
 

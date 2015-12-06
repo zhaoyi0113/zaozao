@@ -4,7 +4,7 @@ import com.education.db.DBConnection;
 import com.education.db.DBUtil;
 import com.education.db.entity.CourseEntity;
 import com.education.ws.CourseRegisterService;
-import com.education.ws.WSUtility;
+import com.education.ws.util.WSUtility;
 import com.google.gson.Gson;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.test.JerseyTest;
