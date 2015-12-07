@@ -58,7 +58,8 @@ define(['angular', 'angular-file-upload', 'directives', 'angular-ui-date','angul
                 allowFileManager:true,
                 allowUpload : true,
                 fileManagerJson : 'http://' + $location.host() + ":" + $location.port() + 
-                '/education/zaozao/fileupload/manager'
+                '/education/zaozao/fileupload/manager',
+                formatUploadUrl: false
                 };
             $scope.status = {};
             $scope.status.opened=false;
@@ -171,7 +172,18 @@ define(['angular', 'angular-file-upload', 'directives', 'angular-ui-date','angul
                 allowFileManager:true,
                 allowUpload : true,
                 fileManagerJson : 'http://' + $location.host() + ":" + $location.port() + 
-                '/education/zaozao/fileupload/manager'
+                '/education/zaozao/fileupload/manager',
+                formatUploadUrl: false,
+                items : [
+        'source', '|', 'undo', 'redo', '|', 'preview', 'print', 'template', 'code', 'cut', 'copy', 'paste',
+        'plainpaste', 'wordpaste', '|', 'justifyleft', 'justifycenter', 'justifyright',
+        'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent', 'subscript',
+        'superscript', 'clearhtml', 'quickformat', 'selectall', '|', 'fullscreen', '/',
+        'formatblock', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold',
+        'italic', 'underline', 'strikethrough', 'lineheight', 'removeformat', '|','image', 'multiimage',
+        'flash', 'media', 'insertfile', 'table', 'hr', 'emoticons', 'baidumap', 'pagebreak',
+        'anchor', 'link', 'unlink', '|', 'about'
+    ]
                 };
             $scope.status={};
             $scope.status.opened=false;
@@ -240,6 +252,7 @@ define(['angular', 'angular-file-upload', 'directives', 'angular-ui-date','angul
                      $scope.course.date.getMinutes()+":"+$scope.course.date.getSeconds());
                 }
                 console.log('course date '+$scope.formatedDate);
+                console.log('course content '+$scope.course.content);
                 if($scope.uploader.queue.length == 0){
                     var req = {
                         method: 'POST',

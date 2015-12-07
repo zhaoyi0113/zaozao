@@ -139,12 +139,11 @@ public class CourseRegisterService {
             CourseRegisterBean bean = new CourseRegisterBean(course, wsUtility);
             Gson gson = new GsonBuilder().setDateFormat(wsUtility.getDateFormatString()).create();
             String json = gson.toJson(bean);
-            return Response.ok().entity(json).build();
+            return Response.ok().entity(json).header("Access-Control-Allow-Origin","*")
+                    .header("Access-Control-Allow-Methods","*").build();
         } catch (Exception e) {
             logger.log(Level.SEVERE, e.getMessage(), e);
             return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
-        } finally {
-            DBConnection.closeSession();
         }
     }
 
