@@ -1,5 +1,18 @@
+body{
+	background: #fafafa;
+}
 .newuser-head{
 	font-size: 5px;
+}
+
+.nav-header{
+	border-top: 1px solid;
+	border-bottom: 1px solid;
+	line-height: 2.5em;
+	padding: .25em .25em .25em 1em;
+	border-left: none;
+	color:#444;
+	background-color: lightgrey;
 }
 
 .sidebar-nav {
@@ -20,8 +33,14 @@
 	list-style: none;
 }
 
+.sidebar-nav .fa-collapse{
+	float: right;
+}
+
 .home_content{
 	margin-left: 240px;
+	border-left: 1px solid #cccccc;
+	min-height: 800px;
 }
 
 input[type='text'] {
