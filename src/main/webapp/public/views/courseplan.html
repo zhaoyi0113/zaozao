@@ -2,6 +2,7 @@
     <header class='header'>
         <h2>Course Plan List</h2>
     </header>
+    <a class='btn btn-primary' ui-sref='home.courseplan_new()'>Add New</a>
 	<table class="table table-striped table-bordered">
         <th ng-repeat="head in headers" ng-model="head"><p class="text-center">{{head}}</p></th>
         <tr ng-repeat="coursePlan in coursePlanList" ng-model="coursePlan">
@@ -13,5 +14,4 @@
             <td><button ng-click='delete(coursePlan.id)'>Delete</button></td>
         </tr>
     </table><br>
-    <a ui-sref='home.courseplan_new()'>Add New</a>
 </div>

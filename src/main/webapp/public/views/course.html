@@ -3,6 +3,7 @@
         <h2>Course List</h2>
     </header>
 
+    <button  class='btn btn-primary' ng-click="newCourse()">New Course</button>
     <table class="table table-striped table-bordered">
         <th ng-repeat="head in headers" ng-model="head"><p>{{head}}</p></th>
 
@@ -23,7 +24,6 @@
         </tr>
     </table>
     <hr/>
-    <button ng-click="newCourse()">New Course</button>
 </div>
 
 <div ui-view/>
