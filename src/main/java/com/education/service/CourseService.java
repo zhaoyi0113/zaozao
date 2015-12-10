@@ -7,6 +7,7 @@ import com.education.ws.util.WSUtility;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.ws.rs.BadRequestException;
 import java.util.*;
 
 /**
@@ -27,6 +28,24 @@ public class CourseService {
 
     public List<CourseRegisterBean> queryCourseByCategoryBeforeNow(String category){
         return queryCourseByCategory(category, false);
+    }
+
+    public int createCourse(CourseRegisterBean bean) {
+        List<CourseEntity> courses = courseRepository.findByName(bean.getName());
+        if(courses != null && courses.size()>0 ){
+            if(bean.getVideoPath() != null){
+                CourseEntity entity = courses.get(0);
+                entity.setVideoPath(bean.getVideoPath());
+                courseRepository.save(entity);
+                return entity.getId();
+            }else{
+                throw new BadRequestException("duplicate course name "+bean.getName());
+            }
+        }else {
+            CourseEntity entity = new CourseEntity(bean);
+            CourseEntity save = courseRepository.save(entity);
+            return save.getId();
+        }
     }
 
     private List<CourseRegisterBean> queryCourseByCategory(String category, boolean after){

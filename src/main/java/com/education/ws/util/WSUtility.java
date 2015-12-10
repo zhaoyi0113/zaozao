@@ -56,7 +56,18 @@ public class WSUtility {
         return "yyyy-MM-dd HH:mm:ss";
     }
 
-    public String getImagePath(String fileName){
+    public String getResourcePath(String fileName){
         return courseImageUrl+"/"+fileName;
+    }
+
+    public boolean whetherVideo(String fileName){
+        if(fileName != null){
+            int index = fileName.lastIndexOf(".");
+            if(index >0) {
+                String suffix = fileName.substring(index+1);
+                return suffix.equalsIgnoreCase("mp4");
+            }
+        }
+        return false;
     }
 }

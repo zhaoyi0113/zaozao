@@ -49,7 +49,7 @@ define(['angular', 'angular-file-upload', 'directives', 'angular-ui-date','angul
         '$httpParamSerializer', 
         function ($scope, $http, $location, $state, FileUploader, $httpParamSerializer) {
             $scope.uploader = new FileUploader({
-                url: 'http://' + $location.host() + ":" + $location.port() + '/education/zaozao/course/uploadfile',
+                url: 'http://' + $location.host() + ":" + $location.port() + '/education/zaozao/course/create',
                 formData: []
             });
             $scope.kindeditor_config={width: '100px',
@@ -111,20 +111,20 @@ define(['angular', 'angular-file-upload', 'directives', 'angular-ui-date','angul
                      $scope.date.getMinutes()+":"+$scope.date.getSeconds());
                 }
                 //console.log('editor:',editor.getAllHtml());
-                var req = {
-                    method: 'POST',
-                    url: 'http://' + $location.host() + ":" + $location.port() + '/education/zaozao/course/new',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
-                    },
-                    data: $httpParamSerializer({
-                        name: $scope.name,
-                        content: $scope.content,
-                        category: $scope.category,
-                        date: $scope.formatedDate,
-                        introduction: $scope.introduction
-                    })
-                };
+                // var req = {
+                //     method: 'POST',
+                //     url: 'http://' + $location.host() + ":" + $location.port() + '/education/zaozao/course/new',
+                //     headers: {
+                //         'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+                //     },
+                //     data: $httpParamSerializer({
+                //         name: $scope.name,
+                //         content: $scope.content,
+                //         category: $scope.category,
+                //         date: $scope.formatedDate,
+                //         introduction: $scope.introduction
+                //     })
+                // };
                 // $http(req).success(function (e) {
                 //     console.log('edit success');
                     
@@ -220,6 +220,7 @@ define(['angular', 'angular-file-upload', 'directives', 'angular-ui-date','angul
                     $scope.course = json;
                     console.log('course:', $scope.course);
                     //console.log('content', $scope.course.content);
+
                     if($scope.course.titleImagePath != null){
                         $scope.course.imageurl = 'http://' + $location.host() + ":" + $location.port() +
                             '/education/'+$scope.course.titleImagePath;

@@ -19,14 +19,15 @@
             </p>
         </div>
         <br>
-        <div class='col-md-6'>
+        <div class='col-md-12'>
             Introduction:<br>
             <textarea ng-model="course.introduction" cols="100%" rows="5"></textarea>
         </div>
-        Title Image: <input type="file" nv-file-select="" uploader="uploader"/>
+        <div class='col-md-12'>
+            Title Image: <input type="file" nv-file-select="" uploader="uploader"/>
 
-        <image ng-src="{{course.imageurl}}"/>
-
+            <image ng-src="{{course.imageurl}}" ng-hide='{{course.imageurl===null}}'/>
+        </div>
         <br>
         <div class='col-md-12'>
         Content: <br>

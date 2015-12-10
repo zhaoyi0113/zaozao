@@ -41,8 +41,12 @@ public class CourseRegisterBean {
         this.category = entity.getCategory();
         this.date = wsUtility.dateToString(entity.getDate());
         this.content = entity.getContent();
-        this.titleImagePath = wsUtility.getImagePath(entity.getTitleImagePath());
-        this.videoPath = entity.getVideoPath();
+        if(entity.getTitleImagePath() != null) {
+            this.titleImagePath = wsUtility.getResourcePath(entity.getTitleImagePath());
+        }
+        if(entity.getVideoPath() != null) {
+            this.videoPath = wsUtility.getResourcePath(entity.getVideoPath());
+        }
         this.introduction = entity.getIntroduction();
         this.id = String.valueOf(entity.getId());
     }

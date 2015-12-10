@@ -15,6 +15,8 @@ public interface CourseRepository extends CrudRepository<CourseEntity, Integer>{
     @Query("select name from CourseEntity")
     List<String> findAllCourseNames();
 
+    List<CourseEntity> findByName(String name);
+
     List<CourseEntity> findByDateAfter(Date date);
 
     List<CourseEntity> findByCategory(String category);

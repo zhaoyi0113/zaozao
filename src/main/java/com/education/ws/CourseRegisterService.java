@@ -60,21 +60,21 @@ public class CourseRegisterService {
     @Autowired
     private CourseService courseService;
 
-    @Path("new")
-    @POST
-    public Response createNewCourse(@BeanParam CourseRegisterBean bean) {
-        System.out.println("create new course " + bean);
-        logger.info("create new course " + bean);
-        try {
-            createCourse(bean);
-        } catch (Exception e) {
-            logger.log(Level.SEVERE, e.getMessage(), e);
-            return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
-        }
-        return Response.ok().build();
-    }
+//    @Path("new")
+//    @POST
+//    public Response createNewCourse(@BeanParam CourseRegisterBean bean) {
+//        System.out.println("create new course " + bean);
+//        logger.info("create new course " + bean);
+//        try {
+//            createCourse(bean);
+//        } catch (Exception e) {
+//            logger.log(Level.SEVERE, e.getMessage(), e);
+//            return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
+//        }
+//        return Response.ok().build();
+//    }
 
-    @Path("uploadfile")
+    @Path("create")
     @POST
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces("multipart/mixed")
@@ -91,9 +91,17 @@ public class CourseRegisterService {
         InputStream file = multiPartFile.getValueAs(InputStream.class);
         String imageDir = courseImagePath;
         String fileName = multiPartFile.getContentDisposition().getFileName();
+        System.out.println("upload course "+bean.getName()+", fileName="+fileName);
+        if(wsUtility.whetherVideo(fileName)){
+            bean.setVideoPath(fileName);
+        }else{
+            bean.setTitleImagePath(fileName);
+        }
+        courseService.createCourse(bean);
         writeFile(file, imageDir, fileName);
-        bean.setTitleImagePath(fileName);
-        createCourse(bean);
+
+
+
         return Response.ok().build();
     }
 
@@ -170,6 +178,9 @@ public class CourseRegisterService {
 
     @Path("/edit")
     @POST
+    /**
+     * when update course without image/video, use this api
+     */
     public Response editCourse(@Context HttpServletRequest request, @BeanParam CourseRegisterBean bean) {
         CourseEntity one = courseRepository.findOne(Integer.parseInt(bean.getId()));
         one.setContent(bean.getContent());
@@ -188,6 +199,9 @@ public class CourseRegisterService {
 
     @Path("/upload_resource")
     @POST
+    /**
+     * edit course uses this api to upload updated course
+     */
     public Response uploadResource(FormDataMultiPart multiPart){
         String id = multiPart.getField("id").getValue();
         if(!courseRepository.exists(Integer.parseInt(id))){
@@ -209,10 +223,12 @@ public class CourseRegisterService {
         InputStream file = multiPartFile.getValueAs(InputStream.class);
         String imageDir = courseImagePath;
         String fileName = multiPartFile.getContentDisposition().getFileName();
-        if(course.getTitleImagePath()!=null){
-            deleteFile(courseImagePath+"/"+course.getTitleImagePath());
+
+        if(wsUtility.whetherVideo(fileName)){
+            course.setVideoPath(fileName);
+        }else {
+            course.setTitleImagePath(fileName);
         }
-        course.setTitleImagePath(multiPartFile.getContentDisposition().getFileName());
         writeFile(file, imageDir, fileName);
         courseRepository.save(course);
 
@@ -229,12 +245,6 @@ public class CourseRegisterService {
             deleteFile(filePath);
         }
         return Response.ok().build();
-    }
-
-    private int createCourse(CourseRegisterBean bean) {
-        CourseEntity entity = new CourseEntity(bean);
-        CourseEntity save = courseRepository.save(entity);
-        return save.getId();
     }
 
     private static void deleteFile(String filePath){
