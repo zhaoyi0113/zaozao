@@ -23,3 +23,11 @@
 .home_content{
 	margin-left: 240px;
 }
+
+input[type='text'] {
+	border-radius: 4px;
+}
+
+textarea {
+	border-radius: 4px;
+}

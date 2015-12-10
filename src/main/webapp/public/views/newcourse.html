@@ -1,47 +1,65 @@
 
 <div>
-    <form name="add_course" class="new_course">
-        Name:  <input ng-model="name" type="text" required/><br>
-        Category: <select ng-model="category" required
-                          ng-options="category as category for category in categories"/>
+    <header class='header'>
+        <h2>New Course</h2>
+    </header>
+    <form name="add_course" class="new_course form-group">
+        <div class="form-group">
+            <label class='col-sm-2 control-label'>Name:</label>  
+            <input class='' ng-model="name" type="text" required/>
+        </div>
+        <div class="form-group">
+            <label class='col-sm-2 control-label'>Category: </label>
+            <select ng-model="category" required
+                 ng-options="category as category for category in categories"/>
+            
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Introduction:</label>
+            <textarea ng-model="introduction" cols="100%" rows="5"></textarea>
+        </div>
         <br>
-        Introduction:<br>
-        <textarea ng-model="introduction" cols="100%" rows="5"></textarea>
-        <br>
-        Title Image: <input type="file" nv-file-select="" uploader="uploader" required/>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Title Image:</label>
+            <input type="file" nv-file-select="" uploader="uploader" required/>
+        </div>
         <!-- <ul ng-repeat="item in uploader.queue">
             <li>
                 <div  ng-thumb="{ file: item._file, height: 100 }"></div>
             </li>
         </ul>  --> 
-        <div>
-        Video: <input type="file" nv-file-select="" uploader="uploader" />
+        <div class='form-group'>
+            <label class="col-sm-2 control-label">Video:</label>
+            <input type="file" nv-file-select="" uploader="uploader" />
         </div> 
-        Content: 
-        <br>
-        <!-- <div class="ueditor" nodetype='2' ng-model='content' config="_simpleConfig" id='editor' >
+        <div class='form-group'>
+            <label class="col-sm-2 control-label">Content: </label>
+            
+            <!-- <div class="ueditor" nodetype='2' ng-model='content' config="_simpleConfig" id='editor' >
 
-        </div> -->
-        <textarea keditor ng-model="content" data-config="kindeditor_config" cols="100%" rows="20"></textarea>
-
+            </div> -->
+            <textarea keditor ng-model="content" data-config="kindeditor_config" cols="100%" rows="20"></textarea>
+        </div>
         <!-- <div>
             <textarea class="form-control" ng-model='content'></textarea>
         </div> -->
-        <br>
-        <!--Date: <input ng-model="date" type="date" required/><br>-->
-        Date:<br>
-        <div class="col-md-6">
-            <p>
-                <input type="text" uib-datepicker-popup="yyyy-MM-dd" datepicker-options="dateOptions" required
-                       ng-model="date" is-open="status.opened" />
-                    <button type="button" class="btn btn-default" ng-click="open($event)">
-                        <i class="glyphicon glyphicon-calendar"></i></button>
-                  
-                <br/>
-            </p>
-        </div><br>
         
-        <button ng-click="submit()" ng-disabled="add_course.$invalid">Submit</button>
-        <button ng-click="cancel()">Cancel</button>
+        <!--Date: <input ng-model="date" type="date" required/><br>-->
+        <div class='form-group'>
+            <label class="col-sm-2 control-label">Date:</label>
+            <div class="col-md-6">
+                <p>
+                    <input type="text" uib-datepicker-popup="yyyy-MM-dd" datepicker-options="dateOptions" required
+                           ng-model="date" is-open="status.opened" />
+                        <button type="button" class="btn btn-default" ng-click="open($event)">
+                            <i class="glyphicon glyphicon-calendar"></i></button>
+                      
+                    <br/>
+                </p>
+            </div><br>
+        </div>
+        
+        <button class='btn btn-primary' ng-click="submit()" ng-disabled="add_course.$invalid">Submit</button>
+        <button class='btn btn-primary' ng-click="cancel()">Cancel</button>
     </form>
 </div>

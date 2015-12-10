@@ -1,45 +1,56 @@
 <div>
+    <header class='header'>
+        <h2>Course Edit</h2>
+    </header>
 
     <form name="course_edit" class="course_edit">
-        Name:<input ng-model="course.name" type="text" required /><br/>
-        Category: <select ng-model="course.category" required
+        <div class='form-group'>
+            <label class='col-sm-2 control-label'>Name:</label>
+            <input ng-model="course.name" type="text" required /><br/>
+        </div>
+        <div class='form-group'>
+            <label class='col-sm-2 control-label'>Category: </label>
+            <select ng-model="course.category" required
                           ng-options="category as category for category in categories"/><br>
-        Date: <!--<input ng-model="course.date" type="date" required />-->
+        </div>
+        <div class='form-group'>
+            <label class='col-sm-2 control-label'>Date: </label>
+            <!--<input ng-model="course.date" type="date" required />-->
 
         <!--<uib-datepicker ng-model="dt"></uib-datepicker><br>-->
-        <br>
-        <div class="col-md-6">
+            <div class="col-md-6">
             <p>
             <input type="text" uib-datepicker-popup="yyyy-MM-dd" datepicker-options="dateOptions" required
                     ng-model="course.date" is-open="status.opened" />
             <button type="button" class="btn btn-default" ng-click="open($event)">
                         <i class="glyphicon glyphicon-calendar"></i></button>
-                  
-            <br/>
-            </p>
+            
+            </div>
         </div>
+        
         <br>
-        <div class='col-md-12'>
-            Introduction:<br>
+        <div class='col-md-12 form-group'>
+            <label class='col-sm-2 control-label'>Introduction:</label>
             <textarea ng-model="course.introduction" cols="100%" rows="5"></textarea>
         </div>
-        <div class='col-md-12'>
-            Title Image: <input type="file" nv-file-select="" uploader="uploader"/>
+        <div class='col-md-12 form-group'>
+            <label class='col-sm-2 control-label'>Title Image:</label>
+            <input type="file" nv-file-select="" uploader="uploader"/>
 
             <image ng-src="{{course.imageurl}}" ng-hide='{{course.imageurl===null}}'/>
         </div>
-        <br>
-        <div class='col-md-12'>
-        Content: <br>
+        
+        <div class='col-md-12 form-group'>
+            <label class='col-sm-2 control-label'>Content: </label>
 
-        <textarea id='content_keditor' coursekeditor ng-model="course.content" data-config="kindeditor_config" cols="100%" rows="20"></textarea>
+            <textarea id='content_keditor' coursekeditor ng-model="course.content" data-config="kindeditor_config" cols="100%" rows="20"></textarea>
         </div>
          <!-- <div>
          <textarea ng-model='course.content' rows="20"  class="form-control"></textarea>
         </div> -->
        
-        <button ng-click="submit()">Submit</button>
-        <button ng-click="cancel()">Cancel</button>
+        <button class='btn btn-primary' ng-click="submit()">Submit</button>
+        <button class='btn btn-primary' ng-click="cancel()">Cancel</button>
     </form>
 
 </div>
