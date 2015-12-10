@@ -1,3 +1,25 @@
 .newuser-head{
 	font-size: 5px;
 }
+
+.sidebar-nav {
+  width: 240px;
+  #position: absolute;
+  float: left;
+  border-top: none;
+  border-left: none;
+  margin: 0em;
+}
+
+.sidebar-nav ul {
+  list-style: none;
+  padding-left: 0px;
+}
+
+.sidebar-nav li{
+	list-style: none;
+}
+
+.home_content{
+	margin-left: 240px;
+}

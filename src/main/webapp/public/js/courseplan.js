@@ -4,7 +4,7 @@ define(['angular'], function(angular){
     courseplan.controller('CoursePlanController',
     	 ['$scope', '$http', '$location', function($scope, $http, $location){
     	 console.log('course plan');
-    	 $scope.headers=['Title','Sub Title', 'Content', 'Price'];
+    	 $scope.headers=['Title','Sub Title', 'Content', 'Price', 'Edit', 'Delete'];
 
     	 getCoursePlanList($http, $scope, $location);
 

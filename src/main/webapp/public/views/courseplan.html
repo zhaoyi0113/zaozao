@@ -1,5 +1,8 @@
 <div>
-	<table class="table">
+    <header class='header'>
+        <h2>Course Plan List</h2>
+    </header>
+	<table class="table table-striped table-bordered">
         <th ng-repeat="head in headers" ng-model="head"><p class="text-center">{{head}}</p></th>
         <tr ng-repeat="coursePlan in coursePlanList" ng-model="coursePlan">
             <td>{{coursePlan.title}}</td>
