@@ -40,7 +40,13 @@ public class CourseService {
                 entity.setVideoPath(bean.getVideoPath());
                 courseRepository.save(entity);
                 return entity.getId();
-            }else{
+            }else if(bean.getTitleImagePath() != null){
+                CourseEntity entity = courses.get(0);
+                entity.setTitleImagePath(bean.getTitleImagePath());
+                courseRepository.save(entity);
+                return entity.getId();
+            }
+            else{
                 throw new BadRequestException("duplicate course name "+bean.getName());
             }
         }else {
