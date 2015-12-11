@@ -16,7 +16,7 @@
     <div class="sidebar-nav">
     	<ul>
     		<li>
-    			<a href='javascript:void(0)' class="nav-header a-folder-1" data-toggle="collapse" data-target=".folder-1">
+    			<a href='javascript:void(0)' class="nav-header a-folder-1" data-toggle="collapse" data-target=".course-folder">
     				<i class="glyphicon glyphicon-wrench">
     				</i>
     				Course Management
@@ -26,7 +26,7 @@
     		</li>
     	</ul>
     	<li>
-			<ul class="folder-1 nav nav-list collapse in"  ng-model="tab">
+			<ul class="course-folder nav nav-list collapse in"  ng-model="tab">
 				<li ng-repeat="tab in tabs">
 					<a ui-sref='{{tab.url}}'>
 						<span class="fa fa-caret-right">

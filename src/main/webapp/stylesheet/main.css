@@ -43,6 +43,10 @@ body{
 	min-height: 800px;
 }
 
+.course-folder li{
+	padding-left: 40px;
+}
+
 input[type='text'] {
 	border-radius: 4px;
 }

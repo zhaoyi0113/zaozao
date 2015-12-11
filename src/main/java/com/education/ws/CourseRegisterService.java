@@ -143,7 +143,9 @@ public class CourseRegisterService {
             int id = Integer.parseInt(courseId);
 
             CourseEntity course =courseRepository.findOne(id);// getCourseDao().getCourseById(id);
-
+            if(course == null){
+                throw new BadRequestException("can't find course "+courseId);
+            }
             CourseRegisterBean bean = new CourseRegisterBean(course, wsUtility);
             Gson gson = new GsonBuilder().setDateFormat(wsUtility.getDateFormatString()).create();
             String json = gson.toJson(bean);
