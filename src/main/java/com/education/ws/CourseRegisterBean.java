@@ -34,6 +34,10 @@ public class CourseRegisterBean {
     @FormParam("introduction")
     private String introduction;
 
+    private String titleImageUrl;
+
+    private String videoUrl;
+
     public CourseRegisterBean(){}
 
     public CourseRegisterBean(CourseEntity entity, WSUtility wsUtility){
@@ -41,11 +45,14 @@ public class CourseRegisterBean {
         this.category = entity.getCategory();
         this.date = wsUtility.dateToString(entity.getDate());
         this.content = entity.getContent();
+        this.titleImagePath = entity.getTitleImagePath();
+        this.videoPath = entity.getVideoPath();
+
         if(entity.getTitleImagePath() != null) {
-            this.titleImagePath = wsUtility.getResourcePath(entity.getTitleImagePath());
+            this.titleImageUrl = wsUtility.getResourcePath(entity.getTitleImagePath());
         }
         if(entity.getVideoPath() != null) {
-            this.videoPath = wsUtility.getResourcePath(entity.getVideoPath());
+            this.videoUrl = wsUtility.getResourcePath(entity.getVideoPath());
         }
         this.introduction = entity.getIntroduction();
         this.id = String.valueOf(entity.getId());
@@ -125,6 +132,22 @@ public class CourseRegisterBean {
 
     public void setIntroduction(String introduction) {
         this.introduction = introduction;
+    }
+
+    public String getTitleImageUrl() {
+        return titleImageUrl;
+    }
+
+    public void setTitleImageUrl(String titleImageUrl) {
+        this.titleImageUrl = titleImageUrl;
+    }
+
+    public String getVideoUrl() {
+        return videoUrl;
+    }
+
+    public void setVideoUrl(String videoUrl) {
+        this.videoUrl = videoUrl;
     }
 
     @Override

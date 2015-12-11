@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.ws.rs.BadRequestException;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.*;
 
 /**
@@ -45,6 +47,21 @@ public class CourseService {
             CourseEntity entity = new CourseEntity(bean);
             CourseEntity save = courseRepository.save(entity);
             return save.getId();
+        }
+    }
+
+    public FileInputStream getCourseFile(String id, String fileName){
+        CourseEntity course = courseRepository.findOne(Integer.parseInt(id));
+        if(course == null){
+            throw new BadRequestException("Can't find course id "+id);
+        }
+        String videoPath = wsUtility.getResourcePhysicalPath(fileName);
+        try {
+            FileInputStream input = new FileInputStream(videoPath);
+            return input;
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            throw new BadRequestException(e.getMessage());
         }
     }
 

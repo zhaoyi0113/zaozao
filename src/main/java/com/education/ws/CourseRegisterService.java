@@ -1,6 +1,5 @@
 package com.education.ws;
 
-import com.education.db.DBConnection;
 import com.education.db.entity.CourseEntity;
 import com.education.db.jpa.CourseRepository;
 import com.education.service.CourseService;
@@ -12,7 +11,6 @@ import org.glassfish.jersey.media.multipart.FormDataBodyPart;
 import org.glassfish.jersey.media.multipart.FormDataMultiPart;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Transactional;
@@ -143,6 +141,7 @@ public class CourseRegisterService {
 
     @Path("/querycourse/{courseId}")
     @GET
+    @Produces(MediaType.APPLICATION_JSON)
     public Response getCourseById(@Context HttpServletRequest request,
                                   @PathParam("courseId") String courseId) {
         try {
@@ -161,6 +160,17 @@ public class CourseRegisterService {
             logger.log(Level.SEVERE, e.getMessage(), e);
             return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
         }
+    }
+
+    @Path("/file/{courseId}/{filename}")
+    @GET
+    public Response getCourseVideoById(@Context HttpServletRequest request,
+                                  @PathParam("courseId") String courseId,
+                                       @PathParam("filename") String fileName) {
+        FileInputStream file = courseService.getCourseFile(courseId, fileName);
+        return Response.ok(file).header("Access-Control-Allow-Origin","*")
+                .header("Access-Control-Allow-Methods","*")
+                .header("Content-Disposition", "attachment; filename = "+fileName).build();
     }
 
     @Path("/findafter")
@@ -231,10 +241,19 @@ public class CourseRegisterService {
         InputStream file = multiPartFile.getValueAs(InputStream.class);
         String imageDir = courseImagePath;
         String fileName = multiPartFile.getContentDisposition().getFileName();
+        try {
+            fileName = new String(fileName.getBytes("ISO-8859-1"),
+                    "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        System.out.println("upload file name "+fileName);
 
         if(wsUtility.whetherVideo(fileName)){
+            wsUtility.deleteFile(course.getVideoPath());
             course.setVideoPath(fileName);
         }else {
+            wsUtility.deleteFile(course.getTitleImagePath());
             course.setTitleImagePath(fileName);
         }
         writeFile(file, imageDir, fileName);

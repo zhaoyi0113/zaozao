@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -60,6 +61,10 @@ public class WSUtility {
         return courseImageUrl+"/"+fileName;
     }
 
+    public String getResourcePhysicalPath(String fileName){
+        return courseImagePath + "/" +fileName;
+    }
+
     public boolean whetherVideo(String fileName){
         if(fileName != null){
             int index = fileName.lastIndexOf(".");
@@ -69,5 +74,12 @@ public class WSUtility {
             }
         }
         return false;
+    }
+
+    public void deleteFile(String fileName){
+        String resourcePath = getResourcePath(fileName);
+        File file = new File(resourcePath);
+        System.out.println("delete file "+file.getAbsolutePath());
+        file.delete();
     }
 }
