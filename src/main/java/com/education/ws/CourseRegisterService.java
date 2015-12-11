@@ -91,6 +91,12 @@ public class CourseRegisterService {
         InputStream file = multiPartFile.getValueAs(InputStream.class);
         String imageDir = courseImagePath;
         String fileName = multiPartFile.getContentDisposition().getFileName();
+        try {
+            fileName = new String(fileName.getBytes("ISO-8859-1"),
+                    "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
         System.out.println("upload course "+bean.getName()+", fileName="+fileName);
         if(wsUtility.whetherVideo(fileName)){
             bean.setVideoPath(fileName);
