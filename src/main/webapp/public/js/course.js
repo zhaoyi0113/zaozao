@@ -257,9 +257,10 @@ define(['angular', 'angular-file-upload', 'directives', 'angular-ui-date','angul
                 if($scope.uploader.queue.length == 0){
                     var req = {
                         method: 'POST',
-                        url: 'http://' + $location.host() + ":" + $location.port() + '/education/zaozao/course/edit',
+                        url: 'http://' + $location.host() + ":" + $location.port() + '/education/zaozao/course/upload_resource',
                         headers: {
                             'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+                            //'Content-Type': 'multipart/form-data; charset=utf-8;'
                         },
                         data: $httpParamSerializer({
                             id: $scope.course.id,
