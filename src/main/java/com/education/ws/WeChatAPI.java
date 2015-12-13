@@ -45,9 +45,17 @@ public class WeChatAPI {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response login(@QueryParam("code") String code, @QueryParam("state") String state) {
-        logger.info(" login " + code + ", state= " + state);
+        logger.info(" login code=" + code + ", state= " + state);
         WeChatUserInfo webUserInfo = weChatService.getWebUserInfo(code);
         return Response.ok(webUserInfo).build();
+    }
+
+    @Path("/getopenid")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getOpenId(@QueryParam("code") String code, @QueryParam("state") String state){
+        WeChatUserInfo webUserInfo = weChatService.getWebUserInfo(code);
+        return Response.ok(webUserInfo.getOpenId()).build();
     }
 
     @Path("/userlist")
@@ -60,8 +68,16 @@ public class WeChatAPI {
 
     @Path("/userinfo")
     @GET
-    @Produces("application/json")
+    @Produces(MediaType.APPLICATION_JSON)
     public Response getUserInfo(@QueryParam("openid") String openid) {
         return Response.ok(weChatService.getUserInfo(openid)).build();
     }
+
+    @Path("/barcode")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getBarCodeURL(@QueryParam("code") String code){
+        return Response.ok(weChatService.getQRBarTicket(code)).build();
+    }
+
 }

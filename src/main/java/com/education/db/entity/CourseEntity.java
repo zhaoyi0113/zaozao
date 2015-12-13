@@ -4,7 +4,6 @@ import com.education.ws.CourseRegisterBean;
 import com.education.ws.util.WSUtility;
 
 import javax.persistence.*;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**

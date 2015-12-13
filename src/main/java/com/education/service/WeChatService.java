@@ -4,9 +4,14 @@ import com.google.gson.Gson;
 import com.google.gson.internal.LinkedTreeMap;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClients;
+import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -15,10 +20,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -52,6 +54,12 @@ public class WeChatService {
 
     @Value("#{config['wechat_web_site_user_info']}")
     private String webUserInfoUrl;
+
+    @Value("#{config['wechat_qrcode_ticket_url']}")
+    private String qrCodeTicketUrl;
+
+    @Value("#{config['wechat_qrcode_url']}")
+    private String qrCodeUrl;
 
     private static final Logger logger = Logger.getLogger(WeChatService.class.getName());
 
@@ -135,13 +143,57 @@ public class WeChatService {
         return null;
     }
 
+    public String getQRBarCodeURL(String code) {
+        String ticket = getQRBarTicket(code);
+        logger.info("get qr bar ticket "+ticket);
+        String url = buildQRCodeUrl(ticket);
+        HttpGet httpGet = new HttpGet(url);
+        HttpClient httpClient = HttpClients.createDefault();
+        try {
+            HttpResponse response = httpClient.execute(httpGet);
+            HttpEntity entity = response.getEntity();
+            String body = EntityUtils.toString(entity, "UTF-8").trim();
+            logger.info("get user list response " + body);
+            Gson gson = new Gson();
+            Map<String, Object> userList = gson.fromJson(body, Map.class);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public String getQRBarTicket(String code){
+        String url = buildQRCodeTicketUrl(requestAccessToken());
+        HttpPost httpPost = new HttpPost(url);
+        HttpClient httpClient = HttpClients.createDefault();
+        try {
+            Map<String, String> params =new Hashtable<>();
+            params.put("expire_seconds", "30");
+            params.put("action_name", "QR_SCENE");
+            Gson gson = new Gson();
+
+            StringEntity strEntity = new StringEntity(gson.toJson(params));
+
+            httpPost.setEntity(strEntity);
+            HttpResponse response = httpClient.execute(httpPost);
+            HttpEntity entity = response.getEntity();
+            String body = EntityUtils.toString(entity, "UTF-8").trim();
+            logger.info("get qr barcode ticket response " + body);
+            Map map = gson.fromJson(body, Map.class);
+            return (String) map.get("ticket");
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public List<String> getUserOpenIDList() {
         String accessToken = requestAccessToken();
 
         String uri = buildGetUserListURL(accessToken);
         logger.info("get user list url " + uri);
         HttpGet httpGet = new HttpGet(uri);
-
         HttpClient httpClient = HttpClients.createDefault();
         try {
             HttpResponse response = httpClient.execute(httpGet);
@@ -210,6 +262,18 @@ public class WeChatService {
     private String buildWebUserInfoUrl(String token, String openid) {
         StringBuilder builder = new StringBuilder();
         builder.append(webUserInfoUrl).append("?access_token=").append(token).append("&openid=").append(openid);
+        return builder.toString();
+    }
+
+    private String buildQRCodeTicketUrl(String token){
+        StringBuilder builder = new StringBuilder();
+        builder.append(qrCodeTicketUrl).append("?access_token=").append(token);
+        return builder.toString();
+    }
+
+    private String buildQRCodeUrl(String token){
+        StringBuilder builder = new StringBuilder();
+        builder.append(qrCodeUrl).append("?ticket=").append(token);
         return builder.toString();
     }
 

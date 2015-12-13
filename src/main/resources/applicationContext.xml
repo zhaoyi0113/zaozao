@@ -26,6 +26,7 @@
     <context:annotation-config/>
     <context:component-scan base-package="com.education"/>
     <context:component-scan base-package="com.education.service"/>
+    <context:component-scan base-package="com.education.filter"/>
     <context:component-scan base-package="com.education.db.jpa"/>
     <aop:config proxy-target-class="true"/>
     <aop:aspectj-autoproxy proxy-target-class="true"/>
