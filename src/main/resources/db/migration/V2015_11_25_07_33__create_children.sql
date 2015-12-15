@@ -4,6 +4,6 @@ CREATE TABLE `children` (
   `age` int(11) DEFAULT NULL,
   `birthdate` varchar(45) DEFAULT NULL,
   `parent_id` varchar(45) DEFAULT NULL,
-  `gender` varchar(45) DEFAULT NULL,
+  `sex` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

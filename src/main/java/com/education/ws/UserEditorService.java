@@ -51,7 +51,7 @@ public class UserEditorService {
         if (user.getBirthdate() != null) {
         }
         if (user.getGender() != null) {
-            currentUser.setGender(user.getGender());
+            currentUser.setSex(user.getGender());
         }
         if (user.getPhone() != null) {
             currentUser.setPhone(user.getPhone());

@@ -99,7 +99,7 @@ public class UserQuery {
         bean.setAge(entity.getAge());
         bean.setUserName(entity.getUserName());
         bean.setPassword(entity.getPassword());
-        bean.setGender(entity.getGender());
+        bean.setGender(entity.getSex());
         bean.setUserId(entity.getUserId());
         bean.setPhone(entity.getPhone());
         bean.setEmail(entity.getEmail());

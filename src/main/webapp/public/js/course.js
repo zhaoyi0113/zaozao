@@ -9,7 +9,7 @@ define(['angular', 'angular-file-upload', 'directives', 'angular-ui-date','angul
         function ($scope, $http, $location, $state) {
             console.log("window.location:"+window.location.protocol);
             //window.UEDITOR_HOME_URL = 'http://' + $location.host() + ":" + $location.port() + '/education/zaozao/course/upload_resource';
-            $scope.headers = ['Name', 'Category','Date','Delete'];
+            $scope.headers = ['Name', 'Category','Months','Delete'];
             $http.get('http://' + $location.host() + ":" + $location.port() + '/education/zaozao/course/queryall')
                 .success(function (e) {
                     var str = JSON.stringify(e);

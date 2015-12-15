@@ -1,0 +1,13 @@
+ALTER TABLE `user` ADD COLUMN `subscribe` varchar(1) NULL;
+ALTER TABLE `user` ADD COLUMN `openid` varchar(128) NULL;
+ALTER TABLE `user` ADD COLUMN `nickname` varchar(64) NULL;
+ALTER TABLE `user` ADD COLUMN `language` varchar(64) NULL;
+ALTER TABLE `user` ADD COLUMN `city` varchar(64) NULL;
+ALTER TABLE `user` ADD COLUMN `province` varchar(64) NULL;
+ALTER TABLE `user` ADD COLUMN `country` varchar(64) NULL;
+ALTER TABLE `user` ADD COLUMN `headimageurl` varchar(64) NULL;
+ALTER TABLE `user` ADD COLUMN `subscribe_time` varchar(64) NULL;
+ALTER TABLE `user` ADD COLUMN `unionid` varchar(64) NULL;
+ALTER TABLE `user` ADD COLUMN `remark` varchar(64) NULL;
+ALTER TABLE `user` ADD COLUMN `groupid` varchar(64) NULL;
+ALTER TABLE `user` CHANGE COLUMN `gender` `sex` VARCHAR(1) NULL DEFAULT NULL ;

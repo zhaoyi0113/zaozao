@@ -58,19 +58,6 @@ public class CourseRegisterService {
     @Autowired
     private CourseService courseService;
 
-//    @Path("new")
-//    @POST
-//    public Response createNewCourse(@BeanParam CourseRegisterBean bean) {
-//        System.out.println("create new course " + bean);
-//        logger.info("create new course " + bean);
-//        try {
-//            createCourse(bean);
-//        } catch (Exception e) {
-//            logger.log(Level.SEVERE, e.getMessage(), e);
-//            return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
-//        }
-//        return Response.ok().build();
-//    }
 
     @Path("create")
     @POST
@@ -89,13 +76,7 @@ public class CourseRegisterService {
 
         InputStream file = multiPartFile.getValueAs(InputStream.class);
         String imageDir = courseImagePath;
-        String fileName = multiPartFile.getContentDisposition().getFileName();
-        try {
-            fileName = new String(fileName.getBytes("ISO-8859-1"),
-                    "UTF-8");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
+        String fileName = getFileNameFromMultipart(multiPartFile);
         logger.info("upload course " + bean.getName() + ", fileName=" + fileName);
         if (wsUtility.whetherVideo(fileName)) {
             bean.setVideoPath(fileName);
@@ -226,13 +207,7 @@ public class CourseRegisterService {
         FormDataBodyPart multiPartFile = multiPart.getField("file");
         InputStream file = multiPartFile.getValueAs(InputStream.class);
         String imageDir = courseImagePath;
-        String fileName = multiPartFile.getContentDisposition().getFileName();
-        try {
-            fileName = new String(fileName.getBytes("ISO-8859-1"),
-                    "UTF-8");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
+        String fileName = getFileNameFromMultipart(multiPartFile);
         logger.info("upload file name " + fileName);
 
         if (wsUtility.whetherVideo(fileName)) {
@@ -246,6 +221,17 @@ public class CourseRegisterService {
         courseRepository.save(course);
 
         return Response.ok().build();
+    }
+
+    private String getFileNameFromMultipart(FormDataBodyPart multiPartFile) {
+        String fileName = multiPartFile.getContentDisposition().getFileName();
+        try {
+            fileName = new String(fileName.getBytes("ISO-8859-1"),
+                    "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        return fileName;
     }
 
     @DELETE
@@ -289,8 +275,5 @@ public class CourseRegisterService {
 
     }
 
-    private String updateCourseTitleImagePath(CourseEntity course) {
-        return (this.courseImageUrl + "/" + course.getTitleImagePath());
-    }
 
 }

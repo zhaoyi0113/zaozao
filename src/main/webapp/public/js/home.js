@@ -9,10 +9,11 @@ define(['angular','user', 'login','course','courseplan'], function(angular){
         {
             url: '.course',
             label: 'Course'
-        },{
-            url: '.courseplan',
-            label: 'Course Plan'
         }
+        // ,{
+        //     url: '.courseplan',
+        //     label: 'Course Plan'
+        // }
         ];
     }]);
 });
