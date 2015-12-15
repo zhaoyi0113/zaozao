@@ -38,12 +38,18 @@ public class CourseRegisterBean {
 
     private String videoUrl;
 
+    @FormParam("months")
+    private int months;
+
+    @FormParam("tags")
+    private String tags;
+
     public CourseRegisterBean(){}
 
     public CourseRegisterBean(CourseEntity entity, WSUtility wsUtility){
         this.name = entity.getName();
         this.category = entity.getCategory();
-        this.date = wsUtility.dateToString(entity.getDate());
+//        this.date = wsUtility.dateToString(entity.getDate());
         this.content = entity.getContent();
         this.titleImagePath = entity.getTitleImagePath();
         this.videoPath = entity.getVideoPath();
@@ -56,6 +62,9 @@ public class CourseRegisterBean {
         }
         this.introduction = entity.getIntroduction();
         this.id = String.valueOf(entity.getId());
+        this.tags = entity.getTags();
+
+        this.months = entity.getMonths();
     }
 
     public String getDate() {
@@ -148,6 +157,22 @@ public class CourseRegisterBean {
 
     public void setVideoUrl(String videoUrl) {
         this.videoUrl = videoUrl;
+    }
+
+    public int getMonths() {
+        return months;
+    }
+
+    public void setMonths(int months) {
+        this.months = months;
+    }
+
+    public String getTags() {
+        return tags;
+    }
+
+    public void setTags(String tags) {
+        this.tags = tags;
     }
 
     @Override

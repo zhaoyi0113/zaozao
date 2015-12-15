@@ -113,3 +113,8 @@ buildscript {
         classpath 'org.flywaydb:flyway-gradle-plugin:3.2.1'
     }
 }
+
+task copyDependencies(type: Copy) {
+    from configurations.compile
+    into 'build/dependencies'
+}

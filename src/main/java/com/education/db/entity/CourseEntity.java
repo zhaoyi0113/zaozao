@@ -22,6 +22,8 @@ public class CourseEntity {
     private Date date;
     private String videoPath;
     private String titleImagePath;
+    private String tags;
+    private int months;
 
     public CourseEntity() {
 
@@ -34,11 +36,13 @@ public class CourseEntity {
         category = bean.getCategory();
         videoPath = bean.getVideoPath();
         titleImagePath = bean.getTitleImagePath();
-        date = WSUtility.stringToDate(bean.getDate());
+//        date = WSUtility.stringToDate(bean.getDate());
         if (bean.getId() != null) {
             id = Integer.parseInt(bean.getId());
         }
         introduction = bean.getIntroduction();
+        tags = bean.getTags();
+        months = bean.getMonths();
     }
 
     @Id
@@ -124,5 +128,21 @@ public class CourseEntity {
 
     public void setIntroduction(String introduction) {
         this.introduction = introduction;
+    }
+
+    public String getTags() {
+        return tags;
+    }
+
+    public void setTags(String tags) {
+        this.tags = tags;
+    }
+
+    public int getMonths() {
+        return months;
+    }
+
+    public void setMonths(int months) {
+        this.months = months;
     }
 }

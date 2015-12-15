@@ -95,17 +95,14 @@ public class CourseRegisterService {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-        System.out.println("upload course "+bean.getName()+", fileName="+fileName);
-        if(wsUtility.whetherVideo(fileName)){
+        logger.info("upload course " + bean.getName() + ", fileName=" + fileName);
+        if (wsUtility.whetherVideo(fileName)) {
             bean.setVideoPath(fileName);
-        }else{
+        } else {
             bean.setTitleImagePath(fileName);
         }
         courseService.createCourse(bean);
         writeFile(file, imageDir, fileName);
-
-
-
         return Response.ok().build();
     }
 
@@ -127,16 +124,16 @@ public class CourseRegisterService {
     @Path("query")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response queryCourse(@QueryParam("category") String category, @QueryParam("history") String history){
+    public Response queryCourse(@QueryParam("category") String category, @QueryParam("history") String history) {
         List<CourseRegisterBean> list = null;
-        if(history == null){
+        if (history == null) {
             list = courseService.queryCourseByCategoryAfterNow(category);
-        }else {
+        } else {
             list = courseService.queryCourseByCategoryBeforeNow(category);
         }
-        System.out.println("query course "+list.size());
-        return Response.ok(list).header("Access-Control-Allow-Origin","*")
-                .header("Access-Control-Allow-Methods","*").build();
+        System.out.println("query course " + list.size());
+        return Response.ok(list).header("Access-Control-Allow-Origin", "*")
+                .header("Access-Control-Allow-Methods", "*").build();
     }
 
     @Path("/querycourse/{courseId}")
@@ -147,15 +144,15 @@ public class CourseRegisterService {
         try {
             int id = Integer.parseInt(courseId);
 
-            CourseEntity course =courseRepository.findOne(id);// getCourseDao().getCourseById(id);
-            if(course == null){
-                throw new BadRequestException("can't find course "+courseId);
+            CourseEntity course = courseRepository.findOne(id);// getCourseDao().getCourseById(id);
+            if (course == null) {
+                throw new BadRequestException("can't find course " + courseId);
             }
             CourseRegisterBean bean = new CourseRegisterBean(course, wsUtility);
             Gson gson = new GsonBuilder().setDateFormat(wsUtility.getDateFormatString()).create();
             String json = gson.toJson(bean);
-            return Response.ok().entity(json).header("Access-Control-Allow-Origin","*")
-                    .header("Access-Control-Allow-Methods","*").build();
+            return Response.ok().entity(json).header("Access-Control-Allow-Origin", "*")
+                    .header("Access-Control-Allow-Methods", "*").build();
         } catch (Exception e) {
             logger.log(Level.SEVERE, e.getMessage(), e);
             return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
@@ -165,17 +162,17 @@ public class CourseRegisterService {
     @Path("/file/{courseId}/{filename}")
     @GET
     public Response getCourseVideoById(@Context HttpServletRequest request,
-                                  @PathParam("courseId") String courseId,
+                                       @PathParam("courseId") String courseId,
                                        @PathParam("filename") String fileName) {
         FileInputStream file = courseService.getCourseFile(courseId, fileName);
-        return Response.ok(file).header("Access-Control-Allow-Origin","*")
-                .header("Access-Control-Allow-Methods","*")
-                .header("Content-Disposition", "attachment; filename = "+fileName).build();
+        return Response.ok(file).header("Access-Control-Allow-Origin", "*")
+                .header("Access-Control-Allow-Methods", "*")
+                .header("Content-Disposition", "attachment; filename = " + fileName).build();
     }
 
     @Path("/findafter")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response findCoursesAfterNow(){
+    public Response findCoursesAfterNow() {
         Date now = Calendar.getInstance().getTime();
         List<CourseEntity> courses = courseRepository.findByDateAfter(now);
         return Response.ok(courses).build();
@@ -204,13 +201,6 @@ public class CourseRegisterService {
         one.setContent(bean.getContent());
         one.setCategory(bean.getCategory());
         one.setIntroduction(bean.getIntroduction());
-        SimpleDateFormat format = wsUtility.getDateFormat();
-        try {
-            System.out.println("get date "+bean.getDate());
-            one.setDate(format.parse(bean.getDate()));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
         courseRepository.save(one);
         return Response.ok().build();
     }
@@ -220,23 +210,15 @@ public class CourseRegisterService {
     /**
      * edit course uses this api to upload updated course
      */
-    public Response uploadResource(FormDataMultiPart multiPart){
+    public Response uploadResource(FormDataMultiPart multiPart) {
         String id = multiPart.getField("id").getValue();
-        if(!courseRepository.exists(Integer.parseInt(id))){
-            return Response.status(Response.Status.BAD_REQUEST).entity("Can't find course "+id).build();
+        if (!courseRepository.exists(Integer.parseInt(id))) {
+            return Response.status(Response.Status.BAD_REQUEST).entity("Can't find course " + id).build();
         }
         CourseEntity course = courseRepository.findOne(Integer.parseInt(id));
         course.setCategory(multiPart.getField("category").getValue());
         course.setName(multiPart.getField("name").getValue());
         course.setContent(multiPart.getField("content").getValue());
-        try{
-            SimpleDateFormat format = wsUtility.getDateFormat();
-            Date date = format.parse(multiPart.getField("date").getValue());
-            format.format(date);
-            course.setDate(date);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
         FormDataBodyPart multiPartFile = multiPart.getField("file");
         InputStream file = multiPartFile.getValueAs(InputStream.class);
         String imageDir = courseImagePath;
@@ -247,12 +229,12 @@ public class CourseRegisterService {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-        System.out.println("upload file name "+fileName);
+        System.out.println("upload file name " + fileName);
 
-        if(wsUtility.whetherVideo(fileName)){
+        if (wsUtility.whetherVideo(fileName)) {
             wsUtility.deleteFile(course.getVideoPath());
             course.setVideoPath(fileName);
-        }else {
+        } else {
             wsUtility.deleteFile(course.getTitleImagePath());
             course.setTitleImagePath(fileName);
         }
@@ -264,30 +246,30 @@ public class CourseRegisterService {
 
     @DELETE
     @Path("/{id}")
-    public Response deleteCourse(@PathParam("id") String id){
+    public Response deleteCourse(@PathParam("id") String id) {
         CourseEntity course = courseRepository.findOne(Integer.parseInt(id));
         courseRepository.delete(course);
-        if(course.getTitleImagePath() != null) {
+        if (course.getTitleImagePath() != null) {
             String filePath = courseImagePath + "/" + course.getTitleImagePath();
             deleteFile(filePath);
         }
         return Response.ok().build();
     }
 
-    private static void deleteFile(String filePath){
+    private static void deleteFile(String filePath) {
         File file = new File(filePath);
         file.delete();
     }
 
     private static void writeFile(InputStream input, String dir, String targetName) {
         try {
-            System.out.println("write to file "+dir+","+targetName);
+            System.out.println("write to file " + dir + "," + targetName);
             File dirFile = new File(dir);
             if (!dirFile.exists()) {
                 dirFile.mkdirs();
             }
             FileOutputStream output = new FileOutputStream(dir + "/" + targetName);
-            logger.info("save file in "+dir+"/"+targetName);
+            logger.info("save file in " + dir + "/" + targetName);
             byte buffer[] = new byte[512];
             int read = input.read(buffer);
             while (read > 0) {
@@ -303,8 +285,8 @@ public class CourseRegisterService {
 
     }
 
-    private String updateCourseTitleImagePath(CourseEntity course){
-        return (this.courseImageUrl+"/"+course.getTitleImagePath());
+    private String updateCourseTitleImagePath(CourseEntity course) {
+        return (this.courseImageUrl + "/" + course.getTitleImagePath());
     }
 
 }
