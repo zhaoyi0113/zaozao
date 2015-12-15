@@ -35,17 +35,17 @@
         <div class='form-group'>
             <label class="col-sm-2 control-label">Content: </label>
             
-            <!-- <div class="ueditor" nodetype='2' ng-model='content' config="_simpleConfig" id='editor' >
-
-            </div> -->
             <textarea keditor ng-model="content" data-config="kindeditor_config" cols="100%" rows="20"></textarea>
         </div>
-        <!-- <div>
-            <textarea class="form-control" ng-model='content'></textarea>
-        </div> -->
-        
-        <!--Date: <input ng-model="date" type="date" required/><br>-->
         <div class='form-group'>
+            <label class="col-sm-2 control-label">Months: </label>
+            <input class='' ng-model="months" type="number" required/>
+        </div>
+        <div clas='form-group'>
+            <label class="col-sm-2 control-label">Tags: </label>
+            <input class='' ng-model="tags" type="text" required/>
+        </div>
+        <!-- <div class='form-group'>
             <label class="col-sm-2 control-label">Date:</label>
             <div class="col-md-6">
                 <p>
@@ -57,9 +57,11 @@
                     <br/>
                 </p>
             </div><br>
+        </div> -->
+
+        <div class='form-group'>
+            <button class='btn btn-primary' ng-click="submit()" ng-disabled="add_course.$invalid">Submit</button>
+            <button class='btn btn-primary' ng-click="cancel()">Cancel</button>
         </div>
-        
-        <button class='btn btn-primary' ng-click="submit()" ng-disabled="add_course.$invalid">Submit</button>
-        <button class='btn btn-primary' ng-click="cancel()">Cancel</button>
     </form>
 </div>

@@ -103,13 +103,13 @@ define(['angular', 'angular-file-upload', 'directives', 'angular-ui-date','angul
             $scope.submit = function () {
                 console.log('create new course ', $scope.date);
                 //$scope.uploader.uploadAll();
-                $scope.formatedDate = $scope.date;
-                if($scope.date.getFullYear() !== null){
-                    $scope.formatedDate = ($scope.date.getFullYear()+"-"
-                        +($scope.date.getMonth()+1)+"-"
-                    +$scope.date.getDate()+" "+$scope.date.getHours()+":"+
-                     $scope.date.getMinutes()+":"+$scope.date.getSeconds());
-                }
+                // $scope.formatedDate = $scope.date;
+                // if($scope.date.getFullYear() !== null){
+                //     $scope.formatedDate = ($scope.date.getFullYear()+"-"
+                //         +($scope.date.getMonth()+1)+"-"
+                //     +$scope.date.getDate()+" "+$scope.date.getHours()+":"+
+                //      $scope.date.getMinutes()+":"+$scope.date.getSeconds());
+                // }
                 //console.log('editor:',editor.getAllHtml());
                 // var req = {
                 //     method: 'POST',
@@ -148,8 +148,9 @@ define(['angular', 'angular-file-upload', 'directives', 'angular-ui-date','angul
                 item.formData.push({name: $scope.name});
                 item.formData.push({content: $scope.content});
                 item.formData.push({category: $scope.category});
-                item.formData.push({date: $scope.formatedDate});
                 item.formData.push({introduction: $scope.introduction});
+                item.formData.push({months: $scope.months});
+                item.formData.push({tags: $scope.tags});
             };
             $scope.uploader.onErrorItem = function(fileItem, response, status, headers) {
                 console.info('onErrorItem', fileItem, response, status, headers);
@@ -187,18 +188,7 @@ define(['angular', 'angular-file-upload', 'directives', 'angular-ui-date','angul
                 };
             $scope.status={};
             $scope.status.opened=false;
-            // $scope._simpleConfig = {
-            //      //这里可以选择自己需要的工具按钮名称,此处仅选择如下五个
-            //      toolbars: [
-            //        ['FullScreen', 'Source', 'Undo', 'Redo', 'Bold', 'simpleupload']
-            //      ],
-            //      //focus时自动清空初始化时的内容
-            //      autoClearinitialContent: true,
-            //      //关闭字数统计
-            //      wordCount: false,
-            //      //关闭elementPath
-            //      elementPathEnabled: false
-            //    };
+            
 
             $scope.open = function($event) {
                 $scope.status.opened = true;
@@ -245,19 +235,18 @@ define(['angular', 'angular-file-upload', 'directives', 'angular-ui-date','angul
 
             $scope.submit = function () {
                 console.log('edit course ', $scope.course.date);
-                $scope.formatedDate = $scope.course.date;
-                if($scope.course.date.getFullYear !== undefined){
-                    $scope.formatedDate = ($scope.course.date.getFullYear()+"-"
-                        +($scope.course.date.getMonth()+1)+"-"
-                    +$scope.course.date.getDate()+" "+$scope.course.date.getHours()+":"+
-                     $scope.course.date.getMinutes()+":"+$scope.course.date.getSeconds());
-                }
-                console.log('course date '+$scope.formatedDate);
-                console.log('course content '+$scope.course.content);
+                // $scope.formatedDate = $scope.course.date;
+                // if($scope.course.date.getFullYear !== undefined){
+                //     $scope.formatedDate = ($scope.course.date.getFullYear()+"-"
+                //         +($scope.course.date.getMonth()+1)+"-"
+                //     +$scope.course.date.getDate()+" "+$scope.course.date.getHours()+":"+
+                //      $scope.course.date.getMinutes()+":"+$scope.course.date.getSeconds());
+                // }
+                
                 if($scope.uploader.queue.length == 0){
                     var req = {
                         method: 'POST',
-                        url: 'http://' + $location.host() + ":" + $location.port() + '/education/zaozao/course/upload_resource',
+                        url: 'http://' + $location.host() + ":" + $location.port() + '/education/zaozao/course/edit',
                         headers: {
                             'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
                             //'Content-Type': 'multipart/form-data; charset=utf-8;'
@@ -267,7 +256,8 @@ define(['angular', 'angular-file-upload', 'directives', 'angular-ui-date','angul
                             name: $scope.course.name,
                             content: $scope.course.content,
                             category: $scope.course.category,
-                            date: $scope.formatedDate,
+                            months: $scope.months,
+                            tags: $scope.tags,
                             introduction: $scope.course.introduction
                         })
                     };
@@ -300,7 +290,8 @@ define(['angular', 'angular-file-upload', 'directives', 'angular-ui-date','angul
                 item.formData.push({introduction: $scope.course.introduction});
                 item.formData.push({content: $scope.course.content});
                 item.formData.push({category: $scope.course.category});
-                item.formData.push({date: $scope.formatedDate});
+                item.formData.push({months: $scope.months});
+                item.formData.push({tags: $scope.tags});
             };
         }]);
 

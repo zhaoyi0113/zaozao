@@ -80,9 +80,10 @@ public class CourseRegisterService {
         CourseRegisterBean bean = new CourseRegisterBean();
         bean.setName(multiPart.getField("name").getValue());
         bean.setCategory(multiPart.getField("category").getValue());
-        bean.setDate(multiPart.getField("date").getValue());
         bean.setContent(multiPart.getField("content").getValue());
         bean.setIntroduction(multiPart.getField("introduction").getValue());
+        bean.setTags(multiPart.getField("tags").getValue());
+        bean.setMonths(Integer.parseInt(multiPart.getField("months").getValue()));
 
         FormDataBodyPart multiPartFile = multiPart.getField("file");
 
@@ -219,6 +220,9 @@ public class CourseRegisterService {
         course.setCategory(multiPart.getField("category").getValue());
         course.setName(multiPart.getField("name").getValue());
         course.setContent(multiPart.getField("content").getValue());
+        course.setMonths(Integer.parseInt(multiPart.getField("months").getValue()));
+        course.setTags(multiPart.getField("tags").getValue());
+
         FormDataBodyPart multiPartFile = multiPart.getField("file");
         InputStream file = multiPartFile.getValueAs(InputStream.class);
         String imageDir = courseImagePath;
@@ -229,7 +233,7 @@ public class CourseRegisterService {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-        System.out.println("upload file name " + fileName);
+        logger.info("upload file name " + fileName);
 
         if (wsUtility.whetherVideo(fileName)) {
             wsUtility.deleteFile(course.getVideoPath());

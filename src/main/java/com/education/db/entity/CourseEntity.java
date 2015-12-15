@@ -23,7 +23,7 @@ public class CourseEntity {
     private String videoPath;
     private String titleImagePath;
     private String tags;
-    private int months;
+    private Integer months;
 
     public CourseEntity() {
 
@@ -130,6 +130,7 @@ public class CourseEntity {
         this.introduction = introduction;
     }
 
+    @Column(name="tags")
     public String getTags() {
         return tags;
     }
@@ -137,12 +138,12 @@ public class CourseEntity {
     public void setTags(String tags) {
         this.tags = tags;
     }
-
-    public int getMonths() {
+    @Column(name="months")
+    public Integer getMonths() {
         return months;
     }
 
-    public void setMonths(int months) {
+    public void setMonths(Integer months) {
         this.months = months;
     }
 }
