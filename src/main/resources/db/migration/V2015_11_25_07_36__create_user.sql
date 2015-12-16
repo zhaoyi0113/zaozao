@@ -5,7 +5,7 @@ CREATE TABLE `user` (
   `sex` varchar(45) DEFAULT NULL,
   `age` int(11) DEFAULT NULL,
   `email` varchar(45) DEFAULT NULL,
-  `birthdate` date DEFAULT NULL,
+  `childBirthdate` date DEFAULT NULL,
   `phone` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;

@@ -83,6 +83,7 @@ public class WeChatService {
         String token = (String) tokenMap.get("access_token");
         String openid = (String) tokenMap.get("openid");
         String url = buildWebUserInfoUrl(token, openid);
+        logger.info("get user info url:"+url);
         HttpGet httpGet = new HttpGet(url);
         HttpClient httpClient = HttpClients.createDefault();
         HttpResponse response = null;
@@ -123,7 +124,9 @@ public class WeChatService {
 
     public WeChatUserInfo getUserInfo(String openid) {
         String accessToken = requestAccessToken();
-        HttpGet httpGet = new HttpGet(buildGetUserInfoURL(accessToken, openid));
+        String url = buildGetUserInfoURL(accessToken, openid);
+        logger.info("get user info url:"+url);
+        HttpGet httpGet = new HttpGet(url);
         HttpClient httpClient = HttpClients.createDefault();
         try {
             HttpResponse response = httpClient.execute(httpGet);

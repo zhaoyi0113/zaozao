@@ -1,6 +1,6 @@
 package com.education.db.entity;
 
-import com.education.ws.UserRegisterBean;
+import com.education.formbean.UserChildrenRegisterBean;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -36,13 +36,8 @@ public class UserEntity {
     public UserEntity() {
     }
 
-    public UserEntity(UserRegisterBean u) {
-        userName = u.getUserName();
-        password = u.getPassword();
-        sex = u.getGender();
-        age = u.getAge();
-        email = u.getEmail();
-        phone = u.getPhone();
+    public UserEntity(UserChildrenRegisterBean u) {
+
     }
 
     @Id
