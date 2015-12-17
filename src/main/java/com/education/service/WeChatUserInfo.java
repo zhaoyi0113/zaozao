@@ -30,6 +30,10 @@ public class WeChatUserInfo {
 
     private String groupid;
 
+    private String errcode;
+
+    private String errmsg;
+
     public String getSubscribe() {
         return subscribe;
     }
@@ -132,5 +136,21 @@ public class WeChatUserInfo {
 
     public void setGroupid(String groupid) {
         this.groupid = groupid;
+    }
+
+    public String getErrcode() {
+        return errcode;
+    }
+
+    public void setErrcode(String errcode) {
+        this.errcode = errcode;
+    }
+
+    public String getErrmsg() {
+        return errmsg;
+    }
+
+    public void setErrmsg(String errmsg) {
+        this.errmsg = errmsg;
     }
 }

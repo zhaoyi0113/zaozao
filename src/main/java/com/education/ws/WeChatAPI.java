@@ -1,5 +1,6 @@
 package com.education.ws;
 
+import com.education.auth.Public;
 import com.education.service.WeChatService;
 import com.education.service.WeChatUserInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +45,7 @@ public class WeChatAPI {
     @Path("/login")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
+    @Public(requireWeChatCode = true, requireWeChatUser = false)
     public Response login(@QueryParam("code") String code, @QueryParam("state") String state) {
         logger.info(" login code=" + code + ", state= " + state);
         WeChatUserInfo webUserInfo = weChatService.getWebUserInfo(code);
@@ -66,7 +68,7 @@ public class WeChatAPI {
         return Response.ok(userOpenIDList).build();
     }
 
-    @Path("/userinfo")
+     @Path("/userinfo")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getUserInfo(@QueryParam("openid") String openid) {

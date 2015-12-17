@@ -31,11 +31,13 @@ public class WeChatAuthenticationFilter implements ContainerRequestFilter {
             logger.info("get openid " + openid);
             WeChatUserInfo userInfo = weChatService.getUserInfo(openid);
             if (userInfo!=null && "1".equals(userInfo.getSubscribe())) {
-                requestContext.setProperty(ContextKeys.WECHAT_USER, true);
+                requestContext.setProperty(ContextKeys.WECHAT_USER, userInfo);
             }
+        } else {
+            logger.severe("can't get user openid");
         }
         if (requestContext.getProperty(ContextKeys.WECHAT_USER) == null) {
-            requestContext.setProperty(ContextKeys.WECHAT_USER, false);
+            requestContext.setProperty(ContextKeys.WECHAT_USER, null);
         }
         logger.info("whether wechat user "+requestContext.getProperty(ContextKeys.WECHAT_USER));
 
