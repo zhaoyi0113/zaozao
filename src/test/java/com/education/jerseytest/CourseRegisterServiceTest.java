@@ -30,6 +30,7 @@ import java.util.Map;
 /**
  * Created by yzzhao on 11/3/15.
  */
+@Ignore
 public class CourseRegisterServiceTest extends AbstractJerseyTest {
     @Before
     public void before() {

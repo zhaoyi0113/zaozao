@@ -4,6 +4,7 @@ import com.education.ws.CourseRegisterService;
 import com.education.ws.ReservationCourseService;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import javax.ws.rs.client.Entity;
@@ -18,6 +19,7 @@ import java.util.Map;
 /**
  * Created by yzzhao on 11/12/15.
  */
+@Ignore
 public class ReserveCourseServiceTest extends AbstractJerseyTest {
     @Override
     protected Application configure() {

@@ -18,7 +18,6 @@ import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.Provider;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -51,7 +50,7 @@ public class WeChatCodeAuthentication implements ContainerRequestFilter {
         if (webUserInfo.getErrcode() != null) {
             throw new BadRequestException(Response.Status.BAD_REQUEST);
         }
-        if(annotation.requireWeChatUser()) {
+        if (annotation.requireWeChatUser()) {
             checkUserExistent(webUserInfo);
         }
         requestContext.setProperty(ContextKeys.WECHAT_USER, webUserInfo);
@@ -73,7 +72,7 @@ public class WeChatCodeAuthentication implements ContainerRequestFilter {
 
     private void checkUserExistent(WeChatUserInfo userInfo) {
         UserEntity entity = userRepository.findByOpenid(userInfo.getOpenId());
-        if(entity == null){
+        if (entity == null) {
             throw new BadRequestException(ErrorCode.USER_NOT_EXISTED);
         }
     }

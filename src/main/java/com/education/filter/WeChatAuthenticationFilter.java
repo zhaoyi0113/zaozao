@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 /**
  * Created by yzzhao on 12/13/15.
  */
-@Provider
+//@Provider
 public class WeChatAuthenticationFilter implements ContainerRequestFilter {
 
     private static final Logger logger = Logger.getLogger(WeChatAuthenticationFilter.class.getName());
