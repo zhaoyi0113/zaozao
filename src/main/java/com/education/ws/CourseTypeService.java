@@ -35,12 +35,7 @@ public class CourseTypeService {
     public Response getAllCaurseTypes(){
         try{
             Iterable<CourseTypeEntity> iterable = courseTypeRepository.findAll();
-            List<String> list =new ArrayList<>();
-            for(CourseTypeEntity entity : iterable){
-                list.add(entity.getName());
-                System.out.println("course type "+entity.getName());
-            }
-            return Response.ok(list).build();
+            return Response.ok(iterable).build();
         }catch(Exception e){
             e.printStackTrace();
             logger.log(Level.SEVERE, e.getMessage(), e);

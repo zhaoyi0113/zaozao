@@ -6,7 +6,6 @@ import com.education.service.CourseService;
 import com.education.ws.util.WSUtility;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import jersey.repackaged.com.google.common.collect.Lists;
 import org.glassfish.jersey.media.multipart.FormDataBodyPart;
 import org.glassfish.jersey.media.multipart.FormDataMultiPart;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +20,6 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.io.*;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -36,9 +33,9 @@ import java.util.logging.Logger;
 @EnableTransactionManagement
 @Transactional
 @Service
-public class CourseRegisterService {
+public class CourseRegisterAPI {
 
-    private static final Logger logger = Logger.getLogger(CourseRegisterService.class.getName());
+    private static final Logger logger = Logger.getLogger(CourseRegisterAPI.class.getName());
     public static final String WEBAPP_PUBLIC_RESOURCES_COURSES = "src/main/webapp/public/resources/courses/";
 
     private LoginCheckService loginCheck;
@@ -67,10 +64,11 @@ public class CourseRegisterService {
         CourseRegisterBean bean = new CourseRegisterBean();
         bean.setName(multiPart.getField("name").getValue());
         bean.setCategory(multiPart.getField("category").getValue());
+        logger.info("create new course in category "+bean.getCategory());
         bean.setContent(multiPart.getField("content").getValue());
         bean.setIntroduction(multiPart.getField("introduction").getValue());
         bean.setTags(multiPart.getField("tags").getValue());
-        bean.setMonths(Integer.parseInt(multiPart.getField("months").getValue()));
+        bean.setWeeks(Integer.parseInt(multiPart.getField("months").getValue()));
 
         FormDataBodyPart multiPartFile = multiPart.getField("file");
 
@@ -92,11 +90,8 @@ public class CourseRegisterService {
     @GET
     public Response getAllCourses() {
         try {
-            Iterable<CourseEntity> courseIterable = courseRepository.findAll();
-            List<CourseEntity> allCourse = Lists.newArrayList(courseIterable); //getCourseDao().getAllCourses();
-            Gson gson = new GsonBuilder().setDateFormat(wsUtility.getDateFormatString()).create();
-            String json = gson.toJson(allCourse);
-            return Response.ok().entity(json).build();
+            List<CourseRegisterBean> allCoursesIndex = courseService.getAllCoursesIndex();
+            return Response.ok().entity(allCoursesIndex).build();
         } catch (Exception e) {
             logger.log(Level.SEVERE, e.getMessage(), e);
             return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
@@ -124,16 +119,8 @@ public class CourseRegisterService {
     public Response getCourseById(@Context HttpServletRequest request,
                                   @PathParam("courseId") String courseId) {
         try {
-            int id = Integer.parseInt(courseId);
-
-            CourseEntity course = courseRepository.findOne(id);// getCourseDao().getCourseById(id);
-            if (course == null) {
-                throw new BadRequestException("can't find course " + courseId);
-            }
-            CourseRegisterBean bean = new CourseRegisterBean(course, wsUtility);
-            Gson gson = new GsonBuilder().setDateFormat(wsUtility.getDateFormatString()).create();
-            String json = gson.toJson(bean);
-            return Response.ok().entity(json).header("Access-Control-Allow-Origin", "*")
+            CourseRegisterBean b = courseService.queryCourse(courseId);
+            return Response.ok().entity(b).header("Access-Control-Allow-Origin", "*")
                     .header("Access-Control-Allow-Methods", "*").build();
         } catch (Exception e) {
             logger.log(Level.SEVERE, e.getMessage(), e);
@@ -179,11 +166,7 @@ public class CourseRegisterService {
      * when update course without image/video, use this api
      */
     public Response editCourse(@Context HttpServletRequest request, @BeanParam CourseRegisterBean bean) {
-        CourseEntity one = courseRepository.findOne(Integer.parseInt(bean.getId()));
-        one.setContent(bean.getContent());
-        one.setCategory(bean.getCategory());
-        one.setIntroduction(bean.getIntroduction());
-        courseRepository.save(one);
+        courseService.editCourse(bean);
         return Response.ok().build();
     }
 
@@ -198,10 +181,10 @@ public class CourseRegisterService {
             return Response.status(Response.Status.BAD_REQUEST).entity("Can't find course " + id).build();
         }
         CourseEntity course = courseRepository.findOne(Integer.parseInt(id));
-        course.setCategory(multiPart.getField("category").getValue());
+        course.setCategory(Integer.parseInt(multiPart.getField("category").getValue()));
         course.setName(multiPart.getField("name").getValue());
         course.setContent(multiPart.getField("content").getValue());
-        course.setMonths(Integer.parseInt(multiPart.getField("months").getValue()));
+        course.setWeeks(Integer.parseInt(multiPart.getField("months").getValue()));
         course.setTags(multiPart.getField("tags").getValue());
 
         FormDataBodyPart multiPartFile = multiPart.getField("file");

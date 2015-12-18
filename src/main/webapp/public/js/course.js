@@ -9,7 +9,7 @@ define(['angular', 'angular-file-upload', 'directives', 'angular-ui-date','angul
         function ($scope, $http, $location, $state) {
             console.log("window.location:"+window.location.protocol);
             //window.UEDITOR_HOME_URL = 'http://' + $location.host() + ":" + $location.port() + '/education/zaozao/course/upload_resource';
-            $scope.headers = ['Name', 'Category','Months','Delete'];
+            $scope.headers = ['Name', 'Category','Weeks','Delete'];
             $http.get('http://' + $location.host() + ":" + $location.port() + '/education/zaozao/course/queryall')
                 .success(function (e) {
                     var str = JSON.stringify(e);
@@ -147,9 +147,9 @@ define(['angular', 'angular-file-upload', 'directives', 'angular-ui-date','angul
                 console.info('onBeforeUploadItem', item);
                 item.formData.push({name: $scope.name});
                 item.formData.push({content: $scope.content});
-                item.formData.push({category: $scope.category});
+                item.formData.push({category: $scope.category.id});
                 item.formData.push({introduction: $scope.introduction});
-                item.formData.push({months: $scope.months});
+                item.formData.push({weeks: $scope.weeks});
                 item.formData.push({tags: $scope.tags});
             };
             $scope.uploader.onErrorItem = function(fileItem, response, status, headers) {
@@ -196,8 +196,9 @@ define(['angular', 'angular-file-upload', 'directives', 'angular-ui-date','angul
             $http.get('http://' + $location.host() + ":" + $location.port() + '/education/zaozao/coursetype')
                 .success(function (e) {
                     $scope.categories = e;
-                    if ($scope.categories.lenght > 0) {
-                        $scope.category = $scope.categories[0];
+                    if ($scope.categories.length > 0) {
+                        console.log('current category '+$scope.course.category);
+                        $scope.course.category = $scope.categories[0];
                     }
                     console.log('get course type ', $scope.categories);
 
@@ -255,8 +256,8 @@ define(['angular', 'angular-file-upload', 'directives', 'angular-ui-date','angul
                             id: $scope.course.id,
                             name: $scope.course.name,
                             content: $scope.course.content,
-                            category: $scope.course.category,
-                            months: $scope.months,
+                            category: $scope.course.category.id,
+                            weeks: $scope.weeks,
                             tags: $scope.tags,
                             introduction: $scope.course.introduction
                         })
@@ -289,8 +290,8 @@ define(['angular', 'angular-file-upload', 'directives', 'angular-ui-date','angul
                 item.formData.push({name: $scope.course.name});
                 item.formData.push({introduction: $scope.course.introduction});
                 item.formData.push({content: $scope.course.content});
-                item.formData.push({category: $scope.course.category});
-                item.formData.push({months: $scope.months});
+                item.formData.push({category: $scope.course.category.id});
+                item.formData.push({weeks: $scope.weeks});
                 item.formData.push({tags: $scope.tags});
             };
         }]);

@@ -1,7 +1,6 @@
 package com.education.db.entity;
 
 import com.education.ws.CourseRegisterBean;
-import com.education.ws.util.WSUtility;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -18,12 +17,12 @@ public class CourseEntity {
     private String introduction;
     private String content;
     private String picture_paths;
-    private String category;
+    private int category;
     private Date date;
     private String videoPath;
     private String titleImagePath;
     private String tags;
-    private Integer months;
+    private Integer weeks;
 
     public CourseEntity() {
 
@@ -33,7 +32,7 @@ public class CourseEntity {
         name = bean.getName();
         content = bean.getContent();
         picture_paths = bean.getPicturePaths();
-        category = bean.getCategory();
+        category = Integer.parseInt(bean.getCategory());
         videoPath = bean.getVideoPath();
         titleImagePath = bean.getTitleImagePath();
 //        date = WSUtility.stringToDate(bean.getDate());
@@ -42,7 +41,7 @@ public class CourseEntity {
         }
         introduction = bean.getIntroduction();
         tags = bean.getTags();
-        months = bean.getMonths();
+        weeks = bean.getWeeks();
     }
 
     @Id
@@ -83,12 +82,12 @@ public class CourseEntity {
         this.picture_paths = picture_paths;
     }
 
-    @Column(name = "category")
-    public String getCategory() {
+    @Column(name = "category_id")
+    public int getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(int category) {
         this.category = category;
     }
 
@@ -138,12 +137,12 @@ public class CourseEntity {
     public void setTags(String tags) {
         this.tags = tags;
     }
-    @Column(name="months")
-    public Integer getMonths() {
-        return months;
+    @Column(name="weeks")
+    public Integer getWeeks() {
+        return weeks;
     }
 
-    public void setMonths(Integer months) {
-        this.months = months;
+    public void setWeeks(Integer weeks) {
+        this.weeks = weeks;
     }
 }

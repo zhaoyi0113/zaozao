@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
 
 @Path("course/proposal")
@@ -21,7 +22,7 @@ public class CourseProposalAPI {
     private CourseProposalService courseProposalService;
 
     @GET
-    public Response getProposalCourse(){
+    public Response getProposalCourse(@QueryParam("category") String category){
 
         return Response.ok().build();
     }
