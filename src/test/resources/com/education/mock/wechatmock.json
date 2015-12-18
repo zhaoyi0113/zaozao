@@ -2,7 +2,7 @@
 {
   "request" :
   {
-    "uri" : "/foo",
+    "uri" : "/cgi-bin/token?grant_type=client_credential",
     "queries" :
     {
       "param" : "blah"
@@ -12,5 +12,15 @@
   {
     "text" : "bar"
   }
-}
+},
+  {
+    "request":
+    {
+      "uri":"/aaa"
+    },
+    "response" :
+    {
+      "text":"me"
+    }
+  }
 ]

@@ -1,0 +1,1 @@
+java -jar src/main/resources/moco-runner-0.10.2-standalone.jar  http -p 7777 -c src/test/resources/com/education/mock/wechatmock.json

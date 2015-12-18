@@ -24,8 +24,8 @@ ext {
     jerseyVersion = "2.22.1"
     aspectjVersion = '1.7.4'
 
-    environment = project.hasProperty("env") ? env : 'src/main/resources'
-    environmentPah = environment
+    environment = project.hasProperty("env") ? env : 'dev'
+    environmentPah = "envs/"+environment
     // read database envs
     Properties props = new Properties()
     props.load(new FileInputStream(file(environmentPah + "/database.properties")))
@@ -39,6 +39,14 @@ ext {
     flyway.password = db_password
     flyway.encoding = 'UTF-8'
     flyway.setBaselineOnMigrate(true);
+}
+
+sourceSets {
+    main {
+        resources {
+            srcDirs = ["src/main/resources", environmentPah]
+        }
+    }
 }
 
 dependencies {
