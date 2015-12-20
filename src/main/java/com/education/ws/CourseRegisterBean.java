@@ -38,8 +38,8 @@ public class CourseRegisterBean {
 
     private String videoUrl;
 
-    @FormParam("weeks")
-    private int weeks;
+    @FormParam("years")
+    private int years;
 
     @FormParam("tags")
     private String tags;
@@ -63,8 +63,9 @@ public class CourseRegisterBean {
         this.introduction = entity.getIntroduction();
         this.id = String.valueOf(entity.getId());
         this.tags = entity.getTags();
-
-        this.weeks = entity.getWeeks();
+        if(entity.getYears() != null) {
+            this.years = entity.getYears();
+        }
     }
 
     public String getDate() {
@@ -159,12 +160,12 @@ public class CourseRegisterBean {
         this.videoUrl = videoUrl;
     }
 
-    public int getWeeks() {
-        return weeks;
+    public int getYears() {
+        return years;
     }
 
-    public void setWeeks(int weeks) {
-        this.weeks = weeks;
+    public void setYears(int years) {
+        this.years = years;
     }
 
     public String getTags() {

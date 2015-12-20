@@ -22,7 +22,7 @@ public class CourseEntity {
     private String videoPath;
     private String titleImagePath;
     private String tags;
-    private Integer weeks;
+    private Integer years;
 
     public CourseEntity() {
 
@@ -41,7 +41,7 @@ public class CourseEntity {
         }
         introduction = bean.getIntroduction();
         tags = bean.getTags();
-        weeks = bean.getWeeks();
+        years = bean.getYears();
     }
 
     @Id
@@ -137,12 +137,12 @@ public class CourseEntity {
     public void setTags(String tags) {
         this.tags = tags;
     }
-    @Column(name="weeks")
-    public Integer getWeeks() {
-        return weeks;
+    @Column(name="years")
+    public Integer getYears() {
+        return years;
     }
 
-    public void setWeeks(Integer weeks) {
-        this.weeks = weeks;
+    public void setYears(Integer years) {
+        this.years = years;
     }
 }

@@ -4,8 +4,6 @@ import com.education.db.entity.CourseEntity;
 import com.education.db.jpa.CourseRepository;
 import com.education.service.CourseService;
 import com.education.ws.util.WSUtility;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import org.glassfish.jersey.media.multipart.FormDataBodyPart;
 import org.glassfish.jersey.media.multipart.FormDataMultiPart;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,7 +66,7 @@ public class CourseRegisterAPI {
         bean.setContent(multiPart.getField("content").getValue());
         bean.setIntroduction(multiPart.getField("introduction").getValue());
         bean.setTags(multiPart.getField("tags").getValue());
-        bean.setWeeks(Integer.parseInt(multiPart.getField("months").getValue()));
+        bean.setYears(Integer.parseInt(multiPart.getField("months").getValue()));
 
         FormDataBodyPart multiPartFile = multiPart.getField("file");
 
@@ -184,7 +182,7 @@ public class CourseRegisterAPI {
         course.setCategory(Integer.parseInt(multiPart.getField("category").getValue()));
         course.setName(multiPart.getField("name").getValue());
         course.setContent(multiPart.getField("content").getValue());
-        course.setWeeks(Integer.parseInt(multiPart.getField("months").getValue()));
+        course.setYears(Integer.parseInt(multiPart.getField("months").getValue()));
         course.setTags(multiPart.getField("tags").getValue());
 
         FormDataBodyPart multiPartFile = multiPart.getField("file");

@@ -1,11 +1,8 @@
 package com.education.service;
 
-import com.education.db.entity.CourseTypeEntity;
 import com.education.db.jpa.CourseTypeRepository;
 import com.education.ws.CourseRegisterBean;
-import com.education.ws.CourseTypeService;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,7 +29,7 @@ public class CourseServiceTest extends AbstractServiceTest {
         String name = System.currentTimeMillis() + "";
         bean.setName(name);
         bean.setTitleImagePath("aaa");
-        bean.setWeeks(13);
+        bean.setYears(13);
         bean.setContent("test");
         courseService.createCourse(bean);
         List<CourseRegisterBean> allCoursesIndex = courseService.getAllCoursesIndex();
@@ -44,6 +41,10 @@ public class CourseServiceTest extends AbstractServiceTest {
             }
         }
         Assert.assertNotNull(bean);
+        name = System.currentTimeMillis() + "";
+        bean.setName(name);
+
+
     }
 
 }
