@@ -44,6 +44,9 @@ public class CourseRegisterBean {
     @FormParam("tags")
     private String tags;
 
+    @FormParam("video_external_url")
+    private String videoExternalUrl;
+
     public CourseRegisterBean(){}
 
     public CourseRegisterBean(CourseEntity entity, WSUtility wsUtility){
@@ -66,6 +69,7 @@ public class CourseRegisterBean {
         if(entity.getYears() != null) {
             this.years = entity.getYears();
         }
+        this.videoExternalUrl = entity.getVideoExternalUrl();
     }
 
     public String getDate() {
@@ -174,6 +178,14 @@ public class CourseRegisterBean {
 
     public void setTags(String tags) {
         this.tags = tags;
+    }
+
+    public String getVideoExternalUrl() {
+        return videoExternalUrl;
+    }
+
+    public void setVideoExternalUrl(String videoExternalUrl) {
+        this.videoExternalUrl = videoExternalUrl;
     }
 
     @Override

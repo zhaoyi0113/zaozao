@@ -75,9 +75,6 @@ public class LoginService {
         Iterable<UserEntity> iterable = userRepository.findAll();//ByUserNameAndPassword(userName, password);
         for(Iterator<UserEntity> iter = iterable.iterator(); iter.hasNext();){
             UserEntity entity = iter.next();
-            if(entity.getPassword() != null && entity.getPassword().equals(password)){
-                return true;
-            }
         }
         return false;
     }

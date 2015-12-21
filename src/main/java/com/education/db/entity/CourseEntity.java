@@ -23,6 +23,7 @@ public class CourseEntity {
     private String titleImagePath;
     private String tags;
     private Integer years;
+    private String videoExternalUrl;
 
     public CourseEntity() {
 
@@ -42,6 +43,7 @@ public class CourseEntity {
         introduction = bean.getIntroduction();
         tags = bean.getTags();
         years = bean.getYears();
+        videoExternalUrl = bean.getVideoExternalUrl();
     }
 
     @Id
@@ -140,6 +142,15 @@ public class CourseEntity {
     @Column(name="years")
     public Integer getYears() {
         return years;
+    }
+
+    @Column(name="video_external_url")
+    public String getVideoExternalUrl() {
+        return videoExternalUrl;
+    }
+
+    public void setVideoExternalUrl(String videoExternalUrl) {
+        this.videoExternalUrl = videoExternalUrl;
     }
 
     public void setYears(Integer years) {

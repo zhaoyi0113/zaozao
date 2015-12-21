@@ -46,7 +46,8 @@ public enum ErrorCode {
     DECRYPTION_ERROR(10026, Response.Status.BAD_REQUEST, "解密失败", "decrypt call failed"),
     DATA_ERROR(10027, Response.Status.BAD_REQUEST, "数据错误", "data error!"),
     WECHAT_CODE_ERROR(10028, Response.Status.BAD_REQUEST, "没有微信Code", "can't find wechat code"),
-    USER_NOT_EXISTED(10029, Response.Status.BAD_REQUEST, "用户不存在", "user doesn't exist");
+    USER_NOT_EXISTED(10029, Response.Status.BAD_REQUEST, "用户不存在", "user doesn't exist"),
+    NOT_LOGIN(10030, Response.Status.BAD_REQUEST, "未登陆", "Not Login");
 
 
     private final int code;

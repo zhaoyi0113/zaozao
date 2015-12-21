@@ -14,7 +14,6 @@ public class UserEntity {
 
     private int userId;
     private String userName;
-    private String password;
     private String sex;
     private int age;
     private String phone;
@@ -58,15 +57,6 @@ public class UserEntity {
 
     public void setUserName(String userName) {
         this.userName = userName;
-    }
-
-    @Column(name = "password")
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     @Column(name = "sex")
