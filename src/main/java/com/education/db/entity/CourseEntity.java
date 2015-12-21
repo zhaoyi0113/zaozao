@@ -22,8 +22,9 @@ public class CourseEntity {
     private String videoPath;
     private String titleImagePath;
     private String tags;
-    private Integer years;
+    private int years;
     private String videoExternalUrl;
+    private int dayNumber;
 
     public CourseEntity() {
 
@@ -44,6 +45,7 @@ public class CourseEntity {
         tags = bean.getTags();
         years = bean.getYears();
         videoExternalUrl = bean.getVideoExternalUrl();
+        dayNumber = bean.getDayNumber();
     }
 
     @Id
@@ -103,7 +105,7 @@ public class CourseEntity {
         this.date = date;
     }
 
-    @Column(name="video_path")
+    @Column(name = "video_path")
     public String getVideoPath() {
         return videoPath;
     }
@@ -112,7 +114,7 @@ public class CourseEntity {
         this.videoPath = videoPath;
     }
 
-    @Column(name="title_image_path")
+    @Column(name = "title_image_path")
     public String getTitleImagePath() {
         return titleImagePath;
     }
@@ -122,7 +124,7 @@ public class CourseEntity {
         this.titleImagePath = titleImagePath;
     }
 
-    @Column(name="introduction")
+    @Column(name = "introduction")
     public String getIntroduction() {
         return introduction;
     }
@@ -131,7 +133,7 @@ public class CourseEntity {
         this.introduction = introduction;
     }
 
-    @Column(name="tags")
+    @Column(name = "tags")
     public String getTags() {
         return tags;
     }
@@ -139,12 +141,13 @@ public class CourseEntity {
     public void setTags(String tags) {
         this.tags = tags;
     }
-    @Column(name="years")
-    public Integer getYears() {
+
+    @Column(name = "years")
+    public int getYears() {
         return years;
     }
 
-    @Column(name="video_external_url")
+    @Column(name = "video_external_url")
     public String getVideoExternalUrl() {
         return videoExternalUrl;
     }
@@ -153,7 +156,16 @@ public class CourseEntity {
         this.videoExternalUrl = videoExternalUrl;
     }
 
-    public void setYears(Integer years) {
+    public void setYears(int years) {
         this.years = years;
+    }
+
+    @Column(name="day_number")
+    public int getDayNumber() {
+        return dayNumber;
+    }
+
+    public void setDayNumber(int dayNumber) {
+        this.dayNumber = dayNumber;
     }
 }

@@ -27,4 +27,6 @@ public interface CourseRepository extends CrudRepository<CourseEntity, Integer>{
 
     List<CourseEntity> findByCategoryAndDate(String category, Date date);
 
+    CourseEntity findByCategoryAndDayNumber(int category, int dayNumber);
+
 }

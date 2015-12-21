@@ -5,10 +5,12 @@ import com.education.db.entity.UserEntity;
 import com.education.db.jpa.UserRepository;
 import com.education.exception.BadRequestException;
 import com.education.exception.ErrorCode;
+import com.education.service.LoginHistoryService;
 import com.education.service.WeChatService;
 import com.education.service.WeChatUserInfo;
 import com.education.ws.util.ContextKeys;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.container.ContainerRequestFilter;
@@ -38,6 +40,9 @@ public class WeChatCodeAuthentication implements ContainerRequestFilter {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private LoginHistoryService loginHistoryService;
+
     @Override
     public void filter(ContainerRequestContext requestContext) throws IOException {
         Public annotation = resourceInfo.getResourceMethod().getAnnotation(Public.class);
@@ -53,6 +58,8 @@ public class WeChatCodeAuthentication implements ContainerRequestFilter {
         if (annotation.requireWeChatUser()) {
             checkUserExistent(webUserInfo);
         }
+        int userId = registerUserIfNotExist(webUserInfo);
+        loginHistoryService.saveLogin(userId);
         requestContext.setProperty(ContextKeys.WECHAT_USER, webUserInfo);
     }
 
@@ -71,10 +78,29 @@ public class WeChatCodeAuthentication implements ContainerRequestFilter {
     }
 
     private void checkUserExistent(WeChatUserInfo userInfo) {
-        UserEntity entity = userRepository.findByOpenid(userInfo.getOpenId());
-        if (entity == null) {
+        List<UserEntity> entity = userRepository.findByOpenid(userInfo.getOpenId());
+        if (entity == null || entity.size()<=0) {
             throw new BadRequestException(ErrorCode.USER_NOT_EXISTED);
         }
     }
 
+    @Transactional
+    private int registerUserIfNotExist(WeChatUserInfo userInfo){
+        UserEntity entity = new UserEntity();
+        entity.setGroupid(userInfo.getGroupid());
+        entity.setRemark(userInfo.getRemark());
+        entity.setCity(userInfo.getCity());
+        entity.setCountry(userInfo.getCountry());
+        entity.setLanguage(userInfo.getLanguage());
+        entity.setHeadimageurl(userInfo.getHeadimgurl());
+        entity.setOpenid(userInfo.getOpenId());
+        entity.setSex(userInfo.getSex());
+        entity.setNickname(userInfo.getNickname());
+        entity.setProvince(userInfo.getProvince());
+        entity.setSubscribe(userInfo.getSubscribe());
+        entity.setUnionid(userInfo.getUnionid());
+        entity.setSubscribe_time(userInfo.getSubscribe_time());
+        UserEntity saved = userRepository.save(entity);
+        return saved.getUserId();
+    }
 }

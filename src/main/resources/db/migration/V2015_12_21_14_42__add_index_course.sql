@@ -1,0 +1,1 @@
+alter table `course` change column `index` `index` int default 0;

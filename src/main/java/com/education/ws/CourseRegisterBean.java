@@ -47,29 +47,32 @@ public class CourseRegisterBean {
     @FormParam("video_external_url")
     private String videoExternalUrl;
 
-    public CourseRegisterBean(){}
+    @FormParam("day_number")
+    private int dayNumber;
 
-    public CourseRegisterBean(CourseEntity entity, WSUtility wsUtility){
+    public CourseRegisterBean() {
+    }
+
+    public CourseRegisterBean(CourseEntity entity, WSUtility wsUtility) {
         this.name = entity.getName();
-        this.category = ""+entity.getCategory();
+        this.category = "" + entity.getCategory();
 //        this.date = wsUtility.dateToString(entity.getDate());
         this.content = entity.getContent();
         this.titleImagePath = entity.getTitleImagePath();
         this.videoPath = entity.getVideoPath();
 
-        if(entity.getTitleImagePath() != null) {
+        if (entity.getTitleImagePath() != null) {
             this.titleImageUrl = wsUtility.getResourcePath(entity.getTitleImagePath());
         }
-        if(entity.getVideoPath() != null) {
+        if (entity.getVideoPath() != null) {
             this.videoUrl = wsUtility.getResourcePath(entity.getVideoPath());
         }
         this.introduction = entity.getIntroduction();
         this.id = String.valueOf(entity.getId());
         this.tags = entity.getTags();
-        if(entity.getYears() != null) {
-            this.years = entity.getYears();
-        }
+        this.years = entity.getYears();
         this.videoExternalUrl = entity.getVideoExternalUrl();
+        this.dayNumber = entity.getDayNumber();
     }
 
     public String getDate() {
@@ -82,6 +85,7 @@ public class CourseRegisterBean {
 
     /**
      * Get the course name
+     *
      * @return
      */
     public String getName() {
@@ -188,10 +192,18 @@ public class CourseRegisterBean {
         this.videoExternalUrl = videoExternalUrl;
     }
 
+    public int getDayNumber() {
+        return dayNumber;
+    }
+
+    public void setDayNumber(int dayNumber) {
+        this.dayNumber = dayNumber;
+    }
+
     @Override
     public String toString() {
-        StringBuffer buffer =new StringBuffer();
-        buffer.append("id="+id+",name="+name+",content="+content+",category="+category+",pictures="+picturePaths+",date"+date);
+        StringBuffer buffer = new StringBuffer();
+        buffer.append("id=" + id + ",name=" + name + ",content=" + content + ",category=" + category + ",pictures=" + picturePaths + ",date" + date);
         return buffer.toString();
     }
 }

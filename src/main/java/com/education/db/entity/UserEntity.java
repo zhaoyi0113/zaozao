@@ -35,10 +35,6 @@ public class UserEntity {
     public UserEntity() {
     }
 
-    public UserEntity(UserChildrenRegisterBean u) {
-
-    }
-
     @Id
     @GeneratedValue
     @Column(name = "user_id")

@@ -1,5 +1,7 @@
 package com.education.service;
 
+import com.education.db.entity.CourseEntity;
+import com.education.db.jpa.CourseRepository;
 import com.education.db.jpa.CourseTypeRepository;
 import com.education.ws.CourseRegisterBean;
 import org.junit.Assert;
@@ -20,6 +22,9 @@ public class CourseServiceTest extends AbstractServiceTest {
 
     @Autowired
     private CourseTypeRepository courseTypeRepository;
+
+    @Autowired
+    private CourseRepository courseRepository;
 
     @Test
     public void testCreateCourse() {
@@ -56,6 +61,7 @@ public class CourseServiceTest extends AbstractServiceTest {
         CourseRegisterBean courseBean = createCourseBean(name);
         courseBean.setYears(3);
         int courseId = courseService.createCourse(courseBean);
+
         CourseRegisterBean queryCourse = courseService.queryCourse(courseId+"");
         Assert.assertNotNull(queryCourse);
         Assert.assertEquals(3, queryCourse.getYears());

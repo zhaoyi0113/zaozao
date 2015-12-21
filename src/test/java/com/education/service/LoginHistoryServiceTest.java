@@ -105,4 +105,18 @@ public class LoginHistoryServiceTest extends AbstractServiceTest {
         Assert.assertEquals(4, dayNumber);
 
     }
+
+    @Test
+    public void testGet0DayNumber(){
+        int dayNumber = loginHistoryService.getDayNumber(0);
+        Assert.assertEquals(0, dayNumber);
+        LoginHistoryEntity entity1 = new LoginHistoryEntity();
+        entity1.setUserid(0);
+        Calendar instance = Calendar.getInstance();
+        instance.set(2015, 11, 2);
+        entity1.setLoginTime(instance.getTime());
+        loginHistoryRepository.save(entity1);
+        dayNumber = loginHistoryService.getDayNumber(0);
+        Assert.assertEquals(1, dayNumber);
+    }
 }
