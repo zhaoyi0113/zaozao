@@ -19,7 +19,8 @@ require.config({
         'kindeditor' : '/education/bower_components/angular-kindeditor/kindeditor/kindeditor-all-min',
         'kindeditor-zh' : '/education/bower_components/angular-kindeditor/kindeditor/lang/zh-CN',
         'angular-kindeditor' : '/education/bower_components/angular-kindeditor/src/angular-kindeditor',
-        'angular-datepicker' : '/education/bower_components/angular-datepicker/dist/angular-datepicker'
+        'angular-datepicker' : '/education/bower_components/angular-datepicker/dist/angular-datepicker',
+        'wx' : 'http://res.wx.qq.com/open/js/jweixin-1.0.0.js'
     },
     shim: {
         'angular': {

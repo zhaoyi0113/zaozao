@@ -96,6 +96,7 @@ public class WeChatCodeAuthentication implements ContainerRequestFilter {
         entity.setOpenid(userInfo.getOpenId());
         entity.setSex(userInfo.getSex());
         entity.setNickname(userInfo.getNickname());
+        entity.setUserName(userInfo.getNickname());
         entity.setProvince(userInfo.getProvince());
         entity.setSubscribe(userInfo.getSubscribe());
         entity.setUnionid(userInfo.getUnionid());

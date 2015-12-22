@@ -6,9 +6,12 @@ import com.education.service.WeChatUserInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.ws.rs.*;
+import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.net.URI;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Logger;
 
 @Path("/wechat")
@@ -55,7 +58,7 @@ public class WeChatAPI {
     @Path("/getopenid")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getOpenId(@QueryParam("code") String code, @QueryParam("state") String state){
+    public Response getOpenId(@QueryParam("code") String code, @QueryParam("state") String state) {
         WeChatUserInfo webUserInfo = weChatService.getWebUserInfo(code);
         return Response.ok(webUserInfo.getOpenId()).build();
     }
@@ -68,17 +71,29 @@ public class WeChatAPI {
         return Response.ok(userOpenIDList).build();
     }
 
-     @Path("/userinfo")
+    @Path("/userinfo")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getUserInfo(@QueryParam("openid") String openid) {
         return Response.ok(weChatService.getUserInfo(openid)).build();
     }
 
+    @Path("/jsapi")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getJsApiTicket(ContainerRequestContext context){
+        URI baseUri = context.getUriInfo().getBaseUri();
+        URI absolutePath = context.getUriInfo().getAbsolutePath();
+        logger.info("base uri:"+baseUri.toString());
+        logger.info("absout path:"+absolutePath.toString());
+        Map<String, String> webJSSignature = weChatService.getWebJSSignature("http://www.imzao.com/education/");
+        return Response.ok(webJSSignature).build();
+    }
+
     @Path("/barcode")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getBarCodeURL(@QueryParam("code") String code){
+    public Response getBarCodeURL(@QueryParam("code") String code) {
         return Response.ok(weChatService.getQRBarTicket(code)).build();
     }
 

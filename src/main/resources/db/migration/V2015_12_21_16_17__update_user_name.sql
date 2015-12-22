@@ -1,0 +1,1 @@
+ALTER TABLE `user` change COLUMN `user_name` `user_name` VARCHAR (64) DEFAULT null;

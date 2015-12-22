@@ -1,8 +1,8 @@
-define(['angular', 'ui-router', 'jquery-ui' , 'home'], function(angular){
+define(['angular', 'ui-router', 'jquery-ui' , 'home', 'wechat'], function(angular){
     'use strict';
 
     console.log('app');
-    var app = angular.module("appModule", ['ui.router', 'homeModule']);
+    var app = angular.module("appModule", ['ui.router', 'homeModule','wechatModule']);
 
     app.config(function($stateProvider, $urlRouterProvider){
         $stateProvider.state('home',{
@@ -49,6 +49,10 @@ define(['angular', 'ui-router', 'jquery-ui' , 'home'], function(angular){
             url: '/courseplan_edit?id',
             templateUrl: '/education/public/views/courseplan_edit.html',
             controller:'CoursePlanEditController'
+        }).state('wechat',{
+            url: '/wechat',
+            templateUrl: '/education/public/views/share_wechat.html',
+            controller: 'WeChatController'
         });
         $urlRouterProvider.otherwise('/home');
     });

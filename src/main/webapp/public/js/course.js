@@ -1,9 +1,9 @@
 define(['angular', 'angular-file-upload', 'directives', 'angular-ui-date','angular-bootstrap','angular-bootstrap-tpls'
-       ,'ueditor-config','ueditor-all', 'angular-editor', 'kindeditor','kindeditor-zh',
+       ,'ueditor-config', 'kindeditor','kindeditor-zh',
        'angular-kindeditor','angular-datepicker'], function (angular) {
     'use strict';
     var course = angular.module("courseModule",
-        ['angularFileUpload', 'ngThumbModel', 'ui.bootstrap', 'ng.ueditor','ngKeditor']);
+        ['angularFileUpload', 'ngThumbModel', 'ui.bootstrap', 'ngKeditor']);
 
     course.controller('CourseController', ['$scope', '$http', '$location', '$state',
         function ($scope, $http, $location, $state) {

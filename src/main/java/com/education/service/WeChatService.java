@@ -27,8 +27,7 @@ import java.util.logging.Logger;
 @Service("WeChatService")
 public class WeChatService {
 
-
-    @Value("#{config['zaozao']}")
+    @Value("#{config['wechat_token']}")
     private String token;
 
     @Value("#{config['wechat_appid']}")
@@ -58,9 +57,15 @@ public class WeChatService {
     @Value("#{config['wechat_qrcode_url']}")
     private String qrCodeUrl;
 
+    @Value("#{config['wechat_jsapi_ticket_url']}")
+    private String jsapiTicketUrl;
+
     private static final Logger logger = Logger.getLogger(WeChatService.class.getName());
 
+    private Map<String,String> jsapiTicketCache;
+
     public boolean validateConnection(String signature, String timeStamp, String nonce) {
+        logger.info("validate connection " + signature + ", " + timeStamp + ", " + nonce + ", " + token);
         String[] tmpArr = {token, timeStamp, nonce};
         Arrays.sort(tmpArr);
         StringBuilder builder = new StringBuilder();
@@ -83,7 +88,7 @@ public class WeChatService {
         String token = (String) tokenMap.get("access_token");
         String openid = (String) tokenMap.get("openid");
         String url = buildWebUserInfoUrl(token, openid);
-        logger.info("get user info url:"+url);
+        logger.info("get user info url:" + url);
         HttpGet httpGet = new HttpGet(url);
         HttpClient httpClient = HttpClients.createDefault();
         HttpResponse response = null;
@@ -100,6 +105,50 @@ public class WeChatService {
             logger.log(Level.SEVERE, e.getMessage(), e);
         }
         return null;
+    }
+
+    public Map<String, String> getWebJSSignature(String url){
+        if(jsapiTicketCache != null){
+            return jsapiTicketCache;
+        }
+        String noncestr = "zaozao";
+        String timestamp = System.currentTimeMillis()+"";
+        Map<String, String> jsApiTicket = getJSApiTicket();
+        String jsTicket = jsApiTicket.get("ticket");
+        StringBuilder builder =new StringBuilder("jsapi_ticket=");
+        builder.append(jsTicket).append("&noncestr=").append(noncestr)
+                .append("&timestamp=").append(timestamp).append("&url=").append(url);
+        String signature = getSha1String(builder.toString());
+        Map<String, String> jsSingautre =new Hashtable<>();
+        jsSingautre.put("noncestr", noncestr);
+        jsSingautre.put("timestamp", timestamp);
+        jsSingautre.put("jsapi_ticket", jsTicket);
+        jsSingautre.put("appid", appid);
+        jsSingautre.put("signature", signature);
+        jsapiTicketCache = jsSingautre;
+        return jsSingautre;
+    }
+
+    private Map getJSApiTicket() {
+        String accessToken = requestAccessToken();
+        String url = buildJSApiTicketUrl(accessToken);
+        logger.info("get jsapi ticket url:" + url);
+        HttpGet httpGet = new HttpGet(url);
+        HttpClient httpClient = HttpClients.createDefault();
+        HttpResponse response = null;
+        try {
+            response = httpClient.execute(httpGet);
+            HttpEntity entity = response.getEntity();
+            String body = EntityUtils.toString(entity, "UTF-8").trim();
+            logger.info("get js api ticket response " + body);
+            Gson gson = new Gson();
+            Map<String, String> map = gson.fromJson(body, Map.class);
+            return map;
+        } catch (IOException e) {
+            e.printStackTrace();
+            logger.log(Level.SEVERE, e.getMessage(), e);
+        }
+        return new Hashtable<>();
     }
 
     public Map getWebSiteAccessToken(String code) {
@@ -125,7 +174,7 @@ public class WeChatService {
     public WeChatUserInfo getUserInfo(String openid) {
         String accessToken = requestAccessToken();
         String url = buildGetUserInfoURL(accessToken, openid);
-        logger.info("get user info url:"+url);
+        logger.info("get user info url:" + url);
         HttpGet httpGet = new HttpGet(url);
         HttpClient httpClient = HttpClients.createDefault();
         try {
@@ -145,7 +194,7 @@ public class WeChatService {
 
     public String getQRBarCodeURL(String code) {
         String ticket = getQRBarTicket(code);
-        logger.info("get qr bar ticket "+ticket);
+        logger.info("get qr bar ticket " + ticket);
         String url = buildQRCodeUrl(ticket);
         HttpGet httpGet = new HttpGet(url);
         HttpClient httpClient = HttpClients.createDefault();
@@ -164,12 +213,12 @@ public class WeChatService {
         return null;
     }
 
-    public String getQRBarTicket(String code){
+    public String getQRBarTicket(String code) {
         String url = buildQRCodeTicketUrl(requestAccessToken());
         HttpPost httpPost = new HttpPost(url);
         HttpClient httpClient = HttpClients.createDefault();
         try {
-            Map<String, String> params =new Hashtable<>();
+            Map<String, String> params = new Hashtable<>();
             params.put("expire_seconds", "30");
             params.put("action_name", "QR_SCENE");
             Gson gson = new Gson();
@@ -183,7 +232,7 @@ public class WeChatService {
             logger.info("get qr barcode ticket response " + body);
             Map map = gson.fromJson(body, Map.class);
             return (String) map.get("ticket");
-        }catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return null;
@@ -266,20 +315,27 @@ public class WeChatService {
         return builder.toString();
     }
 
-    private String buildQRCodeTicketUrl(String token){
+    private String buildQRCodeTicketUrl(String token) {
         StringBuilder builder = new StringBuilder();
         builder.append(qrCodeTicketUrl).append("?access_token=").append(token);
         return builder.toString();
     }
 
-    private String buildQRCodeUrl(String token){
+    private String buildQRCodeUrl(String token) {
         StringBuilder builder = new StringBuilder();
         builder.append(qrCodeUrl).append("?ticket=").append(token);
         return builder.toString();
     }
 
+    private String buildJSApiTicketUrl(String token) {
+        StringBuffer builder = new StringBuffer(jsapiTicketUrl);
+        builder.append("?access_token=").append(token).append("&type=jsapi");
+        return builder.toString();
+    }
+
     private static String getSha1String(String decript) {
         try {
+            logger.info("sha1 on string:"+decript);
             MessageDigest digest = java.security.MessageDigest
                     .getInstance("SHA-1");
             digest.update(decript.getBytes());
