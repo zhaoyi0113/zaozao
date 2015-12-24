@@ -2,6 +2,7 @@ package com.education.ws;
 
 import com.education.db.entity.CourseEntity;
 import com.education.db.jpa.CourseRepository;
+import com.education.formbean.CourseQueryBean;
 import com.education.service.CourseService;
 import com.education.ws.util.WSUtility;
 import org.glassfish.jersey.media.multipart.FormDataBodyPart;
@@ -61,12 +62,10 @@ public class CourseRegisterAPI {
     public Response uploadFile(FormDataMultiPart multiPart) {
         CourseRegisterBean bean = new CourseRegisterBean();
         bean.setName(multiPart.getField("name").getValue());
-        bean.setCategory(multiPart.getField("category").getValue());
         logger.info("create new course in category "+bean.getCategory());
         bean.setContent(multiPart.getField("content").getValue());
         bean.setIntroduction(multiPart.getField("introduction").getValue());
         bean.setTags(multiPart.getField("tags").getValue());
-        bean.setYears(Integer.parseInt(multiPart.getField("months").getValue()));
 
         FormDataBodyPart multiPartFile = multiPart.getField("file");
 
@@ -79,6 +78,7 @@ public class CourseRegisterAPI {
         } else {
             bean.setTitleImagePath(fileName);
         }
+
         courseService.createCourse(bean);
         writeFile(file, imageDir, fileName);
         return Response.ok().build();
@@ -88,7 +88,7 @@ public class CourseRegisterAPI {
     @GET
     public Response getAllCourses() {
         try {
-            List<CourseRegisterBean> allCoursesIndex = courseService.getAllCoursesIndex();
+            List<CourseQueryBean> allCoursesIndex = courseService.getAllCoursesIndex();
             return Response.ok().entity(allCoursesIndex).build();
         } catch (Exception e) {
             logger.log(Level.SEVERE, e.getMessage(), e);

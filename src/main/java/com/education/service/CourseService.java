@@ -1,19 +1,22 @@
 package com.education.service;
 
 import com.education.db.entity.CourseEntity;
+import com.education.db.entity.CourseTagEntity;
+import com.education.db.entity.CourseTagRelationEntity;
 import com.education.db.entity.CourseTypeEntity;
 import com.education.db.jpa.CourseRepository;
+import com.education.db.jpa.CourseTagRelationRepository;
+import com.education.db.jpa.CourseTagRepository;
 import com.education.db.jpa.CourseTypeRepository;
+import com.education.formbean.CourseQueryBean;
 import com.education.ws.CourseRegisterBean;
 import com.education.ws.util.WSUtility;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import jersey.repackaged.com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.ws.rs.BadRequestException;
-import javax.ws.rs.core.Response;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.*;
@@ -28,6 +31,8 @@ public class CourseService {
 
     private static final Logger logger = Logger.getLogger(CourseService.class.getName());
 
+    private static final String COURSE_TAG_SEPARATOR = ",";
+
     @Autowired
     private CourseRepository courseRepository;
 
@@ -37,6 +42,12 @@ public class CourseService {
     @Autowired
     private WSUtility wsUtility;
 
+    @Autowired
+    private CourseTagRepository courseTagRepository;
+
+    @Autowired
+    private CourseTagRelationRepository courseTagRelationRepository;
+
     public List<CourseRegisterBean> queryCourseByCategoryAfterNow(String category) {
         return queryCourseByCategory(category, true);
     }
@@ -45,6 +56,7 @@ public class CourseService {
         return queryCourseByCategory(category, false);
     }
 
+    @Transactional
     public int createCourse(CourseRegisterBean bean) {
         List<CourseEntity> courses = courseRepository.findByName(bean.getName());
         if (courses != null && courses.size() > 0) {
@@ -65,7 +77,26 @@ public class CourseService {
             CourseEntity entity = new CourseEntity(bean);
             entity.setTimeCreated(Calendar.getInstance().getTime());
             CourseEntity save = courseRepository.save(entity);
+            saveCourseTags(save.getId(), bean.getTags());
             return save.getId();
+        }
+    }
+
+    private void saveCourseTags(int courseId, String tags) {
+        if (tags == null) {
+            return;
+        }
+        String[] tagsId = null;
+        if (tags.contains(COURSE_TAG_SEPARATOR)) {
+            tagsId = tags.trim().split(COURSE_TAG_SEPARATOR);
+        } else {
+            tagsId = new String[]{tags.trim()};
+        }
+        for (int i = 0; i < tagsId.length; i++) {
+            CourseTagRelationEntity tagEntity = new CourseTagRelationEntity();
+            tagEntity.setCourseId(courseId);
+            tagEntity.setCourseTagId(Integer.parseInt(tagsId[i]));
+            courseTagRelationRepository.save(tagEntity);
         }
     }
 
@@ -84,25 +115,31 @@ public class CourseService {
         }
     }
 
-    public List<CourseRegisterBean> getAllCoursesIndex() {
+    public List<CourseQueryBean> getAllCoursesIndex() {
         try {
             Iterable<CourseEntity> courseIterable = courseRepository.findAll();
             Iterable<CourseTypeEntity> courseTypeIterable = courseTypeRepository.findAll();
-            List<CourseTypeEntity> courseTypeList = Lists.newArrayList(courseTypeIterable);
-            List<CourseRegisterBean> beanList = new ArrayList<>();
+            List<CourseQueryBean> queryList =new ArrayList<>();
             for (CourseEntity entity : courseIterable) {
-                CourseRegisterBean bean = new CourseRegisterBean(entity, wsUtility);
-                CourseTypeEntity courseType = courseTypeRepository.findOne(Integer.parseInt(bean.getCategory()));
-                if (courseType != null) {
-                    bean.setCategory(courseType.getName());
-                }
-                beanList.add(bean);
+                List<CourseTagEntity> courseTagList = getCourseTagList(entity.getId());
+                CourseQueryBean queryBean = new CourseQueryBean(entity, wsUtility);
+                queryList.add(queryBean);
             }
-            return beanList;
+            return queryList;
         } catch (Exception e) {
             logger.log(Level.SEVERE, e.getMessage(), e);
         }
         return null;
+    }
+
+    private List<CourseTagEntity> getCourseTagList(int courseId){
+        List<CourseTagRelationEntity> courseTags = courseTagRelationRepository.findCourseTagsByCourseId(courseId);
+        List<CourseTagEntity> courseTagEntities = new ArrayList<>();
+        for(CourseTagRelationEntity tag: courseTags){
+            CourseTagEntity courseTag = courseTagRepository.findOne(tag.getCourseId());
+            courseTagEntities.add(courseTag);
+        }
+        return courseTagEntities;
     }
 
     public CourseRegisterBean queryCourse(String courseId) {
@@ -120,7 +157,7 @@ public class CourseService {
         return bean;
     }
 
-    public void editCourse(CourseRegisterBean bean){
+    public void editCourse(CourseRegisterBean bean) {
         CourseEntity one = courseRepository.findOne(Integer.parseInt(bean.getId()));
         one.setContent(bean.getContent());
         one.setCategory(Integer.parseInt(bean.getCategory()));

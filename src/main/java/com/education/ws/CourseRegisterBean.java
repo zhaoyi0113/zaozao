@@ -58,7 +58,6 @@ public class CourseRegisterBean {
 
     public CourseRegisterBean(CourseEntity entity, WSUtility wsUtility) {
         this.name = entity.getName();
-        this.category = "" + entity.getCategory();
 //        this.date = wsUtility.dateToString(entity.getDate());
         this.content = entity.getContent();
         this.titleImagePath = entity.getTitleImagePath();
@@ -72,7 +71,6 @@ public class CourseRegisterBean {
         }
         this.introduction = entity.getIntroduction();
         this.id = String.valueOf(entity.getId());
-        this.tags = entity.getTags();
         this.years = entity.getYears();
         this.videoExternalUrl = entity.getVideoExternalUrl();
         this.dayNumber = entity.getDayNumber();

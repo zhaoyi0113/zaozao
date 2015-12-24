@@ -11,7 +11,7 @@ import javax.persistence.*;
 public class CourseTagRelationEntity {
     private int id;
     private int courseId;
-    private int courseTypeId;
+    private int courseTagId;
 
     @Column(name="course_id")
     public int getCourseId() {
@@ -22,13 +22,13 @@ public class CourseTagRelationEntity {
         this.courseId = courseId;
     }
 
-    @Column(name="course_type_id")
-    public int getCourseTypeId() {
-        return courseTypeId;
+    @Column(name="course_tag_id")
+    public int getCourseTagId() {
+        return courseTagId;
     }
 
-    public void setCourseTypeId(int courseTypeId) {
-        this.courseTypeId = courseTypeId;
+    public void setCourseTagId(int courseTagId) {
+        this.courseTagId = courseTagId;
     }
 
     @Id

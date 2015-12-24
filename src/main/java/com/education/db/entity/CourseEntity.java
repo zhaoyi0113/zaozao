@@ -36,7 +36,6 @@ public class CourseEntity {
         name = bean.getName();
         content = bean.getContent();
         picture_paths = bean.getPicturePaths();
-        category = Integer.parseInt(bean.getCategory());
         videoPath = bean.getVideoPath();
         titleImagePath = bean.getTitleImagePath();
 //        date = WSUtility.stringToDate(bean.getDate());
@@ -44,7 +43,6 @@ public class CourseEntity {
             id = Integer.parseInt(bean.getId());
         }
         introduction = bean.getIntroduction();
-        tags = bean.getTags();
         years = bean.getYears();
         videoExternalUrl = bean.getVideoExternalUrl();
         dayNumber = bean.getDayNumber();
