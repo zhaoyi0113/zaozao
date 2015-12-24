@@ -1,5 +1,6 @@
 package com.education.service;
 
+import com.education.db.entity.CommonStatus;
 import com.education.db.entity.CourseEntity;
 import com.education.db.jpa.CourseRepository;
 import com.education.db.jpa.CourseTypeRepository;
@@ -67,6 +68,18 @@ public class CourseServiceTest extends AbstractServiceTest {
         Assert.assertEquals(3, queryCourse.getYears());
     }
 
+    @Test
+    public void testCreateCourseStatus() {
+        String name = System.currentTimeMillis() + "";
+        CourseRegisterBean courseBean = createCourseBean(name);
+        courseBean.setStatus(CommonStatus.DISABLED.name());
+        int courseId = courseService.createCourse(courseBean);
+
+        CourseRegisterBean queryCourse = courseService.queryCourse(courseId+"");
+        Assert.assertNotNull(queryCourse);
+        Assert.assertEquals(CommonStatus.DISABLED.name(), queryCourse.getStatus());
+    }
+
     private CourseRegisterBean createCourseBean(String name) {
         int courseTypeId = courseTypeRepository.findAll().iterator().next().getId();
         CourseRegisterBean bean = new CourseRegisterBean();
@@ -74,6 +87,7 @@ public class CourseServiceTest extends AbstractServiceTest {
         bean.setName(name);
         bean.setTitleImagePath("aaa");
         bean.setYears(13);
+        bean.setStatus(CommonStatus.ENABLED.name());
         bean.setContent("test");
         return bean;
     }

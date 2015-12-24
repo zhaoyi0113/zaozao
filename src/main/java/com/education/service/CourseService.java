@@ -63,6 +63,7 @@ public class CourseService {
             }
         } else {
             CourseEntity entity = new CourseEntity(bean);
+            entity.setTimeCreated(Calendar.getInstance().getTime());
             CourseEntity save = courseRepository.save(entity);
             return save.getId();
         }

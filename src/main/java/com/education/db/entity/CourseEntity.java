@@ -25,6 +25,8 @@ public class CourseEntity {
     private int years;
     private String videoExternalUrl;
     private int dayNumber;
+    private Date timeCreated;
+    private CommonStatus status;
 
     public CourseEntity() {
 
@@ -46,6 +48,11 @@ public class CourseEntity {
         years = bean.getYears();
         videoExternalUrl = bean.getVideoExternalUrl();
         dayNumber = bean.getDayNumber();
+        if(bean.getStatus() == null){
+            status = CommonStatus.ENABLED;
+        }else {
+            status = CommonStatus.valueOf(bean.getStatus());
+        }
     }
 
     @Id
@@ -167,5 +174,24 @@ public class CourseEntity {
 
     public void setDayNumber(int dayNumber) {
         this.dayNumber = dayNumber;
+    }
+
+    @Column(name="time_created")
+    public Date getTimeCreated() {
+        return timeCreated;
+    }
+
+    public void setTimeCreated(Date timeCreated) {
+        this.timeCreated = timeCreated;
+    }
+
+    @Column(name="status")
+    @Enumerated
+    public CommonStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(CommonStatus status) {
+        this.status = status;
     }
 }

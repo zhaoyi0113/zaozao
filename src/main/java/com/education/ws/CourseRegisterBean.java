@@ -50,6 +50,9 @@ public class CourseRegisterBean {
     @FormParam("day_number")
     private int dayNumber;
 
+    @FormParam("status")
+    private String status;
+
     public CourseRegisterBean() {
     }
 
@@ -73,6 +76,7 @@ public class CourseRegisterBean {
         this.years = entity.getYears();
         this.videoExternalUrl = entity.getVideoExternalUrl();
         this.dayNumber = entity.getDayNumber();
+        this.status = entity.getStatus().name();
     }
 
     public String getDate() {
@@ -198,6 +202,14 @@ public class CourseRegisterBean {
 
     public void setDayNumber(int dayNumber) {
         this.dayNumber = dayNumber;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     @Override
