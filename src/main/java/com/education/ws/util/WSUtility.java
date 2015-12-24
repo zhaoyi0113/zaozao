@@ -27,7 +27,10 @@ public class WSUtility {
         return session.getAttribute("user_name") != null;
     }
 
-    public String dateToString(Date date){
+    public static String dateToString(Date date){
+        if(date == null){
+            return null;
+        }
         try{
             SimpleDateFormat format = getDateFormat();
             return format.format(date);
@@ -38,6 +41,9 @@ public class WSUtility {
     }
 
     public static Date stringToDate(String dateStr){
+        if(dateStr == null){
+            return null;
+        }
         try{
             SimpleDateFormat format = getDateFormat();
             Date date = format.parse(dateStr);
@@ -54,7 +60,7 @@ public class WSUtility {
     }
 
     public static String getDateFormatString() {
-        return "yyyy-MM-dd HH:mm:ss";
+        return "yyyy/MM/dd";
     }
 
     public String getResourcePath(String fileName){

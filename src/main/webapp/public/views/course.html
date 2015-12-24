@@ -13,10 +13,7 @@
                 <a ui-sref='home.courseedit({courseId: course.id})'><strong>{{course.name}}</strong></a>
             </td>
             <td>
-                {{course.category}}
-            </td>
-            <td>
-                {{course.years}}
+                {{course.status}}
             </td>
             <td>
                 <button ng-click="delete(course.id)">Delete</button><br>

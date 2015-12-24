@@ -1,17 +1,17 @@
 package com.education.service;
 
+import com.education.db.entity.CommonStatus;
 import com.education.db.entity.CourseEntity;
 import com.education.db.entity.CourseTagEntity;
 import com.education.db.entity.CourseTagRelationEntity;
-import com.education.db.entity.CourseTypeEntity;
 import com.education.db.jpa.CourseRepository;
 import com.education.db.jpa.CourseTagRelationRepository;
 import com.education.db.jpa.CourseTagRepository;
 import com.education.db.jpa.CourseTypeRepository;
 import com.education.formbean.CourseQueryBean;
+import com.education.formbean.CourseTagBean;
 import com.education.ws.CourseRegisterBean;
 import com.education.ws.util.WSUtility;
-import jersey.repackaged.com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -118,11 +118,11 @@ public class CourseService {
     public List<CourseQueryBean> getAllCoursesIndex() {
         try {
             Iterable<CourseEntity> courseIterable = courseRepository.findAll();
-            Iterable<CourseTypeEntity> courseTypeIterable = courseTypeRepository.findAll();
-            List<CourseQueryBean> queryList =new ArrayList<>();
+            List<CourseQueryBean> queryList = new ArrayList<>();
             for (CourseEntity entity : courseIterable) {
-                List<CourseTagEntity> courseTagList = getCourseTagList(entity.getId());
+                List<CourseTagBean> courseTagList = getCourseTagList(entity.getId());
                 CourseQueryBean queryBean = new CourseQueryBean(entity, wsUtility);
+                queryBean.setTags(courseTagList);
                 queryList.add(queryBean);
             }
             return queryList;
@@ -132,37 +132,42 @@ public class CourseService {
         return null;
     }
 
-    private List<CourseTagEntity> getCourseTagList(int courseId){
+    private List<CourseTagBean> getCourseTagList(int courseId) {
         List<CourseTagRelationEntity> courseTags = courseTagRelationRepository.findCourseTagsByCourseId(courseId);
-        List<CourseTagEntity> courseTagEntities = new ArrayList<>();
-        for(CourseTagRelationEntity tag: courseTags){
-            CourseTagEntity courseTag = courseTagRepository.findOne(tag.getCourseId());
-            courseTagEntities.add(courseTag);
+        List<CourseTagBean> tagBean = new ArrayList<>();
+        for (CourseTagRelationEntity tag : courseTags) {
+            CourseTagEntity courseTag = courseTagRepository.findOne(tag.getCourseTagId());
+            CourseTagBean bean = new CourseTagBean(courseTag.getId(), courseTag.getName());
+            tagBean.add(bean);
         }
-        return courseTagEntities;
+        return tagBean;
     }
 
-    public CourseRegisterBean queryCourse(String courseId) {
+    public CourseQueryBean queryCourse(String courseId) {
         int id = Integer.parseInt(courseId);
 
         CourseEntity course = courseRepository.findOne(id);// getCourseDao().getCourseById(id);
         if (course == null) {
             throw new BadRequestException("can't find course " + courseId);
         }
-        CourseRegisterBean bean = new CourseRegisterBean(course, wsUtility);
-        CourseTypeEntity courseType = courseTypeRepository.findOne(course.getCategory());
-        if (courseType != null) {
-            bean.setCategory(courseType.getName());
-        }
-        return bean;
+        CourseQueryBean queryBean = new CourseQueryBean(course, wsUtility);
+        queryBean.setTags(getCourseTagList(course.getId()));
+        return queryBean;
     }
 
+    @Transactional
     public void editCourse(CourseRegisterBean bean) {
         CourseEntity one = courseRepository.findOne(Integer.parseInt(bean.getId()));
         one.setContent(bean.getContent());
-        one.setCategory(Integer.parseInt(bean.getCategory()));
         one.setIntroduction(bean.getIntroduction());
+        one.setName(bean.getName());
+        one.setTitleImagePath(bean.getTitleImagePath());
+        one.setVideoExternalUrl(bean.getVideoExternalUrl());
+        one.setStatus(CommonStatus.valueOf(bean.getStatus()));
+        one.setPublishDate(wsUtility.stringToDate(bean.getPublishDate()));
         courseRepository.save(one);
+        courseTagRelationRepository.removeByCourseId(one.getId());
+        saveCourseTags(one.getId(), bean.getTags());
     }
 
     private List<CourseRegisterBean> queryCourseByCategory(String category, boolean after) {

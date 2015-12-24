@@ -66,6 +66,8 @@ public class CourseRegisterAPI {
         bean.setContent(multiPart.getField("content").getValue());
         bean.setIntroduction(multiPart.getField("introduction").getValue());
         bean.setTags(multiPart.getField("tags").getValue());
+        bean.setPublishDate(multiPart.getField("publish_date").getValue());
+        bean.setStatus(multiPart.getField("status").getValue());
 
         FormDataBodyPart multiPartFile = multiPart.getField("file");
 
@@ -117,7 +119,7 @@ public class CourseRegisterAPI {
     public Response getCourseById(@Context HttpServletRequest request,
                                   @PathParam("courseId") String courseId) {
         try {
-            CourseRegisterBean b = courseService.queryCourse(courseId);
+            CourseQueryBean b = courseService.queryCourse(courseId);
             return Response.ok().entity(b).header("Access-Control-Allow-Origin", "*")
                     .header("Access-Control-Allow-Methods", "*").build();
         } catch (Exception e) {

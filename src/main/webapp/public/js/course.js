@@ -1,4 +1,5 @@
-define(['angular', 'angular-file-upload', 'directives', 'angular-ui-date', 'angular-bootstrap', 'angular-bootstrap-tpls', 'ueditor-config', 'kindeditor', 'kindeditor-zh',
+define(['angular', 'angular-file-upload', 'directives', 'angular-ui-date', 'angular-bootstrap', 'angular-bootstrap-tpls',
+    'ueditor-config', 'kindeditor', 'kindeditor-zh',
     'angular-kindeditor', 'angular-datepicker'
 ], function(angular) {
     'use strict';
@@ -8,7 +9,7 @@ define(['angular', 'angular-file-upload', 'directives', 'angular-ui-date', 'angu
         function($scope, $http, $location, $state) {
             console.log("window.location:" + window.location.protocol);
             //window.UEDITOR_HOME_URL = 'http://' + $location.host() + ":" + $location.port() + '/education/zaozao/course/upload_resource';
-            $scope.headers = ['Name', 'Category', 'Weeks', 'Delete'];
+            $scope.headers = ['Name', 'Status', 'Delete'];
             $http.get('http://' + $location.host() + ":" + $location.port() + '/education/zaozao/course/queryall')
                 .success(function(e) {
                     var str = JSON.stringify(e);
@@ -89,7 +90,7 @@ define(['angular', 'angular-file-upload', 'directives', 'angular-ui-date', 'angu
                     var str = JSON.stringify(e);
                     var json = JSON.parse(str);
                     $scope.tags = json;
-                    
+
                     console.log('get course tags ', $scope.tags);
 
                 }).error(function(e) {
@@ -97,7 +98,7 @@ define(['angular', 'angular-file-upload', 'directives', 'angular-ui-date', 'angu
                 });
 
             $scope.submit = function() {
-                console.log('create new course ', $scope.date);
+                console.log('create new course ', $scope.publishDate);
                 //$scope.uploader.uploadAll();
                 // $scope.formatedDate = $scope.date;
                 // if($scope.date.getFullYear() !== null){
@@ -129,12 +130,22 @@ define(['angular', 'angular-file-upload', 'directives', 'angular-ui-date', 'angu
                 // }).error(function (e) {
                 //     console.log('edit failed ', e);
                 // });
-                $scope.courseTags='';
-                for(var i = 0; i<$scope.tags.length; i++){
+
+                $scope.courseTags = '';
+                for (var i = 0; i < $scope.tags.length; i++) {
+                    console.log('tag value:' + $scope.tags[i].value);
+                    if ($scope.tags[i].value === false || $scope.tags[i].value === undefined) {
+                        continue;
+                    }
                     $scope.courseTags += $scope.tags[i].id;
-                    if(i != $scope.tags.length-1){
+                    if (i != $scope.tags.length - 1) {
                         $scope.courseTags += ",";
                     }
+                }
+                if ($scope.cstatus === true) {
+                    $scope.courseStatus = 'ENABLED';
+                } else {
+                    $scope.courseStatus = 'DISABLED';
                 }
                 $scope.uploader.uploadAll();
             }
@@ -160,6 +171,11 @@ define(['angular', 'angular-file-upload', 'directives', 'angular-ui-date', 'angu
                 item.formData.push({
                     tags: $scope.courseTags
                 });
+                item.formData.push({
+                    publish_date: $scope.publishDate,
+                    status: $scope.courseStatus,
+                    video_external_url: $scope.videoUrl
+                })
             };
             $scope.uploader.onErrorItem = function(fileItem, response, status, headers) {
                 console.info('onErrorItem', fileItem, response, status, headers);
@@ -205,14 +221,22 @@ define(['angular', 'angular-file-upload', 'directives', 'angular-ui-date', 'angu
             $scope.open = function($event) {
                 $scope.status.opened = true;
             };
-            $http.get('http://' + $location.host() + ":" + $location.port() + '/education/zaozao/coursetype')
+            $http.get('http://' + $location.host() + ":" + $location.port() + '/education/zaozao/course_tags')
                 .success(function(e) {
-                    $scope.categories = e;
-                    if ($scope.categories.length > 0) {
-                        console.log('current category ' + $scope.course.category);
-                        $scope.course.category = $scope.categories[0];
+                    $scope.courseTags = e;
+                    console.log('course tags ', e);
+                    for (var j = 0; j < $scope.courseTags.length; j++) {
+                        $scope.courseTags[j].value = false;
+                        if ($scope.course.tags !== null && $scope.course.tags !== undefined) {
+                            for (var i = 0; i < $scope.course.tags.length; i++) {
+                                for (var j = 0; j < $scope.courseTags.length; j++) {
+                                    if ($scope.course.tags[i].name === $scope.courseTags[j].name) {
+                                        $scope.courseTags[j].value = true;
+                                    }
+                                }
+                            }
+                        }
                     }
-                    console.log('get course type ', $scope.categories);
 
                 }).error(function(e) {
 
@@ -224,14 +248,26 @@ define(['angular', 'angular-file-upload', 'directives', 'angular-ui-date', 'angu
                     console.log('course:', $scope.course);
                     //console.log('content', $scope.course.content);
 
-                    if ($scope.course.titleImagePath != null) {
+                    if ($scope.course.titleImageUrl != null) {
                         $scope.course.imageurl = 'http://' + $location.host() + ":" + $location.port() +
                             '/education/' + $scope.course.titleImageUrl;
                     } else {
                         $scope.course.imageurl = null;
                     }
-
-                    //$scope.content=$scope.course.content;
+                    if ($scope.courseTags !== null && $scope.courseTags !== undefined) {
+                        for (var i = 0; i < $scope.course.tags.length; i++) {
+                            for (var j = 0; j < $scope.courseTags.length; j++) {
+                                if ($scope.course.tags[i].name === $scope.courseTags[j].name) {
+                                    $scope.courseTags[j].value = true;
+                                }
+                            }
+                        }
+                    }
+                    if($scope.course.status === 'ENABLED'){
+                        $scope.course.cstatus = true;
+                    }else{
+                        $scope.course.cstatus = false;
+                    }
                     editContent.cmd.inserthtml($scope.course.content);
                 }).error(function(e) {
                     console.log('error:', e);
@@ -257,6 +293,20 @@ define(['angular', 'angular-file-upload', 'directives', 'angular-ui-date', 'angu
                 // }
 
                 if ($scope.uploader.queue.length == 0) {
+                    $scope.courseTagId = '';
+                    for (var i = 0; i < $scope.courseTags.length; i++) {
+                        if ($scope.courseTags[i].value === true) {
+                            $scope.courseTagId += $scope.courseTags[i].id;
+                            if (i !== $scope.courseTags.length - 1) {
+                                $scope.courseTagId += ',';
+                            }
+                        }
+                    }
+                    if ($scope.course.cstatus === true) {
+                        $scope.course.courseStatus = 'ENABLED';
+                    } else {
+                        $scope.course.courseStatus = 'DISABLED';
+                    }
                     var req = {
                         method: 'POST',
                         url: 'http://' + $location.host() + ":" + $location.port() + '/education/zaozao/course/edit',
@@ -268,10 +318,11 @@ define(['angular', 'angular-file-upload', 'directives', 'angular-ui-date', 'angu
                             id: $scope.course.id,
                             name: $scope.course.name,
                             content: $scope.course.content,
-                            category: $scope.course.category.id,
-                            weeks: $scope.weeks,
-                            tags: $scope.tags,
-                            introduction: $scope.course.introduction
+                            status: $scope.course.courseStatus,
+                            publish_date: $scope.course.publishDate,
+                            introduction: $scope.course.introduction,
+                            tags: $scope.courseTagId,
+                            video_external_url: $scope.course.videoUrl
                         })
                     };
                     $http(req).success(function(e) {
@@ -311,13 +362,10 @@ define(['angular', 'angular-file-upload', 'directives', 'angular-ui-date', 'angu
                     content: $scope.course.content
                 });
                 item.formData.push({
-                    category: $scope.course.category.id
-                });
-                item.formData.push({
-                    weeks: $scope.weeks
-                });
-                item.formData.push({
-                    tags: $scope.tags
+                    tags: $scope.courseTagId,
+                    status: $scope.course.courseStatus,
+                    publish_date: $scope.course.publishDate,
+                    video_external_url: $scope.course.videoUrl
                 });
             };
         }

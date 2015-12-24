@@ -5,10 +5,12 @@ import com.education.db.jpa.CourseTagRepository;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Created by yzzhao on 12/24/15.
  */
+@Transactional
 public class CourseTagServiceTest extends AbstractServiceTest {
 
     @Autowired

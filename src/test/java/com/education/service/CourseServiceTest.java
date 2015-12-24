@@ -7,11 +7,14 @@ import com.education.db.jpa.CourseTagRelationRepository;
 import com.education.db.jpa.CourseTypeRepository;
 import com.education.formbean.CourseQueryBean;
 import com.education.ws.CourseRegisterBean;
+import com.education.ws.util.WSUtility;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -54,21 +57,9 @@ public class CourseServiceTest extends AbstractServiceTest {
         CourseRegisterBean courseBean = createCourseBean(name);
         courseBean.setVideoExternalUrl("xxx");
         int courseId = courseService.createCourse(courseBean);
-        CourseRegisterBean queryCourse = courseService.queryCourse(courseId + "");
+        CourseQueryBean queryCourse = courseService.queryCourse(courseId + "");
         Assert.assertNotNull(queryCourse);
-        Assert.assertEquals("xxx", queryCourse.getVideoExternalUrl());
-    }
-
-    @Test
-    public void testCreateCourseYear() {
-        String name = System.currentTimeMillis() + "";
-        CourseRegisterBean courseBean = createCourseBean(name);
-        courseBean.setYears(3);
-        int courseId = courseService.createCourse(courseBean);
-
-        CourseRegisterBean queryCourse = courseService.queryCourse(courseId + "");
-        Assert.assertNotNull(queryCourse);
-        Assert.assertEquals(3, queryCourse.getYears());
+        Assert.assertEquals("xxx", queryCourse.getVideoUrl());
     }
 
     @Test
@@ -78,9 +69,9 @@ public class CourseServiceTest extends AbstractServiceTest {
         courseBean.setStatus(CommonStatus.DISABLED.name());
         int courseId = courseService.createCourse(courseBean);
 
-        CourseRegisterBean queryCourse = courseService.queryCourse(courseId + "");
+        CourseQueryBean queryCourse = courseService.queryCourse(courseId + "");
         Assert.assertNotNull(queryCourse);
-        Assert.assertEquals(CommonStatus.DISABLED.name(), queryCourse.getStatus());
+        Assert.assertEquals(CommonStatus.DISABLED, queryCourse.getStatus());
     }
 
     @Test
@@ -95,8 +86,17 @@ public class CourseServiceTest extends AbstractServiceTest {
         Assert.assertEquals(2, tags.get(1).getCourseTagId());
         Assert.assertEquals(4, tags.get(2).getCourseTagId());
         Assert.assertEquals(5, tags.get(3).getCourseTagId());
-        List<CourseQueryBean> allCoursesIndex = courseService.getAllCoursesIndex();
-        Assert.assertTrue(!allCoursesIndex.isEmpty());
+    }
+
+    @Test
+    public void testCreatCoursePublishDate() {
+        String name = System.currentTimeMillis() + "";
+        CourseRegisterBean courseBean = createCourseBean(name);
+        Date date = Calendar.getInstance().getTime();
+        courseBean.setPublishDate(WSUtility.dateToString(date));
+        int courseId = courseService.createCourse(courseBean);
+        CourseQueryBean course = courseService.queryCourse(String.valueOf(courseId));
+        Assert.assertEquals(WSUtility.dateToString(date), course.getPublishDate());
     }
 
     private CourseRegisterBean createCourseBean(String name) {
@@ -111,5 +111,19 @@ public class CourseServiceTest extends AbstractServiceTest {
         return bean;
     }
 
+    @Test
+    public void editCourseTest(){
+        String name = System.currentTimeMillis() + "";
+        CourseRegisterBean courseBean = createCourseBean(name);
+        courseBean.setTags("1,2,3");
+        int courseId = courseService.createCourse(courseBean);
+        courseBean.setId(String.valueOf(courseId));
+        courseBean.setTags("4,1");
+        courseService.editCourse(courseBean);
+        List<CourseTagRelationEntity> tagRels = courseTagRelationRepository.findCourseTagsByCourseId(Integer.parseInt(courseBean.getId()));
+        Assert.assertEquals(2, tagRels.size());
+        Assert.assertEquals(4, tagRels.get(0).getCourseTagId());
+        Assert.assertEquals(1, tagRels.get(1).getCourseTagId());
+    }
 
 }

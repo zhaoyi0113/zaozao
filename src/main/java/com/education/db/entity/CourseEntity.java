@@ -1,6 +1,7 @@
 package com.education.db.entity;
 
 import com.education.ws.CourseRegisterBean;
+import com.education.ws.util.WSUtility;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -27,6 +28,7 @@ public class CourseEntity {
     private int dayNumber;
     private Date timeCreated;
     private CommonStatus status;
+    private Date publishDate;
 
     public CourseEntity() {
 
@@ -43,9 +45,9 @@ public class CourseEntity {
             id = Integer.parseInt(bean.getId());
         }
         introduction = bean.getIntroduction();
-        years = bean.getYears();
         videoExternalUrl = bean.getVideoExternalUrl();
         dayNumber = bean.getDayNumber();
+        publishDate = WSUtility.stringToDate(bean.getPublishDate());
         if(bean.getStatus() == null){
             status = CommonStatus.ENABLED;
         }else {
@@ -191,5 +193,14 @@ public class CourseEntity {
 
     public void setStatus(CommonStatus status) {
         this.status = status;
+    }
+
+    @Column(name="publish_date")
+    public Date getPublishDate() {
+        return publishDate;
+    }
+
+    public void setPublishDate(Date publishDate) {
+        this.publishDate = publishDate;
     }
 }

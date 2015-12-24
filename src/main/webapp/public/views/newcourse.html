@@ -11,7 +11,7 @@
             </div>
         </div>
         <div class="form-group">
-            <label class='col-sm-2 control-label'>Category: </label>
+            <label class='col-sm-2 control-label'>Tags: </label>
             <div class='col-sm-4'>
                 <div class='col-sm-4' ng-repeat='tag in tags'>
                     <!-- <select class='form-control' ng-model="category" required
@@ -41,10 +41,26 @@
             <label class="col-sm-2 control-label">Video URL:</label>
             <!-- <input type="file" nv-file-select="" uploader="uploader" /> -->
             <div class='col-sm-4'>
-                <input class="form-control" type="text" ng-model='video_url' 
+                <input class="form-control" type="text" ng-model='videoUrl' 
                     placeholder='Input the video url'/>
             </div>
         </div> 
+
+        <div class='form-group'>
+            <label class="col-sm-2 control-label">Publish Date: </label>
+            <div class='col-sm-4'>
+                 <input type='text' name='publishDate' class='form-control' ng-model="publishDate" ng-pattern='/[0-9]{4}/[0-9]{2}/[0-9]{2}/' placeholder='yyyy/mm/dd'/>
+                 <p class='alert-danger' ng-show='add_course.publishDate.$invalid'>Date format is invalid, please use yyyy/mm/dd</p>
+             </div>
+        </div>
+
+        <div class='form-group'>
+            <label class="col-sm-2 control-label">Status: </label>
+            <div class='col-sm-4'>
+                <input class="form-control" type="checkbox" ng-model='cstatus' />
+            </div>
+        </div>
+
         <div class='form-group'>
             <label class="col-sm-2 control-label">Content: </label>
             <div class='col-sm-4'>
@@ -52,20 +68,20 @@
              </div>
         </div>
         
-        
         <!-- <div class='form-group'>
-            <label class="col-sm-2 control-label">Date:</label>
+            <label class="col-sm-2 control-label">Publish Date:</label>
             <div class="col-md-6">
                 <p>
                     <input type="text" uib-datepicker-popup="yyyy-MM-dd" datepicker-options="dateOptions" required
-                           ng-model="date" is-open="status.opened" />
+                           ng-model="publishDate" is-open="status.opened" />
                         <button type="button" class="btn btn-default" ng-click="open($event)">
                             <i class="glyphicon glyphicon-calendar"></i></button>
                       
                     <br/>
                 </p>
             </div><br>
-        </div> -->
+        </div>  -->
+
 
         <div class='form-group'>
             <button class='btn btn-primary' ng-click="submit()" ng-disabled="add_course.$invalid">Submit</button>

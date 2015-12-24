@@ -53,6 +53,9 @@ public class CourseRegisterBean {
     @FormParam("status")
     private String status;
 
+    @FormParam("publish_date")
+    private String publishDate;
+
     public CourseRegisterBean() {
     }
 
@@ -75,6 +78,7 @@ public class CourseRegisterBean {
         this.videoExternalUrl = entity.getVideoExternalUrl();
         this.dayNumber = entity.getDayNumber();
         this.status = entity.getStatus().name();
+        this.publishDate = wsUtility.dateToString(entity.getPublishDate());
     }
 
     public String getDate() {
@@ -208,6 +212,14 @@ public class CourseRegisterBean {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getPublishDate() {
+        return publishDate;
+    }
+
+    public void setPublishDate(String publishDate) {
+        this.publishDate = publishDate;
     }
 
     @Override

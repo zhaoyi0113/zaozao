@@ -1,5 +1,6 @@
 package com.education.formbean;
 
+import com.education.db.entity.CommonStatus;
 import com.education.db.entity.CourseEntity;
 import com.education.db.entity.CourseTagEntity;
 import com.education.ws.util.WSUtility;
@@ -28,7 +29,11 @@ public class CourseQueryBean {
 
     private String videoUrl;
 
-    private List<CourseTagEntity> tags;
+    private List<CourseTagBean> tags;
+
+    private CommonStatus status;
+
+    public String publishDate;
 
     public CourseQueryBean(CourseEntity courseEntity, WSUtility wsUtility){
         this.id = String.valueOf(courseEntity.getId());
@@ -39,7 +44,8 @@ public class CourseQueryBean {
         if (courseEntity.getTitleImagePath() != null) {
             this.titleImageUrl = wsUtility.getResourcePath(courseEntity.getTitleImagePath());
         }
-
+        status=courseEntity.getStatus();
+        publishDate = wsUtility.dateToString(courseEntity.getPublishDate());
     }
 
     public String getId() {
@@ -106,11 +112,27 @@ public class CourseQueryBean {
         this.videoUrl = videoUrl;
     }
 
-    public List<CourseTagEntity> getTags() {
+    public List<CourseTagBean> getTags() {
         return tags;
     }
 
-    public void setTags(List<CourseTagEntity> tags) {
+    public void setTags(List<CourseTagBean> tags) {
         this.tags = tags;
+    }
+
+    public CommonStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(CommonStatus status) {
+        this.status = status;
+    }
+
+    public String getPublishDate() {
+        return publishDate;
+    }
+
+    public void setPublishDate(String publishDate) {
+        this.publishDate = publishDate;
     }
 }
