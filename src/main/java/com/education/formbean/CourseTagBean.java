@@ -7,6 +7,7 @@ public class CourseTagBean {
 
     private int id;
     private String name;
+    private String imageUrl;
 
     public CourseTagBean(int id, String name) {
         this.id = id;
@@ -27,5 +28,13 @@ public class CourseTagBean {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

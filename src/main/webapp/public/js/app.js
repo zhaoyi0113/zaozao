@@ -53,6 +53,18 @@ define(['angular', 'ui-router', 'jquery-ui' , 'home', 'wechat'], function(angula
             url: '/wechat',
             templateUrl: '/education/public/views/share_wechat.html',
             controller: 'WeChatController'
+        }).state('home.coursetag',{
+            url: '/coursetag',
+            templateUrl: '/education/public/views/coursetag.html',
+            controller: 'CourseTagController'
+        }).state('home.coursetag_new',{
+            url: '/coursetag_new',
+            templateUrl: '/education/public/views/coursetag_new.html',
+            controller: 'NewCourseTagController'
+        }).state('home.coursetag_edit',{
+            url: '/coursetag_edit?courseTagId',
+            templateUrl: '/education/public/views/coursetag_edit.html',
+            controller: 'EditCourseTagController'
         });
         $urlRouterProvider.otherwise('/home');
     });

@@ -14,4 +14,8 @@ public interface CourseTagRelationRepository extends CrudRepository<CourseTagRel
 
     void removeByCourseId(int courseId);
 
+    void removeByCourseTagId(int courseTagId);
+
+    List<CourseTagRelationEntity> findCoursesTagsByCourseTagId(int courseTagId);
+
 }

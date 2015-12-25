@@ -100,10 +100,8 @@ public class CourseServiceTest extends AbstractServiceTest {
         Assert.assertEquals(WSUtility.dateToString(date), course.getPublishDate());
     }
 
-    private CourseRegisterBean createCourseBean(String name) {
-        int courseTypeId = courseTypeRepository.findAll().iterator().next().getId();
+    protected static CourseRegisterBean createCourseBean(String name) {
         CourseRegisterBean bean = new CourseRegisterBean();
-        bean.setCategory(String.valueOf(courseTypeId));
         bean.setName(name);
         bean.setTitleImagePath("aaa");
         bean.setYears(13);
@@ -113,7 +111,7 @@ public class CourseServiceTest extends AbstractServiceTest {
     }
 
     @Test
-    public void editCourseTest(){
+    public void editCourseTest() {
         String name = System.currentTimeMillis() + "";
         CourseRegisterBean courseBean = createCourseBean(name);
         courseBean.setTags("1,2,3");
@@ -128,7 +126,7 @@ public class CourseServiceTest extends AbstractServiceTest {
     }
 
     @Test
-    public void deleteCourse(){
+    public void deleteCourse() {
         String name = System.currentTimeMillis() + "";
         CourseRegisterBean courseBean = createCourseBean(name);
         courseBean.setTags("1,2,3");

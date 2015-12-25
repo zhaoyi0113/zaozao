@@ -11,6 +11,7 @@ public class CourseTagEntity {
 
     private int id;
     private String name;
+    private String image;
 
     @Column(name = "id")
     @Id
@@ -30,5 +31,14 @@ public class CourseTagEntity {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Column(name = "image")
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

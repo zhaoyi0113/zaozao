@@ -18,7 +18,8 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.io.*;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -62,7 +63,7 @@ public class CourseRegisterAPI {
     public Response uploadFile(FormDataMultiPart multiPart) {
         CourseRegisterBean bean = new CourseRegisterBean();
         bean.setName(multiPart.getField("name").getValue());
-        logger.info("create new course in category "+bean.getCategory());
+        logger.info("create new course in category " + bean.getCategory());
         bean.setContent(multiPart.getField("content").getValue());
         bean.setIntroduction(multiPart.getField("introduction").getValue());
         bean.setTags(multiPart.getField("tags").getValue());
@@ -72,8 +73,7 @@ public class CourseRegisterAPI {
         FormDataBodyPart multiPartFile = multiPart.getField("file");
 
         InputStream file = multiPartFile.getValueAs(InputStream.class);
-        String imageDir = courseImagePath;
-        String fileName = getFileNameFromMultipart(multiPartFile);
+        String fileName = WSUtility.getFileNameFromMultipart(multiPartFile);
         logger.info("upload course " + bean.getName() + ", fileName=" + fileName);
         if (wsUtility.whetherVideo(fileName)) {
             bean.setVideoPath(fileName);
@@ -82,7 +82,7 @@ public class CourseRegisterAPI {
         }
 
         courseService.createCourse(bean);
-        writeFile(file, imageDir, fileName);
+        WSUtility.writeFile(file, courseImagePath, fileName);
         return Response.ok().build();
     }
 
@@ -178,10 +178,9 @@ public class CourseRegisterAPI {
     public Response uploadResource(FormDataMultiPart multiPart) {
         FormDataBodyPart multiPartFile = multiPart.getField("file");
         InputStream file = multiPartFile.getValueAs(InputStream.class);
-        String imageDir = courseImagePath;
-        String fileName = getFileNameFromMultipart(multiPartFile);
+        String fileName = WSUtility.getFileNameFromMultipart(multiPartFile);
         logger.info("upload file name " + fileName);
-        writeFile(file, imageDir, fileName);
+        WSUtility.writeFile(file, courseImagePath, fileName);
         CourseRegisterBean bean = new CourseRegisterBean();
         bean.setId(multiPart.getField("id").getValue());
         bean.setName(multiPart.getField("name").getValue());
@@ -196,46 +195,11 @@ public class CourseRegisterAPI {
         return Response.ok().build();
     }
 
-    private String getFileNameFromMultipart(FormDataBodyPart multiPartFile) {
-        String fileName = multiPartFile.getContentDisposition().getFileName();
-        try {
-            fileName = new String(fileName.getBytes("ISO-8859-1"),
-                    "UTF-8");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-        return fileName;
-    }
-
     @DELETE
     @Path("/{id}")
     public Response deleteCourse(@PathParam("id") String id) {
         courseService.deleteCourse(Integer.parseInt(id));
         return Response.ok().build();
-    }
-
-    private static void writeFile(InputStream input, String dir, String targetName) {
-        try {
-            System.out.println("write to file " + dir + "," + targetName);
-            File dirFile = new File(dir);
-            if (!dirFile.exists()) {
-                dirFile.mkdirs();
-            }
-            FileOutputStream output = new FileOutputStream(dir + "/" + targetName);
-            logger.info("save file in " + dir + "/" + targetName);
-            byte buffer[] = new byte[512];
-            int read = input.read(buffer);
-            while (read > 0) {
-                output.write(buffer, 0, read);
-                read = input.read(buffer);
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-            logger.log(Level.SEVERE, e.getMessage(), e);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
     }
 
 

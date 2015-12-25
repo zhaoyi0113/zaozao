@@ -1,0 +1,36 @@
+
+<div>
+    <header class='header'>
+        <h2>Edit Course Tag</h2>
+    </header>
+    <form name="add_course_tag" class="new_course_tag  form-horizontal">
+        <div class="form-group">
+            <label class='col-sm-2 control-label'>Name:</label>  
+            <div class='col-sm-4'>
+                <input class='form-control' ng-model="name" type="text" required/>
+            </div>
+        </div>
+        <div class="">
+            <label class="col-sm-2 control-label">Title Image:</label>
+            <input type="file" nv-file-select="" uploader="uploader"/>
+        </div>
+        <div class="">
+            <ul ng-repeat="item in uploader.queue">
+                <li>
+                    <div  ng-thumb="{ file: item._file, height: 100 }"></div>
+                </li>
+            </ul>  
+        </div>
+        <div class='form-group'>
+            <img ng-src='{{imageUrl}}' width='200px' ng-show='uploader.queue === null || uploader.queue.length<=0'/>
+        </div>
+        <div class='btn-group' role='group'>
+            <div class='btn-group'>
+                <button class='button btn btn-primary' ng-click="submit()" ng-disabled="add_course_tag.$invalid">Submit</button>
+            </div>
+            <div class='btn-group'>
+                <button class='button btn btn-primary' ng-click="cancel()">Cancel</button>
+            </div>
+        </div>
+    </form>
+</div>

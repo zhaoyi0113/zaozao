@@ -1,0 +1,23 @@
+<div class="coursetag">
+    <header class='header'>
+        <h2>Course Tag</h2>
+    </header>
+
+    <button  class='btn btn-primary' ng-click="newCourseTag()">New Course Tag</button>
+    <table class="table table-striped table-bordered">
+        <th ng-repeat="head in headers" ng-model="head"><p>{{head}}</p></th>
+
+        <tr ng-repeat="courseTag in courseTags" ng-model="courseTag">
+            <hr/>
+            <td>
+                <a ui-sref='home.coursetag_edit({courseTagId: courseTag.id})'><strong>{{courseTag.name}}</strong></a>
+            </td>
+            <td>
+                <button ng-click="delete(courseTag.id)">Delete</button><br>
+            </td>
+        </tr>
+    </table>
+    <hr/>
+</div>
+
+<div ui-view/>
