@@ -263,9 +263,9 @@ define(['angular', 'angular-file-upload', 'directives', 'angular-ui-date', 'angu
                             }
                         }
                     }
-                    if($scope.course.status === 'ENABLED'){
+                    if ($scope.course.status === 'ENABLED') {
                         $scope.course.cstatus = true;
-                    }else{
+                    } else {
                         $scope.course.cstatus = false;
                     }
                     editContent.cmd.inserthtml($scope.course.content);
@@ -291,22 +291,21 @@ define(['angular', 'angular-file-upload', 'directives', 'angular-ui-date', 'angu
                 //     +$scope.course.date.getDate()+" "+$scope.course.date.getHours()+":"+
                 //      $scope.course.date.getMinutes()+":"+$scope.course.date.getSeconds());
                 // }
-
-                if ($scope.uploader.queue.length == 0) {
-                    $scope.courseTagId = '';
-                    for (var i = 0; i < $scope.courseTags.length; i++) {
-                        if ($scope.courseTags[i].value === true) {
-                            $scope.courseTagId += $scope.courseTags[i].id;
-                            if (i !== $scope.courseTags.length - 1) {
-                                $scope.courseTagId += ',';
-                            }
+                if ($scope.course.cstatus === true) {
+                    $scope.course.courseStatus = 'ENABLED';
+                } else {
+                    $scope.course.courseStatus = 'DISABLED';
+                }
+                $scope.courseTagId = '';
+                for (var i = 0; i < $scope.courseTags.length; i++) {
+                    if ($scope.courseTags[i].value === true) {
+                        $scope.courseTagId += $scope.courseTags[i].id;
+                        if (i !== $scope.courseTags.length - 1) {
+                            $scope.courseTagId += ',';
                         }
                     }
-                    if ($scope.course.cstatus === true) {
-                        $scope.course.courseStatus = 'ENABLED';
-                    } else {
-                        $scope.course.courseStatus = 'DISABLED';
-                    }
+                }
+                if ($scope.uploader.queue.length == 0) {
                     var req = {
                         method: 'POST',
                         url: 'http://' + $location.host() + ":" + $location.port() + '/education/zaozao/course/edit',

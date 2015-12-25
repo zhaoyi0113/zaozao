@@ -176,33 +176,23 @@ public class CourseRegisterAPI {
      * edit course uses this api to upload updated course
      */
     public Response uploadResource(FormDataMultiPart multiPart) {
-        String id = multiPart.getField("id").getValue();
-        if (!courseRepository.exists(Integer.parseInt(id))) {
-            return Response.status(Response.Status.BAD_REQUEST).entity("Can't find course " + id).build();
-        }
-        CourseEntity course = courseRepository.findOne(Integer.parseInt(id));
-        course.setCategory(Integer.parseInt(multiPart.getField("category").getValue()));
-        course.setName(multiPart.getField("name").getValue());
-        course.setContent(multiPart.getField("content").getValue());
-        course.setYears(Integer.parseInt(multiPart.getField("months").getValue()));
-        course.setTags(multiPart.getField("tags").getValue());
-
         FormDataBodyPart multiPartFile = multiPart.getField("file");
         InputStream file = multiPartFile.getValueAs(InputStream.class);
         String imageDir = courseImagePath;
         String fileName = getFileNameFromMultipart(multiPartFile);
         logger.info("upload file name " + fileName);
-
-        if (wsUtility.whetherVideo(fileName)) {
-            wsUtility.deleteFile(course.getVideoPath());
-            course.setVideoPath(fileName);
-        } else {
-            wsUtility.deleteFile(course.getTitleImagePath());
-            course.setTitleImagePath(fileName);
-        }
         writeFile(file, imageDir, fileName);
-        courseRepository.save(course);
-
+        CourseRegisterBean bean = new CourseRegisterBean();
+        bean.setId(multiPart.getField("id").getValue());
+        bean.setName(multiPart.getField("name").getValue());
+        bean.setTags(multiPart.getField("tags").getValue());
+        bean.setIntroduction(multiPart.getField("introduction").getValue());
+        bean.setTitleImagePath(fileName);
+        bean.setContent(multiPart.getField("content").getValue());
+        bean.setPublishDate(multiPart.getField("publish_date").getValue());
+        bean.setStatus(multiPart.getField("status").getValue());
+        bean.setVideoExternalUrl(multiPart.getField("video_external_url").getValue());
+        courseService.editCourse(bean);
         return Response.ok().build();
     }
 

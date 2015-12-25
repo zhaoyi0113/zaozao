@@ -126,4 +126,5 @@ public class CourseServiceTest extends AbstractServiceTest {
         Assert.assertEquals(1, tagRels.get(1).getCourseTagId());
     }
 
+
 }
