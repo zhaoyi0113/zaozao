@@ -210,18 +210,8 @@ public class CourseRegisterAPI {
     @DELETE
     @Path("/{id}")
     public Response deleteCourse(@PathParam("id") String id) {
-        CourseEntity course = courseRepository.findOne(Integer.parseInt(id));
-        courseRepository.delete(course);
-        if (course.getTitleImagePath() != null) {
-            String filePath = courseImagePath + "/" + course.getTitleImagePath();
-            deleteFile(filePath);
-        }
+        courseService.deleteCourse(Integer.parseInt(id));
         return Response.ok().build();
-    }
-
-    private static void deleteFile(String filePath) {
-        File file = new File(filePath);
-        file.delete();
     }
 
     private static void writeFile(InputStream input, String dir, String targetName) {

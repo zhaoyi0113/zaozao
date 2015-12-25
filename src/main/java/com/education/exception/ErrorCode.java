@@ -48,8 +48,9 @@ public enum ErrorCode {
     WECHAT_CODE_ERROR(10028, Response.Status.BAD_REQUEST, "没有微信Code", "can't find wechat code"),
     USER_NOT_EXISTED(10029, Response.Status.BAD_REQUEST, "用户不存在", "user doesn't exist"),
     NOT_LOGIN(10030, Response.Status.BAD_REQUEST, "未登陆", "Not Login"),
-    COURSE_TAG_ALREADY_EXISTED(10031, Response.Status.BAD_REQUEST, "课程标签已存在", "course tag alread exist.");
-
+    COURSE_TAG_ALREADY_EXISTED(10031, Response.Status.BAD_REQUEST, "课程标签已存在", "course tag alread exist."),
+    COURSE_NOT_FOUND(10032, Response.Status.BAD_REQUEST, "没有该课程", "Course not found"),
+    DUPLICATE_COURSE_NAME(10033, Response.Status.BAD_REQUEST, "重复的课程名称", "Duplicate couse name");
 
     private final int code;
 

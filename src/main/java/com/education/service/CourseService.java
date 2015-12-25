@@ -8,18 +8,24 @@ import com.education.db.jpa.CourseRepository;
 import com.education.db.jpa.CourseTagRelationRepository;
 import com.education.db.jpa.CourseTagRepository;
 import com.education.db.jpa.CourseTypeRepository;
+import com.education.exception.BadRequestException;
+import com.education.exception.ErrorCode;
 import com.education.formbean.CourseQueryBean;
 import com.education.formbean.CourseTagBean;
 import com.education.ws.CourseRegisterBean;
 import com.education.ws.util.WSUtility;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.ws.rs.BadRequestException;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -48,6 +54,10 @@ public class CourseService {
     @Autowired
     private CourseTagRelationRepository courseTagRelationRepository;
 
+
+    @Value("#{config['course_image_path']}")
+    private String courseImagePath;
+
     public List<CourseRegisterBean> queryCourseByCategoryAfterNow(String category) {
         return queryCourseByCategory(category, true);
     }
@@ -71,7 +81,7 @@ public class CourseService {
                 courseRepository.save(entity);
                 return entity.getId();
             } else {
-                throw new BadRequestException("duplicate course name " + bean.getName());
+                throw new BadRequestException(ErrorCode.DUPLICATE_COURSE_NAME);
             }
         } else {
             CourseEntity entity = new CourseEntity(bean);
@@ -103,7 +113,7 @@ public class CourseService {
     public FileInputStream getCourseFile(String id, String fileName) {
         CourseEntity course = courseRepository.findOne(Integer.parseInt(id));
         if (course == null) {
-            throw new BadRequestException("Can't find course id " + id);
+            throw new BadRequestException(ErrorCode.COURSE_NOT_FOUND);
         }
         String videoPath = wsUtility.getResourcePhysicalPath(fileName);
         try {
@@ -111,7 +121,7 @@ public class CourseService {
             return input;
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-            throw new BadRequestException(e.getMessage());
+            throw new BadRequestException(ErrorCode.FILE_NOT_EXISTED);
         }
     }
 
@@ -148,7 +158,7 @@ public class CourseService {
 
         CourseEntity course = courseRepository.findOne(id);// getCourseDao().getCourseById(id);
         if (course == null) {
-            throw new BadRequestException("can't find course " + courseId);
+            throw new BadRequestException(ErrorCode.COURSE_NOT_FOUND);
         }
         CourseQueryBean queryBean = new CourseQueryBean(course, wsUtility);
         queryBean.setTags(getCourseTagList(course.getId()));
@@ -186,6 +196,25 @@ public class CourseService {
             beanList.add(bean);
         }
         return beanList;
+    }
+
+    @Transactional
+    public void deleteCourse(int courseId) {
+        CourseEntity course = courseRepository.findOne(courseId);
+        if (course == null) {
+            throw new com.education.exception.BadRequestException(ErrorCode.COURSE_NOT_FOUND);
+        }
+        courseRepository.delete(course);
+        if (course.getTitleImagePath() != null) {
+            String filePath = courseImagePath + "/" + course.getTitleImagePath();
+            deleteFile(filePath);
+        }
+        courseTagRelationRepository.removeByCourseId(course.getId());
+    }
+
+    private static void deleteFile(String filePath) {
+        File file = new File(filePath);
+        file.delete();
     }
 
 }

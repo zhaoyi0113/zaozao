@@ -1,6 +1,7 @@
 package com.education.service;
 
 import com.education.db.entity.CommonStatus;
+import com.education.db.entity.CourseEntity;
 import com.education.db.entity.CourseTagRelationEntity;
 import com.education.db.jpa.CourseRepository;
 import com.education.db.jpa.CourseTagRelationRepository;
@@ -126,5 +127,18 @@ public class CourseServiceTest extends AbstractServiceTest {
         Assert.assertEquals(1, tagRels.get(1).getCourseTagId());
     }
 
-
+    @Test
+    public void deleteCourse(){
+        String name = System.currentTimeMillis() + "";
+        CourseRegisterBean courseBean = createCourseBean(name);
+        courseBean.setTags("1,2,3");
+        int courseId = courseService.createCourse(courseBean);
+        List<CourseTagRelationEntity> tags = courseTagRelationRepository.findCourseTagsByCourseId(courseId);
+        Assert.assertEquals(3, tags.size());
+        courseService.deleteCourse(courseId);
+        CourseEntity course = courseRepository.findOne(courseId);
+        Assert.assertNull(course);
+        tags = courseTagRelationRepository.findCourseTagsByCourseId(courseId);
+        Assert.assertEquals(0, tags.size());
+    }
 }
