@@ -65,6 +65,10 @@ define(['angular', 'ui-router', 'jquery-ui' , 'home', 'wechat'], function(angula
             url: '/coursetag_edit?courseTagId',
             templateUrl: '/education/public/views/coursetag_edit.html',
             controller: 'EditCourseTagController'
+        }).state('home.config',{
+            url: '/config',
+            templateUrl: '/education/public/views/homeconfig.html',
+            controller: 'HomeConfigController'
         });
         $urlRouterProvider.otherwise('/home');
     });

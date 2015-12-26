@@ -20,7 +20,10 @@ require.config({
         'kindeditor-zh' : '/education/bower_components/angular-kindeditor/kindeditor/lang/zh-CN',
         'angular-kindeditor' : '/education/bower_components/angular-kindeditor/src/angular-kindeditor',
         'angular-datepicker' : '/education/bower_components/angular-datepicker/dist/angular-datepicker',
-        'wx' : 'http://res.wx.qq.com/open/js/jweixin-1.0.0.js'
+        'wx' : 'http://res.wx.qq.com/open/js/jweixin-1.0.0.js',
+        'angular-animate': '/education/bower_components/angular-animate/angular-animate.min',
+        'tweenmax': '/education/bower_components/gsap/src/minified/TweenMax.min',
+        'jquery': '/education/bower_components/jquery/dist/jquery.min'
     },
     shim: {
         'angular': {
@@ -77,6 +80,9 @@ require.config({
         'angular-datepicker':{
             deps: ['angular'],
             exports: 'angular-datepicker'
+        },
+        'angular-animate': {
+            deps: ['angular']
         }
     }
 });

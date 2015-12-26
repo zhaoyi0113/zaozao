@@ -3,6 +3,7 @@ package com.education.ws;
 import com.education.db.entity.CourseTagEntity;
 import com.education.formbean.CourseTagBean;
 import com.education.service.CourseTagService;
+import com.education.ws.util.WSUtility;
 import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
 import org.glassfish.jersey.media.multipart.FormDataParam;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,11 +34,8 @@ public class CourseTagAPI {
                                     @FormDataParam("file") InputStream fileInputStream,
                                     @FormDataParam("file") FormDataContentDisposition disposition) {
         logger.info("add course tag " + tagName);
-        if (courseTagId == 0) {
-            courseTagService.addNewCourseTag(tagName, disposition.getFileName(), fileInputStream);
-        } else {
-            courseTagService.editCourseTag(courseTagId, tagName, disposition.getFileName(), fileInputStream);
-        }
+        String fileName = WSUtility.getUtf8Character(disposition.getFileName());
+        courseTagService.addNewCourseTag(tagName, fileName, fileInputStream);
         return Response.ok().build();
     }
 

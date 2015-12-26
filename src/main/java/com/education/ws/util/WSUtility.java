@@ -94,14 +94,18 @@ public class WSUtility {
     }
 
     public static String getFileNameFromMultipart(FormDataBodyPart multiPartFile) {
-        String fileName = multiPartFile.getContentDisposition().getFileName();
+        return getUtf8Character(multiPartFile.getContentDisposition().getFileName());
+    }
+
+    public static String getUtf8Character(String str){
+        String string = null;
         try {
-            fileName = new String(fileName.getBytes("ISO-8859-1"),
+            string = new String(str.getBytes("ISO-8859-1"),
                     "UTF-8");
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-        return fileName;
+        return string;
     }
 
     public static void writeFile(InputStream input, String dir, String targetName) {

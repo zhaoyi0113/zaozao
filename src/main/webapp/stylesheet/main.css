@@ -54,3 +54,35 @@ input[type='text'] {
 textarea {
 	border-radius: 4px;
 }
+
+.panel-body {
+  position:relative; 
+}
+.my-switch-animation.ng-enter,
+.my-switch-animation.ng-leave {
+  -webkit-transition:0.5s linear all;
+  -moz-transition:0.5s linear all;
+  -o-transition:0.5s linear all;
+  transition:0.5s linear all;
+
+  position:absolute;
+}
+
+.my-switch-animation.ng-enter {
+  left:100%;
+}
+
+.my-switch-animation.ng-leave,
+.my-switch-animation.ng-enter.ng-enter-active {
+  left:0;
+}
+
+.my-switch-animation.ng-leave.ng-leave-active {
+  left:-100%;
+}
+
+.panel {
+  overflow:hidden;
+  height: 600px;
+  position: relative;
+}

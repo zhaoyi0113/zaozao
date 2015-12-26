@@ -1,0 +1,6 @@
+CREATE TABLE `homeconfig` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `image` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
