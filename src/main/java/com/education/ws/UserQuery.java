@@ -3,6 +3,7 @@ package com.education.ws;
 import com.education.db.DBConnection;
 import com.education.db.entity.UserEntity;
 import com.education.formbean.UserChildrenRegisterBean;
+import com.education.service.BackendLoginService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.hibernate.Query;
@@ -28,7 +29,7 @@ public class UserQuery {
 
     private static final Logger logger = Logger.getLogger(UserQuery.class.getName());
 
-    private LoginCheckService loginCheck;
+    private BackendLoginService loginCheck;
 
     @Path("/allusers")
     @GET
@@ -85,12 +86,12 @@ public class UserQuery {
     }
 
 
-    public LoginCheckService getLoginCheck() {
+    public BackendLoginService getLoginCheck() {
         return loginCheck;
     }
 
     @Autowired(required = true)
-    public void setLoginCheck(LoginCheckService loginCheck) {
+    public void setLoginCheck(BackendLoginService loginCheck) {
         this.loginCheck = loginCheck;
     }
 }

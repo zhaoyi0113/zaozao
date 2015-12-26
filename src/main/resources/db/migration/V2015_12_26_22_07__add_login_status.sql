@@ -1,0 +1,1 @@
+ALTER TABLE `backend_login_history` ADD COLUMN `login_status` int default 0;

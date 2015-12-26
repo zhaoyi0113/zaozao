@@ -1,5 +1,7 @@
 package com.education.service;
 
+import com.education.db.entity.BackendLoginHistoryEntity;
+import com.education.db.jpa.BackendLoginHistoryRepository;
 import com.education.db.jpa.BackendUserRepository;
 import com.education.formbean.BackendRoleService;
 import com.education.formbean.BackendUserBean;
@@ -25,6 +27,12 @@ public class BackendUserServiceTest extends AbstractServiceTest {
     @Autowired
     private BackendRoleService roleService;
 
+    @Autowired
+    private BackendLoginService loginService;
+
+    @Autowired
+    private BackendLoginHistoryRepository loginHistoryRepository;
+
     @Test
     public void testCreateNewUser(){
         String roleName = String.valueOf(System.currentTimeMillis());
@@ -37,12 +45,14 @@ public class BackendUserServiceTest extends AbstractServiceTest {
         Assert.assertEquals("aaa", userBean1.getName());
         Assert.assertEquals(roleId, userBean1.getRoleId());
         List<BackendUserBean> allUsers = userService.getAllUsers();
-        Assert.assertEquals(1, allUsers.size());
-        Assert.assertEquals(userId, allUsers.get(0).getId());
+        Assert.assertEquals(userId, allUsers.get(allUsers.size()-1).getId());
+
+        String role = loginService.getUserRole("aaa", "1234");
+        Assert.assertEquals(roleName, role);
 
         userService.deleteUser(userId);
-        allUsers = userService.getAllUsers();
-        Assert.assertTrue(allUsers.isEmpty());
+        List<BackendUserBean> allUsers1 = userService.getAllUsers();
+        Assert.assertEquals(allUsers.size(), allUsers1.size()+1);
     }
 
     @Test
@@ -58,4 +68,21 @@ public class BackendUserServiceTest extends AbstractServiceTest {
         Assert.assertEquals("bbb", userBean1.getName());
     }
 
+    @Test
+    public void testLogin(){
+        String roleName = String.valueOf(System.currentTimeMillis());
+        int roleId = roleService.createNewRole(roleName);
+        BackendUserBean userBean = new BackendUserBean("aaa","1234",roleId);
+        int userId = userService.createNewUser(userBean);
+        boolean login = loginService.login("aaa", "1234");
+        Assert.assertTrue(login);
+        List<BackendLoginHistoryEntity> history = loginHistoryRepository.findByUserId(userId);
+        Assert.assertFalse(history.isEmpty());
+    }
+
+    @Test
+    public void testLoginFailed(){
+        boolean login = loginService.login("aaa", "1234");
+        Assert.assertFalse(login);
+    }
 }

@@ -1,7 +1,7 @@
 define(['angular','user_service','ui-router'], function(angular) {
     'use strict';
 
-    var user = angular.module("userModule", ['userService','ui.router']);
+    var user = angular.module("userModule", ['userServiceModule','ui.router']);
 
     user.controller('UserController', ['$scope', '$http', '$location','UserService','$state',
         function($scope, $http, $location, userSrv, $state){

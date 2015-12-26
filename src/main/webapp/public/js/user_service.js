@@ -1,6 +1,6 @@
 define(['angular'], function(angular) {
 
-    var user = angular.module("userService", []);
+    var user = angular.module("userServiceModule", []);
     user.service('UserService', function(){
        this.userList = [];
 

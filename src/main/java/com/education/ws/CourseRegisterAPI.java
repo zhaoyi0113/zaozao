@@ -4,6 +4,7 @@ import com.education.db.entity.CourseEntity;
 import com.education.db.jpa.CourseRepository;
 import com.education.formbean.CourseQueryBean;
 import com.education.service.CourseService;
+import com.education.service.BackendLoginService;
 import com.education.ws.util.WSUtility;
 import org.glassfish.jersey.media.multipart.FormDataBodyPart;
 import org.glassfish.jersey.media.multipart.FormDataMultiPart;
@@ -38,7 +39,7 @@ public class CourseRegisterAPI {
     private static final Logger logger = Logger.getLogger(CourseRegisterAPI.class.getName());
     public static final String WEBAPP_PUBLIC_RESOURCES_COURSES = "src/main/webapp/public/resources/courses/";
 
-    private LoginCheckService loginCheck;
+    private BackendLoginService loginCheck;
 
     @Autowired
     private CourseRepository courseRepository;
