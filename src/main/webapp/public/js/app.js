@@ -17,7 +17,7 @@ define(['angular', 'ui-router', 'jquery-ui', 'home', 'wechat', 'login_service'],
             url: '/edit?userId',
             templateUrl: '/education/public/views/useredit.html',
             controller: 'UserEditController'
-        }).state('home.adduser', {
+        }).state('home.newuser', {
             url: '/adduser',
             templateUrl: '/education/public/views/newuser.html',
             controller: 'NewUserController'

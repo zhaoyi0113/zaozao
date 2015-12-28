@@ -1,28 +1,26 @@
+<header class='header'>
+        <h2>Add New User</h2>
+</header>
 <form name="add_user">
-    <h1 class="newuser-head">Add New User</h1>
-        <p class = "label">Name:
-            <input class = "input" ng-model="user.userName" name="userName" type="text" placeholder = "Enter your full name" required /></p>
-        <p class = "label">Password:
-            <input class = "input" ng-model="user.password" name="password" type="password" placeholder = "Enter your password"/></p>
-        <p class = "label">Email:
-            <input class = "input" ng-model="user.email" name="userEmail" type="text" placeholder = "Enter your email" required /></p>
-        <p class = "label">Phone:
-            <input class = "input" ng-model="user.phone" name="userPhone" type="text" placeholder = "Enter your Phone number"/></p>
-        <p class = "label">Age:
-            <input class = "input" ng-model="user.age" name="userAge" type="text" placeholder = "Enter your Age"/></p>
-        <p class = "label">Birthdate:
-            <input class = "input" ng-model='user.childBirthdate' name="userBirthdate" type="datetime" placeholder = "Enter your Birthdate"/></p>
-        <p class = "label">Gender:
-            <label>
-                <input class = "input" ng-model='user.sex' name="userGender" type="radio" value ="female"/>Female&nbsp;&nbsp;&nbsp;
-            </label>
-            <label>
-                <input class = "input" ng-model='user.sex' name="userGender" type="radio" value ="male"/>Male
-            </label>
-        </p>
+        <div class = "form-group">
+            <label class='control-label'>Name:</label>
+            <input class = "form-control" ng-model="user.userName" name="userName" type="text" placeholder = "Enter your full name" required />
+        </div>
+        <div class = "form-group" ng-class="{'has-error': add_user.password.$invalid && !add_user.password.$pristine}">
+            <label class='control-label'>Password:</label>
+            <input id='password' class = "form-control" ng-model="user.password" name="password" type="password" placeholder = "Enter your password" ng-minlength="6" required/>
+            <span class='alert-danger help-block' ng-show='add_user.password.$invalid && !add_user.password.$pristine'>Password need to be at least 6 characters</span>
+        </div>
+        <div class = "form-group" ng-class="{'has-error': add_user.repassword.$invalid && !add_user.repassword.$pristine}">
+            <label class='control-label'>Confirm Password:</label>
+            <input class = "form-control" ng-model="user.repassword" name="repassword" type="password" placeholder = "Enter your password" ng-minlength="6" pw-check='password' required/>
+            <span ng-show='!add_user.repassword.$pristine && add_user.repassword.$invalid' class='alert-danger help-block'>
+                The password doesn't match!
+            </span>
+        </div>
         <p class = "submit">
-            <button ng-click="submit()" width ="200px">Submit</button>
-            <button ng-click="cancel()">Cancel</button>
+            <button class='btn btn-primary' ng-click="submit()" width ="200px" ng-disabled='add_user.$invalid'>Submit</button>
+            <button class='btn btn-primary' ng-click="cancel()">Cancel</button>
         </p>
 </form>
 

@@ -12,10 +12,11 @@ public class BackendUserBean {
     private String name;
     @FormParam("password")
     private String password;
-    @FormParam("roleId")
+    @FormParam("role_id")
     private int roleId;
     @FormParam("email")
     private String email;
+    private String role;
 
     public BackendUserBean(String name, String password, int roleId) {
         this.name = name;
@@ -64,5 +65,13 @@ public class BackendUserBean {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }

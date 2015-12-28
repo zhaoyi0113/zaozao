@@ -8,16 +8,18 @@ define(['angular'], function(angular) {
 		this.isLogin = function() {
 			var deferred = $q.defer();
 			var promise = deferred.promise;
+			console.log('is login');
 			$http.get('http://' + $location.host() + ":" +
 					$location.port() + '/education/zaozao/backend_login/check')
 				.success(function(e) {
-					if (e === '1') {
-						deferred.resolve(true);
+					console.log('check login ',e);
+					if (e !== '0') {
+						deferred.resolve(e);
 					} else {
-						deferred.reject(false);
+						deferred.reject(e);
 					}
 				}).error(function(e) {
-					deferred.reject(false);
+					deferred.reject(e);
 				});
 			return promise;
 		}
@@ -38,8 +40,8 @@ define(['angular'], function(angular) {
 			};
 			$http(req).success(function(e) {
 				console.log('login success.');
-				$rootScope.$emit('LOGIN', true);
-				deferred.resolve(true);
+				$rootScope.$emit('LOGIN', e);
+				deferred.resolve(e);
 			}).error(function(e) {
 				$rootScope.$emit('LOGIN', false);
 				deferred.reject(false);
@@ -54,6 +56,7 @@ define(['angular'], function(angular) {
 				.success(function(e) {
 					deferred.resolve(true);
 					$rootScope.$emit('LOGIN', false);
+					$rootScope.$emit('LOGOUT', true);
 				}).error(function(e){
 					deferred.reject(false);
 				});

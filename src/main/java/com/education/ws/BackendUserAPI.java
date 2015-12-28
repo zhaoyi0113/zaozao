@@ -1,5 +1,6 @@
 package com.education.ws;
 
+import com.education.service.BackendRoleService;
 import com.education.formbean.BackendUserBean;
 import com.education.service.BackendUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,39 +16,56 @@ import javax.ws.rs.core.Response;
 public class BackendUserAPI {
 
     @Autowired
-    private BackendUserService backendUserService;
+    private BackendUserService userService;
+
+    @Autowired
+    private BackendRoleService roleService;
 
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     public Response createNewUser(@BeanParam BackendUserBean userBean) {
-        backendUserService.createNewUser(userBean);
+        userService.createNewUser(userBean);
         return Response.ok().build();
     }
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllUsers() {
-        return Response.ok(backendUserService.getAllUsers()).build();
+        return Response.ok(userService.getAllUsers()).build();
     }
 
     @GET
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getUser(@QueryParam("id") int id) {
-        return Response.ok(backendUserService.queryUser(id)).build();
+        return Response.ok(userService.queryUser(id)).build();
     }
 
     @DELETE
     @Path("{id}")
     public Response deleteUser(@PathParam("id") int id) {
-        backendUserService.deleteUser(id);
+        userService.deleteUser(id);
         return Response.ok().build();
     }
 
     @POST
     @Path("/edit")
     public Response editUser(@BeanParam BackendUserBean userBean) {
-        backendUserService.editUser(userBean);
+        userService.editUser(userBean);
         return Response.ok().build();
+    }
+
+    @GET
+    @Path("/get_role_names")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getAllRoleNames(){
+        return Response.ok(roleService.getRoleNames()).build();
+    }
+
+    @GET
+    @Path("/get_roles")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getAllRoles(){
+        return Response.ok(roleService.getRoles()).build();
     }
 }

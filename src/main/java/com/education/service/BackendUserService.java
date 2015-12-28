@@ -20,42 +20,43 @@ import java.util.List;
 public class BackendUserService {
 
     @Autowired
-    private BackendUserRepository backendUserRepository;
+    private BackendUserRepository userRepository;
 
     @Autowired
-    private BackendRoleRepository backendRoleRepository;
+    private BackendRoleRepository roleRepository;
 
     public int createNewUser(BackendUserBean userBean) {
-        BackendRoleEntity role = backendRoleRepository.findOne(userBean.getRoleId());
+        BackendRoleEntity role = roleRepository.findOne(userBean.getRoleId());
         if (role == null) {
             throw new BadRequestException(ErrorCode.ROLE_NOT_FOUND);
         }
         BackendUserEntity userEntity = createUserEntity(userBean);
-        BackendUserEntity save = backendUserRepository.save(userEntity);
+        BackendUserEntity save = userRepository.save(userEntity);
         return save.getId();
     }
 
     public List<BackendUserBean> getAllUsers() {
-        Iterable<BackendUserEntity> userEntities = backendUserRepository.findAll();
+        Iterable<BackendUserEntity> userEntities = userRepository.findAll();
         List<BackendUserBean> userBeanList = new ArrayList<>();
         for (BackendUserEntity entity : userEntities) {
             BackendUserBean userBean = createUserBean(entity);
+
             userBeanList.add(userBean);
         }
         return userBeanList;
     }
 
     public BackendUserBean queryUser(int id) {
-        BackendUserEntity user = backendUserRepository.findOne(id);
+        BackendUserEntity user = this.userRepository.findOne(id);
         return createUserBean(user);
     }
 
     public void deleteUser(int id) {
-        backendUserRepository.delete(id);
+        userRepository.delete(id);
     }
 
     public void editUser(BackendUserBean userBean) {
-        BackendUserEntity user = backendUserRepository.findOne(userBean.getId());
+        BackendUserEntity user = this.userRepository.findOne(userBean.getId());
         if (user == null) {
             throw new BadRequestException(ErrorCode.USER_NOT_EXISTED);
         }
@@ -71,15 +72,17 @@ public class BackendUserService {
         if (userBean.getRoleId() != 0) {
             user.setRoleId(userBean.getRoleId());
         }
-        backendUserRepository.save(user);
+        this.userRepository.save(user);
     }
 
-    private static BackendUserBean createUserBean(BackendUserEntity userEntity) {
+    private BackendUserBean createUserBean(BackendUserEntity userEntity) {
         BackendUserBean userBean = new BackendUserBean();
         userBean.setId(userEntity.getId());
         userBean.setName(userEntity.getName());
         userBean.setRoleId(userEntity.getRoleId());
         userBean.setEmail(userEntity.getEmail());
+        BackendRoleEntity role = roleRepository.findOne(userEntity.getRoleId());
+        userBean.setRole(role.getRole());
         return userBean;
     }
 

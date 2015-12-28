@@ -1,13 +1,19 @@
+<header class='header'>
+        <h2>Uesr List</h2>
+</header>
 <div>
+    <div class='button-group'>
+        <a class='btn btn-primary' ui-sref='home.newuser' >New User</a>
+    </div>
     <table class="table">
         <th ng-repeat="head in headers" ng-model="head">
         	<p class= "userlist-head">{{head}}</p>
         </th>
         <tr ng-repeat="user in users" ng-model="user">
-            <td class= "userlist-text">{{user.userName}}</td>
-            <td class= "userlist-text">{{user.email}}</td>
-            <td class= "userlist-text">{{user.phone}}</td>
-            <td><a ui-sref='home.edit({openid: user.openid})'>edit</a></td>
+            <td class= "userlist-text">{{user.name}}</td>
+            <td class= "userlist-text">{{user.role}}</td>
+            <td><a ui-sref='home.edit({id: user.id})'>Edit</a></td>
+            <td><a ui-sref='#' ng-click='delete(user.id)' >Delete</a></td>
         </tr>
     </table>
 </div>

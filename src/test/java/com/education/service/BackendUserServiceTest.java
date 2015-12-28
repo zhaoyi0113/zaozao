@@ -3,7 +3,6 @@ package com.education.service;
 import com.education.db.entity.BackendLoginHistoryEntity;
 import com.education.db.jpa.BackendLoginHistoryRepository;
 import com.education.db.jpa.BackendUserRepository;
-import com.education.formbean.BackendRoleService;
 import com.education.formbean.BackendUserBean;
 import org.junit.Assert;
 import org.junit.Test;
@@ -49,6 +48,8 @@ public class BackendUserServiceTest extends AbstractServiceTest {
 
         String role = loginService.getUserRole("aaa", "1234");
         Assert.assertEquals(roleName, role);
+        role = loginService.getUserRole("aaa");
+        Assert.assertEquals(roleName, role);
 
         userService.deleteUser(userId);
         List<BackendUserBean> allUsers1 = userService.getAllUsers();
@@ -84,5 +85,11 @@ public class BackendUserServiceTest extends AbstractServiceTest {
     public void testLoginFailed(){
         boolean login = loginService.login("aaa", "1234");
         Assert.assertFalse(login);
+    }
+
+    @Test
+    public void testGetRoleNames(){
+        List<String> roleNames = roleService.getRoleNames();
+
     }
 }

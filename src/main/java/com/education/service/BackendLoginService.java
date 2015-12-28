@@ -66,4 +66,14 @@ public class BackendLoginService {
         }
         return null;
     }
+
+    public String getUserRole(String userName){
+        List<BackendUserEntity> userEntityList = userRepository.findByName(userName);
+        if(!userEntityList.isEmpty()){
+            int roleId = userEntityList.get(0).getRoleId();
+            BackendRoleEntity role = roleRepository.findOne(roleId);
+            return role.getRole();
+        }
+        return null;
+    }
 }
