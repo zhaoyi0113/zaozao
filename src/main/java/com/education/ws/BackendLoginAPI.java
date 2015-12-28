@@ -24,7 +24,7 @@ import java.util.logging.Logger;
 /**
  * Created by yzzhao on 11/1/15.
  */
-@Path("/login")
+@Path("/backend_login")
 @Service
 public class BackendLoginAPI {
 
@@ -40,6 +40,7 @@ public class BackendLoginAPI {
         logger.info("login " + userName);
         if (loginService.login(userName, password)) {
             HttpSession session = request.getSession();
+            logger.info("session interval:"+session.getMaxInactiveInterval());
             session.setAttribute("user_name", userName);
             return Response.ok().entity(loginService.getUserRole(userName, password)).build();
         }
@@ -50,8 +51,10 @@ public class BackendLoginAPI {
     @Path("/check")
     public Response isLogin(@Context HttpServletRequest request) {
         if (loginService.whetherLogin(request)) {
+            logger.info("logined in");
             return Response.ok().entity("1").build();
         }
+        logger.info("not login");
         return Response.ok().entity("0").build();
     }
 
@@ -60,7 +63,7 @@ public class BackendLoginAPI {
     public Response logout(@Context HttpServletRequest request) {
         HttpSession session = request.getSession();
         session.invalidate();
-        ;
+
         return Response.ok().build();
     }
 

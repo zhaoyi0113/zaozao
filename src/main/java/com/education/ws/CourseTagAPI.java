@@ -35,7 +35,11 @@ public class CourseTagAPI {
                                     @FormDataParam("file") FormDataContentDisposition disposition) {
         logger.info("add course tag " + tagName);
         String fileName = WSUtility.getUtf8Character(disposition.getFileName());
-        courseTagService.addNewCourseTag(tagName, fileName, fileInputStream);
+        if(courseTagId == 0) {
+            courseTagService.addNewCourseTag(tagName, fileName, fileInputStream);
+        }else{
+            courseTagService.editCourseTag(courseTagId, tagName, disposition.getFileName(), fileInputStream);
+         }
         return Response.ok().build();
     }
 

@@ -1,14 +1,23 @@
 <div>
-    <p ng-show="loginFailed">Login Failed</p>
     
-    <form name="form" ng-show="!login">
-            <p>Name:<input ng-model="username" name="userName" type="text" required /></p>
-            <p>Password: <input ng-model="password" name="password" type="password" required/></p>
-            <p>
-            	<button ng-click="submit()" ng-disabled="username ==='' || password === ''">Submit</button>
-        		<button ng-click="cancel()">Cancel</button>
-            </p>
+    
+    <form name="form" class="form-inline">
+        <div class='has-error' ng-show="loginFailed">
+            <label class='control-label'> Login Failed</label>
+        </div>
+        <div class='form-group'>
+            <label>Name:</label>
+            <input class='form-control' ng-model="username" name="userName" type="text" required />
+        </div>
+        <div class='form-group'>
+            <label>Password: </label>
+            <input class='form-control' ng-model="password" name="password" type="password" required/>
+        </div>
+        <div class='form-group'>
+            	<button class='btn btn-default' ng-click="submit()" ng-disabled="username ==='' || password === ''">Submit</button>
+        		<button class='btn btn-default' ng-click="cancel()">Cancel</button>
+        </div>
     	</ul>
     </form>
-    <button ng-click="logout()" ng-show="login">Logout</button>
+    <!-- <button ng-click="logout()" ng-show="login">Logout</button> -->
 </div>

@@ -3,21 +3,68 @@ define(['angular'], function(angular) {
 	'use strict';
 	var login = angular.module("loginServiceModule", []);
 
-	login.service('LoginService', function() {
-		this.login = false;
+	login.service('LoginService', function($rootScope, $q, $http, $location, $httpParamSerializer) {
 
 		this.isLogin = function() {
-			return this.login;
+			var deferred = $q.defer();
+			var promise = deferred.promise;
+			$http.get('http://' + $location.host() + ":" +
+					$location.port() + '/education/zaozao/backend_login/check')
+				.success(function(e) {
+					if (e === '1') {
+						deferred.resolve(true);
+					} else {
+						deferred.reject(false);
+					}
+				}).error(function(e) {
+					deferred.reject(false);
+				});
+			return promise;
 		}
 
-		this.setLogin = function(login) {
-			this.login = login;
+		this.doLogin = function(userName, password) {
+			var deferred = $q.defer();
+			var promise = deferred.promise;
+			var req = {
+				method: 'POST',
+				url: 'http://' + $location.host() + ":" + $location.port() + '/education/zaozao/backend_login',
+				headers: {
+					'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+				},
+				data: $httpParamSerializer({
+					userName: userName,
+					password: this.sha1(password)
+				})
+			};
+			$http(req).success(function(e) {
+				console.log('login success.');
+				$rootScope.$emit('LOGIN', true);
+				deferred.resolve(true);
+			}).error(function(e) {
+				$rootScope.$emit('LOGIN', false);
+				deferred.reject(false);
+			});
+			return promise;
 		}
 
-		this.sha1 = function(str){
+		this.doLogout = function doLogout() {
+			var deferred = $q.defer();
+			var promise = deferred.promise;
+			$http.get('http://' + $location.host() + ":" + $location.port() + '/education/zaozao/backend_login/logout')
+				.success(function(e) {
+					deferred.resolve(true);
+					$rootScope.$emit('LOGIN', false);
+				}).error(function(e){
+					deferred.reject(false);
+				});
+			return promise;
+		}
+
+		this.sha1 = function(str) {
 			return hex_sha1(str);
 		}
 	});
+
 
 
 	/*

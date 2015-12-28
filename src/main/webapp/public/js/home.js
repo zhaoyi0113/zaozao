@@ -4,15 +4,9 @@ define(['angular', 'user', 'login', 'course', 'courseplan', 'coursetag', 'homeco
     var home = angular.module("homeModule", ['userModule', 'loginModule', 'courseModule', 'coursePlanModel',
         'courseTagModule', 'homeConfigModule', 'userServiceModule', 'loginServiceModule'
     ]);
-    home.controller('HomeController', ['$scope', '$http', '$rootScope', 'LoginService',
-        function($scope, $http, $rootScope, loginService) {
+    home.controller('HomeController', ['$scope', '$http', '$rootScope', 'LoginService','$state',
+        function($scope, $http, $rootScope, loginService, $state) {
             console.log('home');
-            var loginLabel = '';
-            if (loginService.isLogin() === true) {
-                loginLabel = 'Logout';
-            } else {
-                loginLabel = 'Login';
-            }
             $scope.tabs = [{
                 url: '.course',
                 label: 'Course'
@@ -24,22 +18,24 @@ define(['angular', 'user', 'login', 'course', 'courseplan', 'coursetag', 'homeco
                 label: 'Home Page Config'
             }, {
                 url: '.login',
-                label: loginLabel
+                label: 'Label'
             }];
-            console.log(loginService.sha1('jstc127a'));
-            $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
-                console.log('state changed to ' + toState.name)
-                if (toState.name == 'login') {
-                    return; // 如果是进入登录界面则允许
+            loginService.isLogin().then(function(event){
+                console.log('already login ', event);
+                $scope.tabs[3].label = 'Logout';
+            }, function(error){
+                console.log('not login', error);
+                $scope.tabs[3].label = 'Login';
+            });
+            $rootScope.$on('LOGIN', function(event, data){
+                console.log('login service changed ',data);
+
+                if(data === true){
+                    $scope.tabs[3].label = 'Logout';
+
+                }else{
+                    $scope.tabs[3].label = 'Login';
                 }
-                // 如果用户不存在
-                // if (!$rootScope.user || !$rootScope.user.token) {
-                //     event.preventDefault(); // 取消默认跳转行为
-                //     $state.go("login", {
-                //         from: fromState.name,
-                //         w: 'notLogin'
-                //     }); //跳转到登录界面
-                // }
             });
         }
     ]);
