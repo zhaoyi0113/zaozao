@@ -1,7 +1,8 @@
 package com.education.ws;
 
-import com.education.service.BackendRoleService;
+import com.education.auth.Login;
 import com.education.formbean.BackendUserBean;
+import com.education.service.BackendRoleService;
 import com.education.service.BackendUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -13,6 +14,7 @@ import javax.ws.rs.core.Response;
  * Created by yzzhao on 12/26/15.
  */
 @Path("/backend_users")
+@Login
 public class BackendUserAPI {
 
     @Autowired
