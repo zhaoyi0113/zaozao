@@ -1,0 +1,2 @@
+ALTER TABLE `course`
+CHANGE COLUMN `content` `content` MEDIUMTEXT NULL DEFAULT NULL ;

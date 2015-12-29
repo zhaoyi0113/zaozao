@@ -1,6 +1,5 @@
 package com.education.ws;
 
-import com.education.db.entity.CourseTagEntity;
 import com.education.formbean.CourseTagBean;
 import com.education.service.CourseTagService;
 import com.education.ws.util.WSUtility;
@@ -40,7 +39,7 @@ public class CourseTagAPI {
         }else{
             courseTagService.editCourseTag(courseTagId, tagName, disposition.getFileName(), fileInputStream);
          }
-        return Response.ok().build();
+        return WSUtility.buildResponse();
     }
 
     @POST
@@ -49,7 +48,7 @@ public class CourseTagAPI {
                                   @FormParam("course_tag_id") int courseTagId) {
         logger.info("edit course tag " + tagName);
         courseTagService.editCourseTag(courseTagId, tagName, null, null);
-        return Response.ok().build();
+        return WSUtility.buildResponse();
     }
 
     @GET
@@ -57,7 +56,7 @@ public class CourseTagAPI {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response getCourseTags() {
         List<CourseTagBean> courseTags = courseTagService.getCourseTags();
-        return Response.ok(courseTags).build();
+        return WSUtility.buildResponse(courseTags);
     }
 
     @GET
@@ -65,8 +64,7 @@ public class CourseTagAPI {
     @Consumes(MediaType.APPLICATION_JSON)
     @Path("/{courseId}")
     public Response getCourseTag(@PathParam("courseId") int courseTagId) {
-
-        return Response.ok(courseTagService.getCourseTag(courseTagId)).build();
+        return WSUtility.buildResponse(courseTagService.getCourseTag(courseTagId));
     }
 
     @DELETE
@@ -74,6 +72,6 @@ public class CourseTagAPI {
     @Path("/{id}")
     public Response deleteCourseTag(@PathParam("id") int courseTagId) {
         courseTagService.deleteCourseTag(courseTagId);
-        return Response.ok().build();
+        return WSUtility.buildResponse();
     }
 }
