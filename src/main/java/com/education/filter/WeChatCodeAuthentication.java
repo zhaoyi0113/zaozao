@@ -17,7 +17,6 @@ import javax.ws.rs.container.ContainerRequestFilter;
 import javax.ws.rs.container.ResourceInfo;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MultivaluedMap;
-import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.Provider;
 import java.io.IOException;
 import java.util.List;
@@ -46,14 +45,19 @@ public class WeChatCodeAuthentication implements ContainerRequestFilter {
     @Override
     public void filter(ContainerRequestContext requestContext) throws IOException {
         Public annotation = resourceInfo.getResourceMethod().getAnnotation(Public.class);
-        if (annotation == null || !annotation.requireWeChatCode()) {
+        if (annotation == null) {
             return;
         }
-        String code = getWeChatCode(requestContext);
+        String code = getWeChatCode(requestContext, annotation);
         logger.info("get wechat code " + code);
         WeChatUserInfo webUserInfo = weChatService.getWebUserInfo(code);
-        if (webUserInfo.getErrcode() != null) {
-            throw new BadRequestException(Response.Status.BAD_REQUEST);
+        if (webUserInfo == null) {
+            return;
+        }
+        if (webUserInfo.getErrcode() != null || webUserInfo.getOpenid() == null) {
+            //throw new BadRequestException(Response.Status.BAD_REQUEST);
+            logger.severe("can't get wechat user info," + webUserInfo.getErrcode() + "," + webUserInfo.getOpenid());
+            return;
         }
         if (annotation.requireWeChatUser()) {
             checkUserExistent(webUserInfo);
@@ -63,14 +67,20 @@ public class WeChatCodeAuthentication implements ContainerRequestFilter {
         requestContext.setProperty(ContextKeys.WECHAT_USER, webUserInfo);
     }
 
-    private String getWeChatCode(ContainerRequestContext requestContext) {
+    private String getWeChatCode(ContainerRequestContext requestContext, Public annotation) {
         MultivaluedMap<String, String> pathParameters = requestContext.getUriInfo().getQueryParameters();
         if (pathParameters == null) {
+            if (annotation.requireWeChatCode() == false) {
+                return null;
+            }
             throw new BadRequestException(ErrorCode.WECHAT_CODE_ERROR);
         }
         logger.info("request context parameters " + pathParameters);
         List<String> code = pathParameters.get("code");
-        if (code == null || code.isEmpty()) {
+        if ((code == null || code.isEmpty())) {
+            if (annotation.requireWeChatCode() == false) {
+                return null;
+            }
             logger.severe(ErrorCode.WECHAT_CODE_ERROR.getEnMsg());
             throw new BadRequestException(ErrorCode.WECHAT_CODE_ERROR);
         }
@@ -78,14 +88,17 @@ public class WeChatCodeAuthentication implements ContainerRequestFilter {
     }
 
     private void checkUserExistent(WeChatUserInfo userInfo) {
-        List<UserEntity> entity = userRepository.findByOpenid(userInfo.getOpenId());
-        if (entity == null || entity.size()<=0) {
+        List<UserEntity> entity = userRepository.findByOpenid(userInfo.getOpenid());
+        if (entity == null || entity.size() <= 0) {
             throw new BadRequestException(ErrorCode.USER_NOT_EXISTED);
         }
     }
 
     @Transactional
-    private int registerUserIfNotExist(WeChatUserInfo userInfo){
+    private int registerUserIfNotExist(WeChatUserInfo userInfo) {
+        if (!userRepository.findByOpenid(userInfo.getOpenid()).isEmpty()) {
+            return userRepository.findByOpenid(userInfo.getOpenid()).get(0).getUserId();
+        }
         UserEntity entity = new UserEntity();
         entity.setGroupid(userInfo.getGroupid());
         entity.setRemark(userInfo.getRemark());
@@ -93,7 +106,7 @@ public class WeChatCodeAuthentication implements ContainerRequestFilter {
         entity.setCountry(userInfo.getCountry());
         entity.setLanguage(userInfo.getLanguage());
         entity.setHeadimageurl(userInfo.getHeadimgurl());
-        entity.setOpenid(userInfo.getOpenId());
+        entity.setOpenid(userInfo.getOpenid());
         entity.setSex(userInfo.getSex());
         entity.setNickname(userInfo.getNickname());
         entity.setUserName(userInfo.getNickname());

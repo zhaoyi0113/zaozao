@@ -8,6 +8,7 @@ import com.education.exception.BadRequestException;
 import com.education.exception.ErrorCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -24,6 +25,43 @@ public class LoginHistoryService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Transactional
+    public int saveWeChatUserLogin(WeChatUserInfo userInfo) {
+        int userId = -1;
+        List<UserEntity> users = userRepository.findByOpenid(userInfo.getOpenid());
+        if (users.isEmpty()) {
+            userId = saveUserInfo(userInfo);
+        } else {
+            UserEntity userEntity = users.get(0);
+            userId = userEntity.getUserId();
+        }
+        LoginHistoryEntity entity = new LoginHistoryEntity();
+        entity.setLoginTime(Calendar.getInstance().getTime());
+        entity.setUserid(userId);
+        LoginHistoryEntity save = loginHistoryRepository.save(entity);
+        return save.getId();
+    }
+
+    private int saveUserInfo(WeChatUserInfo userInfo) {
+        UserEntity entity = new UserEntity();
+        entity.setGroupid(userInfo.getGroupid());
+        entity.setRemark(userInfo.getRemark());
+        entity.setCity(userInfo.getCity());
+        entity.setCountry(userInfo.getCountry());
+        entity.setLanguage(userInfo.getLanguage());
+        entity.setHeadimageurl(userInfo.getHeadimgurl());
+        entity.setOpenid(userInfo.getOpenid());
+        entity.setSex(userInfo.getSex());
+        entity.setNickname(userInfo.getNickname());
+        entity.setUserName(userInfo.getNickname());
+        entity.setProvince(userInfo.getProvince());
+        entity.setSubscribe(userInfo.getSubscribe());
+        entity.setUnionid(userInfo.getUnionid());
+        entity.setSubscribe_time(userInfo.getSubscribe_time());
+        UserEntity saved = userRepository.save(entity);
+        return saved.getUserId();
+    }
 
     public int saveLogin(int userid) {
         UserEntity user = userRepository.findOne(userid);

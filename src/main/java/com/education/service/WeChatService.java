@@ -99,6 +99,7 @@ public class WeChatService {
             logger.info("get web user info response " + body);
             Gson gson = new Gson();
             WeChatUserInfo weChatUserInfo = gson.fromJson(body, WeChatUserInfo.class);
+            logger.info("get web user info response " + weChatUserInfo.getOpenid());
             return weChatUserInfo;
         } catch (IOException e) {
             e.printStackTrace();

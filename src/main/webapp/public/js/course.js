@@ -250,7 +250,7 @@ define(['angular', 'angular-file-upload', 'directives', 'angular-ui-date', 'angu
 
                     if ($scope.course.titleImageUrl != null) {
                         $scope.course.imageurl = 'http://' + $location.host() + ":" + $location.port() +
-                            '/education/' + $scope.course.titleImageUrl;
+                            $scope.course.titleImageUrl;
                     } else {
                         $scope.course.imageurl = null;
                     }

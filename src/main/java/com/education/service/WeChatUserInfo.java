@@ -6,7 +6,7 @@ package com.education.service;
 public class WeChatUserInfo {
     private String subscribe;
 
-    private String openId;
+    private String openid;
 
     private String nickname;
 
@@ -42,12 +42,12 @@ public class WeChatUserInfo {
         this.subscribe = subscribe;
     }
 
-    public String getOpenId() {
-        return openId;
+    public String getOpenid() {
+        return openid;
     }
 
-    public void setOpenId(String openId) {
-        this.openId = openId;
+    public void setOpenid(String openid) {
+        this.openid = openid;
     }
 
     public String getNickname() {

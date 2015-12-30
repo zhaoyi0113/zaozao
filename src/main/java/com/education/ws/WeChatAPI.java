@@ -1,12 +1,16 @@
 package com.education.ws;
 
 import com.education.auth.Public;
+import com.education.service.LoginHistoryService;
 import com.education.service.WeChatService;
 import com.education.service.WeChatUserInfo;
+import com.education.ws.util.ContextKeys;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.*;
 import javax.ws.rs.container.ContainerRequestContext;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.net.URI;
@@ -21,6 +25,9 @@ public class WeChatAPI {
 
     @Autowired
     private WeChatService weChatService;
+
+    @Autowired
+    private LoginHistoryService historyService;
 
     @Path("/connect")
     @GET
@@ -49,10 +56,15 @@ public class WeChatAPI {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Public(requireWeChatCode = true, requireWeChatUser = false)
-    public Response login(@QueryParam("code") String code, @QueryParam("state") String state) {
-        logger.info(" login code=" + code + ", state= " + state);
-        WeChatUserInfo webUserInfo = weChatService.getWebUserInfo(code);
-        return Response.ok(webUserInfo).build();
+    public Response login(@Context HttpServletRequest request,
+                          @Context ContainerRequestContext requestContext,
+                          @QueryParam("code") String code, @QueryParam("state") String state) {
+        logger.info(" login code=" + code + ", state= " + state+", "+requestContext);
+        WeChatUserInfo userInfo = (WeChatUserInfo) requestContext.getProperty(ContextKeys.WECHAT_USER);
+        if(userInfo != null) {
+            historyService.saveWeChatUserLogin(userInfo);
+        }
+        return Response.ok().build();
     }
 
     @Path("/getopenid")
@@ -60,7 +72,7 @@ public class WeChatAPI {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getOpenId(@QueryParam("code") String code, @QueryParam("state") String state) {
         WeChatUserInfo webUserInfo = weChatService.getWebUserInfo(code);
-        return Response.ok(webUserInfo.getOpenId()).build();
+        return Response.ok(webUserInfo.getOpenid()).build();
     }
 
     @Path("/userlist")
@@ -81,11 +93,11 @@ public class WeChatAPI {
     @Path("/jsapi")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getJsApiTicket(ContainerRequestContext context){
+    public Response getJsApiTicket(ContainerRequestContext context) {
         URI baseUri = context.getUriInfo().getBaseUri();
         URI absolutePath = context.getUriInfo().getAbsolutePath();
-        logger.info("base uri:"+baseUri.toString());
-        logger.info("absout path:"+absolutePath.toString());
+        logger.info("base uri:" + baseUri.toString());
+        logger.info("absout path:" + absolutePath.toString());
         Map<String, String> webJSSignature = weChatService.getWebJSSignature("http://www.imzao.com/education/");
         return Response.ok(webJSSignature).build();
     }

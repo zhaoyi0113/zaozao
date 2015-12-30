@@ -56,7 +56,7 @@ public class UserService {
     private UserEntity createUserEntity( WeChatUserInfo userInfo) {
         UserEntity entity = new UserEntity();
         entity.setSubscribe(userInfo.getSubscribe());
-        entity.setOpenid(userInfo.getOpenId());
+        entity.setOpenid(userInfo.getOpenid());
         entity.setNickname(userInfo.getNickname());
         entity.setCity(userInfo.getCity());
         entity.setSex(userInfo.getSex());
