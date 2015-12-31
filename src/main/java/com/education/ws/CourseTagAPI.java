@@ -62,9 +62,17 @@ public class CourseTagAPI {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    @Path("/{courseId}")
-    public Response getCourseTag(@PathParam("courseId") int courseTagId) {
+    @Path("/{courseTagId}")
+    public Response getCourseTag(@PathParam("courseTagId") int courseTagId) {
         return WSUtility.buildResponse(courseTagService.getCourseTag(courseTagId));
+    }
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Path("/course/{courseId}")
+    public Response getCourseTagByCourseId(@PathParam("courseId") int courseId) {
+        return WSUtility.buildResponse(courseTagService.getCourseTagsByCourseId(courseId));
     }
 
     @DELETE

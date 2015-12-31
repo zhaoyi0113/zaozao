@@ -1,6 +1,7 @@
 package com.education.service;
 
 import com.education.db.entity.CourseTagEntity;
+import com.education.db.entity.CourseTagRelationEntity;
 import com.education.db.jpa.CourseTagRelationRepository;
 import com.education.db.jpa.CourseTagRepository;
 import com.education.exception.BadRequestException;
@@ -87,6 +88,19 @@ public class CourseTagService {
             throw new BadRequestException(ErrorCode.COURSE_TAG_NOT_EXIST);
         }
         return createCourseTagBean(courseTag);
+    }
+
+    public List<CourseTagBean> getCourseTagsByCourseId(int courseId){
+        List<CourseTagRelationEntity> courseTags = courseTagRelationRepository.findCourseTagsByCourseId(courseId);
+        List<CourseTagBean> tags = new ArrayList<>();
+        for(CourseTagRelationEntity entity : courseTags){
+            CourseTagEntity tagEntity = courseTagRepository.findOne(entity.getCourseTagId());
+            if(tagEntity != null) {
+                CourseTagBean courseTagBean = createCourseTagBean(tagEntity);
+                tags.add(courseTagBean);
+            }
+        }
+        return tags;
     }
 
     @Transactional

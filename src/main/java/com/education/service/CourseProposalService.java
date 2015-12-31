@@ -5,6 +5,7 @@ import com.education.db.entity.CourseEntity;
 import com.education.db.jpa.CourseRepository;
 import com.education.db.jpa.CourseTypeRepository;
 import com.education.db.jpa.UserRepository;
+import com.education.formbean.CourseTagBean;
 import com.education.ws.CourseRegisterBean;
 import com.education.ws.util.WSUtility;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,9 @@ public class CourseProposalService {
     private CourseRepository courseRepository;
 
     @Autowired
+    private CourseTagService courseTagService;
+
+    @Autowired
     private WSUtility wsUtility;
 
     public List<CourseRegisterBean> queryCourse(WeChatUserInfo userInfo, int tagId, String status, int number) {
@@ -53,6 +57,16 @@ public class CourseProposalService {
             logger.info("add course " + entity.getId());
             CourseRegisterBean bean = new CourseRegisterBean(entity, wsUtility);
             courseBeanList.add(bean);
+            StringBuilder builder = new StringBuilder();
+            List<CourseTagBean> tags = courseTagService.getCourseTagsByCourseId(entity.getId());
+            for (CourseTagBean tag : tags) {
+                builder.append(tag.getName()).append(",");
+            }
+            String tagStr = builder.toString();
+            if (tagStr.endsWith(",")) {
+                tagStr = tagStr.substring(0, tagStr.length() - 1);
+            }
+            bean.setTags(tagStr);
             index++;
             if (number > 0 && index == number) {
                 break;

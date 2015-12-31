@@ -72,4 +72,14 @@ public class CourseTagServiceTest extends AbstractServiceTest {
         Assert.assertEquals("aaa", courseTag.getName());
     }
 
+    @Test
+    public void testGetCourseTag(){
+        String name = String.valueOf(System.currentTimeMillis());
+        CourseRegisterBean courseBean = CourseServiceTest.createCourseBean(name);
+        int courseTagId = courseTagService.addNewCourseTag("1", "1", null);
+        courseBean.setTags(courseTagId + ",2,3");
+        int courseId = courseService.createCourse(courseBean);
+        List<CourseTagBean> tags = courseTagService.getCourseTagsByCourseId(courseId);
+        Assert.assertEquals(3, tags.size());
+    }
 }
