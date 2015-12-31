@@ -65,7 +65,9 @@ define(['angular', 'angular-file-upload', 'directives', 'angular-ui-date', 'angu
             };
             $scope.status = {};
             $scope.status.opened = false;
-
+            var now = new Date();
+            $scope.publishDate = now.getFullYear() +"/"+(now.getMonth()+1)+"/"+now.getDate();
+            console.log('now:', $scope.publishDate);
             // $scope._simpleConfig = {
             //      //这里可以选择自己需要的工具按钮名称,此处仅选择如下五个
             //      toolbars: [

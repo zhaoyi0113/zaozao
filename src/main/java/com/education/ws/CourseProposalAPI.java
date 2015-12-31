@@ -5,6 +5,7 @@ import com.education.auth.Public;
 import com.education.service.CourseProposalService;
 import com.education.service.WeChatUserInfo;
 import com.education.ws.util.ContextKeys;
+import com.education.ws.util.WSUtility;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -34,12 +35,13 @@ public class CourseProposalAPI {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/query")
     public Response getCourse(@Context ContainerRequestContext context,
-                              @DefaultValue("0") @QueryParam("category") int category,
-                              @DefaultValue("1") @QueryParam("status") String status) {
-        logger.info("get course " + category);
+                              @DefaultValue("0") @QueryParam("tag_id") int tagId,
+                              @DefaultValue("ENABLED") @QueryParam("status") String status,
+                              @DefaultValue("3") @QueryParam("number") int number) {
+        logger.info("get course " + tagId);
         WeChatUserInfo userInfo = (WeChatUserInfo) context.getProperty(ContextKeys.WECHAT_USER);
-        List<CourseRegisterBean> beans = courseProposalService.queryCourse(userInfo, category, status);
-        return Response.ok(beans).build();
+        List<CourseRegisterBean> beans = courseProposalService.queryCourse(userInfo, tagId, status, number);
+        return WSUtility.buildResponse(beans);
     }
 
 

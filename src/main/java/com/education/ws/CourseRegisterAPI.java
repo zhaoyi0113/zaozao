@@ -70,6 +70,7 @@ public class CourseRegisterAPI {
         bean.setTags(multiPart.getField("tags").getValue());
         bean.setPublishDate(multiPart.getField("publish_date").getValue());
         bean.setStatus(multiPart.getField("status").getValue());
+        bean.setVideoExternalUrl(multiPart.getField("video_external_url").getValue());
 
         FormDataBodyPart multiPartFile = multiPart.getField("file");
 

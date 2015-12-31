@@ -28,9 +28,10 @@ public interface CourseRepository extends CrudRepository<CourseEntity, Integer>{
 
     List<CourseEntity> findByCategoryAndDate(String category, Date date);
 
-//    @QueryParam("select * from CourseEntity c where c.category = :category_id and c.status  = :status")
-//    List<CourseEntity> findEnabledCoursesByCategoryIdAndStatus(@Param("category_id") int category,@Param("status") CommonStatus status);
+    @Query("select c from CourseEntity c where status= :status and publishDate<= :date order by publishDate desc")
+    List<CourseEntity> findEnabledCoursesByStatus(@Param("status") CommonStatus status, @Param("date") Date date);
 
-    @Query("select c from CourseEntity c where status= :status and category_id = :category_id")
-    List<CourseEntity> findEnabledCoursesByStatusAndCategory(@Param("status") CommonStatus status, @Param("category_id") int categoryId);
+    @Query("select c from CourseEntity c, CourseTagRelationEntity ctr where c.id = ctr.courseId and ctr.courseTagId = :courseTagId and c.status = :status and c.publishDate <= :date order by c.publishDate desc")
+    List<CourseEntity> findEnabledCoursesByStatusAndCourseTag(@Param("status") CommonStatus status, @Param("courseTagId") int courseTagId, @Param("date") Date date);
+
 }

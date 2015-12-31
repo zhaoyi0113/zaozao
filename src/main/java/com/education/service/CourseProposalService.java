@@ -11,13 +11,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.logging.Logger;
 
 /**
  * Created by yzzhao on 12/15/15.
  */
 @Service("CourseProposalService")
 public class CourseProposalService {
+
+    private static final Logger logger = Logger.getLogger(CourseProposalService.class.getName());
 
     @Autowired
     private CourseTypeRepository courseTypeRepository;
@@ -34,12 +39,24 @@ public class CourseProposalService {
     @Autowired
     private WSUtility wsUtility;
 
-    public List<CourseRegisterBean> queryCourse(WeChatUserInfo userInfo, int categoryId, String status) {
-        List<CourseEntity> courseList = courseRepository.findEnabledCoursesByStatusAndCategory(CommonStatus.valueOf(status), categoryId);
+    public List<CourseRegisterBean> queryCourse(WeChatUserInfo userInfo, int tagId, String status, int number) {
+        List<CourseEntity> courseList = new ArrayList<>();
+        Date now = Calendar.getInstance().getTime();
+        if (tagId <= 0) {
+            courseList = courseRepository.findEnabledCoursesByStatus(CommonStatus.valueOf(status), now);
+        } else {
+            courseList = courseRepository.findEnabledCoursesByStatusAndCourseTag(CommonStatus.valueOf(status), tagId, now);
+        }
         List<CourseRegisterBean> courseBeanList = new ArrayList<>();
+        int index = 0;
         for (CourseEntity entity : courseList) {
+            logger.info("add course " + entity.getId());
             CourseRegisterBean bean = new CourseRegisterBean(entity, wsUtility);
             courseBeanList.add(bean);
+            index++;
+            if (number > 0 && index == number) {
+                break;
+            }
         }
         return courseBeanList;
     }

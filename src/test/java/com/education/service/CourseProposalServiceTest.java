@@ -2,8 +2,10 @@ package com.education.service;
 
 import com.education.db.entity.CommonStatus;
 import com.education.db.entity.CourseEntity;
+import com.education.db.entity.CourseTagRelationEntity;
 import com.education.db.entity.UserEntity;
 import com.education.db.jpa.CourseRepository;
+import com.education.db.jpa.CourseTagRelationRepository;
 import com.education.db.jpa.UserRepository;
 import com.education.ws.CourseRegisterBean;
 import org.junit.Assert;
@@ -13,7 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -34,6 +37,9 @@ public class CourseProposalServiceTest extends AbstractServiceTest {
     @Autowired
     private CourseRepository courseRepository;
 
+    @Autowired
+    private CourseTagRelationRepository courseTagRelationRepository;
+
     @Test
     @Ignore
     public void testCourseProposalEmpty() {
@@ -52,15 +58,76 @@ public class CourseProposalServiceTest extends AbstractServiceTest {
     }
 
     @Test
-    public void testCourseProposalQuery1(){
-        List<CourseRegisterBean> beans = courseProposalService.queryCourse(null, 1, CommonStatus.ENABLED.name());
+    public void testCourseProposalQuery1() {
+        List<CourseRegisterBean> beans = courseProposalService.queryCourse(null, 0, CommonStatus.ENABLED.name(), 0);
         long size = beans.size();
-        CourseEntity course =new CourseEntity();
+        CourseEntity course = new CourseEntity();
         course.setStatus(CommonStatus.ENABLED);
         course.setName("course1");
         course.setCategory(1);
+        course.setPublishDate(Calendar.getInstance().getTime());
         courseRepository.save(course);
-        beans = courseProposalService.queryCourse(null, 1, CommonStatus.ENABLED.name());
-        Assert.assertEquals(size+1, beans.size());
+        beans = courseProposalService.queryCourse(null, 0, CommonStatus.ENABLED.name(), 0);
+        Assert.assertEquals(size + 1, beans.size());
+    }
+
+    @Test
+    public void testCourseTagQuery1() {
+        CourseEntity course = new CourseEntity();
+        course.setStatus(CommonStatus.ENABLED);
+        course.setName("course1");
+        course.setPublishDate(Calendar.getInstance().getTime());
+        CourseEntity saved = courseRepository.save(course);
+        CourseTagRelationEntity ctrEntity = new CourseTagRelationEntity();
+        ctrEntity.setCourseId(saved.getId());
+        ctrEntity.setCourseTagId(99);
+        courseTagRelationRepository.save(ctrEntity);
+        List<CourseRegisterBean> beans = courseProposalService.queryCourse(null, 99, CommonStatus.ENABLED.name(), 0);
+        Assert.assertEquals(1, beans.size());
+    }
+
+    @Test
+    public void testQueryNumberOfCourses() {
+        int length = 10;
+        for (int i = 0; i < length; i++) {
+            CourseEntity course = new CourseEntity();
+            course.setStatus(CommonStatus.ENABLED);
+            course.setName("course1");
+            course.setPublishDate(Calendar.getInstance().getTime());
+            CourseEntity saved = courseRepository.save(course);
+            CourseTagRelationEntity ctrEntity = new CourseTagRelationEntity();
+            ctrEntity.setCourseId(saved.getId());
+            ctrEntity.setCourseTagId(99);
+            courseTagRelationRepository.save(ctrEntity);
+        }
+        List<CourseRegisterBean> beans = courseProposalService.queryCourse(null, 99, CommonStatus.ENABLED.name(), 3);
+        Assert.assertEquals(3, beans.size());
+    }
+
+    @Test
+    public void testQueryCouseByOrder() {
+        List<Integer> lastThree = new ArrayList<>();
+        int length = 10;
+        Calendar instance = Calendar.getInstance();
+        for (int i = 0; i < length; i++) {
+            CourseEntity course = new CourseEntity();
+            course.setStatus(CommonStatus.ENABLED);
+            course.setName("course1");
+            course.setPublishDate(instance.getTime());
+            CourseEntity saved = courseRepository.save(course);
+            CourseTagRelationEntity ctrEntity = new CourseTagRelationEntity();
+            ctrEntity.setCourseId(saved.getId());
+            ctrEntity.setCourseTagId(99);
+            courseTagRelationRepository.save(ctrEntity);
+            instance.add(Calendar.DAY_OF_YEAR,-1);
+            if (i <3) {
+                lastThree.add(saved.getId());
+            }
+        }
+        List<CourseRegisterBean> beans = courseProposalService.queryCourse(null, 99, CommonStatus.ENABLED.name(), 3);
+        Assert.assertEquals(3, beans.size());
+        for (int i = 0; i < lastThree.size(); i++) {
+            Assert.assertEquals(lastThree.get(i)+"", beans.get(i).getId());
+        }
     }
 }
