@@ -14,10 +14,9 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * Created by yzzhao on 12/21/15.
@@ -128,6 +127,48 @@ public class CourseProposalServiceTest extends AbstractServiceTest {
         Assert.assertEquals(3, beans.size());
         for (int i = 0; i < lastThree.size(); i++) {
             Assert.assertEquals(lastThree.get(i)+"", beans.get(i).getId());
+        }
+    }
+
+    @Test
+    public void testQueryMapByDate(){
+        SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+        try {
+            Date date = format.parse("2015/12/1");
+            CourseEntity course = new CourseEntity();
+            course.setStatus(CommonStatus.ENABLED);
+            course.setName("course1");
+            course.setPublishDate(date);
+            courseRepository.save(course);
+
+            date = format.parse("2015/12/2");
+            course = new CourseEntity();
+            course.setStatus(CommonStatus.ENABLED);
+            course.setName("course2");
+            course.setPublishDate(date);
+            courseRepository.save(course);
+
+            date = format.parse("2015/12/2");
+            course = new CourseEntity();
+            course.setStatus(CommonStatus.ENABLED);
+            course.setName("course3");
+            course.setPublishDate(date);
+            courseRepository.save(course);
+
+
+            date = format.parse("2015/12/3");
+            course = new CourseEntity();
+            course.setStatus(CommonStatus.ENABLED);
+            course.setName("course4");
+            course.setPublishDate(date);
+            courseRepository.save(course);
+
+            Map<Date, List<CourseRegisterBean>> courseMap = courseProposalService.queryCourseByDate(null, 0, CommonStatus.ENABLED.name(), 10);
+            Assert.assertTrue(courseMap.size()>=3);
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+            Assert.fail(e.getMessage());
         }
     }
 }

@@ -17,6 +17,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Logger;
 
 @Path("course/proposal")
@@ -44,5 +45,18 @@ public class CourseProposalAPI {
         return WSUtility.buildResponse(beans);
     }
 
+    @GET
+    @Public(requireWeChatCode = false)
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/query_by_date")
+    public Response getCourseByDate(@Context ContainerRequestContext context,
+                                    @DefaultValue("0") @QueryParam("tag_id") int tagId,
+                                    @DefaultValue("ENABLED") @QueryParam("status") String status,
+                                    @DefaultValue("10") @QueryParam("number") int number) {
+        logger.info("get course " + tagId);
+        WeChatUserInfo userInfo = (WeChatUserInfo) context.getProperty(ContextKeys.WECHAT_USER);
+        Map<String, List<CourseRegisterBean>> beans = courseProposalService.queryCourseByDate(userInfo, tagId, status, number);
+        return WSUtility.buildResponse(beans);
+    }
 
 }
