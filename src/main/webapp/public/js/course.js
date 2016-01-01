@@ -251,8 +251,7 @@ define(['angular', 'angular-file-upload', 'directives', 'angular-ui-date', 'angu
                     //console.log('content', $scope.course.content);
                     console.log('path:',$location.path());
                     if ($scope.course.titleImageUrl != null) {
-                        $scope.course.imageurl = 
-                            $scope.course.titleImageUrl;
+                        $scope.course.imageurl = $scope.course.titleImageUrl;
                     } else {
                         $scope.course.imageurl = null;
                     }

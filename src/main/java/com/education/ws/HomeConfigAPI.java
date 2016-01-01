@@ -25,6 +25,9 @@ public class HomeConfigAPI {
     @Autowired
     private HomeConfigService homeConfigService;
 
+    @Autowired
+    private WSUtility wsUtility;
+
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.MULTIPART_FORM_DATA)
@@ -34,14 +37,14 @@ public class HomeConfigAPI {
         String fileName = WSUtility.getUtf8Character(disposition.getFileName());
         logger.info("upload file " + fileName);
         homeConfigService.createImage(fileName, fileInputStream);
-        return Response.ok().build();
+        return wsUtility.buildResponse();
     }
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getHomeImages() {
         List<HomeConfigResp> homeImages = homeConfigService.getHomeImages();
-        return Response.ok(homeImages).build();
+        return wsUtility.buildResponse(homeImages);
     }
 
     @DELETE

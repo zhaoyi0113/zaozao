@@ -50,8 +50,7 @@ define(['angular', 'jquery', 'angular-file-upload', 'angular-animate'], function
 					for (var i = 0; i < e.length; i++) {
 						$scope.images[i] = {
 							id: e[i].id,
-							url: $location.protocol() + "://" + $location.host() + ":" + $location.port() +
-								'/education/' + e[i].image,
+							url: e[i].image,
 							active: false,
 							index: i,
 							name: e[i].fileName
