@@ -59,13 +59,13 @@ public class CourseProposalServiceTest extends AbstractServiceTest {
     @Test
     public void testCourseProposalQuery1() {
         List<CourseRegisterBean> beans = courseProposalService.queryCourse(null, 0, CommonStatus.ENABLED.name(), 0);
-        long size = beans.size();
+        int size = beans.size();
         CourseEntity course = new CourseEntity();
         course.setStatus(CommonStatus.ENABLED);
         course.setName("course1");
         course.setCategory(1);
         course.setPublishDate(Calendar.getInstance().getTime());
-        courseRepository.save(course);
+        CourseEntity save = courseRepository.save(course);
         beans = courseProposalService.queryCourse(null, 0, CommonStatus.ENABLED.name(), 0);
         Assert.assertEquals(size + 1, beans.size());
     }
@@ -163,7 +163,7 @@ public class CourseProposalServiceTest extends AbstractServiceTest {
             course.setPublishDate(date);
             courseRepository.save(course);
 
-            Map<Date, List<CourseRegisterBean>> courseMap = courseProposalService.queryCourseByDate(null, 0, CommonStatus.ENABLED.name(), 10);
+            Map<String, List<CourseRegisterBean>> courseMap = courseProposalService.queryCourseByDate(null, 0, CommonStatus.ENABLED.name(), 10);
             Assert.assertTrue(courseMap.size()>=3);
 
         } catch (ParseException e) {

@@ -49,7 +49,7 @@ public class CourseProposalService {
             String tagStr = getCourseTagString(entity);
             bean.setTags(tagStr);
             courseBeanList.add(bean);
-            if (courseBeanList.size() >= number) {
+            if (number > 0 && courseBeanList.size() >= number) {
                 break;
             }
         }
@@ -72,13 +72,13 @@ public class CourseProposalService {
     public Map<String, List<CourseRegisterBean>> queryCourseByDate(WeChatUserInfo userInfo, int tagId, String status, int number) {
         List<CourseEntity> courseList = getCourseEntities(tagId, status);
         Map<Date, List<CourseRegisterBean>> courseMap = new Hashtable<>();
-        int index=0;
+        int index = 0;
         for (CourseEntity entity : courseList) {
             Date publishDate = entity.getPublishDate();
             List<CourseRegisterBean> beanList = null;
             if (courseMap.containsKey(publishDate)) {
                 beanList = courseMap.get(publishDate);
-            }else{
+            } else {
                 beanList = new ArrayList<>();
                 courseMap.put(publishDate, beanList);
             }
@@ -86,7 +86,7 @@ public class CourseProposalService {
             cbean.setTags(getCourseTagString(entity));
             beanList.add(cbean);
             index++;
-            if(index >= number){
+            if (number > 0 && index >= number) {
                 break;
             }
         }
@@ -98,7 +98,7 @@ public class CourseProposalService {
         });
         sortedMap.putAll(courseMap);
         Map<String, List<CourseRegisterBean>> sortedCourses = new LinkedHashMap<>();
-        for(Map.Entry<Date, List<CourseRegisterBean>> entry : sortedMap.entrySet()){
+        for (Map.Entry<Date, List<CourseRegisterBean>> entry : sortedMap.entrySet()) {
             String dateStr = WSUtility.dateToString(entry.getKey());
             sortedCourses.put(dateStr, entry.getValue());
         }
