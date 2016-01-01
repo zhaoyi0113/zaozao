@@ -176,7 +176,8 @@ define(['angular', 'angular-file-upload', 'directives', 'angular-ui-date', 'angu
                 item.formData.push({
                     publish_date: $scope.publishDate,
                     status: $scope.courseStatus,
-                    video_external_url: $scope.videoUrl
+                    video_external_url: $scope.videoUrl,
+                    video_length: $scope.videoLength
                 })
             };
             $scope.uploader.onErrorItem = function(fileItem, response, status, headers) {
@@ -322,7 +323,8 @@ define(['angular', 'angular-file-upload', 'directives', 'angular-ui-date', 'angu
                             publish_date: $scope.course.publishDate,
                             introduction: $scope.course.introduction,
                             tags: $scope.courseTagId,
-                            video_external_url: $scope.course.videoUrl
+                            video_external_url: $scope.course.videoUrl,
+                            video_length: $scope.course.videoLength
                         })
                     };
                     $http(req).success(function(e) {
@@ -365,7 +367,8 @@ define(['angular', 'angular-file-upload', 'directives', 'angular-ui-date', 'angu
                     tags: $scope.courseTagId,
                     status: $scope.course.courseStatus,
                     publish_date: $scope.course.publishDate,
-                    video_external_url: $scope.course.videoUrl
+                    video_external_url: $scope.course.videoUrl,
+                    video_length:$scope.course.videoLength
                 });
             };
         }

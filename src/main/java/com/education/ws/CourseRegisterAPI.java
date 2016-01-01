@@ -56,7 +56,6 @@ public class CourseRegisterAPI {
     @Autowired
     private CourseService courseService;
 
-
     @Path("create")
     @POST
     @Consumes(MediaType.MULTIPART_FORM_DATA)
@@ -71,6 +70,7 @@ public class CourseRegisterAPI {
         bean.setPublishDate(multiPart.getField("publish_date").getValue());
         bean.setStatus(multiPart.getField("status").getValue());
         bean.setVideoExternalUrl(multiPart.getField("video_external_url").getValue());
+        bean.setVideoLength(Double.parseDouble(multiPart.getField("video_length").getValue()));
 
         FormDataBodyPart multiPartFile = multiPart.getField("file");
 
@@ -122,8 +122,7 @@ public class CourseRegisterAPI {
                                   @PathParam("courseId") String courseId) {
         try {
             CourseQueryBean b = courseService.queryCourse(courseId);
-            return Response.ok().entity(b).header("Access-Control-Allow-Origin", "*")
-                    .header("Access-Control-Allow-Methods", "*").build();
+            return wsUtility.buildResponse(b);
         } catch (Exception e) {
             logger.log(Level.SEVERE, e.getMessage(), e);
             return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
@@ -193,6 +192,7 @@ public class CourseRegisterAPI {
         bean.setPublishDate(multiPart.getField("publish_date").getValue());
         bean.setStatus(multiPart.getField("status").getValue());
         bean.setVideoExternalUrl(multiPart.getField("video_external_url").getValue());
+        bean.setVideoLength(Double.parseDouble(multiPart.getField("video_length").getValue()));
         courseService.editCourse(bean);
         return Response.ok().build();
     }

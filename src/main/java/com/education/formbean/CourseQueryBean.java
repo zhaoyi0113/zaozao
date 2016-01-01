@@ -35,6 +35,8 @@ public class CourseQueryBean {
 
     public String publishDate;
 
+    public double videoLength;
+
     public CourseQueryBean(CourseEntity courseEntity, WSUtility wsUtility){
         this.id = String.valueOf(courseEntity.getId());
         this.name = courseEntity.getName();
@@ -46,6 +48,7 @@ public class CourseQueryBean {
         }
         status=courseEntity.getStatus();
         publishDate = wsUtility.dateToString(courseEntity.getPublishDate());
+        videoLength = courseEntity.getVideoLength();
     }
 
     public String getId() {
@@ -134,5 +137,13 @@ public class CourseQueryBean {
 
     public void setPublishDate(String publishDate) {
         this.publishDate = publishDate;
+    }
+
+    public double getVideoLength() {
+        return videoLength;
+    }
+
+    public void setVideoLength(double videoLength) {
+        this.videoLength = videoLength;
     }
 }

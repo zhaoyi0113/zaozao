@@ -1,0 +1,1 @@
+ALTER TABLE `course` change COLUMN `video_length` `video_length` DOUBLE NULL DEFAULT 0;

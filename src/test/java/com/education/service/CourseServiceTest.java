@@ -100,6 +100,18 @@ public class CourseServiceTest extends AbstractServiceTest {
         Assert.assertEquals(WSUtility.dateToString(date), course.getPublishDate());
     }
 
+    @Test
+    public void testCreateCourseVideoLength(){
+        String name = System.currentTimeMillis() + "";
+        CourseRegisterBean courseBean = createCourseBean(name);
+        courseBean.setVideoLength(20.3);
+        Date date = Calendar.getInstance().getTime();
+        courseBean.setPublishDate(WSUtility.dateToString(date));
+        int courseId = courseService.createCourse(courseBean);
+        CourseQueryBean course = courseService.queryCourse(String.valueOf(courseId));
+        Assert.assertEquals(20.3, course.getVideoLength(),0.1);
+    }
+
     protected static CourseRegisterBean createCourseBean(String name) {
         CourseRegisterBean bean = new CourseRegisterBean();
         bean.setName(name);

@@ -2,6 +2,7 @@ package com.education.ws;
 
 import com.education.db.entity.CourseEntity;
 import com.education.ws.util.WSUtility;
+import org.glassfish.jersey.media.multipart.FormDataParam;
 
 import javax.ws.rs.FormParam;
 
@@ -56,6 +57,9 @@ public class CourseRegisterBean {
     @FormParam("publish_date")
     private String publishDate;
 
+    @FormParam("video_length")
+    private double videoLength;
+
     public CourseRegisterBean() {
     }
 
@@ -79,6 +83,7 @@ public class CourseRegisterBean {
         this.dayNumber = entity.getDayNumber();
         this.status = entity.getStatus().name();
         this.publishDate = wsUtility.dateToString(entity.getPublishDate());
+        this.videoLength = entity.getVideoLength();
     }
 
     public String getDate() {
@@ -220,6 +225,14 @@ public class CourseRegisterBean {
 
     public void setPublishDate(String publishDate) {
         this.publishDate = publishDate;
+    }
+
+    public double getVideoLength() {
+        return videoLength;
+    }
+
+    public void setVideoLength(double videoLength) {
+        this.videoLength = videoLength;
     }
 
     @Override

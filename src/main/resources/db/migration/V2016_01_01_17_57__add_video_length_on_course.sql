@@ -1,0 +1,1 @@
+ALTER TABLE `course` ADD COLUMN video_length int default 0;

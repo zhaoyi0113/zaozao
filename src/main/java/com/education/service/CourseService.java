@@ -171,10 +171,13 @@ public class CourseService {
         one.setContent(bean.getContent());
         one.setIntroduction(bean.getIntroduction());
         one.setName(bean.getName());
-        one.setTitleImagePath(bean.getTitleImagePath());
+        if(bean.getTitleImagePath() != null) {
+            one.setTitleImagePath(bean.getTitleImagePath());
+        }
         one.setVideoExternalUrl(bean.getVideoExternalUrl());
         one.setStatus(CommonStatus.valueOf(bean.getStatus()));
         one.setPublishDate(wsUtility.stringToDate(bean.getPublishDate()));
+        one.setVideoLength(bean.getVideoLength());
         courseRepository.save(one);
         courseTagRelationRepository.removeByCourseId(one.getId());
         saveCourseTags(one.getId(), bean.getTags());

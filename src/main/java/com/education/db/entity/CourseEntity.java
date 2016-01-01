@@ -29,6 +29,7 @@ public class CourseEntity {
     private Date timeCreated;
     private CommonStatus status;
     private Date publishDate;
+    private double videoLength;
 
     public CourseEntity() {
 
@@ -40,7 +41,6 @@ public class CourseEntity {
         picture_paths = bean.getPicturePaths();
         videoPath = bean.getVideoPath();
         titleImagePath = bean.getTitleImagePath();
-//        date = WSUtility.stringToDate(bean.getDate());
         if (bean.getId() != null) {
             id = Integer.parseInt(bean.getId());
         }
@@ -48,11 +48,12 @@ public class CourseEntity {
         videoExternalUrl = bean.getVideoExternalUrl();
         dayNumber = bean.getDayNumber();
         publishDate = WSUtility.stringToDate(bean.getPublishDate());
-        if(bean.getStatus() == null){
+        if (bean.getStatus() == null) {
             status = CommonStatus.ENABLED;
-        }else {
+        } else {
             status = CommonStatus.valueOf(bean.getStatus());
         }
+        videoLength = bean.getVideoLength();
     }
 
     @Id
@@ -167,7 +168,7 @@ public class CourseEntity {
         this.years = years;
     }
 
-    @Column(name="day_number")
+    @Column(name = "day_number")
     public int getDayNumber() {
         return dayNumber;
     }
@@ -176,7 +177,7 @@ public class CourseEntity {
         this.dayNumber = dayNumber;
     }
 
-    @Column(name="time_created")
+    @Column(name = "time_created")
     public Date getTimeCreated() {
         return timeCreated;
     }
@@ -185,7 +186,7 @@ public class CourseEntity {
         this.timeCreated = timeCreated;
     }
 
-    @Column(name="status")
+    @Column(name = "status")
     @Enumerated
     public CommonStatus getStatus() {
         return status;
@@ -195,12 +196,21 @@ public class CourseEntity {
         this.status = status;
     }
 
-    @Column(name="publish_date")
+    @Column(name = "publish_date")
     public Date getPublishDate() {
         return publishDate;
     }
 
     public void setPublishDate(Date publishDate) {
         this.publishDate = publishDate;
+    }
+
+    @Column(name = "video_length")
+    public double getVideoLength() {
+        return videoLength;
+    }
+
+    public void setVideoLength(double videoLength) {
+        this.videoLength = videoLength;
     }
 }
