@@ -5,6 +5,7 @@ import com.education.service.LoginHistoryService;
 import com.education.service.WeChatService;
 import com.education.service.WeChatUserInfo;
 import com.education.ws.util.ContextKeys;
+import com.education.ws.util.WSUtility;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.servlet.http.HttpServletRequest;
@@ -64,7 +65,7 @@ public class WeChatAPI {
         if(userInfo != null) {
             historyService.saveWeChatUserLogin(userInfo);
         }
-        return Response.ok().build();
+        return WSUtility.buildResponse();
     }
 
     @Path("/getopenid")
@@ -72,7 +73,7 @@ public class WeChatAPI {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getOpenId(@QueryParam("code") String code, @QueryParam("state") String state) {
         WeChatUserInfo webUserInfo = weChatService.getWebUserInfo(code);
-        return Response.ok(webUserInfo.getOpenid()).build();
+        return WSUtility.buildResponse(webUserInfo.getOpenid());
     }
 
     @Path("/userlist")
@@ -80,7 +81,7 @@ public class WeChatAPI {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getUserOpenIdList() {
         List<String> userOpenIDList = weChatService.getUserOpenIDList();
-        return Response.ok(userOpenIDList).build();
+        return WSUtility.buildResponse(userOpenIDList);
     }
 
     @Path("/userinfo")
@@ -99,14 +100,14 @@ public class WeChatAPI {
         logger.info("base uri:" + baseUri.toString());
         logger.info("absout path:" + absolutePath.toString());
         Map<String, String> webJSSignature = weChatService.getWebJSSignature("http://www.imzao.com/education/");
-        return Response.ok(webJSSignature).build();
+        return WSUtility.buildResponse(webJSSignature);
     }
 
     @Path("/barcode")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getBarCodeURL(@QueryParam("code") String code) {
-        return Response.ok(weChatService.getQRBarTicket(code)).build();
+        return WSUtility.buildResponse(weChatService.getQRBarTicket(code));
     }
 
 }

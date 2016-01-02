@@ -6,7 +6,7 @@ define(['angular', 'login_service'], function(angular) {
         function($scope, $http, $state, $httpParamSerializer, $location, loginSrv,
             $stateParams) {
             
-            console.log('state params, '+$stateParams.state);
+            console.log('state params, ',$stateParams.state);
             $scope.username = '';
             $scope.password = '';
             $scope.loginFailed = false;
@@ -21,6 +21,7 @@ define(['angular', 'login_service'], function(angular) {
                     .then(function(event) {
                         if($stateParams.state !== null 
                             && $stateParams.state !== undefined){
+                            console.log('go to previous page ', $stateParams.state);
                             $state.go($stateParams.state);
                         }else{
                             $state.go('home');

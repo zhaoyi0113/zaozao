@@ -46,14 +46,6 @@ public class BackendLoginService {
         if (userList != null && userList.size() > 0) {
             login = true;
         }
-        List<BackendUserEntity> userNameList = userRepository.findByName(userName);
-        if (!userNameList.isEmpty()) {
-            BackendLoginHistoryEntity entity = new BackendLoginHistoryEntity();
-            entity.setLoginStatus(login ? 1 : 0);
-            entity.setLoginTime(Calendar.getInstance().getTime());
-            entity.setUserId(userNameList.get(0).getId());
-            loginHistoryRepository.save(entity);
-        }
         return login;
     }
 

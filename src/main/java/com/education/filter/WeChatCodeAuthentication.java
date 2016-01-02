@@ -62,8 +62,7 @@ public class WeChatCodeAuthentication implements ContainerRequestFilter {
         if (annotation.requireWeChatUser()) {
             checkUserExistent(webUserInfo);
         }
-        int userId = registerUserIfNotExist(webUserInfo);
-        loginHistoryService.saveLogin(userId);
+        registerUserIfNotExist(webUserInfo);
         requestContext.setProperty(ContextKeys.WECHAT_USER, webUserInfo);
     }
 

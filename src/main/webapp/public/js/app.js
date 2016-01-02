@@ -76,7 +76,7 @@ define(['angular', 'ui-router', 'jquery-ui', 'home', 'wechat', 'login_service'],
     app.run(['$rootScope', '$location', 'LoginService', '$state',
         function($rootScope, $location, loginSrv, $state) {
             $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
-                console.log('state changed to ' + toState.name+', from state '+fromState.name);
+                console.log('state changed to ' + toState.name+'to params',toParams, ', from state '+fromState.name+", from params ",fromParams);
                 if (toState.name === 'home.login') {
                     return; // 如果是进入登录界面则允许
                 }
