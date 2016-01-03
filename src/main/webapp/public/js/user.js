@@ -36,34 +36,36 @@ define(['angular', 'user_service', 'ui-router','jquery','login_service'], functi
     }
 
     user.controller('UserEditController', ['$scope', '$http', '$stateParams', 'UserService', '$state', '$location',
-        '$httpParamSerializer',
-        function($scope, $http, $stateParams, userSrv, $state, $location, $httpParamSerializer) {
+        '$httpParamSerializer', 'LoginService',
+        function($scope, $http, $stateParams, userSrv, $state, $location, $httpParamSerializer, loginSrv) {
             console.log("params", $stateParams.userId);
             $scope.userId = $stateParams.userId;
-            $scope.user = userSrv.getUserById($scope.userId);
-            console.log("user", $scope.user);
+            $http.get($location.protocol()+"://"+$location.host()+":"+$location.port()+
+                "/education/zaozao/backend_users/"+$scope.userId)
+                .success(function(e){
+                    console.log('get user ',e);
+                    $scope.user = e;
+                }).error(function(e){
+
+                });
 
             $scope.submit = function() {
 
                 var req = {
                     method: 'POST',
-                    url: 'http://' + $location.host() + ":" + $location.port() + '/education/zaozao/editor/user',
+                    url: $location.protocol()+'://' + $location.host() + ":" + $location.port() + 
+                        '/education/zaozao/backend_users/edit',
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
                     },
                     data: $httpParamSerializer({
-                        user_id: $scope.user.userId,
-                        user_name: $scope.user.userName,
-                        phone: $scope.user.phone,
-                        age: $scope.user.age,
-                        email: $scope.user.email,
-                        birthdate: $scope.user.birthdate
+                        id: $scope.user.id,
+                        name: $scope.user.name,
+                        password: loginSrv.sha1($scope.user.password)
                     })
-
                 };
                 $http(req).success(function(e) {
                     $state.go('home.user');
-                    userSrv.updateUser($scope.user);
                 }).error(function(e) {
 
                 });
@@ -111,6 +113,9 @@ define(['angular', 'user_service', 'ui-router','jquery','login_service'], functi
                 }).error(function(e) {
 
                 });
+            }
+            $scope.cancel = function() {
+                $state.go('home.user');
             }
         }
     ]);

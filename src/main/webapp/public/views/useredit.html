@@ -2,18 +2,26 @@
 	<h1>Register Page</h1>
 
     <form name="user_edit">
-        <fieldset>
-            <label for="userName"></label>
-    	</fieldset>
-        
-
-
-        Name:<input ng-model="user.userName" name="userName" type="text" required /><br/>
-        Email: <input ng-model="user.email" name="userEmail" type="text" required /><br/>
-        Phone: <input ng-model="user.phone" name="userPhone" type="text" /><br/>
-        Age: <input ng-model="user.age" name="userAge" type="text" /><br/>
-        <button ng-click="submit()">Submit</button>
-        <button ng-click="cancel()">Cancel</button>
+        <div class = "form-group">
+            <label class='control-label'>Name:</label>
+            <input class = "form-control" ng-model="user.name" name="userName" type="text" placeholder = "Enter your full name" required />
+        </div>
+        <div class = "form-group" ng-class="{'has-error': user_edit.password.$invalid && !user_edit.password.$pristine}">
+            <label class='control-label'>Password:</label>
+            <input id='password' class = "form-control" ng-model="user.password" name="password" type="password" placeholder = "Enter your password" ng-minlength="6" required/>
+            <span class='alert-danger help-block' ng-show='user_edit.password.$invalid && !user_edit.password.$pristine'>Password need to be at least 6 characters</span>
+        </div>
+        <div class = "form-group" ng-class="{'has-error': user_edit.repassword.$invalid && !user_edit.repassword.$pristine}">
+            <label class='control-label'>Confirm Password:</label>
+            <input class = "form-control" ng-model="user.repassword" name="repassword" type="password" placeholder = "Enter your password" ng-minlength="6" pw-check='password' required/>
+            <span ng-show='!user_edit.repassword.$pristine && user_edit.repassword.$invalid' class='alert-danger help-block'>
+                The password doesn't match!
+            </span>
+        </div>
+        <div>
+            <button class='btn btn-primary' ng-click="submit()">Submit</button>
+            <button class='btn btn-primary' ng-click="cancel()">Cancel</button>
+        </div>
     </form>
 
 </div>

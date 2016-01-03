@@ -62,9 +62,6 @@ public class BackendUserService {
         if (user == null) {
             throw new BadRequestException(ErrorCode.USER_NOT_EXISTED);
         }
-        if (userBean.getEmail() != null) {
-            user.setEmail(userBean.getEmail());
-        }
         if (userBean.getName() != null) {
             user.setName(userBean.getName());
         }
@@ -80,6 +77,7 @@ public class BackendUserService {
     private BackendUserBean createUserBean(BackendUserEntity userEntity) {
         BackendUserBean userBean = new BackendUserBean();
         userBean.setId(userEntity.getId());
+        userBean.setPassword(userEntity.getPassword());
         userBean.setName(userEntity.getName());
         userBean.setRoleId(userEntity.getRoleId());
         userBean.setEmail(userEntity.getEmail());

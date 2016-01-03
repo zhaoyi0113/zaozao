@@ -47,6 +47,9 @@ public class AdminPasswordAuthentication implements ContainerRequestFilter {
         if(ContextKeys.ADMIN_ACCOUNT.equals(userName)){
             return;
         }
+        if (annotation.requireAdminAccount()) {
+            throw new BadRequestException(ErrorCode.INVALID_USER);
+        }
         String pwd = getAdminPassword(requestContext);
         if(!loginService.checkUserAccount(ContextKeys.ADMIN_ACCOUNT, pwd)){
             throw new BadRequestException(ErrorCode.INVALID_PASSWORD);

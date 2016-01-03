@@ -12,7 +12,7 @@
         <tr ng-repeat="user in users" ng-model="user">
             <td class= "userlist-text">{{user.name}}</td>
             <td class= "userlist-text">{{user.role}}</td>
-            <td><a ui-sref='home.edit({id: user.id})'>Edit</a></td>
+            <td><a ui-sref='home.edit({userId: user.id})'>Edit</a></td>
             <td><a ui-sref='#' ng-click='delete(user.id)' >Delete</a></td>
         </tr>
     </table>

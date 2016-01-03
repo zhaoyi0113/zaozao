@@ -1,6 +1,7 @@
 package com.education.ws;
 
 import com.education.auth.Login;
+import com.education.auth.Public;
 import com.education.formbean.BackendUserBean;
 import com.education.service.BackendRoleService;
 import com.education.service.BackendUserService;
@@ -25,6 +26,7 @@ public class BackendUserAPI {
 
     @POST
     @Produces(MediaType.APPLICATION_JSON)
+    @Public(requireAdminAccount = true)
     public Response createNewUser(@BeanParam BackendUserBean userBean) {
         userService.createNewUser(userBean);
         return Response.ok().build();
@@ -39,12 +41,13 @@ public class BackendUserAPI {
     @GET
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getUser(@QueryParam("id") int id) {
+    public Response getUser(@PathParam("id") int id) {
         return Response.ok(userService.queryUser(id)).build();
     }
 
     @DELETE
     @Path("{id}")
+    @Public(requireAdminAccount = true)
     public Response deleteUser(@PathParam("id") int id) {
         userService.deleteUser(id);
         return Response.ok().build();
@@ -52,6 +55,7 @@ public class BackendUserAPI {
 
     @POST
     @Path("/edit")
+    @Public(requireAdminAccount = true)
     public Response editUser(@BeanParam BackendUserBean userBean) {
         userService.editUser(userBean);
         return Response.ok().build();
@@ -70,4 +74,5 @@ public class BackendUserAPI {
     public Response getAllRoles(){
         return Response.ok(roleService.getRoles()).build();
     }
+
 }

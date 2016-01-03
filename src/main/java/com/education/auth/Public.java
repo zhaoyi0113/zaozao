@@ -14,4 +14,5 @@ public @interface Public {
     boolean requireWeChatCode() default false;
     boolean requireWeChatUser() default false;
     boolean requireAdminPassword() default false;
+    boolean requireAdminAccount() default false;
 }
