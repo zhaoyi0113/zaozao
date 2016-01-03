@@ -20,6 +20,11 @@ define(['angular', 'user', 'login', 'course', 'courseplan', 'coursetag', 'homeco
                 url: '.login',
                 label: 'Label'
             }];
+            $scope.adminTabs = [{
+                url: '.user',
+                label: 'User'
+            }];
+            $scope.showAdmin = false;
             loginService.isLogin().then(function(event) {
                 loginSuccess(event);
             }, function(error) {
@@ -37,21 +42,17 @@ define(['angular', 'user', 'login', 'course', 'courseplan', 'coursetag', 'homeco
                 }
             });
             $rootScope.$on('LOGOUT', function(event, data) {
-                if ($scope.tabs.length === 5) {
-                    $scope.tabs.splice(4, 1);
-                }
+                $scope.showAdmin = false;
             });
 
             function loginSuccess(event) {
-                console.log('already login ', event);
                 $scope.tabs[3].label = 'Logout';
-                if (event === 'admin' && $scope.tabs.length === 4) {
-                    $scope.tabs.push({
-                        url: '.user',
-                        label: 'User'
-                    });
-                } else if (event === 'user' && $scope.tabs.length === 5) {
-                    $scope.tabs.splice(4, 1);
+                if (event === 'admin') {
+                    console.log('login as admin');
+                    $scope.showAdmin  = true;
+                } else if (event === 'user') {
+                    console.log('login as user');
+                    $scope.showAdmin  = false;
                 };
             }
         }

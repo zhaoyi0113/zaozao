@@ -1,5 +1,6 @@
 package com.education.ws;
 
+import com.education.auth.Public;
 import com.education.formbean.CourseTagBean;
 import com.education.service.CourseTagService;
 import com.education.ws.util.WSUtility;
@@ -28,6 +29,7 @@ public class CourseTagAPI {
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.MULTIPART_FORM_DATA)
+    @Public(requireAdminPassword = true)
     public Response createCourseTag(@FormDataParam("tag_name") String tagName,
                                     @FormDataParam("course_tag_id") int courseTagId,
                                     @FormDataParam("file") InputStream fileInputStream,
@@ -44,6 +46,7 @@ public class CourseTagAPI {
 
     @POST
     @Path("/edit")
+    @Public(requireAdminPassword = true)
     public Response editCourseTag(@FormParam("tag_name") String tagName,
                                   @FormParam("course_tag_id") int courseTagId) {
         logger.info("edit course tag " + tagName);
@@ -78,6 +81,7 @@ public class CourseTagAPI {
     @DELETE
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/{id}")
+    @Public(requireAdminPassword = true)
     public Response deleteCourseTag(@PathParam("id") int courseTagId) {
         courseTagService.deleteCourseTag(courseTagId);
         return WSUtility.buildResponse();

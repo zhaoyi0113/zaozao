@@ -23,7 +23,8 @@ require.config({
         'wx' : 'http://res.wx.qq.com/open/js/jweixin-1.0.0.js',
         'angular-animate': '/education/bower_components/angular-animate/angular-animate.min',
         'tweenmax': '/education/bower_components/gsap/src/minified/TweenMax.min',
-        'jquery': '/education/bower_components/jquery/dist/jquery.min'
+        'jquery': '/education/bower_components/jquery/dist/jquery.min',
+        'ng-dialog': '/education/bower_components/ng-dialog/js/ngDialog.min'
     },
     shim: {
         'angular': {
@@ -82,6 +83,9 @@ require.config({
             exports: 'angular-datepicker'
         },
         'angular-animate': {
+            deps: ['angular']
+        },
+        'ng-dialog': {
             deps: ['angular']
         }
     }

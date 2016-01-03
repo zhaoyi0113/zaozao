@@ -13,4 +13,5 @@ import java.lang.annotation.Target;
 public @interface Public {
     boolean requireWeChatCode() default false;
     boolean requireWeChatUser() default false;
+    boolean requireAdminPassword() default false;
 }

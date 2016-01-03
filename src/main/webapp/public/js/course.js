@@ -1,15 +1,17 @@
 define(['angular', 'angular-file-upload', 'directives', 'angular-ui-date', 'angular-bootstrap', 'angular-bootstrap-tpls',
-    'ueditor-config', 'kindeditor', 'kindeditor-zh',
-    'angular-kindeditor', 'angular-datepicker'
+    'ueditor-config', 'kindeditor', 'kindeditor-zh', 'login_service',
+    'angular-kindeditor', 'angular-datepicker', 'ng-dialog', 'admin_pwd_service'
 ], function(angular) {
     'use strict';
-    var course = angular.module("courseModule", ['angularFileUpload', 'ngThumbModel', 'ui.bootstrap', 'ngKeditor']);
+    var course = angular.module("courseModule", ['angularFileUpload', 'ngThumbModel',
+        'ui.bootstrap', 'ngKeditor', 'ngDialog', 'loginServiceModule', 'adminPwdServiceModule'
+    ]);
 
-    course.controller('CourseController', ['$scope', '$http', '$location', '$state',
-        function($scope, $http, $location, $state) {
+    course.controller('CourseController', ['$scope', '$http', '$location', '$state', 'ngDialog',
+        'LoginService', 'AdminPwdService',
+        function($scope, $http, $location, $state, $ngDialog, loginSrv, adminPwdSrv) {
             console.log("window.location:" + window.location.protocol);
-            //window.UEDITOR_HOME_URL = 'http://' + $location.host() + ":" + $location.port() + '/education/zaozao/course/upload_resource';
-            $scope.headers = ['Name','Publish Date', 'Status', 'Delete'];
+            $scope.headers = ['Name', 'Publish Date', 'Status', 'Delete'];
             $http.get('http://' + $location.host() + ":" + $location.port() + '/education/zaozao/course/queryall')
                 .success(function(e) {
                     var str = JSON.stringify(e);
@@ -24,25 +26,52 @@ define(['angular', 'angular-file-upload', 'directives', 'angular-ui-date', 'angu
             }
 
             $scope.delete = function(id) {
-                $http.delete('http://' + $location.host() + ":" + $location.port() + '/education/zaozao/course/' + id)
-                    .success(function(e) {
-                        console.log('delete success');
-                        var i = 0;
-                        var course = null;
-                        for (i = 0; i < $scope.courses.length; i++) {
-                            if (id === $scope.courses[i].id) {
-                                course = $scope.courses[i];
-                                break;
+                loginSrv.isLogin().then(function(event) {
+                    console.log(event === 'admin');
+                    if (event !== 'admin') {
+                        adminPwdSrv.openPasswordDlg().then(function(data) {
+                            console.log('close dialog ', data.value, adminPwdSrv.adminPwd);
+                            if (data.value !== true) {
+                                return;
                             }
-                        }
-                        if (course !== null) {
-                            $scope.courses.splice(i, 1);
-                        }
+                            $http.delete('http://' + $location.host() + ":" + $location.port() +
+                                '/education/zaozao/course/' + id, {
+                                    headers: {
+                                        'password': adminPwdSrv.adminPwd
+                                    }
+                                }).success(function(e) {
+                                deleteCourse(id);
+                            }).error(function(e) {
+                                alert('delete failed,');
+                            });
+                        });
+                    } else {
+                        $http.delete('http://' + $location.host() + ":" + $location.port() +
+                            '/education/zaozao/course/' + id).success(function(e) {
+                            deleteCourse(id);
+                        });
+                    }
+                }, function(error) {
 
-                    }).error(function(e) {
-                        console.log(e);
-                    });
+                });
             };
+
+            function deleteCourse(id) {
+
+                console.log('delete success');
+                var i = 0;
+                var course = null;
+                for (i = 0; i < $scope.courses.length; i++) {
+                    if (id === $scope.courses[i].id) {
+                        course = $scope.courses[i];
+                        break;
+                    }
+                }
+                if (course !== null) {
+                    $scope.courses.splice(i, 1);
+                }
+
+            }
         }
     ]);
 
@@ -66,7 +95,7 @@ define(['angular', 'angular-file-upload', 'directives', 'angular-ui-date', 'angu
             $scope.status = {};
             $scope.status.opened = false;
             var now = new Date();
-            $scope.publishDate = now.getFullYear() +"/"+(now.getMonth()+1)+"/"+now.getDate();
+            $scope.publishDate = now.getFullYear() + "/" + (now.getMonth() + 1) + "/" + now.getDate();
             console.log('now:', $scope.publishDate);
             // $scope._simpleConfig = {
             //      //这里可以选择自己需要的工具按钮名称,此处仅选择如下五个
@@ -250,7 +279,7 @@ define(['angular', 'angular-file-upload', 'directives', 'angular-ui-date', 'angu
                     $scope.course = json;
                     console.log('course:', $scope.course);
                     //console.log('content', $scope.course.content);
-                    console.log('path:',$location.path());
+                    console.log('path:', $location.path());
                     if ($scope.course.titleImageUrl != null) {
                         $scope.course.imageurl = $scope.course.titleImageUrl;
                     } else {
@@ -368,7 +397,7 @@ define(['angular', 'angular-file-upload', 'directives', 'angular-ui-date', 'angu
                     status: $scope.course.courseStatus,
                     publish_date: $scope.course.publishDate,
                     video_external_url: $scope.course.videoUrl,
-                    video_length:$scope.course.videoLength
+                    video_length: $scope.course.videoLength
                 });
             };
         }
@@ -376,12 +405,13 @@ define(['angular', 'angular-file-upload', 'directives', 'angular-ui-date', 'angu
 
     course.constructor("deleteCourse", ['$scope', '$http', '$state', '$location',
         function($scope, $http, $state, $location) {
-            $http.delete('http://' + $location.host() + ":" + $location.port() + '/education/zaozao/course')
-                .success(function(e) {
-                    console.log('delete success');
-                }).error(function(e) {
-                    console.log(e);
-                });
+
+            // $http.delete('http://' + $location.host() + ":" + $location.port() + '/education/zaozao/course')
+            //     .success(function(e) {
+            //         console.log('delete success');
+            //     }).error(function(e) {
+            //         console.log(e);
+            //     });
         }
     ]);
 

@@ -13,6 +13,7 @@ body{
 	border-left: none;
 	color:#444;
 	background-color: lightgrey;
+  display: block;
 }
 
 .sidebar-nav {
@@ -45,6 +46,10 @@ body{
 
 .course-folder li{
 	padding-left: 40px;
+}
+
+.course-admin-folder li{
+  padding-left: 40px;
 }
 
 input[type='text'] {

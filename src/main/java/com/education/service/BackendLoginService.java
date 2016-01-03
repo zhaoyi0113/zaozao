@@ -1,5 +1,7 @@
 package com.education.service;
 
+import com.education.auth.Login;
+import com.education.auth.Public;
 import com.education.db.entity.BackendLoginHistoryEntity;
 import com.education.db.entity.BackendRoleEntity;
 import com.education.db.entity.BackendUserEntity;
@@ -20,6 +22,7 @@ import java.util.logging.Logger;
  * Created by yzzhao on 11/9/15.
  */
 @Service("BackendLoginService")
+@Login
 public class BackendLoginService {
 
     @Autowired
@@ -49,9 +52,14 @@ public class BackendLoginService {
         return login;
     }
 
-    public String getUserRole(String userName, String password){
+    public boolean checkUserAccount(String userName, String password) {
         List<BackendUserEntity> userList = userRepository.findByNameAndPassword(userName, password);
-        if(!userList.isEmpty()){
+        return userList != null && userList.size() > 0;
+    }
+
+    public String getUserRole(String userName, String password) {
+        List<BackendUserEntity> userList = userRepository.findByNameAndPassword(userName, password);
+        if (!userList.isEmpty()) {
             int roleId = userList.get(0).getRoleId();
             BackendRoleEntity role = roleRepository.findOne(roleId);
             return role.getRole();
@@ -59,9 +67,9 @@ public class BackendLoginService {
         return null;
     }
 
-    public String getUserRole(String userName){
+    public String getUserRole(String userName) {
         List<BackendUserEntity> userEntityList = userRepository.findByName(userName);
-        if(!userEntityList.isEmpty()){
+        if (!userEntityList.isEmpty()) {
             int roleId = userEntityList.get(0).getRoleId();
             BackendRoleEntity role = roleRepository.findOne(roleId);
             return role.getRole();

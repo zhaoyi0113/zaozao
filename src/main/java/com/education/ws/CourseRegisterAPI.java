@@ -1,5 +1,7 @@
 package com.education.ws;
 
+import com.education.auth.Login;
+import com.education.auth.Public;
 import com.education.db.entity.CourseEntity;
 import com.education.db.jpa.CourseRepository;
 import com.education.formbean.CourseQueryBean;
@@ -34,6 +36,7 @@ import java.util.logging.Logger;
 @EnableTransactionManagement
 @Transactional
 @Service
+@Login
 public class CourseRegisterAPI {
 
     private static final Logger logger = Logger.getLogger(CourseRegisterAPI.class.getName());
@@ -199,6 +202,7 @@ public class CourseRegisterAPI {
 
     @DELETE
     @Path("/{id}")
+    @Public(requireAdminPassword = true)
     public Response deleteCourse(@PathParam("id") String id) {
         courseService.deleteCourse(Integer.parseInt(id));
         return Response.ok().build();

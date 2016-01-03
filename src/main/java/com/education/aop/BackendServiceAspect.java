@@ -10,7 +10,12 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.request.RequestAttributes;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
+import javax.ws.rs.container.ContainerRequestContext;
+import javax.ws.rs.core.Context;
 import java.util.Calendar;
 import java.util.List;
 import java.util.logging.Logger;
@@ -50,7 +55,9 @@ public class BackendServiceAspect {
 
     @AfterReturning(pointcut = "backendUserLogin()", returning = "retVal")
     public void afterLogin(JoinPoint joinPoint, Object retVal) {
-        logger.info("after login " + retVal);
+        ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        logger.info("after login " + retVal+", context="+ requestAttributes);
+
         String userName = (String) joinPoint.getArgs()[0];
         if (retVal instanceof Boolean) {
             Boolean login = (Boolean) retVal;

@@ -22,7 +22,6 @@ public class HomeConfigService {
     @Autowired
     private HomeConfigRepository homeConfigRepository;
 
-
     @Value("#{config['home_image_path']}")
     private String homeImagePath;
 

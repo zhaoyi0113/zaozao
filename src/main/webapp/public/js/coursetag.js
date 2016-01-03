@@ -1,9 +1,9 @@
-define(['angular', 'angular-file-upload'], function(angular) {
+define(['angular', 'angular-file-upload', 'admin_pwd_service', 'login_service'], function(angular) {
 	'use strict';
-	var course = angular.module("courseTagModule", ['angularFileUpload']);
+	var course = angular.module("courseTagModule", ['angularFileUpload', 'adminPwdServiceModule', 'loginServiceModule']);
 
-	course.controller('CourseTagController', ['$scope', '$http', '$location', '$state',
-		function($scope, $http, $location, $state) {
+	course.controller('CourseTagController', ['$scope', '$http', '$location', '$state', 'AdminPwdService', 'LoginService',
+		function($scope, $http, $location, $state, adminPwdSrv, loginSrv) {
 			$scope.headers = ['Name', 'Delete'];
 			$http.get($location.protocol() + '://' + $location.host() + ":" + $location.port() + '/education/zaozao/course_tags')
 				.success(function(e) {
@@ -17,22 +17,42 @@ define(['angular', 'angular-file-upload'], function(angular) {
 			}
 
 			$scope.delete = function(id) {
-				console.log('delete course tag '+id);
+				console.log('delete course tag ' + id);
+				loginSrv.isLogin().then(function(event) {
+					console.log(event === 'admin');
+					if (event !== 'admin') {
+						adminPwdSrv.openPasswordDlg().then(function(data) {
+							if (data.value !== true) {
+								return;
+							}
+							$scope.adminPwd = adminPwdSrv.adminPwd;
+							deleteCourseTag(id);
+						});
+					} else {
+						deleteCourseTag(id);
+					}
+				});
+			}
+
+			function deleteCourseTag(id) {
 				$http.delete($location.protocol() + '://' + $location.host() + ":" + $location.port() +
-						'/education/zaozao/course_tags/'+id)
+						'/education/zaozao/course_tags/' + id, {
+							headers: {
+								'password': $scope.adminPwd
+							}
+						})
 					.success(function(e) {
 						var tag = null;
-						var i=0;
-						for(i=0; i< $scope.courseTags.length; i++){
-							if($scope.courseTags[i].id === id){
+						var i = 0;
+						for (i = 0; i < $scope.courseTags.length; i++) {
+							if ($scope.courseTags[i].id === id) {
 								tag = $scope.courseTags[i];
 								break;
 							}
 						}
-						if(tag !== null){
-							$scope.courseTags.splice(i,1);
+						if (tag !== null) {
+							$scope.courseTags.splice(i, 1);
 						}
-						//$state.go('home.coursetag');
 					}).error(function(e) {
 						console.log('delete course tag error ', e);
 					});
@@ -42,17 +62,36 @@ define(['angular', 'angular-file-upload'], function(angular) {
 	]);
 
 	course.controller('NewCourseTagController', ['$scope', '$http', '$location', '$state', 'FileUploader',
-		function($scope, $http, $location, $state, FileUploader) {
+		'AdminPwdService', 'LoginService',
+		function($scope, $http, $location, $state, FileUploader, adminPwdSrv, loginSrv) {
 			$scope.uploader = new FileUploader({
 				url: $location.protocol() + '://' + $location.host() + ":" + $location.port() + '/education/zaozao/course_tags',
 				formData: []
 			});
 			$scope.submit = function() {
-				console.log('submit');
-				$scope.uploader.uploadAll();
+
+				loginSrv.isLogin().then(function(event) {
+					console.log(event === 'admin');
+					if (event !== 'admin') {
+						adminPwdSrv.openPasswordDlg().then(function(data) {
+							console.log('close dialog ', data.value, adminPwdSrv.adminPwd);
+							$scope.adminPwd = adminPwdSrv.adminPwd;
+							if (data.value !== true) {
+								return;
+							}
+							$scope.uploader.uploadAll();
+						});
+					} else {
+						$scope.uploader.uploadAll();
+					}
+
+				}, function(error) {
+
+				});
 
 			}
 			$scope.cancel = function() {
+				console.log('cancel');
 				$state.go('home.coursetag');
 			}
 			$scope.uploader.onAfterAddingFile = function(fileItem) {
@@ -65,21 +104,29 @@ define(['angular', 'angular-file-upload'], function(angular) {
 			};
 			$scope.uploader.onBeforeUploadItem = function(item) {
 				console.info('onBeforeUploadItem', item);
-
 				item.formData.push({
 					tag_name: $scope.name,
 					status: $scope.courseStatus
-				})
+				});
+				item.headers = {
+					password: $scope.adminPwd
+				};
+
 			};
 			$scope.uploader.onCompleteAll = function() {
 				console.info('onCompleteAll');
 				$state.go('home.coursetag');
 			};
+			$scope.uploader.onErrorItem = function(item, response, status, headers) {
+				alert('Add course tag failed');
+			};
 
 		}
 	]);
-	course.controller('EditCourseTagController', ['$scope', '$http', '$location', '$state', 'FileUploader', '$httpParamSerializer', '$stateParams',
-		function($scope, $http, $location, $state, FileUploader, $httpParamSerializer, $stateParams) {
+	course.controller('EditCourseTagController', ['$scope', '$http', '$location', '$state', 'FileUploader',
+		'$httpParamSerializer', '$stateParams', 'AdminPwdService', 'LoginService', 
+		function($scope, $http, $location, $state, FileUploader, $httpParamSerializer, $stateParams,
+			adminPwdSrv, loginSrv) {
 
 			console.log('edit course id = ', $stateParams.courseTagId);
 			$scope.uploader = new FileUploader({
@@ -96,31 +143,26 @@ define(['angular', 'angular-file-upload'], function(angular) {
 
 			$scope.submit = function() {
 				console.log('submit');
-				if ($scope.uploader.queue.length > 0) {
-					$scope.uploader.uploadAll();
-				} else {
-					//upload without image
-					var req = {
-						method: 'POST',
-						url: $location.protocol() + '://' + $location.host() + ":" + $location.port() + '/education/zaozao/course_tags/edit',
-						headers: {
-							'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
-						},
-						data: $httpParamSerializer({
-							course_tag_id: $stateParams.courseTagId,
-							tag_name: $scope.name,
-							status: $scope.courseStatus
-						})
-					};
-					$http(req).success(function(e) {
-						console.log('edit course tag success.');
-						$state.go('home.coursetag');
-					}).error(function(e) {
-						console.log('edic course tag error ', e);
-					});
-				}
-			}
+				loginSrv.isLogin().then(function(event) {
+					console.log(event === 'admin');
+					if (event !== 'admin') {
+						adminPwdSrv.openPasswordDlg().then(function(data) {
+							console.log('close dialog ', data.value, adminPwdSrv.adminPwd);
+							if (data.value !== true) {
+								return;
+							}
+							$scope.adminPwd = adminPwdSrv.adminPwd;
+							
+							editCourseTag();
+						});
+					} else {
+						editCourseTag();
+					}
+				}, function(error) {
 
+				});
+
+			}
 			$scope.cancel = function() {
 				$state.go('home.coursetag');
 			}
@@ -137,12 +179,42 @@ define(['angular', 'angular-file-upload'], function(angular) {
 				item.formData.push({
 					tag_name: $scope.name,
 					course_tag_id: $stateParams.courseTagId
-				})
+
+				});
+				item.headers={password: $scope.adminPwd};
 			};
 			$scope.uploader.onCompleteAll = function() {
 				console.info('onCompleteAll');
 				$state.go('home.coursetag');
 			};
+
+			function editCourseTag() {
+				if ($scope.uploader.queue.length > 0) {
+					$scope.uploader.uploadAll();
+				} else {
+					//upload without image
+					var req = {
+						method: 'POST',
+						url: $location.protocol() + '://' + $location.host() + ":" + $location.port() + '/education/zaozao/course_tags/edit',
+						headers: {
+							'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+							'password': $scope.adminPwd
+						},
+						data: $httpParamSerializer({
+							course_tag_id: $stateParams.courseTagId,
+							tag_name: $scope.name,
+							status: $scope.courseStatus
+						})
+					};
+					$http(req).success(function(e) {
+						console.log('edit course tag success.');
+						$state.go('home.coursetag');
+					}).error(function(e) {
+						console.log('edic course tag error ', e);
+						alert('failed to edit course tag');
+					});
+				}
+			}
 		}
 	]);
 

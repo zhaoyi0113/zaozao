@@ -7,35 +7,53 @@
 
     				</span>
     			</span>
-			</a>
-			<span class="navbar-brand top_menu_title padding-left-0">
-				ZaoZao
-			</span>
-		</div>
+         </a>
+         <span class="navbar-brand top_menu_title padding-left-0">
+            ZaoZao
+        </span>
     </div>
-    <div class="sidebar-nav">
-    	<ul>
-    		<li>
-    			<a href='javascript:void(0)' class="nav-header" data-toggle="collapse" data-target=".course-folder">
-    				<!-- <i class="glyphicon glyphicon-wrench">
-    				</i> -->
-    				Course Management
-    				<i class="fa fa-collapse">
-    				</i>
-    			</a>
-    		</li>
-    	</ul>
-    	<li>
-			<ul class="course-folder nav nav-list collapse in"  ng-model="tab">
-				<li ng-repeat="tab in tabs">
-					<a ui-sref='{{tab.url}}'>
-						<span class="fa fa-caret-right">
-						</span>
-						{{tab.label}}
-					</a>
-				</li>
-			</ul>
-		</li>
-    </div>
+</div>
+<div class="sidebar-nav">
+   <ul>
+      <li>
+         <a href='javascript:void(0)' class="nav-header" data-toggle="collapse" data-target=".course-folder">
+            <i class="glyphicon glyphicon-wrench">
+            </i>
+            Course Management
+            <i class="fa fa-collapse">
+            </i>
+        </a>
+    </li>
+</ul>
+<li>
+ <ul class="course-folder nav nav-list collapse in"  ng-model="tab">
+    <li ng-repeat="tab in tabs">
+       <a ui-sref='{{tab.url}}'>
+          <span class="fa fa-caret-right">
+          </span>
+          {{tab.label}}
+      </a>
+  </li>
+</ul>
+</li>
+<li ng-show="showAdmin" >
+    <a href='javascript:void(0)' class="nav-header" data-toggle="collapse" data-target=".course-admin-folder">
+        <i class="glyphicon glyphicon-wrench">
+        </i>
+        System Management
+    </a>
+</li>
+<li ng-show="showAdmin">
+    <ul class="course-admin-folder nav nav-list collapse in" ng-model="tab">
+        <li ng-repeat="tab in adminTabs">
+            <a ui-sref='{{tab.url}}'>
+                <span class="fa fa-caret-right">
+                </span>
+                {{tab.label}}
+            </a>
+        </li>
+    </ul>
+</li>
+</div>
 </div>
 <div class="home_content" ui-view></div>

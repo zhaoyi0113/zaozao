@@ -1,5 +1,6 @@
 package com.education.service;
 
+import com.education.auth.Login;
 import com.education.db.entity.BackendRoleEntity;
 import com.education.db.entity.BackendUserEntity;
 import com.education.db.jpa.BackendRoleRepository;
@@ -17,6 +18,7 @@ import java.util.List;
  * Created by yzzhao on 12/26/15.
  */
 @Service("BackendUserService")
+@Login
 public class BackendUserService {
 
     @Autowired
