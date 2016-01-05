@@ -42,7 +42,7 @@ public class CourseQueryBean {
         this.name = courseEntity.getName();
         this.content = courseEntity.getContent();
         this.introduction = courseEntity.getIntroduction();
-        this.videoUrl = courseEntity.getVideoExternalUrl();
+        this.videoUrl = wsUtility.getResourcePath(courseEntity.getVideoPath());
         if (courseEntity.getTitleImagePath() != null) {
             this.titleImageUrl = wsUtility.getResourcePath(courseEntity.getTitleImagePath());
         }

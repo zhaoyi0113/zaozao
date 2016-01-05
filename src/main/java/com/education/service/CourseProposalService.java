@@ -93,7 +93,7 @@ public class CourseProposalService {
         Map<Date, List<CourseRegisterBean>> sortedMap = new TreeMap<>(new Comparator<Date>() {
             @Override
             public int compare(Date o1, Date o2) {
-                return o1.compareTo(o2);
+                return o2.compareTo(o1);
             }
         });
         sortedMap.putAll(courseMap);

@@ -36,7 +36,7 @@ import java.util.logging.Logger;
 @EnableTransactionManagement
 @Transactional
 @Service
-@Login
+//@Login
 public class CourseRegisterAPI {
 
     private static final Logger logger = Logger.getLogger(CourseRegisterAPI.class.getName());
