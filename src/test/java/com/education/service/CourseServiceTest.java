@@ -34,6 +34,9 @@ public class CourseServiceTest extends AbstractServiceTest {
     private CourseRepository courseRepository;
 
     @Autowired
+    private WSUtility wsUtility;
+
+    @Autowired
     private CourseTagRelationRepository courseTagRelationRepository;
 
     @Test
@@ -57,10 +60,11 @@ public class CourseServiceTest extends AbstractServiceTest {
         String name = System.currentTimeMillis() + "";
         CourseRegisterBean courseBean = createCourseBean(name);
         courseBean.setVideoExternalUrl("xxx");
+        courseBean.setVideoPath("xxx");
         int courseId = courseService.createCourse(courseBean);
         CourseQueryBean queryCourse = courseService.queryCourse(courseId + "");
         Assert.assertNotNull(queryCourse);
-        Assert.assertEquals("xxx", queryCourse.getVideoUrl());
+        Assert.assertEquals(wsUtility.getResourcePath("xxx"), queryCourse.getVideoUrl());
     }
 
     @Test
