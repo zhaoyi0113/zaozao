@@ -2,10 +2,11 @@ package com.education.ws;
 
 
 import com.education.auth.Public;
+import com.education.formbean.CourseQueryBean;
 import com.education.service.CourseProposalService;
+import com.education.service.CourseService;
 import com.education.service.WeChatUserInfo;
 import com.education.ws.util.ContextKeys;
-import com.education.ws.util.WSUtility;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -31,6 +32,9 @@ public class CourseProposalAPI {
     @Autowired
     private CourseProposalService courseProposalService;
 
+    @Autowired
+    private CourseService courseService;
+
     @GET
     @Public(requireWeChatCode = false)
     @Produces(MediaType.APPLICATION_JSON)
@@ -41,7 +45,7 @@ public class CourseProposalAPI {
                               @DefaultValue("3") @QueryParam("number") int number) {
         logger.info("get course " + tagId);
         WeChatUserInfo userInfo = (WeChatUserInfo) context.getProperty(ContextKeys.WECHAT_USER);
-        List<CourseRegisterBean> beans = courseProposalService.queryCourse(userInfo, tagId, status, number);
+        List<CourseQueryBean> beans = courseProposalService.queryCourse(userInfo, tagId, status, number);
         return Response.ok(beans).build();
     }
 
@@ -55,8 +59,15 @@ public class CourseProposalAPI {
                                     @DefaultValue("10") @QueryParam("number") int number) {
         logger.info("get course " + tagId);
         WeChatUserInfo userInfo = (WeChatUserInfo) context.getProperty(ContextKeys.WECHAT_USER);
-        Map<String, List<CourseRegisterBean>> beans = courseProposalService.queryCourseByDate(userInfo, tagId, status, number);
+        Map<String, List<CourseQueryBean>> beans = courseProposalService.queryCourseByDate(userInfo, tagId, status, number);
         return Response.ok(beans).build();
     }
 
+    @GET
+    @Path("/{course_id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getCourse(@PathParam("course_id") int courseId){
+        CourseQueryBean b = courseService.queryCourse(String.valueOf(courseId));
+        return Response.ok(b).build();
+    }
 }
