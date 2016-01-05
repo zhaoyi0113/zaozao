@@ -37,14 +37,14 @@ public class HomeConfigAPI {
         String fileName = WSUtility.getUtf8Character(disposition.getFileName());
         logger.info("upload file " + fileName);
         homeConfigService.createImage(fileName, fileInputStream);
-        return wsUtility.buildResponse();
+        return Response.ok().build();
     }
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getHomeImages() {
         List<HomeConfigResp> homeImages = homeConfigService.getHomeImages();
-        return wsUtility.buildResponse(homeImages);
+        return Response.ok(homeImages).build();
     }
 
     @DELETE

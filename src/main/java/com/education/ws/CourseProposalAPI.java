@@ -42,7 +42,7 @@ public class CourseProposalAPI {
         logger.info("get course " + tagId);
         WeChatUserInfo userInfo = (WeChatUserInfo) context.getProperty(ContextKeys.WECHAT_USER);
         List<CourseRegisterBean> beans = courseProposalService.queryCourse(userInfo, tagId, status, number);
-        return WSUtility.buildResponse(beans);
+        return Response.ok(beans).build();
     }
 
     @GET
@@ -56,7 +56,7 @@ public class CourseProposalAPI {
         logger.info("get course " + tagId);
         WeChatUserInfo userInfo = (WeChatUserInfo) context.getProperty(ContextKeys.WECHAT_USER);
         Map<String, List<CourseRegisterBean>> beans = courseProposalService.queryCourseByDate(userInfo, tagId, status, number);
-        return WSUtility.buildResponse(beans);
+        return Response.ok(beans).build();
     }
 
 }

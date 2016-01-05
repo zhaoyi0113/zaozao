@@ -6,7 +6,6 @@ import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.ws.rs.core.Response;
 import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -139,15 +138,5 @@ public class WSUtility {
             e.printStackTrace();
         }
 
-    }
-
-    public static Response buildResponse(){
-        return Response.ok().header("Access-Control-Allow-Origin", "*")
-                .header("Access-Control-Allow-Methods", "*").build();
-    }
-
-    public static Response buildResponse(Object obj){
-        return Response.ok(obj).header("Access-Control-Allow-Origin", "*")
-                .header("Access-Control-Allow-Methods", "*").build();
     }
 }

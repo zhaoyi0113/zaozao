@@ -65,7 +65,7 @@ public class WeChatAPI {
         if(userInfo != null) {
             historyService.saveWeChatUserLogin(userInfo);
         }
-        return WSUtility.buildResponse();
+        return Response.ok().build();
     }
 
     @Path("/getopenid")
@@ -73,7 +73,7 @@ public class WeChatAPI {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getOpenId(@QueryParam("code") String code, @QueryParam("state") String state) {
         WeChatUserInfo webUserInfo = weChatService.getWebUserInfo(code);
-        return WSUtility.buildResponse(webUserInfo.getOpenid());
+        return Response.ok(webUserInfo.getOpenid()).build();
     }
 
     @Path("/userlist")
@@ -81,7 +81,7 @@ public class WeChatAPI {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getUserOpenIdList() {
         List<String> userOpenIDList = weChatService.getUserOpenIDList();
-        return WSUtility.buildResponse(userOpenIDList);
+        return Response.ok(userOpenIDList).build();
     }
 
     @Path("/userinfo")
@@ -100,14 +100,14 @@ public class WeChatAPI {
         logger.info("base uri:" + baseUri.toString());
         logger.info("absout path:" + absolutePath.toString());
         Map<String, String> webJSSignature = weChatService.getWebJSSignature("http://www.imzao.com/education/");
-        return WSUtility.buildResponse(webJSSignature);
+        return Response.ok(webJSSignature).build();
     }
 
     @Path("/barcode")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getBarCodeURL(@QueryParam("code") String code) {
-        return WSUtility.buildResponse(weChatService.getQRBarTicket(code));
+        return Response.ok(weChatService.getQRBarTicket(code)).build();
     }
 
 }

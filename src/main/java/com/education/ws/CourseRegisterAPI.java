@@ -120,7 +120,7 @@ public class CourseRegisterAPI {
                                   @PathParam("courseId") String courseId) {
         try {
             CourseQueryBean b = courseService.queryCourse(courseId);
-            return wsUtility.buildResponse(b);
+            return Response.ok(b).build();
         } catch (Exception e) {
             logger.log(Level.SEVERE, e.getMessage(), e);
             return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
@@ -133,8 +133,7 @@ public class CourseRegisterAPI {
                                        @PathParam("courseId") String courseId,
                                        @PathParam("filename") String fileName) {
         FileInputStream file = courseService.getCourseFile(courseId, fileName);
-        return Response.ok(file).header("Access-Control-Allow-Origin", "*")
-                .header("Access-Control-Allow-Methods", "*")
+        return Response.ok(file)
                 .header("Content-Disposition", "attachment; filename = " + fileName).build();
     }
 

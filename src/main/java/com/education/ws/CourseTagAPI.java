@@ -41,7 +41,7 @@ public class CourseTagAPI {
         }else{
             courseTagService.editCourseTag(courseTagId, tagName, disposition.getFileName(), fileInputStream);
          }
-        return WSUtility.buildResponse();
+        return Response.ok().build();
     }
 
     @POST
@@ -51,7 +51,7 @@ public class CourseTagAPI {
                                   @FormParam("course_tag_id") int courseTagId) {
         logger.info("edit course tag " + tagName);
         courseTagService.editCourseTag(courseTagId, tagName, null, null);
-        return WSUtility.buildResponse();
+        return Response.ok().build();
     }
 
     @GET
@@ -59,7 +59,7 @@ public class CourseTagAPI {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response getCourseTags() {
         List<CourseTagBean> courseTags = courseTagService.getCourseTags();
-        return WSUtility.buildResponse(courseTags);
+        return Response.ok(courseTags).build();
     }
 
     @GET
@@ -67,7 +67,7 @@ public class CourseTagAPI {
     @Consumes(MediaType.APPLICATION_JSON)
     @Path("/{courseTagId}")
     public Response getCourseTag(@PathParam("courseTagId") int courseTagId) {
-        return WSUtility.buildResponse(courseTagService.getCourseTag(courseTagId));
+        return Response.ok(courseTagService.getCourseTag(courseTagId)).build();
     }
 
     @GET
@@ -75,7 +75,7 @@ public class CourseTagAPI {
     @Consumes(MediaType.APPLICATION_JSON)
     @Path("/course/{courseId}")
     public Response getCourseTagByCourseId(@PathParam("courseId") int courseId) {
-        return WSUtility.buildResponse(courseTagService.getCourseTagsByCourseId(courseId));
+        return Response.ok(courseTagService.getCourseTagsByCourseId(courseId)).build();
     }
 
     @DELETE
@@ -84,6 +84,6 @@ public class CourseTagAPI {
     @Public(requireAdminPassword = true)
     public Response deleteCourseTag(@PathParam("id") int courseTagId) {
         courseTagService.deleteCourseTag(courseTagId);
-        return WSUtility.buildResponse();
+        return Response.ok().build();
     }
 }
