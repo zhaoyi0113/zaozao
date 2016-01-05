@@ -42,13 +42,8 @@ public class CourseRegisterAPI {
     private static final Logger logger = Logger.getLogger(CourseRegisterAPI.class.getName());
     public static final String WEBAPP_PUBLIC_RESOURCES_COURSES = "src/main/webapp/public/resources/courses/";
 
-    private BackendLoginService loginCheck;
-
     @Autowired
     private CourseRepository courseRepository;
-
-    @Value("#{config['course_image_path']}")
-    private String courseImagePath;
 
     @Value("#{config['course_image_url']}")
     private String courseImageUrl;
@@ -87,7 +82,7 @@ public class CourseRegisterAPI {
         }
 
         courseService.createCourse(bean);
-        WSUtility.writeFile(file, courseImagePath, fileName);
+        wsUtility.writeCourseFile(fileName, file);
         return Response.ok().build();
     }
 
@@ -184,7 +179,7 @@ public class CourseRegisterAPI {
         InputStream file = multiPartFile.getValueAs(InputStream.class);
         String fileName = WSUtility.getFileNameFromMultipart(multiPartFile);
         logger.info("upload file name " + fileName);
-        WSUtility.writeFile(file, courseImagePath, fileName);
+        wsUtility.writeCourseFile(fileName, file);
         CourseRegisterBean bean = new CourseRegisterBean();
         bean.setId(multiPart.getField("id").getValue());
         bean.setName(multiPart.getField("name").getValue());

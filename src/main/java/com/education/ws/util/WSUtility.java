@@ -87,11 +87,16 @@ public class WSUtility {
         return false;
     }
 
-    public void deleteFile(String fileName) {
-        String resourcePath = getResourcePath(fileName);
+    public void deleteCourseFile(String fileName) {
+        String resourcePath = courseImagePath+"/"+fileName;
         File file = new File(resourcePath);
-        System.out.println("delete file " + file.getAbsolutePath());
-        file.delete();
+        logger.info("delete file " + file.getAbsolutePath()+", "+file.exists());
+        boolean delete = file.delete();
+        logger.info("delete file "+delete);
+    }
+
+    public void writeCourseFile(String fileName, InputStream inputStream){
+        writeFile(inputStream, courseImagePath, fileName);
     }
 
     public static String getFileNameFromMultipart(FormDataBodyPart multiPartFile) {

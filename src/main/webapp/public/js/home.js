@@ -1,8 +1,11 @@
-define(['angular', 'user', 'login', 'course', 'courseplan', 'coursetag', 'homeconfig', 'user_service', 'login_service'], function(angular) {
+define(['angular', 'user', 'login', 'course', 'courseplan',
+    'coursetag', 'homeconfig', 'user_service', 'login_service', 'course_video',
+], function(angular) {
 
     'use strict';
     var home = angular.module("homeModule", ['userModule', 'loginModule', 'courseModule', 'coursePlanModel',
-        'courseTagModule', 'homeConfigModule', 'userServiceModule', 'loginServiceModule'
+        'courseTagModule', 'homeConfigModule', 'userServiceModule', 
+        'loginServiceModule', 'courseVideoModule'
     ]);
     home.controller('HomeController', ['$scope', '$http', '$rootScope', 'LoginService', '$state',
         function($scope, $http, $rootScope, loginService, $state) {
@@ -14,8 +17,11 @@ define(['angular', 'user', 'login', 'course', 'courseplan', 'coursetag', 'homeco
                 url: '.coursetag',
                 label: 'Course Tag'
             }, {
+                url: '.course_video',
+                label: 'Course Video'
+            },{
                 url: '.config',
-                label: 'Home Page Config'
+                label: 'Home Page Slide'
             }, {
                 url: '.login',
                 label: 'Label'
@@ -49,10 +55,10 @@ define(['angular', 'user', 'login', 'course', 'courseplan', 'coursetag', 'homeco
                 $scope.tabs[3].label = 'Logout';
                 if (event === 'admin') {
                     console.log('login as admin');
-                    $scope.showAdmin  = true;
+                    $scope.showAdmin = true;
                 } else if (event === 'user') {
                     console.log('login as user');
-                    $scope.showAdmin  = false;
+                    $scope.showAdmin = false;
                 };
             }
         }

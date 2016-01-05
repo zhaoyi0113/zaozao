@@ -1,0 +1,13 @@
+<div>
+	<h2>Video</h2>
+	<video  ng-src='{{videoPath}}' ng-model='videoPath' autoplay='true' width='100%' controls='true'></video>
+
+	<form>
+		<div class='col-md-12 form-group'>
+            <label class='col-sm-2 control-label'>Video:</label>
+            <input type="file" nv-file-select="" uploader="uploader"/>
+
+        </div>
+        <button class='btn btn-primary' ng-click='submit()'>Submit</button>
+	</form>
+</div>

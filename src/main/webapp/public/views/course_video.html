@@ -1,0 +1,28 @@
+<div class="course">
+    <header class='header'>
+        <h2>Course Video</h2>
+    </header>
+
+    <table class="table table-striped table-bordered">
+        <th ng-repeat="head in headers" ng-model="head"><p>{{head}}</p></th>
+
+        <tr ng-repeat="course in courses" ng-model="course">
+            <hr/>
+            <td>
+               <strong>{{course.name}}</strong>
+            </td>
+            <td>
+                {{course.publishDate}}
+            </td>
+            <td>
+                {{course.status}}
+            </td>
+            <td>
+            	<button class='btn btn-primary' ui-sref='home.course_video_edit({courseId: course.id})'>Upload Video</button>
+            </td>
+        </tr>
+    </table>
+    <hr/>
+</div>
+
+<div ui-view/>
