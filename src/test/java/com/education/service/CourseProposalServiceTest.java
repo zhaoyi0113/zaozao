@@ -7,6 +7,7 @@ import com.education.db.entity.UserEntity;
 import com.education.db.jpa.CourseRepository;
 import com.education.db.jpa.CourseTagRelationRepository;
 import com.education.db.jpa.UserRepository;
+import com.education.formbean.CourseQueryBean;
 import com.education.ws.CourseRegisterBean;
 import org.junit.Assert;
 import org.junit.Ignore;
@@ -58,7 +59,7 @@ public class CourseProposalServiceTest extends AbstractServiceTest {
 
     @Test
     public void testCourseProposalQuery1() {
-        List<CourseRegisterBean> beans = courseProposalService.queryCourse(null, 0, CommonStatus.ENABLED.name(), 0);
+        List<CourseQueryBean> beans = courseProposalService.queryCourse(null, 0, CommonStatus.ENABLED.name(), 0);
         int size = beans.size();
         CourseEntity course = new CourseEntity();
         course.setStatus(CommonStatus.ENABLED);
@@ -81,7 +82,7 @@ public class CourseProposalServiceTest extends AbstractServiceTest {
         ctrEntity.setCourseId(saved.getId());
         ctrEntity.setCourseTagId(99);
         courseTagRelationRepository.save(ctrEntity);
-        List<CourseRegisterBean> beans = courseProposalService.queryCourse(null, 99, CommonStatus.ENABLED.name(), 0);
+        List<CourseQueryBean> beans = courseProposalService.queryCourse(null, 99, CommonStatus.ENABLED.name(), 0);
         Assert.assertEquals(1, beans.size());
     }
 
@@ -99,7 +100,7 @@ public class CourseProposalServiceTest extends AbstractServiceTest {
             ctrEntity.setCourseTagId(99);
             courseTagRelationRepository.save(ctrEntity);
         }
-        List<CourseRegisterBean> beans = courseProposalService.queryCourse(null, 99, CommonStatus.ENABLED.name(), 3);
+        List<CourseQueryBean> beans = courseProposalService.queryCourse(null, 99, CommonStatus.ENABLED.name(), 3);
         Assert.assertEquals(3, beans.size());
     }
 
@@ -123,7 +124,7 @@ public class CourseProposalServiceTest extends AbstractServiceTest {
                 lastThree.add(saved.getId());
             }
         }
-        List<CourseRegisterBean> beans = courseProposalService.queryCourse(null, 99, CommonStatus.ENABLED.name(), 3);
+        List<CourseQueryBean> beans = courseProposalService.queryCourse(null, 99, CommonStatus.ENABLED.name(), 3);
         Assert.assertEquals(3, beans.size());
         for (int i = 0; i < lastThree.size(); i++) {
             Assert.assertEquals(lastThree.get(i)+"", beans.get(i).getId());
@@ -163,7 +164,7 @@ public class CourseProposalServiceTest extends AbstractServiceTest {
             course.setPublishDate(date);
             courseRepository.save(course);
 
-            Map<String, List<CourseRegisterBean>> courseMap = courseProposalService.queryCourseByDate(null, 0, CommonStatus.ENABLED.name(), 10);
+            Map<String, List<CourseQueryBean>> courseMap = courseProposalService.queryCourseByDate(null, 0, CommonStatus.ENABLED.name(), 10);
             Assert.assertTrue(courseMap.size()>=3);
 
         } catch (ParseException e) {
