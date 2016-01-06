@@ -24,7 +24,7 @@ define(['angular', 'user', 'login', 'course', 'courseplan',
                 label: 'Home Page Slide'
             }, {
                 url: '.login',
-                label: 'Label'
+                label: 'Login'
             }];
             $scope.adminTabs = [{
                 url: '.user',
@@ -35,13 +35,13 @@ define(['angular', 'user', 'login', 'course', 'courseplan',
                 loginSuccess(event);
             }, function(error) {
                 console.log('not login', error);
-                $scope.tabs[3].label = 'Login';
+                $scope.tabs[4].label = 'Login';
             });
             $rootScope.$on('LOGIN', function(event, data) {
                 console.log('login service changed ', data);
 
                 if (data === false) {
-                    $scope.tabs[3].label = 'Login';
+                    $scope.tabs[4].label = 'Login';
 
                 } else {
                     loginSuccess(data);
@@ -52,7 +52,7 @@ define(['angular', 'user', 'login', 'course', 'courseplan',
             });
 
             function loginSuccess(event) {
-                $scope.tabs[3].label = 'Logout';
+                $scope.tabs[4].label = 'Logout';
                 if (event === 'admin') {
                     console.log('login as admin');
                     $scope.showAdmin = true;

@@ -1,10 +1,10 @@
-define(['angular', 'ui-router', 'jquery-ui', 'home', 'wechat', 'login_service'], function(angular) {
+define(['angular', 'ui-router', 'jquery-ui', 'home', 'wechat', 'login_service','angular-gestures'], function(angular) {
     'use strict';
 
     console.log('app');
-    var app = angular.module("appModule", ['ui.router', 'homeModule', 'wechatModule', 'loginServiceModule']);
+    var app = angular.module("appModule", ['ui.router', 'homeModule', 'wechatModule', 'loginServiceModule', 'angular-gestures']);
 
-    app.config(function($stateProvider, $urlRouterProvider) {
+    app.config(function($stateProvider, $urlRouterProvider, hammerDefaultOptsProvider) {
         $stateProvider.state('home', {
             url: '/home',
             templateUrl: '/education/public/views/home.html',
@@ -79,6 +79,10 @@ define(['angular', 'ui-router', 'jquery-ui', 'home', 'wechat', 'login_service'],
             controller: 'CourseVideoEditController'
         });
         $urlRouterProvider.otherwise('/home');
+
+        hammerDefaultOptsProvider.set({
+            recognizers: [[Hammer.Swipe, {time: 250}]]
+        });
     });
 
     app.run(['$rootScope', '$location', 'LoginService', '$state',

@@ -24,7 +24,11 @@ require.config({
         'angular-animate': '/education/bower_components/angular-animate/angular-animate.min',
         'tweenmax': '/education/bower_components/gsap/src/minified/TweenMax.min',
         'jquery': '/education/bower_components/jquery/dist/jquery.min',
-        'ng-dialog': '/education/bower_components/ng-dialog/js/ngDialog.min'
+        'ng-dialog': '/education/bower_components/ng-dialog/js/ngDialog.min',
+        'hammerjs': '/education/bower_components/hammerjs/hammer.min',
+        'angular-gestures': '/education/bower_components/angular-gestures/gestures.min',
+        'bootstrap-carousel-swipe': '/education/bower_components/bootstrap-carousel-swipe/carousel-swipe',
+        'bootstrap': '/education/bower_components/bootstrap/dist/js/bootstrap.min'
     },
     shim: {
         'angular': {
@@ -87,6 +91,13 @@ require.config({
         },
         'ng-dialog': {
             deps: ['angular']
+        },
+        'angular-gestures':{
+            deps: ['angular', 'hammerjs']
+        },
+        'bootstrap-carousel-swipe':{
+            deps: ['bootstrap'],
+            exports: 'bootstrap-carousel-swipe'
         }
     }
 });

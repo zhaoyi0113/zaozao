@@ -15,15 +15,16 @@
 	<div> -->
 
 	<!-- <div id="myCarousel" data-ride="carousel" data-interval="5000" class="carousel slide col-sm-4"> -->
-	<div id="myCarousel" class="carousel slide col-sm-4">
+	<div id="myCarousel" class="carousel slide col-sm-4"  data-ride="carousel"
+		hm-swipe-left="swipeLeft()" hm-swipe-right="swipeRight()">
 	   <!-- 轮播（Carousel）指标 -->
 	   <ol class="carousel-indicators">
-	      <li ng-repeat='image in images' data-target="#myCarousel" data-slide-to="{{image.index}}" ng-class="image.active?'active':''"></li>
+	      <li ng-repeat='image in images' data-target="#myCarousel" data-slide-to="{{image.index}}" ng-model="image" ng-class="image.active?'active':''"></li>
 	   
 	   </ol>   
 	   <!-- 轮播（Carousel）项目 -->
 	   <div class="carousel-inner">
-	      <div class="item" ng-repeat='image in images' ng-class='image.active?"active":""'>
+	      <div class="item" ng-repeat='image in images' ng-model='image' ng-class='image.active?"active":""'>
 	         <img ng-src="{{image.url}}">
 	      </div>
 	   </div>
