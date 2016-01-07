@@ -68,8 +68,11 @@ public class CourseRegisterAPI {
         bean.setPublishDate(multiPart.getField("publish_date").getValue());
         bean.setStatus(multiPart.getField("status").getValue());
         bean.setVideoExternalUrl(multiPart.getField("video_external_url").getValue());
-        bean.setVideoLength(Double.parseDouble(multiPart.getField("video_length").getValue()));
-
+        try {
+            bean.setVideoLength(Double.parseDouble(multiPart.getField("video_length").getValue()));
+        }catch(Exception e){
+            logger.severe("can't parse video length "+multiPart.getField("video_length"));
+        }
         FormDataBodyPart multiPartFile = multiPart.getField("file");
 
         InputStream file = multiPartFile.getValueAs(InputStream.class);

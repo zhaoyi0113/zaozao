@@ -94,6 +94,7 @@ define(['angular', 'angular-file-upload', 'directives', 'angular-ui-date', 'angu
             };
             $scope.status = {};
             $scope.status.opened = false;
+            $scope.cstatus = true;
             var now = new Date();
             $scope.publishDate = now.getFullYear() + "/" + (now.getMonth() + 1) + "/" + now.getDate();
             console.log('now:', $scope.publishDate);

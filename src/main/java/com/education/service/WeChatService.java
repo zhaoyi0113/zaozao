@@ -85,8 +85,14 @@ public class WeChatService {
 
     public WeChatUserInfo getWebUserInfo(String code) {
         Map tokenMap = getWebSiteAccessToken(code);
+        if(tokenMap == null){
+            return null;
+        }
         String token = (String) tokenMap.get("access_token");
         String openid = (String) tokenMap.get("openid");
+        if(token == null || openid == null){
+            return null;
+        }
         String url = buildWebUserInfoUrl(token, openid);
         logger.info("get user info url:" + url);
         HttpGet httpGet = new HttpGet(url);

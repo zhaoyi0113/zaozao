@@ -164,9 +164,12 @@ public class CourseProposalServiceTest extends AbstractServiceTest {
             course.setPublishDate(date);
             courseRepository.save(course);
 
-            Map<String, List<CourseQueryBean>> courseMap = courseProposalService.queryCourseByDate(null, 0, CommonStatus.ENABLED.name(), 10);
-            Assert.assertTrue(courseMap.size()>=3);
-
+            Map<String, List<CourseQueryBean>> courseMap = courseProposalService.queryCourseByDate(null, 0, CommonStatus.ENABLED.name(), 10,0);
+            int num = 0;
+            for(Map.Entry<String, List<CourseQueryBean>> entry : courseMap.entrySet()){
+                num += entry.getValue().size();
+            }
+            Assert.assertTrue(num>=3);
         } catch (ParseException e) {
             e.printStackTrace();
             Assert.fail(e.getMessage());

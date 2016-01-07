@@ -76,11 +76,13 @@ public class CourseProposalService {
         return tagStr;
     }
 
-    public Map<String, List<CourseQueryBean>> queryCourseByDate(WeChatUserInfo userInfo, int tagId, String status, int number) {
+    public Map<String, List<CourseQueryBean>> queryCourseByDate(
+            WeChatUserInfo userInfo, int tagId, String status, int number, int pageIdx) {
         List<CourseEntity> courseList = getCourseEntities(tagId, status);
         Map<Date, List<CourseQueryBean>> courseMap = new Hashtable<>();
-        int index = 0;
-        for (CourseEntity entity : courseList) {
+        int totalNumber= 1;
+        for(int i=pageIdx*number; i<courseList.size(); i++,totalNumber++){
+            CourseEntity entity = courseList.get(i);
             Date publishDate = entity.getPublishDate();
             List<CourseQueryBean> beanList = null;
             if (courseMap.containsKey(publishDate)) {
@@ -92,8 +94,7 @@ public class CourseProposalService {
             CourseQueryBean cbean = new CourseQueryBean(entity, wsUtility);
             cbean.setTags(tagService.getCourseTagsByCourseId(entity.getId()));
             beanList.add(cbean);
-            index++;
-            if (number > 0 && index >= number) {
+            if (number > 0 && totalNumber >= number) {
                 break;
             }
         }
