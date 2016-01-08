@@ -2,3 +2,5 @@ build/*
 .idea/*
 .gradle/*
 src/main/webapp/public/resources/*
+src/main/webapp/dist/*
+src/main/webapp/node_modules/*

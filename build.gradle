@@ -7,6 +7,7 @@ apply plugin: 'war'
 apply plugin: 'groovy'
 //apply plugin: 'application'
 apply plugin: 'org.flywaydb.flyway'
+apply plugin: 'com.moowork.grunt'
 
 repositories {
     maven{
@@ -15,6 +16,7 @@ repositories {
     maven{url "http://maven.oschina.net/content/groups/public"}
     maven{url "https://jcenter.bintray.com/"}
     maven{url "https://repo1.maven.org/maven2"}
+    maven{url "https://plugins.gradle.org/m2/"}
     mavenCentral()
     mavenLocal()
 }
@@ -107,8 +109,6 @@ dependencies {
             "org.apache.tomcat.embed:tomcat-embed-logging-juli:${tomcatVersion}",
             "org.apache.tomcat.embed:tomcat-embed-jasper:${tomcatVersion}"
 
-//    testCompile("com.github.dreamhead:moco-core:0.10.2")
-//    testCompile("com.github.dreamhead:moco-runner:0.10.2")
 }
 tomcatRunWar{
     webDefaultXml = file('src/main/resources/web.xml')
@@ -119,6 +119,7 @@ tomcatRun{
 war{
     webXml = file('src/main/resources/web.xml')
     archiveName = "education.war"
+    excludes = ['public/resources', 'dist',  'node_modules']
 }
 buildscript {
     repositories {
@@ -128,10 +129,22 @@ buildscript {
     dependencies {
         classpath 'com.bmuschko:gradle-tomcat-plugin:2.2.2'
         classpath 'org.flywaydb:flyway-gradle-plugin:3.2.1'
+        classpath 'com.moowork.gradle:gradle-grunt-plugin:0.11'
     }
 }
 
 task copyDependencies(type: Copy) {
     from configurations.compile
     into 'build/dependencies'
+}
+
+grunt {
+    // Set the directory where Gruntfile.js should be found
+    workDir = file("src/main/webapp")
+
+    // Whether colors should output on the terminal
+    colors = true
+
+    // Whether output from Grunt should be buffered - useful when running tasks in parallel
+    bufferOutput = false
 }
