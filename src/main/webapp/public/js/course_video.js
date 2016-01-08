@@ -54,7 +54,8 @@ define(['angular', 'angular-file-upload', 'admin_pwd_service', 'login_service'],
 						$location.port() + '/education/zaozao/course/video/' + $scope.courseId)
 					.success(function(e) {
 						console.log('course ', e);
-						$scope.videoPath = e;
+						$scope.videoPath = $sce.trustAsResourceUrl(e.video_path);
+						console.log('get video path ', $scope.videoPath);
 					}).error(function(e) {
 
 					});

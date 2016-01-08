@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.InputStream;
+import java.util.Hashtable;
+import java.util.Map;
 
 /**
  * Created by yzzhao on 1/5/16.
@@ -23,13 +25,15 @@ public class CourseVideoService {
     @Autowired
     private WSUtility wsUtility;
 
-    public String getVideoUrl(int courseId) {
+    public Map<String, String> getVideoUrl(int courseId) {
         CourseEntity course = courseRepository.findOne(courseId);
+        Map<String,String> ret = new Hashtable<>();
         if (course != null) {
             if(course.getVideoPath() == null){
                 return null;
             }
-            return wsUtility.getResourcePath(course.getVideoPath());
+            ret.put("video_path", wsUtility.getResourcePath(course.getVideoPath()));
+            return ret;
         }
         throw new BadRequestException(ErrorCode.COURSE_NOT_FOUND);
     }

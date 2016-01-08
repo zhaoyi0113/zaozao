@@ -25,8 +25,7 @@ public class CourseVideoAPI {
     @Path("/{id}")
     @GET
     public Response getCourseVideo(@PathParam("id") int id) {
-        String videoUrl = videoService.getVideoUrl(id);
-        return Response.ok(videoUrl).build();
+        return Response.ok(videoService.getVideoUrl(id)).build();
     }
 
     @POST
