@@ -28,7 +28,8 @@ require.config({
         'hammerjs': '/education/bower_components/hammerjs/hammer.min',
         'angular-gestures': '/education/bower_components/angular-gestures/gestures.min',
         'bootstrap-carousel-swipe': '/education/bower_components/bootstrap-carousel-swipe/carousel-swipe',
-        'bootstrap': '/education/bower_components/bootstrap/dist/js/bootstrap.min'
+        'bootstrap': '/education/bower_components/bootstrap/dist/js/bootstrap.min',
+        'angular-bootstrap': '/education/bower_components/angular-bootstrap/ui-bootstrap.min'
     },
     shim: {
         'angular': {
@@ -98,6 +99,9 @@ require.config({
         'bootstrap-carousel-swipe':{
             deps: ['bootstrap'],
             exports: 'bootstrap-carousel-swipe'
+        },
+        'angular-bootstrap': {
+            deps: ['angular']
         }
     }
 });

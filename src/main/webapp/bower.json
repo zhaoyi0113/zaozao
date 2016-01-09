@@ -34,6 +34,7 @@
     "requirejs": "~2.1.20",
     "ng-dialog": "~0.5.6",
     "ueditor": "~1.4.3",
-    "ueditor-bower": "~1.4.3"
+    "ueditor-bower": "~1.4.3",
+    "angular-ui-bootstrap": "~1.0.0"
   }
 }

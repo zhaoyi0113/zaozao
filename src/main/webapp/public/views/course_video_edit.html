@@ -1,6 +1,6 @@
 <div>
-	<h2>Video</h2>
-	<video  ng-src='{{videoPath}}' ng-model='videoPath' autoplay='true' width='100%' controls='true'></video>
+	<h2>{{courseName}}</h2>
+	<video  ng-src='{{videoPath}}' ng-model='videoPath' width='100%' controls='true'></video>
 
 	<form>
 		<div class='col-md-12 form-group'>
@@ -8,7 +8,12 @@
             <input type="file" nv-file-select="" uploader="uploader"/>
 
         </div>
+        <div>
+        	<label>Upload</label>
+        	<uib-progressbar max="100" value="uploadProgress" ><span style="color:white; white-space:nowrap;">{{uploadProgress}} / 1oo</span></uib-progressbar>
+		</div>
         <button class='btn btn-primary' ng-click='submit()'>Upload</button>
+        <button class='btn btn-primary' ng-click='cancel()'>Cancel</button>
 	</form>
 	
 </div>

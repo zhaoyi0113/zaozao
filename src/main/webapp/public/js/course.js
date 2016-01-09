@@ -1,10 +1,10 @@
 define(['angular', 'angular-file-upload', 'directives', 'angular-ui-date', 'angular-bootstrap', 'angular-bootstrap-tpls',
     'ueditor-config', 'kindeditor', 'kindeditor-zh', 'login_service',
-    'angular-kindeditor', 'angular-datepicker', 'ng-dialog', 'admin_pwd_service'
+    'angular-kindeditor', 'angular-datepicker', 'ng-dialog', 'admin_pwd_service','angular-bootstrap'
 ], function(angular) {
     'use strict';
     var course = angular.module("courseModule", ['angularFileUpload', 'ngThumbModel',
-        'ui.bootstrap', 'ngKeditor', 'ngDialog', 'loginServiceModule', 'adminPwdServiceModule'
+        'ui.bootstrap', 'ngKeditor', 'ngDialog', 'loginServiceModule', 'adminPwdServiceModule', 'ui.bootstrap'
     ]);
 
     course.controller('CourseController', ['$scope', '$http', '$location', '$state', 'ngDialog',
@@ -12,19 +12,25 @@ define(['angular', 'angular-file-upload', 'directives', 'angular-ui-date', 'angu
         function($scope, $http, $location, $state, $ngDialog, loginSrv, adminPwdSrv) {
             console.log("window.location:" + window.location.protocol);
             $scope.headers = ['Name', 'Publish Date', 'Status', 'Delete'];
-            $http.get('http://' + $location.host() + ":" + $location.port() + '/education/zaozao/course/queryall')
-                .success(function(e) {
-                    var str = JSON.stringify(e);
-                    var json = JSON.parse(str);
-                    console.log('get all course ', json);
-                    $scope.courses = json;
-                }).error(function(e) {
-
-                });
+            $scope.pageIdx = 1;
+            $scope.number = 10;
+            loadCourses();
+            
+            $http.get('http://' + $location.host() + ":" +
+                    $location.port() + '/education/zaozao/course/coursecount')
+            .success(function(e){
+                $scope.totalCourseCount = e;
+                $scope.totalPages = Math.round(e/$scope.number+0.5);
+                console.log('total pages ', $scope.totalPages);
+            });
+            
             $scope.newCourse = function() {
                 $state.go('home.newcourse')
             }
-
+            $scope.pageChanged=function(){
+                console.log('page change to '+$scope.pageIdx);
+                loadCourses();
+            }
             $scope.delete = function(id) {
                 loginSrv.isLogin().then(function(event) {
                     console.log(event === 'admin');
@@ -71,6 +77,20 @@ define(['angular', 'angular-file-upload', 'directives', 'angular-ui-date', 'angu
                     $scope.courses.splice(i, 1);
                 }
 
+            }
+
+            function loadCourses(){
+                $http.get('http://' + $location.host() + ":" +
+                    $location.port() + '/education/zaozao/course/queryall?page_index=' + ($scope.pageIdx-1) +
+                    '&number=' + $scope.number)
+                .success(function(e) {
+                    var str = JSON.stringify(e);
+                    var json = JSON.parse(str);
+                    console.log('get all course ', json);
+                    $scope.courses = json;
+                }).error(function(e) {
+
+                });
             }
         }
     ]);
