@@ -59,7 +59,7 @@ public class CourseProposalServiceTest extends AbstractServiceTest {
 
     @Test
     public void testCourseProposalQuery1() {
-        List<CourseQueryBean> beans = courseProposalService.queryCourse(null, 0, CommonStatus.ENABLED.name(), 0);
+        List<CourseQueryBean> beans = courseProposalService.queryCourse(null, 0, CommonStatus.ENABLED.name(), 0, 0);
         int size = beans.size();
         CourseEntity course = new CourseEntity();
         course.setStatus(CommonStatus.ENABLED);
@@ -67,7 +67,7 @@ public class CourseProposalServiceTest extends AbstractServiceTest {
         course.setCategory(1);
         course.setPublishDate(Calendar.getInstance().getTime());
         CourseEntity save = courseRepository.save(course);
-        beans = courseProposalService.queryCourse(null, 0, CommonStatus.ENABLED.name(), 0);
+        beans = courseProposalService.queryCourse(null, 0, CommonStatus.ENABLED.name(), 0, 0);
         Assert.assertEquals(size + 1, beans.size());
     }
 
@@ -82,7 +82,7 @@ public class CourseProposalServiceTest extends AbstractServiceTest {
         ctrEntity.setCourseId(saved.getId());
         ctrEntity.setCourseTagId(99);
         courseTagRelationRepository.save(ctrEntity);
-        List<CourseQueryBean> beans = courseProposalService.queryCourse(null, 99, CommonStatus.ENABLED.name(), 0);
+        List<CourseQueryBean> beans = courseProposalService.queryCourse(null, 99, CommonStatus.ENABLED.name(), 0, 0);
         Assert.assertEquals(1, beans.size());
     }
 
@@ -100,7 +100,7 @@ public class CourseProposalServiceTest extends AbstractServiceTest {
             ctrEntity.setCourseTagId(99);
             courseTagRelationRepository.save(ctrEntity);
         }
-        List<CourseQueryBean> beans = courseProposalService.queryCourse(null, 99, CommonStatus.ENABLED.name(), 3);
+        List<CourseQueryBean> beans = courseProposalService.queryCourse(null, 99, CommonStatus.ENABLED.name(), 3, 0);
         Assert.assertEquals(3, beans.size());
     }
 
@@ -124,7 +124,7 @@ public class CourseProposalServiceTest extends AbstractServiceTest {
                 lastThree.add(saved.getId());
             }
         }
-        List<CourseQueryBean> beans = courseProposalService.queryCourse(null, 99, CommonStatus.ENABLED.name(), 3);
+        List<CourseQueryBean> beans = courseProposalService.queryCourse(null, 99, CommonStatus.ENABLED.name(), 3, 0);
         Assert.assertEquals(3, beans.size());
         for (int i = 0; i < lastThree.size(); i++) {
             Assert.assertEquals(lastThree.get(i)+"", beans.get(i).getId());

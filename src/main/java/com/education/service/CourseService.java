@@ -14,6 +14,7 @@ import com.education.formbean.CourseQueryBean;
 import com.education.formbean.CourseTagBean;
 import com.education.ws.CourseRegisterBean;
 import com.education.ws.util.WSUtility;
+import jersey.repackaged.com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -22,10 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -54,6 +52,9 @@ public class CourseService {
     @Autowired
     private CourseTagRelationRepository courseTagRelationRepository;
 
+
+    @Autowired
+    private CourseTagService tagService;
 
     @Value("#{config['course_image_path']}")
     private String courseImagePath;
@@ -123,6 +124,28 @@ public class CourseService {
             e.printStackTrace();
             throw new BadRequestException(ErrorCode.FILE_NOT_EXISTED);
         }
+    }
+
+    public List<CourseQueryBean> queryCourses( int number, int pageIdx) {
+        Iterable<CourseEntity> courseEntityList = courseRepository.findAllByOrderByTimeCreatedDesc();
+        List<CourseEntity> courseList = Lists.newArrayList(courseEntityList);
+        List<CourseQueryBean> courseBeanList = new ArrayList<>();
+        for (int i =number*pageIdx; i<courseList.size(); i++) {
+            CourseEntity entity = courseList.get(i);
+            logger.info("add course " + entity.getId());
+            List<CourseTagBean> courseTags = tagService.getCourseTagsByCourseId(entity.getId());
+            CourseQueryBean bean = new CourseQueryBean(entity, wsUtility);
+            bean.setTags(courseTags);
+            courseBeanList.add(bean);
+            if (number > 0 && courseBeanList.size() >= number) {
+                break;
+            }
+        }
+        return courseBeanList;
+    }
+
+    public long getCourseCount(){
+        return courseRepository.count();
     }
 
     public List<CourseQueryBean> getAllCoursesIndex() {

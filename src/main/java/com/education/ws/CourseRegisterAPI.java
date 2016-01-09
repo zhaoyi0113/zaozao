@@ -5,6 +5,7 @@ import com.education.auth.Public;
 import com.education.db.entity.CourseEntity;
 import com.education.db.jpa.CourseRepository;
 import com.education.formbean.CourseQueryBean;
+import com.education.service.CourseProposalService;
 import com.education.service.CourseService;
 import com.education.service.BackendLoginService;
 import com.education.ws.util.WSUtility;
@@ -54,6 +55,9 @@ public class CourseRegisterAPI {
     @Autowired
     private CourseService courseService;
 
+    @Autowired
+    private CourseProposalService courseProposalService;
+
     @Path("create")
     @POST
     @Consumes(MediaType.MULTIPART_FORM_DATA)
@@ -91,14 +95,22 @@ public class CourseRegisterAPI {
 
     @Path("queryall")
     @GET
-    public Response getAllCourses() {
+    public Response getAllCourses(
+                                  @DefaultValue("10") @QueryParam("number") int number,
+                                  @DefaultValue("0") @QueryParam("page_index") int pageIndex) {
         try {
-            List<CourseQueryBean> allCoursesIndex = courseService.getAllCoursesIndex();
+            List<CourseQueryBean> allCoursesIndex = courseService.queryCourses(number, pageIndex);
             return Response.ok().entity(allCoursesIndex).build();
         } catch (Exception e) {
             logger.log(Level.SEVERE, e.getMessage(), e);
             return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
         }
+    }
+
+    @Path("coursecount")
+    @GET
+    public Response getCourseCount(){
+        return Response.ok(courseService.getCourseCount()).build();
     }
 
     @Path("query")

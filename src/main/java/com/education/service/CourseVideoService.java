@@ -29,10 +29,11 @@ public class CourseVideoService {
         CourseEntity course = courseRepository.findOne(courseId);
         Map<String,String> ret = new Hashtable<>();
         if (course != null) {
-            if(course.getVideoPath() == null){
-                return null;
+            if(course.getVideoPath() != null){
+                ret.put("video_path", wsUtility.getResourcePath(course.getVideoPath()));
             }
-            ret.put("video_path", wsUtility.getResourcePath(course.getVideoPath()));
+
+            ret.put("course_name", course.getName());
             return ret;
         }
         throw new BadRequestException(ErrorCode.COURSE_NOT_FOUND);
