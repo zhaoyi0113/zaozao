@@ -49,9 +49,11 @@ public class WeChatCodeAuthentication implements ContainerRequestFilter {
             return;
         }
         String code = getWeChatCode(requestContext, annotation);
-        logger.info("get wechat code " + code);
-        WeChatUserInfo webUserInfo = weChatService.getWebUserInfo(code);
+        String status = getWeChatState(requestContext);
+        logger.info("get wechat code " + code+", state="+status);
+        WeChatUserInfo webUserInfo = weChatService.getWebUserInfo(code, status);
         if (webUserInfo == null) {
+            logger.severe("not able to find wechat user info");
             return;
         }
         if (webUserInfo.getErrcode() != null || webUserInfo.getOpenid() == null) {
@@ -84,6 +86,15 @@ public class WeChatCodeAuthentication implements ContainerRequestFilter {
             throw new BadRequestException(ErrorCode.WECHAT_CODE_ERROR);
         }
         return code.get(0);
+    }
+
+    private String getWeChatState(ContainerRequestContext requestContext){
+        MultivaluedMap<String, String> pathParameters = requestContext.getUriInfo().getQueryParameters();
+        List<String> status = pathParameters.get("state");
+        if(status!= null && !status.isEmpty()){
+            return status.get(0);
+        }
+        return null;
     }
 
     private void checkUserExistent(WeChatUserInfo userInfo) {

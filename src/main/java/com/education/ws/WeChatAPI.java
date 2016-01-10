@@ -10,6 +10,7 @@ import com.education.ws.util.ContextKeys;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.ws.rs.*;
 import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.core.Context;
@@ -65,7 +66,13 @@ public class WeChatAPI {
         logger.info(" login code=" + code + ", state= " + state+", "+requestContext);
         WeChatUserInfo userInfo = (WeChatUserInfo) requestContext.getProperty(ContextKeys.WECHAT_USER);
         if(userInfo != null) {
-            historyService.saveWeChatUserLogin(userInfo);
+            HttpSession session = request.getSession(true);
+            logger.info("save user info session "+userInfo +", session id:"+session.getId());
+            session.setAttribute(ContextKeys.WECHAT_USER, userInfo);
+            String token = historyService.saveWeChatUserLogin(userInfo);
+            return Response.ok(token).build();
+        }else{
+            logger.severe("can't login through wechat");
         }
         return Response.ok().build();
     }
@@ -74,7 +81,7 @@ public class WeChatAPI {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getOpenId(@QueryParam("code") String code, @QueryParam("state") String state) {
-        WeChatUserInfo webUserInfo = weChatService.getWebUserInfo(code);
+        WeChatUserInfo webUserInfo = weChatService.getWebUserInfo(code, state);
         return Response.ok(webUserInfo.getOpenid()).build();
     }
 
@@ -96,7 +103,7 @@ public class WeChatAPI {
     @Path("/jsapi")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getJsApiTicket(ContainerRequestContext context) {
+    public Response getJsApiTicket(@Context ContainerRequestContext context) {
         URI baseUri = context.getUriInfo().getBaseUri();
         URI absolutePath = context.getUriInfo().getAbsolutePath();
         logger.info("base uri:" + baseUri.toString());

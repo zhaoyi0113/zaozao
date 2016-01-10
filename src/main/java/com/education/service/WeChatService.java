@@ -1,5 +1,6 @@
 package com.education.service;
 
+import com.education.auth.WeChatAccessStatus;
 import com.google.gson.Gson;
 import com.google.gson.internal.LinkedTreeMap;
 import org.apache.http.HttpEntity;
@@ -66,6 +67,9 @@ public class WeChatService {
     @Value("#{config['wechat_web_appid']}")
     private String webAppId;
 
+    @Value("#{config['wechat_web_secret']}")
+    private String webAppSecret;
+
     private static final Logger logger = Logger.getLogger(WeChatService.class.getName());
 
     private Map<String,String> jsapiTicketCache;
@@ -89,8 +93,8 @@ public class WeChatService {
         return false;
     }
 
-    public WeChatUserInfo getWebUserInfo(String code) {
-        Map tokenMap = getWebSiteAccessToken(code);
+    public WeChatUserInfo getWebUserInfo(String code, String state) {
+        Map tokenMap = getWebSiteAccessToken(code, state);
         if(tokenMap == null){
             return null;
         }
@@ -163,8 +167,8 @@ public class WeChatService {
         return new Hashtable<>();
     }
 
-    public Map getWebSiteAccessToken(String code) {
-        String url = buildWebAccessTokenURL(code);
+    public Map getWebSiteAccessToken(String code, String state) {
+        String url = buildWebAccessTokenURL(code, state);
         HttpGet httpGet = new HttpGet(url);
         HttpClient httpClient = HttpClients.createDefault();
         try {
@@ -310,14 +314,39 @@ public class WeChatService {
         return builder.toString();
     }
 
-    private String buildWebAccessTokenURL(String code) {
+    private String buildWebAccessTokenURL(String code, String state) {
         StringBuilder builder = new StringBuilder();
-        builder.append(webAccessTokenUrl).append("?appid=").append(appid).append("&secret=").append(appSecret).append("&code=").append(code).append("&grant_type=authorization_code");
+        String appId = appid;
+        String appSec = appSecret;
+        if(state != null){
+            try {
+                WeChatAccessStatus weChatAccessStatus = WeChatAccessStatus.valueOf(state);
+                switch (weChatAccessStatus){
+                    case WEB:
+                        appId = webAppId;
+                        appSec = webAppSecret;
+                        break;
+                    case WECHAT:
+                        appId = appid;
+                        appSec = appSecret;
+                        break;
+                    case MOBILE:
+                        break;
+                    default:
+                        appId = appid;
+                        appSec = appSecret;
+                }
+            }catch(IllegalArgumentException e){
+                logger.log(Level.SEVERE, e.getMessage(), e);
+            }
+        }
+        builder.append(webAccessTokenUrl).append("?appid=").append(appId).append("&secret=").append(appSec).append("&code=").append(code).append("&grant_type=authorization_code");
         return builder.toString();
     }
 
     private String buildWebUserInfoUrl(String token, String openid) {
         StringBuilder builder = new StringBuilder();
+
         builder.append(webUserInfoUrl).append("?access_token=").append(token).append("&openid=").append(openid);
         return builder.toString();
     }

@@ -6,6 +6,7 @@ import com.education.db.jpa.LoginHistoryRepository;
 import com.education.db.jpa.UserRepository;
 import com.education.exception.BadRequestException;
 import com.education.exception.ErrorCode;
+import com.education.util.AccessTokenGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,8 +27,10 @@ public class LoginHistoryService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired AccessTokenGenerator tokenGenerator;
+
     @Transactional
-    public int saveWeChatUserLogin(WeChatUserInfo userInfo) {
+    public String saveWeChatUserLogin(WeChatUserInfo userInfo) {
         int userId = -1;
         List<UserEntity> users = userRepository.findByUnionid(userInfo.getUnionid());
         if (users.isEmpty()) {
@@ -39,8 +42,10 @@ public class LoginHistoryService {
         LoginHistoryEntity entity = new LoginHistoryEntity();
         entity.setLoginTime(Calendar.getInstance().getTime());
         entity.setUserid(userId);
+        String accessToken = tokenGenerator.generateAccessToken(userInfo.getUnionid(), System.currentTimeMillis() + "");
+        entity.setToken(accessToken);
         LoginHistoryEntity save = loginHistoryRepository.save(entity);
-        return save.getId();
+        return save.getToken();
     }
 
     private int saveUserInfo(WeChatUserInfo userInfo) {

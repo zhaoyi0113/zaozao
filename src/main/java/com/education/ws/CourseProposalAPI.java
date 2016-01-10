@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.ws.rs.*;
 import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.core.Context;
@@ -36,7 +38,6 @@ public class CourseProposalAPI {
     private CourseService courseService;
 
     @GET
-    @Public(requireWeChatCode = false)
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/query")
     public Response getCourse(@Context ContainerRequestContext context,
@@ -51,10 +52,10 @@ public class CourseProposalAPI {
     }
 
     @GET
-    @Public(requireWeChatCode = false)
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/query_by_date")
-    public Response getCourseByDate(@Context ContainerRequestContext context,
+    public Response getCourseByDate(@Context HttpServletRequest request,
+                                    @Context ContainerRequestContext context,
                                     @DefaultValue("0") @QueryParam("tag_id") int tagId,
                                     @DefaultValue("ENABLED") @QueryParam("status") String status,
                                     @DefaultValue("10") @QueryParam("number") int number,
@@ -67,12 +68,18 @@ public class CourseProposalAPI {
 
     @GET
     @Path("/{course_id}")
-    @Public(requireWeChatCode = false)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getCourse(@Context ContainerRequestContext context,
+    public Response getCourse(@Context HttpServletRequest request,
+                              @Context ContainerRequestContext context,
                               @PathParam("course_id") int courseId){
-        WeChatUserInfo userInfo = (WeChatUserInfo) context.getProperty(ContextKeys.WECHAT_USER);
-
+        WeChatUserInfo userInfo = null;
+        HttpSession session = request.getSession();
+        if(session.getAttribute(ContextKeys.WECHAT_USER) != null){
+            userInfo = (WeChatUserInfo) session.getAttribute(ContextKeys.WECHAT_USER);
+            logger.info("login user "+userInfo.getUnionid());
+        }else{
+            logger.info("anonymous query "+session.getId());
+        }
         CourseQueryBean b = courseProposalService.queryCourse(userInfo,courseId);
 
         return Response.ok(b).build();

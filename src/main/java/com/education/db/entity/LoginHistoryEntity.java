@@ -13,6 +13,7 @@ public class LoginHistoryEntity {
     private int userid;
     private Date loginTime;
     private String source;
+    private String token;
 
     @Id
     @GeneratedValue
@@ -50,5 +51,14 @@ public class LoginHistoryEntity {
 
     public void setSource(String source) {
         this.source = source;
+    }
+
+    @Column(name="token")
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }
