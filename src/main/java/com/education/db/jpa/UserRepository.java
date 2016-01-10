@@ -12,5 +12,5 @@ public interface UserRepository extends CrudRepository<UserEntity, Integer> {
 
     List<UserEntity> findByUserName(String userName);
 
-    List<UserEntity> findByOpenid(String openid);
+    List<UserEntity> findByUnionid(String unionId);
 }

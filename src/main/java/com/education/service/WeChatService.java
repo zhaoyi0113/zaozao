@@ -60,6 +60,12 @@ public class WeChatService {
     @Value("#{config['wechat_jsapi_ticket_url']}")
     private String jsapiTicketUrl;
 
+    @Value("#{config['wechat_qr_connect_url']}")
+    private String qrWebConnectUrl;
+
+    @Value("#{config['wechat_web_appid']}")
+    private String webAppId;
+
     private static final Logger logger = Logger.getLogger(WeChatService.class.getName());
 
     private Map<String,String> jsapiTicketCache;
@@ -105,7 +111,6 @@ public class WeChatService {
             logger.info("get web user info response " + body);
             Gson gson = new Gson();
             WeChatUserInfo weChatUserInfo = gson.fromJson(body, WeChatUserInfo.class);
-            logger.info("get web user info response " + weChatUserInfo.getOpenid());
             return weChatUserInfo;
         } catch (IOException e) {
             e.printStackTrace();
@@ -203,21 +208,16 @@ public class WeChatService {
         String ticket = getQRBarTicket(code);
         logger.info("get qr bar ticket " + ticket);
         String url = buildQRCodeUrl(ticket);
-        HttpGet httpGet = new HttpGet(url);
-        HttpClient httpClient = HttpClients.createDefault();
-        try {
-            HttpResponse response = httpClient.execute(httpGet);
-            HttpEntity entity = response.getEntity();
-            String body = EntityUtils.toString(entity, "UTF-8").trim();
-            logger.info("get user list response " + body);
-            Gson gson = new Gson();
-            Map<String, Object> userList = gson.fromJson(body, Map.class);
+        logger.info("show qr bar url:"+url);
+        return url;
+    }
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public String getQrWebConnectUrl(){
+        StringBuilder builder = new StringBuilder(qrWebConnectUrl);
+        builder.append("?appid=").append(webAppId).append("&redirect_uri=").append("http://imzao.com&response_type=code&scope=snsapi_login&state=123#wechat_redirect");
+        logger.info("generate qr connect url "+builder.toString());
+        return builder.toString();
 
-        return null;
     }
 
     public String getQRBarTicket(String code) {
@@ -226,7 +226,7 @@ public class WeChatService {
         HttpClient httpClient = HttpClients.createDefault();
         try {
             Map<String, String> params = new Hashtable<>();
-            params.put("expire_seconds", "30");
+            params.put("expire_seconds", "300");
             params.put("action_name", "QR_SCENE");
             Gson gson = new Gson();
 

@@ -7,7 +7,6 @@ import com.education.db.jpa.CourseTypeRepository;
 import com.education.db.jpa.UserRepository;
 import com.education.formbean.CourseQueryBean;
 import com.education.formbean.CourseTagBean;
-import com.education.ws.CourseRegisterBean;
 import com.education.ws.util.WSUtility;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -44,7 +43,10 @@ public class CourseProposalService {
     @Autowired
     private CourseTagService tagService;
 
-    public List<CourseQueryBean> queryCourse(WeChatUserInfo userInfo, int tagId, String status, int number, int pageIdx) {
+    @Autowired
+    private CourseService courseService;
+
+    public List<CourseQueryBean> queryCourses(WeChatUserInfo userInfo, int tagId, String status, int number, int pageIdx) {
         List<CourseEntity> courseList = getCourseEntities(tagId, status);
         List<CourseQueryBean> courseBeanList = new ArrayList<>();
         for (int i =number*pageIdx; i<courseList.size(); i++) {
@@ -109,6 +111,10 @@ public class CourseProposalService {
             sortedCourses.put(dateStr, entry.getValue());
         }
         return sortedCourses;
+    }
+
+    public CourseQueryBean queryCourse(WeChatUserInfo userInfo, int courseId) {
+        return courseService.queryCourse(String.valueOf(courseId));
     }
 
     private List<CourseEntity> getCourseEntities(int tagId, String status) {

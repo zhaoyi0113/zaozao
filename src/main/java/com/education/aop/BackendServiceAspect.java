@@ -7,6 +7,7 @@ import com.education.db.jpa.BackendUserRepository;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -18,6 +19,7 @@ import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.core.Context;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Objects;
 import java.util.logging.Logger;
 
 /**
@@ -42,6 +44,11 @@ public class BackendServiceAspect {
 
     @Pointcut("execution(* com.education.service.BackendLoginService.login(..))")
     public void backendUserLogin() {
+    }
+
+    @Pointcut("execution(* com.education.service.CourseProposalService.queryCourseByDate(..))")
+    public void queryCourseByDate(){
+
     }
 
 //    @Before("backendUserLogin()")
@@ -69,9 +76,13 @@ public class BackendServiceAspect {
                 entity.setUserId(userNameList.get(0).getId());
                 loginHistoryRepository.save(entity);
             }
-
         }
     }
 
+    @Before("queryCourseByDate()")
+    public void beforeQueryCourse(JoinPoint joinPoint){
+        Object[] args = joinPoint.getArgs();
+
+    }
 
 }

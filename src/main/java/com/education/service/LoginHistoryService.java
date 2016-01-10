@@ -29,7 +29,7 @@ public class LoginHistoryService {
     @Transactional
     public int saveWeChatUserLogin(WeChatUserInfo userInfo) {
         int userId = -1;
-        List<UserEntity> users = userRepository.findByOpenid(userInfo.getOpenid());
+        List<UserEntity> users = userRepository.findByUnionid(userInfo.getUnionid());
         if (users.isEmpty()) {
             userId = saveUserInfo(userInfo);
         } else {

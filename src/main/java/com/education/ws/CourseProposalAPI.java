@@ -46,7 +46,7 @@ public class CourseProposalAPI {
                               @DefaultValue("0") @QueryParam("page_index") int pageIndex) {
         logger.info("get course " + tagId);
         WeChatUserInfo userInfo = (WeChatUserInfo) context.getProperty(ContextKeys.WECHAT_USER);
-        List<CourseQueryBean> beans = courseProposalService.queryCourse(userInfo, tagId, status, number, pageIndex);
+        List<CourseQueryBean> beans = courseProposalService.queryCourses(userInfo, tagId, status, number, pageIndex);
         return Response.ok(beans).build();
     }
 
@@ -67,9 +67,14 @@ public class CourseProposalAPI {
 
     @GET
     @Path("/{course_id}")
+    @Public(requireWeChatCode = false)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getCourse(@PathParam("course_id") int courseId){
-        CourseQueryBean b = courseService.queryCourse(String.valueOf(courseId));
+    public Response getCourse(@Context ContainerRequestContext context,
+                              @PathParam("course_id") int courseId){
+        WeChatUserInfo userInfo = (WeChatUserInfo) context.getProperty(ContextKeys.WECHAT_USER);
+
+        CourseQueryBean b = courseProposalService.queryCourse(userInfo,courseId);
+
         return Response.ok(b).build();
     }
 }

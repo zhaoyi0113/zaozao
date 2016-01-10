@@ -1,11 +1,12 @@
 package com.education.ws;
 
 import com.education.auth.Public;
+import com.education.exception.*;
+import com.education.exception.BadRequestException;
 import com.education.service.LoginHistoryService;
 import com.education.service.WeChatService;
 import com.education.service.WeChatUserInfo;
 import com.education.ws.util.ContextKeys;
-import com.education.ws.util.WSUtility;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,6 +16,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
@@ -108,6 +110,25 @@ public class WeChatAPI {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getBarCodeURL(@QueryParam("code") String code) {
         return Response.ok(weChatService.getQRBarTicket(code)).build();
+    }
+
+    @Path("/qrurl")
+    @GET
+    @Produces(MediaType.MULTIPART_FORM_DATA)
+    public Response getQRUrl(@QueryParam("code") String code){
+        return Response.ok(weChatService.getQRBarCodeURL(code)).build();
+    }
+
+    @Path("/qrwebconnect")
+    @GET
+    public Response getQrWebConnectUrl(){
+        String qrConnectUrl = weChatService.getQrWebConnectUrl();
+        try {
+            return Response.seeOther(new URI(qrConnectUrl)).build();
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+            throw new BadRequestException(ErrorCode.BUILD_QRCONNECT_URI_ERROR);
+        }
     }
 
 }

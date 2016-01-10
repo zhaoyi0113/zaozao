@@ -87,7 +87,7 @@ public class WeChatCodeAuthentication implements ContainerRequestFilter {
     }
 
     private void checkUserExistent(WeChatUserInfo userInfo) {
-        List<UserEntity> entity = userRepository.findByOpenid(userInfo.getOpenid());
+        List<UserEntity> entity = userRepository.findByUnionid(userInfo.getUnionid());
         if (entity == null || entity.size() <= 0) {
             throw new BadRequestException(ErrorCode.USER_NOT_EXISTED);
         }
@@ -95,8 +95,9 @@ public class WeChatCodeAuthentication implements ContainerRequestFilter {
 
     @Transactional
     private int registerUserIfNotExist(WeChatUserInfo userInfo) {
-        if (!userRepository.findByOpenid(userInfo.getOpenid()).isEmpty()) {
-            return userRepository.findByOpenid(userInfo.getOpenid()).get(0).getUserId();
+        List<UserEntity> byUnionid = userRepository.findByUnionid(userInfo.getUnionid());
+        if (!byUnionid.isEmpty()) {
+            return byUnionid.get(0).getUserId();
         }
         UserEntity entity = new UserEntity();
         entity.setGroupid(userInfo.getGroupid());

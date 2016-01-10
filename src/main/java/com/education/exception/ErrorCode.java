@@ -53,7 +53,8 @@ public enum ErrorCode {
     DUPLICATE_COURSE_NAME(10033, Response.Status.BAD_REQUEST, "重复的课程名称", "Duplicate couse name"),
     COURSE_TAG_NOT_EXIST(10034, Response.Status.BAD_REQUEST, "课程标签不存在", "Course Tag not exist"),
     ROLE_NOT_FOUND(10035, Response.Status.BAD_REQUEST, "角色不存在", "Role not exited."),
-    INVALID_USER(10036, Response.Status.BAD_REQUEST, "用户错误", "Invalid Users Access");
+    INVALID_USER(10036, Response.Status.BAD_REQUEST, "用户错误", "Invalid Users Access"),
+    BUILD_QRCONNECT_URI_ERROR(10037, Response.Status.BAD_REQUEST, "创建QR Connect URI失败", "Failed to build QR Connect URI");
 
     private final int code;
 
