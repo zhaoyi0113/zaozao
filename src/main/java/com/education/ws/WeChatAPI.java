@@ -115,15 +115,15 @@ public class WeChatAPI {
     @Path("/barcode")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getBarCodeURL(@QueryParam("code") String code) {
-        return Response.ok(weChatService.getQRBarTicket(code)).build();
+    public Response getBarCodeURL(@QueryParam("code") String code, @QueryParam("state") String state) {
+        return Response.ok(weChatService.getQRBarTicket(code, state)).build();
     }
 
     @Path("/qrurl")
     @GET
     @Produces(MediaType.MULTIPART_FORM_DATA)
-    public Response getQRUrl(@QueryParam("code") String code){
-        return Response.ok(weChatService.getQRBarCodeURL(code)).build();
+    public Response getQRUrl(@QueryParam("code") String code, @QueryParam("state") String state){
+        return Response.ok(weChatService.getQRBarCodeURL(code, state)).build();
     }
 
     @Path("/qrwebconnect")

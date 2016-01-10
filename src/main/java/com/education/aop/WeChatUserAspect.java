@@ -26,11 +26,11 @@ public class WeChatUserAspect {
     private UserCourseHistoryService historyService;
 
     @Pointcut("execution(* com.education.service.CourseProposalService.queryCourse(..))")
-    public void queryCourses() {
+    public void queryCourse() {
 
     }
 
-    @Before("queryCourses()")
+    @Before("queryCourse()")
     @Transactional
     public void beforeQueryCourses(JoinPoint joinPoint) {
         Object[] args = joinPoint.getArgs();
