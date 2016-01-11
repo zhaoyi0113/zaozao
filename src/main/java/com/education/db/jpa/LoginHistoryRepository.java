@@ -15,4 +15,6 @@ public interface LoginHistoryRepository extends CrudRepository<LoginHistoryEntit
     int countByuserid(int userId);
 
     List<LoginHistoryEntity> findByUseridOrderByLoginTimeAsc(int userId);
+
+    List<LoginHistoryEntity> findByToken(String token);
 }

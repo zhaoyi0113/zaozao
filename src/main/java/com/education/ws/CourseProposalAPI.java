@@ -2,11 +2,14 @@ package com.education.ws;
 
 
 import com.education.auth.Public;
+import com.education.db.entity.UserEntity;
 import com.education.formbean.CourseQueryBean;
 import com.education.service.CourseProposalService;
 import com.education.service.CourseService;
+import com.education.service.LoginHistoryService;
 import com.education.service.WeChatUserInfo;
 import com.education.ws.util.ContextKeys;
+import com.education.ws.util.HeaderKeys;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -36,6 +39,9 @@ public class CourseProposalAPI {
 
     @Autowired
     private CourseService courseService;
+
+    @Autowired
+    private LoginHistoryService historyService;
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -72,16 +78,16 @@ public class CourseProposalAPI {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getCourse(@Context HttpServletRequest request,
                               @Context ContainerRequestContext context,
-                              @PathParam("course_id") int courseId){
-        WeChatUserInfo userInfo = null;
-        HttpSession session = request.getSession();
-        if(session.getAttribute(ContextKeys.WECHAT_USER) != null){
-            userInfo = (WeChatUserInfo) session.getAttribute(ContextKeys.WECHAT_USER);
-            logger.info("login user "+userInfo.getUnionid());
-        }else{
-            logger.info("anonymous query "+session.getId());
+                              @PathParam("course_id") int courseId) {
+        String token = (String) context.getProperty(HeaderKeys.ACCESS_TOKEN);
+        UserEntity userInfo = null;
+        if (token != null) {
+            logger.info("login user " + token);
+            userInfo = historyService.getUserByToken(token);
+        } else {
+            logger.info("anonymous query ");
         }
-        CourseQueryBean b = courseProposalService.queryCourse(userInfo,courseId);
+        CourseQueryBean b = courseProposalService.queryCourse(userInfo, courseId);
 
         return Response.ok(b).build();
     }

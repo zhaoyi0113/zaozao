@@ -16,6 +16,7 @@ import java.util.logging.Logger;
 
 /**
  * Created by yzzhao on 12/28/15.
+ * check login for backend service
  */
 @Provider
 public class LoginAuthenticationFilter implements ContainerRequestFilter {

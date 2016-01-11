@@ -25,7 +25,7 @@ public class UserCourseHistoryService {
     private UserRepository userRepository;
 
     @Transactional
-    public void saveUserAccessHistory(WeChatUserInfo userInfo, int courseId) {
+    public void saveUserAccessHistory(UserEntity userInfo, int courseId) {
         List<UserEntity> userList = userRepository.findByUnionid(userInfo.getUnionid());
         if (!userList.isEmpty()) {
             UserCourseHistoryEntity entity = new UserCourseHistoryEntity();

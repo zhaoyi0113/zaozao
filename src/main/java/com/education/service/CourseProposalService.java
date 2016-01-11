@@ -2,6 +2,7 @@ package com.education.service;
 
 import com.education.db.entity.CommonStatus;
 import com.education.db.entity.CourseEntity;
+import com.education.db.entity.UserEntity;
 import com.education.db.jpa.CourseRepository;
 import com.education.db.jpa.CourseTypeRepository;
 import com.education.db.jpa.UserRepository;
@@ -110,7 +111,7 @@ public class CourseProposalService {
         return sortedCourses;
     }
 
-    public CourseQueryBean queryCourse(WeChatUserInfo userInfo, int courseId) {
+    public CourseQueryBean queryCourse(UserEntity userInfo, int courseId) {
         return courseService.queryCourse(String.valueOf(courseId));
     }
 

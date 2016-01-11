@@ -121,4 +121,13 @@ public class LoginHistoryService {
         }
         return dayNumber;
     }
+
+    public UserEntity getUserByToken(String token){
+        List<LoginHistoryEntity> tokenList = loginHistoryRepository.findByToken(token);
+        if(tokenList == null || tokenList.isEmpty()){
+            return null;
+        }
+        UserEntity user = userRepository.findOne(tokenList.get(0).getUserid());
+        return user;
+    }
 }

@@ -1,7 +1,9 @@
 package com.education.aop;
 
+import com.education.db.entity.UserEntity;
 import com.education.service.UserCourseHistoryService;
 import com.education.service.WeChatUserInfo;
+import com.education.ws.UserEditBean;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
@@ -35,7 +37,7 @@ public class WeChatUserAspect {
     public void beforeQueryCourse(JoinPoint joinPoint) {
         Object[] args = joinPoint.getArgs();
         if (args != null && args.length >= 2) {
-            WeChatUserInfo userInfo = (WeChatUserInfo) args[0];
+            UserEntity userInfo = (UserEntity) args[0];
             int courseId = (int) args[1];
             logger.info("query course aop " + courseId);
             if (userInfo != null) {
