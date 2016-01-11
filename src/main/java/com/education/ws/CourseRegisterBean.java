@@ -1,9 +1,5 @@
 package com.education.ws;
 
-import com.education.db.entity.CourseEntity;
-import com.education.ws.util.WSUtility;
-import org.glassfish.jersey.media.multipart.FormDataParam;
-
 import javax.ws.rs.FormParam;
 
 /**
@@ -61,29 +57,6 @@ public class CourseRegisterBean {
     private double videoLength;
 
     public CourseRegisterBean() {
-    }
-
-    public CourseRegisterBean(CourseEntity entity, WSUtility wsUtility) {
-        this.name = entity.getName();
-//        this.date = wsUtility.dateToString(entity.getDate());
-        this.content = entity.getContent();
-        this.titleImagePath = entity.getTitleImagePath();
-        this.videoPath = entity.getVideoPath();
-
-        if (entity.getTitleImagePath() != null) {
-            this.titleImageUrl = wsUtility.getResourcePath(entity.getId(),entity.getTitleImagePath());
-        }
-        if (entity.getVideoPath() != null) {
-            this.videoUrl = wsUtility.getResourcePath(entity.getId(),entity.getVideoPath());
-        }
-        this.introduction = entity.getIntroduction();
-        this.id = String.valueOf(entity.getId());
-        this.years = entity.getYears();
-        this.videoExternalUrl = entity.getVideoExternalUrl();
-        this.dayNumber = entity.getDayNumber();
-        this.status = entity.getStatus().name();
-        this.publishDate = wsUtility.dateToString(entity.getPublishDate());
-        this.videoLength = entity.getVideoLength();
     }
 
     public String getDate() {

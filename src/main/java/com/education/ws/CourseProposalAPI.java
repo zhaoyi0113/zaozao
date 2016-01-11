@@ -44,10 +44,11 @@ public class CourseProposalAPI {
                               @DefaultValue("0") @QueryParam("tag_id") int tagId,
                               @DefaultValue("ENABLED") @QueryParam("status") String status,
                               @DefaultValue("10") @QueryParam("number") int number,
-                              @DefaultValue("0") @QueryParam("page_index") int pageIndex) {
+                              @DefaultValue("0") @QueryParam("page_index") int pageIndex,
+                              @DefaultValue("0") @QueryParam("ignore_course_id") int ignoreCourseId) {
         logger.info("get course " + tagId);
         WeChatUserInfo userInfo = (WeChatUserInfo) context.getProperty(ContextKeys.WECHAT_USER);
-        List<CourseQueryBean> beans = courseProposalService.queryCourses(userInfo, tagId, status, number, pageIndex);
+        List<CourseQueryBean> beans = courseProposalService.queryCourses(userInfo, tagId, status, number, pageIndex, ignoreCourseId);
         return Response.ok(beans).build();
     }
 

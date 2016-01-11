@@ -61,14 +61,6 @@ public class CourseService {
     @Value("#{config['course_image_path']}")
     private String courseImagePath;
 
-    public List<CourseRegisterBean> queryCourseByCategoryAfterNow(String category) {
-        return queryCourseByCategory(category, true);
-    }
-
-    public List<CourseRegisterBean> queryCourseByCategoryBeforeNow(String category) {
-        return queryCourseByCategory(category, false);
-    }
-
     @Transactional
     public int createCourse(CourseRegisterBean bean) {
         CourseEntity entity = new CourseEntity(bean);
@@ -189,24 +181,6 @@ public class CourseService {
         courseRepository.save(one);
         courseTagRelationRepository.removeByCourseId(one.getId());
         saveCourseTags(one.getId(), bean.getTags());
-    }
-
-    private List<CourseRegisterBean> queryCourseByCategory(String category, boolean after) {
-        Date date = new Date();
-        System.out.println("get course by category=" + category + ", date=" + date + ", after=" + after);
-        List<CourseEntity> list = null;
-        if (after) {
-            list = courseRepository.findByCategoryAndDateAfter(category, date);
-            list.addAll(courseRepository.findByCategoryAndDate(category, date));
-        } else {
-            list = courseRepository.findByCategoryAndDateBefore(category, date);
-        }
-        List<CourseRegisterBean> beanList = new ArrayList<>();
-        for (CourseEntity entity : list) {
-            CourseRegisterBean bean = new CourseRegisterBean(entity, wsUtility);
-            beanList.add(bean);
-        }
-        return beanList;
     }
 
     @Transactional

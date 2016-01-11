@@ -58,7 +58,7 @@ public class CourseProposalServiceTest extends AbstractServiceTest {
 
     @Test
     public void testCourseProposalQuery1() {
-        List<CourseQueryBean> beans = courseProposalService.queryCourses(null, 0, CommonStatus.ENABLED.name(), 0, 0);
+        List<CourseQueryBean> beans = courseProposalService.queryCourses(null, 0, CommonStatus.ENABLED.name(), 0, 0, 0);
         int size = beans.size();
         CourseEntity course = new CourseEntity();
         course.setStatus(CommonStatus.ENABLED);
@@ -66,7 +66,7 @@ public class CourseProposalServiceTest extends AbstractServiceTest {
         course.setCategory(1);
         course.setPublishDate(Calendar.getInstance().getTime());
         CourseEntity save = courseRepository.save(course);
-        beans = courseProposalService.queryCourses(null, 0, CommonStatus.ENABLED.name(), 0, 0);
+        beans = courseProposalService.queryCourses(null, 0, CommonStatus.ENABLED.name(), 0, 0, 0);
         Assert.assertEquals(size + 1, beans.size());
     }
 
@@ -81,7 +81,7 @@ public class CourseProposalServiceTest extends AbstractServiceTest {
         ctrEntity.setCourseId(saved.getId());
         ctrEntity.setCourseTagId(99);
         courseTagRelationRepository.save(ctrEntity);
-        List<CourseQueryBean> beans = courseProposalService.queryCourses(null, 99, CommonStatus.ENABLED.name(), 0, 0);
+        List<CourseQueryBean> beans = courseProposalService.queryCourses(null, 99, CommonStatus.ENABLED.name(), 0, 0, 0);
         Assert.assertEquals(1, beans.size());
     }
 
@@ -99,7 +99,7 @@ public class CourseProposalServiceTest extends AbstractServiceTest {
             ctrEntity.setCourseTagId(99);
             courseTagRelationRepository.save(ctrEntity);
         }
-        List<CourseQueryBean> beans = courseProposalService.queryCourses(null, 99, CommonStatus.ENABLED.name(), 3, 0);
+        List<CourseQueryBean> beans = courseProposalService.queryCourses(null, 99, CommonStatus.ENABLED.name(), 3, 0, 0);
         Assert.assertEquals(3, beans.size());
     }
 
@@ -118,20 +118,20 @@ public class CourseProposalServiceTest extends AbstractServiceTest {
             ctrEntity.setCourseId(saved.getId());
             ctrEntity.setCourseTagId(99);
             courseTagRelationRepository.save(ctrEntity);
-            instance.add(Calendar.DAY_OF_YEAR,-1);
-            if (i <3) {
+            instance.add(Calendar.DAY_OF_YEAR, -1);
+            if (i < 3) {
                 lastThree.add(saved.getId());
             }
         }
-        List<CourseQueryBean> beans = courseProposalService.queryCourses(null, 99, CommonStatus.ENABLED.name(), 3, 0);
+        List<CourseQueryBean> beans = courseProposalService.queryCourses(null, 99, CommonStatus.ENABLED.name(), 3, 0, 0);
         Assert.assertEquals(3, beans.size());
         for (int i = 0; i < lastThree.size(); i++) {
-            Assert.assertEquals(lastThree.get(i)+"", beans.get(i).getId());
+            Assert.assertEquals(lastThree.get(i) + "", beans.get(i).getId());
         }
     }
 
     @Test
-    public void testQueryMapByDate(){
+    public void testQueryMapByDate() {
         SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
         try {
             Date date = format.parse("2015/12/1");
@@ -163,15 +163,42 @@ public class CourseProposalServiceTest extends AbstractServiceTest {
             course.setPublishDate(date);
             courseRepository.save(course);
 
-            Map<String, List<CourseQueryBean>> courseMap = courseProposalService.queryCourseByDate(null, 0, CommonStatus.ENABLED.name(), 10,0);
+            Map<String, List<CourseQueryBean>> courseMap = courseProposalService.queryCourseByDate(null, 0, CommonStatus.ENABLED.name(), 10, 0);
             int num = 0;
-            for(Map.Entry<String, List<CourseQueryBean>> entry : courseMap.entrySet()){
+            for (Map.Entry<String, List<CourseQueryBean>> entry : courseMap.entrySet()) {
                 num += entry.getValue().size();
             }
-            Assert.assertTrue(num>=3);
+            Assert.assertTrue(num >= 3);
         } catch (ParseException e) {
             e.printStackTrace();
             Assert.fail(e.getMessage());
         }
+    }
+
+    @Test
+    public void testQueryWithIgnore() {
+        CourseEntity course = new CourseEntity();
+        course.setStatus(CommonStatus.ENABLED);
+        course.setName("course1");
+        course.setPublishDate(Calendar.getInstance().getTime());
+        course = courseRepository.save(course);
+        List<CourseQueryBean> courseList = courseProposalService.queryCourses(null, 0, CommonStatus.ENABLED.name(), 10, 0, 0);
+        boolean found = false;
+        for (CourseQueryBean bean : courseList) {
+            if (bean.getId().equals(String.valueOf(course.getId()))) {
+                found = true;
+                break;
+            }
+        }
+        Assert.assertTrue(found);
+        courseList = courseProposalService.queryCourses(null, 0, CommonStatus.ENABLED.name(), 10, 0, course.getId());
+        found = false;
+        for (CourseQueryBean bean : courseList) {
+            if (bean.getId().equals(String.valueOf(course.getId()))) {
+                found = true;
+                break;
+            }
+        }
+        Assert.assertFalse(found);
     }
 }

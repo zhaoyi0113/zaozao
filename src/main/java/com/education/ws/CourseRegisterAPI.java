@@ -113,22 +113,6 @@ public class CourseRegisterAPI {
         return Response.ok(courseService.getCourseCount()).build();
     }
 
-//    @Path("query")
-//    @GET
-//    @Produces(MediaType.APPLICATION_JSON)
-    @Deprecated
-    public Response queryCourse(@QueryParam("category") String category, @QueryParam("history") String history) {
-        List<CourseRegisterBean> list = null;
-        if (history == null) {
-            list = courseService.queryCourseByCategoryAfterNow(category);
-        } else {
-            list = courseService.queryCourseByCategoryBeforeNow(category);
-        }
-        logger.info("query course " + list.size());
-        return Response.ok(list).header("Access-Control-Allow-Origin", "*")
-                .header("Access-Control-Allow-Methods", "*").build();
-    }
-
     @Path("/querycourse/{courseId}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)

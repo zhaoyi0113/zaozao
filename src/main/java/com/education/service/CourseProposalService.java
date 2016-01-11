@@ -46,11 +46,14 @@ public class CourseProposalService {
     @Autowired
     private CourseService courseService;
 
-    public List<CourseQueryBean> queryCourses(WeChatUserInfo userInfo, int tagId, String status, int number, int pageIdx) {
+    public List<CourseQueryBean> queryCourses(WeChatUserInfo userInfo, int tagId, String status, int number, int pageIdx, int ignoreCourseId) {
         List<CourseEntity> courseList = getCourseEntities(tagId, status);
         List<CourseQueryBean> courseBeanList = new ArrayList<>();
         for (int i =number*pageIdx; i<courseList.size(); i++) {
             CourseEntity entity = courseList.get(i);
+            if(ignoreCourseId > 0 && entity.getId() == ignoreCourseId){
+                continue;
+            }
             logger.info("add course " + entity.getId());
             List<CourseTagBean> courseTags = tagService.getCourseTagsByCourseId(entity.getId());
             CourseQueryBean bean = new CourseQueryBean(entity, wsUtility);
