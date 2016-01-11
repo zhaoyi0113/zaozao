@@ -88,8 +88,8 @@ public class CourseRegisterAPI {
             bean.setTitleImagePath(fileName);
         }
 
-        courseService.createCourse(bean);
-        wsUtility.writeCourseFile(fileName, file);
+        int courseId = courseService.createCourse(bean);
+        wsUtility.writeCourseFile(fileName, file, courseId);
         return Response.ok().build();
     }
 
@@ -113,9 +113,10 @@ public class CourseRegisterAPI {
         return Response.ok(courseService.getCourseCount()).build();
     }
 
-    @Path("query")
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
+//    @Path("query")
+//    @GET
+//    @Produces(MediaType.APPLICATION_JSON)
+    @Deprecated
     public Response queryCourse(@QueryParam("category") String category, @QueryParam("history") String history) {
         List<CourseRegisterBean> list = null;
         if (history == null) {
@@ -123,7 +124,7 @@ public class CourseRegisterAPI {
         } else {
             list = courseService.queryCourseByCategoryBeforeNow(category);
         }
-        System.out.println("query course " + list.size());
+        logger.info("query course " + list.size());
         return Response.ok(list).header("Access-Control-Allow-Origin", "*")
                 .header("Access-Control-Allow-Methods", "*").build();
     }
@@ -192,8 +193,6 @@ public class CourseRegisterAPI {
         FormDataBodyPart multiPartFile = multiPart.getField("file");
         InputStream file = multiPartFile.getValueAs(InputStream.class);
         String fileName = WSUtility.getFileNameFromMultipart(multiPartFile);
-        logger.info("upload file name " + fileName);
-        wsUtility.writeCourseFile(fileName, file);
         CourseRegisterBean bean = new CourseRegisterBean();
         bean.setId(multiPart.getField("id").getValue());
         bean.setName(multiPart.getField("name").getValue());
@@ -205,6 +204,8 @@ public class CourseRegisterAPI {
         bean.setStatus(multiPart.getField("status").getValue());
         bean.setVideoExternalUrl(multiPart.getField("video_external_url").getValue());
         bean.setVideoLength(Double.parseDouble(multiPart.getField("video_length").getValue()));
+        logger.info("upload file name " + fileName);
+        wsUtility.writeCourseFile(fileName, file, Integer.parseInt(bean.getId()));
         courseService.editCourse(bean);
         return Response.ok().build();
     }

@@ -15,6 +15,7 @@ import com.education.formbean.CourseTagBean;
 import com.education.ws.CourseRegisterBean;
 import com.education.ws.util.WSUtility;
 import jersey.repackaged.com.google.common.collect.Lists;
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -69,28 +71,11 @@ public class CourseService {
 
     @Transactional
     public int createCourse(CourseRegisterBean bean) {
-        List<CourseEntity> courses = courseRepository.findByName(bean.getName());
-        if (courses != null && courses.size() > 0) {
-            if (bean.getVideoPath() != null) {
-                CourseEntity entity = courses.get(0);
-                entity.setVideoPath(bean.getVideoPath());
-                courseRepository.save(entity);
-                return entity.getId();
-            } else if (bean.getTitleImagePath() != null) {
-                CourseEntity entity = courses.get(0);
-                entity.setTitleImagePath(bean.getTitleImagePath());
-                courseRepository.save(entity);
-                return entity.getId();
-            } else {
-                throw new BadRequestException(ErrorCode.DUPLICATE_COURSE_NAME);
-            }
-        } else {
-            CourseEntity entity = new CourseEntity(bean);
-            entity.setTimeCreated(Calendar.getInstance().getTime());
-            CourseEntity save = courseRepository.save(entity);
-            saveCourseTags(save.getId(), bean.getTags());
-            return save.getId();
-        }
+        CourseEntity entity = new CourseEntity(bean);
+        entity.setTimeCreated(Calendar.getInstance().getTime());
+        CourseEntity save = courseRepository.save(entity);
+        saveCourseTags(save.getId(), bean.getTags());
+        return save.getId();
     }
 
     private void saveCourseTags(int courseId, String tags) {
@@ -126,11 +111,11 @@ public class CourseService {
         }
     }
 
-    public List<CourseQueryBean> queryCourses( int number, int pageIdx) {
+    public List<CourseQueryBean> queryCourses(int number, int pageIdx) {
         Iterable<CourseEntity> courseEntityList = courseRepository.findAllByOrderByTimeCreatedDesc();
         List<CourseEntity> courseList = Lists.newArrayList(courseEntityList);
         List<CourseQueryBean> courseBeanList = new ArrayList<>();
-        for (int i =number*pageIdx; i<courseList.size(); i++) {
+        for (int i = number * pageIdx; i < courseList.size(); i++) {
             CourseEntity entity = courseList.get(i);
             logger.info("add course " + entity.getId());
             List<CourseTagBean> courseTags = tagService.getCourseTagsByCourseId(entity.getId());
@@ -144,7 +129,7 @@ public class CourseService {
         return courseBeanList;
     }
 
-    public long getCourseCount(){
+    public long getCourseCount() {
         return courseRepository.count();
     }
 
@@ -194,7 +179,7 @@ public class CourseService {
         one.setContent(bean.getContent());
         one.setIntroduction(bean.getIntroduction());
         one.setName(bean.getName());
-        if(bean.getTitleImagePath() != null) {
+        if (bean.getTitleImagePath() != null) {
             one.setTitleImagePath(bean.getTitleImagePath());
         }
         one.setVideoExternalUrl(bean.getVideoExternalUrl());
@@ -232,7 +217,7 @@ public class CourseService {
         }
         courseRepository.delete(course);
         if (course.getTitleImagePath() != null) {
-            String filePath = courseImagePath + "/" + course.getTitleImagePath();
+            String filePath = courseImagePath + "/" + course.getId();
             deleteFile(filePath);
         }
         courseTagRelationRepository.removeByCourseId(course.getId());
@@ -240,7 +225,11 @@ public class CourseService {
 
     private static void deleteFile(String filePath) {
         File file = new File(filePath);
-        file.delete();
+        try {
+            FileUtils.deleteDirectory(file);
+        } catch (IOException e) {
+            logger.log(Level.SEVERE, e.getMessage(),e);
+        }
     }
 
 }

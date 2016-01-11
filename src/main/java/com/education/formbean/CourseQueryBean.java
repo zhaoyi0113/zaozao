@@ -42,9 +42,9 @@ public class CourseQueryBean {
         this.name = courseEntity.getName();
         this.content = courseEntity.getContent();
         this.introduction = courseEntity.getIntroduction();
-        this.videoUrl = wsUtility.getResourcePath(courseEntity.getVideoPath());
+        this.videoUrl = wsUtility.getResourcePath(courseEntity.getId(), courseEntity.getVideoPath());
         if (courseEntity.getTitleImagePath() != null) {
-            this.titleImageUrl = wsUtility.getResourcePath(courseEntity.getTitleImagePath());
+            this.titleImageUrl = wsUtility.getResourcePath(courseEntity.getId(), courseEntity.getTitleImagePath());
         }
         status=courseEntity.getStatus();
         publishDate = wsUtility.dateToString(courseEntity.getPublishDate());

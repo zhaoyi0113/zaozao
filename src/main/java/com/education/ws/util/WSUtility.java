@@ -67,8 +67,8 @@ public class WSUtility {
         return "yyyy/MM/dd";
     }
 
-    public String getResourcePath(String fileName) {
-        return courseImageUrl + "/" + fileName;
+    public String getResourcePath(int courseId, String fileName) {
+        return courseImageUrl + "/"+courseId+"/" + fileName;
     }
 
     public String getResourcePhysicalPath(String fileName) {
@@ -94,8 +94,9 @@ public class WSUtility {
         logger.info("delete file "+delete);
     }
 
-    public void writeCourseFile(String fileName, InputStream inputStream){
-        writeFile(inputStream, courseImagePath, fileName);
+    public void writeCourseFile(String fileName, InputStream inputStream, int courseId){
+
+        writeFile(inputStream, courseImagePath+"/"+courseId, fileName);
     }
 
     public static String getFileNameFromMultipart(FormDataBodyPart multiPartFile) {
@@ -118,7 +119,7 @@ public class WSUtility {
             if(input==null){
                 return;
             }
-            System.out.println("write to file " + dir + "," + targetName);
+            logger.info("write to file " + dir + "," + targetName);
             File dirFile = new File(dir);
             if (!dirFile.exists()) {
                 dirFile.mkdirs();

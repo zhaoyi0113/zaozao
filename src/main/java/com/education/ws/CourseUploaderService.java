@@ -46,12 +46,12 @@ public class CourseUploaderService {
                                  @FormDataParam("imgFile") FormDataContentDisposition disposition,
                                  @QueryParam("dir") String type
                                 ){
-        System.out.println("upload image type "+type);
+        logger.info("upload image type "+type);
         Map<String, List<FormDataBodyPart>> fields = multiPart.getFields();
         for(Map.Entry<String, List<FormDataBodyPart>> entry : fields.entrySet()){
-            System.out.println(entry.getKey()+"="+entry.getValue());
+            logger.info(entry.getKey()+"="+entry.getValue());
         }
-        System.out.println("filename="+disposition.getFileName());
+        logger.info("filename="+disposition.getFileName());
         InputStream input = multiPart.getField("imgFile").getValueAs(InputStream.class);
 
         File tmpDir = new File(courseImagePath);
@@ -74,7 +74,7 @@ public class CourseUploaderService {
         resp.put("error", 0);
         Gson gson = new Gson();
         String json = gson.toJson(resp);
-        System.out.println("resp:"+json);
+        logger.info("resp:"+json);
         return Response.ok(resp).build();
     }
 }

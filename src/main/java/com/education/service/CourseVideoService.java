@@ -30,7 +30,7 @@ public class CourseVideoService {
         Map<String,String> ret = new Hashtable<>();
         if (course != null) {
             if(course.getVideoPath() != null){
-                ret.put("video_path", wsUtility.getResourcePath(course.getVideoPath()));
+                ret.put("video_path", wsUtility.getResourcePath(course.getId(), course.getVideoPath()));
             }
 
             ret.put("course_name", course.getName());
@@ -48,7 +48,7 @@ public class CourseVideoService {
         String videoPath = course.getVideoPath();
         wsUtility.deleteCourseFile(videoPath);
         course.setVideoPath(fileName);
-        wsUtility.writeCourseFile(fileName, inputStream);
+        wsUtility.writeCourseFile(fileName, inputStream, courseId);
         courseRepository.save(course);
     }
 

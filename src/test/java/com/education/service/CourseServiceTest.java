@@ -64,7 +64,7 @@ public class CourseServiceTest extends AbstractServiceTest {
         int courseId = courseService.createCourse(courseBean);
         CourseQueryBean queryCourse = courseService.queryCourse(courseId + "");
         Assert.assertNotNull(queryCourse);
-        Assert.assertEquals(wsUtility.getResourcePath("xxx"), queryCourse.getVideoUrl());
+        Assert.assertEquals(wsUtility.getResourcePath(courseId,"xxx"), queryCourse.getVideoUrl());
     }
 
     @Test

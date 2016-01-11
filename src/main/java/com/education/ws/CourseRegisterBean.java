@@ -71,10 +71,10 @@ public class CourseRegisterBean {
         this.videoPath = entity.getVideoPath();
 
         if (entity.getTitleImagePath() != null) {
-            this.titleImageUrl = wsUtility.getResourcePath(entity.getTitleImagePath());
+            this.titleImageUrl = wsUtility.getResourcePath(entity.getId(),entity.getTitleImagePath());
         }
         if (entity.getVideoPath() != null) {
-            this.videoUrl = wsUtility.getResourcePath(entity.getVideoPath());
+            this.videoUrl = wsUtility.getResourcePath(entity.getId(),entity.getVideoPath());
         }
         this.introduction = entity.getIntroduction();
         this.id = String.valueOf(entity.getId());
