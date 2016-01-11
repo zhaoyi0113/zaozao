@@ -30,7 +30,7 @@ public class LoginHistoryService {
     @Autowired AccessTokenGenerator tokenGenerator;
 
     @Transactional
-    public String saveWeChatUserLogin(WeChatUserInfo userInfo) {
+    public String saveWeChatUserLogin(WeChatUserInfo userInfo, String source) {
         int userId = -1;
         List<UserEntity> users = userRepository.findByUnionid(userInfo.getUnionid());
         if (users.isEmpty()) {
@@ -44,6 +44,7 @@ public class LoginHistoryService {
         entity.setUserid(userId);
         String accessToken = tokenGenerator.generateAccessToken(userInfo.getUnionid(), System.currentTimeMillis() + "");
         entity.setToken(accessToken);
+        entity.setSource(source);
         LoginHistoryEntity save = loginHistoryRepository.save(entity);
         return save.getToken();
     }

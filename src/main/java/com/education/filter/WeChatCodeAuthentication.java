@@ -39,9 +39,6 @@ public class WeChatCodeAuthentication implements ContainerRequestFilter {
     @Autowired
     private UserRepository userRepository;
 
-    @Autowired
-    private LoginHistoryService loginHistoryService;
-
     @Override
     public void filter(ContainerRequestContext requestContext) throws IOException {
         Public annotation = resourceInfo.getResourceMethod().getAnnotation(Public.class);

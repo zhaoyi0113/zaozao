@@ -69,7 +69,7 @@ public class WeChatAPI {
             HttpSession session = request.getSession(true);
             logger.info("save user info session "+userInfo +", session id:"+session.getId());
             session.setAttribute(ContextKeys.WECHAT_USER, userInfo);
-            String token = historyService.saveWeChatUserLogin(userInfo);
+            String token = historyService.saveWeChatUserLogin(userInfo, state);
             return Response.ok(token).build();
         }else{
             logger.severe("can't login through wechat");
@@ -103,12 +103,14 @@ public class WeChatAPI {
     @Path("/jsapi")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getJsApiTicket(@Context ContainerRequestContext context) {
+    public Response getJsApiTicket(@Context ContainerRequestContext context, @QueryParam("url") String url) {
         URI baseUri = context.getUriInfo().getBaseUri();
         URI absolutePath = context.getUriInfo().getAbsolutePath();
-        logger.info("base uri:" + baseUri.toString());
-        logger.info("absout path:" + absolutePath.toString());
-        Map<String, String> webJSSignature = weChatService.getWebJSSignature("http://www.imzao.com/education/");
+//        logger.info("base uri:" + baseUri.toString());
+//        logger.info("absout path:" + absolutePath.toString());
+        logger.info("get url:"+url);
+        Map<String, String> webJSSignature = weChatService.getWebJSSignature(url);
+        logger.info("jsapi "+webJSSignature);
         return Response.ok(webJSSignature).build();
     }
 

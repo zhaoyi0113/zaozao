@@ -32,7 +32,7 @@ public class WeChatUserAspect {
 
     @Before("queryCourse()")
     @Transactional
-    public void beforeQueryCourses(JoinPoint joinPoint) {
+    public void beforeQueryCourse(JoinPoint joinPoint) {
         Object[] args = joinPoint.getArgs();
         if (args != null && args.length >= 2) {
             WeChatUserInfo userInfo = (WeChatUserInfo) args[0];
@@ -40,6 +40,8 @@ public class WeChatUserAspect {
             logger.info("query course aop " + courseId);
             if (userInfo != null) {
                 historyService.saveUserAccessHistory(userInfo, courseId);
+            }else{
+                historyService.saveGuestAccessHistory(courseId);
             }
         } else {
             logger.severe("can't get query course parameters");

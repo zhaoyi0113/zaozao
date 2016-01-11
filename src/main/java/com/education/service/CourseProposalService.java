@@ -26,12 +26,6 @@ public class CourseProposalService {
     private CourseTypeRepository courseTypeRepository;
 
     @Autowired
-    private LoginHistoryService loginHistoryService;
-
-    @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
     private CourseRepository courseRepository;
 
     @Autowired

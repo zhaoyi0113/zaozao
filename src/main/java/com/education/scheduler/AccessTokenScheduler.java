@@ -23,6 +23,8 @@ public class AccessTokenScheduler {
 
     private Map<WeChatAccessState, String> accessTokens = new Hashtable<>();
 
+    private String jsApiTicket;
+
     @Autowired
     private WeChatService weChatService;
 
@@ -38,6 +40,7 @@ public class AccessTokenScheduler {
         accessTokens.put(WeChatAccessState.WECHAT, accessToken);
         accessToken = weChatService.requestAccessToken(WeChatAccessState.WEB.name());
         accessTokens.put(WeChatAccessState.WEB, accessToken);
+        jsApiTicket = weChatService.getJSApiTicket(accessTokens.get(WeChatAccessState.WECHAT));
         logger.info("get access token "+accessTokens);
     }
 
@@ -50,6 +53,10 @@ public class AccessTokenScheduler {
         }
 
         return null;
+    }
+
+    public String getJsApiTicket() {
+        return jsApiTicket;
     }
 
     public String getAccessToken(WeChatAccessState state){

@@ -7,6 +7,7 @@ import com.education.db.jpa.UserCourseHistoryRepository;
 import com.education.db.jpa.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Calendar;
 import java.util.List;
@@ -23,9 +24,10 @@ public class UserCourseHistoryService {
     @Autowired
     private UserRepository userRepository;
 
+    @Transactional
     public void saveUserAccessHistory(WeChatUserInfo userInfo, int courseId) {
         List<UserEntity> userList = userRepository.findByUnionid(userInfo.getUnionid());
-        if(!userList.isEmpty()){
+        if (!userList.isEmpty()) {
             UserCourseHistoryEntity entity = new UserCourseHistoryEntity();
             entity.setCourseId(courseId);
             entity.setUserId(userList.get(0).getUserId());
@@ -34,4 +36,16 @@ public class UserCourseHistoryService {
             historyRepository.save(entity);
         }
     }
+
+    @Transactional
+    public void saveGuestAccessHistory(int courseId) {
+        UserCourseHistoryEntity entity = new UserCourseHistoryEntity();
+        entity.setCourseId(courseId);
+        entity.setUserId(0);
+        entity.setAccessFlag(COURSE_ACCESS_FLAG.GUEST);
+        entity.setTimeCreated(Calendar.getInstance().getTime());
+        historyRepository.save(entity);
+    }
+
+
 }
