@@ -58,7 +58,7 @@ public class WeChatAPI {
 
     @Path("/login")
     @GET
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.TEXT_PLAIN)
     @Public(requireWeChatCode = true, requireWeChatUser = false)
     public Response login(@Context HttpServletRequest request,
                           @Context ContainerRequestContext requestContext,
@@ -74,7 +74,7 @@ public class WeChatAPI {
         }else{
             logger.severe("can't login through wechat");
         }
-        return Response.ok().build();
+        return Response.ok("aaaa").build();
     }
 
     @Path("/getopenid")

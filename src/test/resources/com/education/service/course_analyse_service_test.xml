@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+
+    <user user_id="30000"/>
+    <user user_id="30001"/>
+    <user user_id="30002"/>
+    <course id="10000" name="1"/>
+    <course id="10001" name="2"/>
+    <course id="10002" name="3"/>
+
+    <user_course_history id="20000" course_id="10000" user_id="30000" access_flag="WECHAT" time_created="2016-01-01"/>
+    <user_course_history id="20001" course_id="10000" user_id="30001" access_flag="WECHAT" time_created="2016-01-01"/>
+    <user_course_history id="20002" course_id="10000" user_id="30001" access_flag="WECHAT" time_created="2016-01-01"/>
+
+    <user_course_history id="20003" course_id="10001" user_id="30002" access_flag="WECHAT" time_created="2016-01-01"/>
+    <user_course_history id="20004" course_id="10001" user_id="30001" access_flag="WECHAT" time_created="2016-01-01"/>
+
+</dataset>

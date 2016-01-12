@@ -2,6 +2,7 @@ package com.education.ws;
 
 
 import com.education.auth.Public;
+import com.education.auth.TokenAccess;
 import com.education.db.entity.UserEntity;
 import com.education.formbean.CourseQueryBean;
 import com.education.service.CourseProposalService;
@@ -76,6 +77,7 @@ public class CourseProposalAPI {
     @GET
     @Path("/{course_id}")
     @Produces(MediaType.APPLICATION_JSON)
+    @TokenAccess
     public Response getCourse(@Context HttpServletRequest request,
                               @Context ContainerRequestContext context,
                               @PathParam("course_id") int courseId) {

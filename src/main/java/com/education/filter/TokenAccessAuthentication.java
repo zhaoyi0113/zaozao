@@ -14,6 +14,7 @@ import javax.ws.rs.ext.Provider;
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.List;
+import java.util.logging.Logger;
 
 /**
  * Created by yzzhao on 1/11/16.
@@ -21,6 +22,7 @@ import java.util.List;
 @Provider
 public class TokenAccessAuthentication implements ContainerRequestFilter {
 
+    private static final Logger logger = Logger.getLogger(TokenAccessAuthentication.class.getName());
 
     @Context
     private ResourceInfo resourceInfo;
@@ -46,6 +48,7 @@ public class TokenAccessAuthentication implements ContainerRequestFilter {
             return;
         }
         String token = tokens.get(0);
+        logger.info("get token "+token);
         requestContext.setProperty(HeaderKeys.ACCESS_TOKEN, token);
     }
 

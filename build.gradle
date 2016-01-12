@@ -110,6 +110,9 @@ dependencies {
             "org.apache.tomcat.embed:tomcat-embed-logging-juli:${tomcatVersion}",
             "org.apache.tomcat.embed:tomcat-embed-jasper:${tomcatVersion}"
 
+    testCompile('com.github.springtestdbunit:spring-test-dbunit:1.2.0')
+    testCompile('org.dbunit:dbunit:2.5.0')
+
 }
 tomcatRunWar{
     webDefaultXml = file('src/main/resources/web.xml')
