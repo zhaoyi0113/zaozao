@@ -18,13 +18,13 @@ public class CourseAnalyseService {
     private CourseRepository courseRepository;
 
     public Map<Integer, Long> getCoursePreviewCount() {
-        List<Object[]> courseCount = courseRepository.findCourseCount();
+        List<Object[]> courseCount = courseRepository.findCourseViewCount();
         Map<Integer, Long> courses = getIntegerCountMap(courseCount);
         return courses;
     }
 
     public Map<Integer, Long> getCoursePreviewCountByUser(int userId) {
-        List<Object[]> courseCount = courseRepository.findCourseCountByUser(userId);
+        List<Object[]> courseCount = courseRepository.findCourseViewCountByUser(userId);
         Map<Integer, Long> courses = getIntegerCountMap(courseCount);
         return courses;
     }

@@ -188,6 +188,11 @@ define(['angular', 'angular-file-upload', 'admin_pwd_service', 'login_service'],
 				$state.go('home.coursetag');
 			};
 
+			
+			$scope.uploader.onErrorItem = function(item, response, status, headers) {
+				alert('Add course tag failed');
+			};
+
 			function editCourseTag() {
 				if ($scope.uploader.queue.length > 0) {
 					$scope.uploader.uploadAll();

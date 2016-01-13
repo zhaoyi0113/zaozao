@@ -93,4 +93,14 @@ public class CourseProposalAPI {
 
         return Response.ok(b).build();
     }
+
+    @GET
+    @Path("/count")
+    @Produces(MediaType.TEXT_PLAIN)
+    public Response getCourseCount(@DefaultValue("0") @QueryParam("course_tag_id") int tagId){
+        long count = courseProposalService.getCourseCount(tagId);
+        logger.info("get course count "+count+" for tag "+tagId);
+        return Response.ok(count).build();
+
+    }
 }

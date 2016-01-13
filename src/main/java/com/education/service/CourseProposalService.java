@@ -5,7 +5,6 @@ import com.education.db.entity.CourseEntity;
 import com.education.db.entity.UserEntity;
 import com.education.db.jpa.CourseRepository;
 import com.education.db.jpa.CourseTypeRepository;
-import com.education.db.jpa.UserRepository;
 import com.education.formbean.CourseQueryBean;
 import com.education.formbean.CourseTagBean;
 import com.education.ws.util.WSUtility;
@@ -124,5 +123,13 @@ public class CourseProposalService {
             courseList = courseRepository.findEnabledCoursesByStatusAndCourseTag(CommonStatus.valueOf(status), tagId, now);
         }
         return courseList;
+    }
+
+    public long getCourseCount(int tagId){
+        if(tagId <= 0){
+            return courseRepository.count();
+        }else{
+            return courseRepository.getCourseCountByTag(tagId);
+        }
     }
 }

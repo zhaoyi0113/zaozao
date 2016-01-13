@@ -39,9 +39,11 @@ public interface CourseRepository extends CrudRepository<CourseEntity, Integer>{
     //select name, count(name) from user_course_history as u, course as c where u.course_id = c.id group by name;
 
     @Query("select c.id, count(c.id) from CourseEntity c, UserCourseHistoryEntity u where c.id = u.courseId group by c")
-    List<Object[]> findCourseCount();
+    List<Object[]> findCourseViewCount();
 
     @Query("select c.id, count(c.id) from CourseEntity c, UserCourseHistoryEntity u where c.id = u.courseId and u.userId= :userId group by c")
-    List<Object[]> findCourseCountByUser(@Param("userId") int userId);
+    List<Object[]> findCourseViewCountByUser(@Param("userId") int userId);
 
+    @Query("select count(*) from CourseEntity c, CourseTagRelationEntity ctr where ctr.courseTagId = :tagId and ctr.courseId = c.id ")
+    public long getCourseCountByTag(@Param("tagId") int tagId);
 }
