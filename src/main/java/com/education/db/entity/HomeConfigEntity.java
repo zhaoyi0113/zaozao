@@ -11,6 +11,7 @@ public class HomeConfigEntity {
 
     private int id;
     private String image;
+    private int courseId;
 
     @Id
     @GeneratedValue
@@ -28,7 +29,18 @@ public class HomeConfigEntity {
         return image;
     }
 
+
+
     public void setImage(String image) {
         this.image = image;
+    }
+
+    @Column(name = "course_id")
+    public int getCourseId() {
+        return courseId;
+    }
+
+    public void setCourseId(int courseId) {
+        this.courseId = courseId;
     }
 }

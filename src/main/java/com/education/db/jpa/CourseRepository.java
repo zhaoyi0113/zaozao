@@ -46,4 +46,7 @@ public interface CourseRepository extends CrudRepository<CourseEntity, Integer>{
 
     @Query("select count(*) from CourseEntity c, CourseTagRelationEntity ctr where ctr.courseTagId = :tagId and ctr.courseId = c.id ")
     public long getCourseCountByTag(@Param("tagId") int tagId);
+
+    @Query("select id, name from CourseEntity")
+    List<Object[]> findIdAndNames();
 }

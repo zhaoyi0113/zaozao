@@ -74,8 +74,8 @@ public class CourseRegisterAPI {
         bean.setVideoExternalUrl(multiPart.getField("video_external_url").getValue());
         try {
             bean.setVideoLength(Double.parseDouble(multiPart.getField("video_length").getValue()));
-        }catch(Exception e){
-            logger.severe("can't parse video length "+multiPart.getField("video_length"));
+        } catch (Exception e) {
+            logger.severe("can't parse video length " + multiPart.getField("video_length"));
         }
         FormDataBodyPart multiPartFile = multiPart.getField("file");
 
@@ -96,8 +96,8 @@ public class CourseRegisterAPI {
     @Path("queryall")
     @GET
     public Response getAllCourses(
-                                  @DefaultValue("10") @QueryParam("number") int number,
-                                  @DefaultValue("0") @QueryParam("page_index") int pageIndex) {
+            @DefaultValue("10") @QueryParam("number") int number,
+            @DefaultValue("0") @QueryParam("page_index") int pageIndex) {
         try {
             List<CourseQueryBean> allCoursesIndex = courseService.queryCourses(number, pageIndex);
             return Response.ok().entity(allCoursesIndex).build();
@@ -109,7 +109,7 @@ public class CourseRegisterAPI {
 
     @Path("coursecount")
     @GET
-    public Response getCourseCount(){
+    public Response getCourseCount() {
         return Response.ok(courseService.getCourseCount()).build();
     }
 
@@ -149,13 +149,7 @@ public class CourseRegisterAPI {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllCourseNames() {
-        try {
-            List<String> names = courseRepository.findAllCourseNames();
-            return Response.ok().entity(names).build();
-        } catch (Exception e) {
-            logger.log(Level.SEVERE, e.getMessage(), e);
-            return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
-        }
+        return Response.ok().entity(courseService.findCourseIdAndNames()).build();
     }
 
     @Path("/edit")

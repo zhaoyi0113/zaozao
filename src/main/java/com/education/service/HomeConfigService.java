@@ -43,7 +43,7 @@ public class HomeConfigService {
         List<HomeConfigResp> imageUrls = new ArrayList<>();
         Iterable<HomeConfigEntity> entities = homeConfigRepository.findAll();
         for(HomeConfigEntity entity : entities){
-            imageUrls.add(new HomeConfigResp(entity.getId(), homeImageUrl+"/"+entity.getImage(), entity.getImage()));
+            imageUrls.add(new HomeConfigResp(entity.getId(), homeImageUrl+"/"+entity.getImage(), entity.getImage(), entity.getCourseId()));
         }
         return imageUrls;
     }

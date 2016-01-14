@@ -7,14 +7,16 @@ public class HomeConfigResp {
     private int id;
     private String image;
     private String fileName;
+    private int courseId;
 
     public HomeConfigResp() {
     }
 
-    public HomeConfigResp(int id, String image, String fileName) {
+    public HomeConfigResp(int id, String image, String fileName, int courseId) {
         this.id = id;
         this.image = image;
         this.fileName= fileName;
+        this.courseId = courseId;
     }
 
     public int getId() {
@@ -39,5 +41,13 @@ public class HomeConfigResp {
 
     public void setFileName(String fileName) {
         this.fileName = fileName;
+    }
+
+    public int getCourseId() {
+        return courseId;
+    }
+
+    public void setCourseId(int courseId) {
+        this.courseId = courseId;
     }
 }

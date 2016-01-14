@@ -9,6 +9,7 @@ import com.education.db.jpa.CourseTypeRepository;
 import com.education.formbean.CourseQueryBean;
 import com.education.ws.CourseRegisterBean;
 import com.education.ws.util.WSUtility;
+import com.github.springtestdbunit.annotation.DatabaseSetup;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by yzzhao on 12/5/15.
@@ -154,5 +156,13 @@ public class CourseServiceTest extends AbstractServiceTest {
         Assert.assertNull(course);
         tags = courseTagRelationRepository.findCourseTagsByCourseId(courseId);
         Assert.assertEquals(0, tags.size());
+    }
+
+    @Test
+    @DatabaseSetup(value="classpath:/com/education/service/course_service_idnames_test.xml")
+    public void getAllIdAndNamesTest(){
+        Map<Integer, String> idNames = courseService.findCourseIdAndNames();
+        Assert.assertEquals(5, idNames.size());
+
     }
 }

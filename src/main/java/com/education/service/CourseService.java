@@ -206,4 +206,12 @@ public class CourseService {
         }
     }
 
+    public Map<Integer, String> findCourseIdAndNames(){
+        List<Object[]> idNames = courseRepository.findIdAndNames();
+        Map<Integer, String> courses = new Hashtable<>();
+        for(Object[] in : idNames){
+            courses.put(Integer.parseInt(String.valueOf(in[0])), String.valueOf(in[1]));
+        }
+        return courses;
+    }
 }

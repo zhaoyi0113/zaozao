@@ -25,26 +25,24 @@ public class UserCourseHistoryService {
     private UserRepository userRepository;
 
     @Transactional
-    public void saveUserAccessHistory(UserEntity userInfo, int courseId) {
-        List<UserEntity> userList = userRepository.findByUnionid(userInfo.getUnionid());
-        if (!userList.isEmpty()) {
-            UserCourseHistoryEntity entity = new UserCourseHistoryEntity();
+    public void saveUserAccessHistory(UserEntity userInfo, int courseId, COURSE_ACCESS_FLAG flag) {
+        UserCourseHistoryEntity entity = null;
+        if (userInfo == null) {
+            entity = new UserCourseHistoryEntity();
+            entity.setUserId(0);
+        } else {
+            List<UserEntity> userList = userRepository.findByUnionid(userInfo.getUnionid());
+            if (!userList.isEmpty()) {
+                entity = new UserCourseHistoryEntity();
+                entity.setUserId(userList.get(0).getUserId());
+            }
+        }
+        if (entity != null) {
+            entity.setAccessFlag(flag);
             entity.setCourseId(courseId);
-            entity.setUserId(userList.get(0).getUserId());
-            entity.setAccessFlag(COURSE_ACCESS_FLAG.VIEW);
             entity.setTimeCreated(Calendar.getInstance().getTime());
             historyRepository.save(entity);
         }
-    }
-
-    @Transactional
-    public void saveGuestAccessHistory(int courseId) {
-        UserCourseHistoryEntity entity = new UserCourseHistoryEntity();
-        entity.setCourseId(courseId);
-        entity.setUserId(0);
-        entity.setAccessFlag(COURSE_ACCESS_FLAG.GUEST);
-        entity.setTimeCreated(Calendar.getInstance().getTime());
-        historyRepository.save(entity);
     }
 
 

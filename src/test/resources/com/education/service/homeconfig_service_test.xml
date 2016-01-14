@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+
+    <homeconfig id="10000" image="image1" course_id="2000"/>
+    <homeconfig id="10001" image="image1" course_id="2000"/>
+    <homeconfig id="10002" image="image1" course_id="2000"/>
+    <homeconfig id="10003" image="image1" course_id="2000"/>
+</dataset>

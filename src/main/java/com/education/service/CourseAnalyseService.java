@@ -29,6 +29,8 @@ public class CourseAnalyseService {
         return courses;
     }
 
+
+
     private Map<Integer, Long> getIntegerCountMap(List<Object[]> courseCount) {
         Map<Integer, Long> courses = new Hashtable<Integer, Long>();
         for (Object[] objs : courseCount) {

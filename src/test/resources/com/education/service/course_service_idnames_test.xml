@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <course id="10000" name="course1"/>
+    <course id="10001" name="course2"/>
+    <course id="10002" name="course3"/>
+    <course id="10003" name="course4"/>
+    <course id="10004" name="course5"/>
+</dataset>

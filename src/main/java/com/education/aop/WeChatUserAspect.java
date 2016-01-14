@@ -1,5 +1,6 @@
 package com.education.aop;
 
+import com.education.db.entity.COURSE_ACCESS_FLAG;
 import com.education.db.entity.UserEntity;
 import com.education.service.UserCourseHistoryService;
 import com.education.service.WeChatUserInfo;
@@ -41,9 +42,9 @@ public class WeChatUserAspect {
             int courseId = (int) args[1];
             logger.info("query course aop " + courseId);
             if (userInfo != null) {
-                historyService.saveUserAccessHistory(userInfo, courseId);
+                historyService.saveUserAccessHistory(userInfo, courseId, COURSE_ACCESS_FLAG.VIEW);
             }else{
-                historyService.saveGuestAccessHistory(courseId);
+                historyService.saveUserAccessHistory(null, courseId, COURSE_ACCESS_FLAG.GUEST);
             }
         } else {
             logger.severe("can't get query course parameters");
