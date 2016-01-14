@@ -4,6 +4,8 @@ import com.education.db.entity.CourseEntity;
 import com.education.db.entity.HomeConfigEntity;
 import com.education.db.jpa.CourseRepository;
 import com.education.db.jpa.HomeConfigRepository;
+import com.education.exception.BadRequestException;
+import com.education.exception.ErrorCode;
 import com.education.formbean.HomeConfigResp;
 import com.education.ws.util.WSUtility;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +43,7 @@ public class HomeConfigService {
     private WSUtility wsUtility;
 
     @Transactional
-    public void createImage(String fileName,int courseId, InputStream inputStream){
+    public void createImage(String fileName, int courseId, InputStream inputStream) {
         HomeConfigEntity entity = new HomeConfigEntity();
         entity.setImage(fileName);
         entity.setCourseId(courseId);
@@ -49,13 +51,13 @@ public class HomeConfigService {
         wsUtility.writeFile(inputStream, homeImagePath, fileName);
     }
 
-    public List<HomeConfigResp> getHomeImages(){
+    public List<HomeConfigResp> getHomeImages() {
         List<HomeConfigResp> imageUrls = new ArrayList<>();
-        Iterable<HomeConfigEntity> entities = homeConfigRepository.findAll();
-        for(HomeConfigEntity entity : entities){
+        Iterable<HomeConfigEntity> entities = homeConfigRepository.findOrderByOrderIndex();
+        for (HomeConfigEntity entity : entities) {
             HomeConfigResp config = new HomeConfigResp(entity.getId(), homeImageUrl + "/" + entity.getImage(), entity.getImage(), entity.getCourseId());
             CourseEntity course = courseRepository.findOne(entity.getCourseId());
-            if(course != null){
+            if (course != null) {
                 config.setCourseName(course.getName());
             }
             imageUrls.add(config);
@@ -64,12 +66,29 @@ public class HomeConfigService {
     }
 
     @Transactional
+    public void moveUp(int id) {
+        HomeConfigEntity config = homeConfigRepository.findOne(id);
+        if (config == null) {
+            throw new BadRequestException(ErrorCode.COURSE_NOT_FOUND);
+        }
+        List<HomeConfigEntity> configBefore = homeConfigRepository.findByOrderIndexLessThan(config.getOrderIndex());
+        if (configBefore.size() > 0) {
+            HomeConfigEntity last = configBefore.get(configBefore.size() - 1);
+            int order = config.getOrderIndex();
+            config.setOrderIndex(last.getOrderIndex());
+            last.setOrderIndex(order);
+            homeConfigRepository.save(last);
+            homeConfigRepository.save(config);
+        }
+    }
+
+    @Transactional
     public void deleteImage(int id) {
         HomeConfigEntity config = homeConfigRepository.findOne(id);
-        if(config != null) {
+        if (config != null) {
             homeConfigRepository.delete(id);
-            String path = homeImagePath+"/"+config.getImage();
-            logger.info("delete home config file "+path);
+            String path = homeImagePath + "/" + config.getImage();
+            logger.info("delete home config file " + path);
             File file = new File(path);
             file.delete();
         }

@@ -1,0 +1,1 @@
+ALTER TABLE `homeconfig` change COLUMN `order` `index` int DEFAULT 0;

@@ -12,6 +12,7 @@ public class HomeConfigEntity {
     private int id;
     private String image;
     private int courseId;
+    private int orderIndex;
 
     @Id
     @GeneratedValue
@@ -30,7 +31,6 @@ public class HomeConfigEntity {
     }
 
 
-
     public void setImage(String image) {
         this.image = image;
     }
@@ -42,5 +42,14 @@ public class HomeConfigEntity {
 
     public void setCourseId(int courseId) {
         this.courseId = courseId;
+    }
+
+    @Column(name = "order_index")
+    public int getOrderIndex() {
+        return orderIndex;
+    }
+
+    public void setOrderIndex(int orderIndex) {
+        this.orderIndex = orderIndex;
     }
 }

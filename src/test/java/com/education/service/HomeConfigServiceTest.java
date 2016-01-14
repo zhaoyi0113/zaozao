@@ -4,6 +4,7 @@ import com.education.formbean.HomeConfigResp;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import org.glassfish.jersey.internal.util.collection.ByteBufferInputStream;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,4 +34,15 @@ public class HomeConfigServiceTest extends AbstractServiceTest {
             Assert.assertEquals("c1", resp.getCourseName());
         }
     }
+
+
+    @Test
+    @Ignore
+    @DatabaseSetup(value="classpath:/com/education/service/homeconfig_service_test.xml")
+    public void testMoveUp(){
+        configService.moveUp(10001);
+        List<HomeConfigResp> homeImages = configService.getHomeImages();
+        Assert.assertEquals(10001, homeImages.get(0).getId());
+    }
+
 }

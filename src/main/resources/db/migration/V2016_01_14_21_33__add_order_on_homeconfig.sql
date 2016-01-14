@@ -1,0 +1,1 @@
+ALTER TABLE `homeconfig` ADD COLUMN `order` INT DEFAULT 0;
