@@ -13,16 +13,19 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.File;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Logger;
 
 /**
  * Created by yzzhao on 12/24/15.
  */
 @Service("CourseTagService")
 public class CourseTagService {
+    private static final Logger logger = Logger.getLogger(CourseTagService.class.getName());
 
     @Value("#{config['course_tag_image_path']}")
     private String courseTagImagePath;
@@ -111,6 +114,10 @@ public class CourseTagService {
         }
         courseTagRepository.delete(courseTag);
         courseTagRelationRepository.removeByCourseTagId(courseTagId);
+        String path = courseTagImagePath+"/"+courseTag.getImage();
+        logger.info("delete course tag image "+path);
+        File file = new File(path);
+        file.delete();
     }
 
     private CourseTagBean createCourseTagBean(CourseTagEntity courseTag) {

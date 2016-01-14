@@ -11,15 +11,19 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.File;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 /**
  * Created by yzzhao on 12/25/15.
  */
 @Service("HomeConfigService")
 public class HomeConfigService {
+
+    private static final Logger logger = Logger.getLogger(HomeConfigService.class.getName());
 
     @Autowired
     private HomeConfigRepository homeConfigRepository;
@@ -61,6 +65,13 @@ public class HomeConfigService {
 
     @Transactional
     public void deleteImage(int id) {
-        homeConfigRepository.delete(id);
+        HomeConfigEntity config = homeConfigRepository.findOne(id);
+        if(config != null) {
+            homeConfigRepository.delete(id);
+            String path = homeImagePath+"/"+config.getImage();
+            logger.info("delete home config file "+path);
+            File file = new File(path);
+            file.delete();
+        }
     }
 }
