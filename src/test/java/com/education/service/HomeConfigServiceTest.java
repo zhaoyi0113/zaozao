@@ -30,6 +30,7 @@ public class HomeConfigServiceTest extends AbstractServiceTest {
         Assert.assertEquals(4, homeImages.size());
         for(HomeConfigResp resp: homeImages){
             Assert.assertEquals(2000, resp.getCourseId());
+            Assert.assertEquals("c1", resp.getCourseName());
         }
     }
 }

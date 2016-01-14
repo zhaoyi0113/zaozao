@@ -32,11 +32,12 @@ public class HomeConfigAPI {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     public Response addHomeImage(
+            @FormDataParam("course_id") int courseId,
             @FormDataParam("file") InputStream fileInputStream,
             @FormDataParam("file") FormDataContentDisposition disposition) {
         String fileName = WSUtility.getUtf8Character(disposition.getFileName());
         logger.info("upload file " + fileName);
-        homeConfigService.createImage(fileName, fileInputStream);
+        homeConfigService.createImage(fileName,courseId, fileInputStream);
         return Response.ok().build();
     }
 

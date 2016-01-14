@@ -1,10 +1,10 @@
-define(['angular', 'jquery', 'angular-file-upload', 
-	'angular-animate','hammerjs','bootstrap-carousel-swipe'],
+define(['angular', 'jquery', 'angular-file-upload',
+		'angular-animate', 'hammerjs', 'bootstrap-carousel-swipe'
+	],
 	function(angular, $) {
 		var homeConfig = angular.module("homeConfigModule", ['angularFileUpload', 'ngAnimate']);
 
-		homeConfig.controller('HomeConfigController', 
-			['$scope', '$http', '$location', '$state', 'FileUploader',
+		homeConfig.controller('HomeConfigController', ['$scope', '$http', '$location', '$state', 'FileUploader',
 			function($scope, $http, $location, $state, FileUploader) {
 				$scope.uploader = new FileUploader({
 					url: $location.protocol() + '://' + $location.host() + ":" + $location.port() +
@@ -14,6 +14,20 @@ define(['angular', 'jquery', 'angular-file-upload',
 
 				getHomeConfigImages($scope, $http, $location);
 
+				$http.get($location.protocol() + "://" + $location.host() +
+					":" + $location.port() + '/education/zaozao/course/query/allnames')
+					.success(function(e){
+						// console.log('get course idnames ',e);
+						$scope.courseIdNames = new Array();
+						for(var c in e){
+							$scope.courseIdNames.push({
+								id: c,
+								name: e[c]
+							});
+						}
+						// console.log('get course idnames:', $scope.courseIdNames);
+						
+					});
 				$scope.deletePic = function(id) {
 					console.log('remove image ', id);
 					$http.delete($location.protocol() + '://' + $location.host() + ":" + $location.port() +
@@ -26,7 +40,7 @@ define(['angular', 'jquery', 'angular-file-upload',
 				}
 
 				$scope.submit = function() {
-					console.log('upload all images');
+					console.log('upload all images ');
 					$scope.uploader.uploadAll();
 				}
 				$scope.uploader.onAfterAddingFile = function(fileItem) {
@@ -37,16 +51,21 @@ define(['angular', 'jquery', 'angular-file-upload',
 					}
 					console.info('onAfterAddingFile', fileItem);
 				};
+				$scope.uploader.onBeforeUploadItem = function(item) {
+					item.formData.push({
+	                    course_id: $scope.selectedCourseId
+	                });
+				};
 				$scope.uploader.onCompleteAll = function() {
 					console.info('onCompleteAll');
 					getHomeConfigImages($scope, $http, $location);
 				};
-				$scope.swipeLeft = function(e){
+				$scope.swipeLeft = function(e) {
 					console.log('swipe left ');
 					$("#myCarousel").carousel('next');
-					
+
 				};
-				$scope.swipeRight = function(){
+				$scope.swipeRight = function() {
 					console.log('swipe right');
 					$("#myCarousel").carousel('prev');
 				}
@@ -65,7 +84,9 @@ define(['angular', 'jquery', 'angular-file-upload',
 							url: e[i].image,
 							active: false,
 							index: i,
-							name: e[i].fileName
+							name: e[i].fileName,
+							courseId: e[i].courseId,
+							courseName: e[i].courseName
 						};
 						console.log('image ', $scope.images[i]);
 					}

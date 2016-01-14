@@ -36,31 +36,30 @@
 	</div> 
 
 	<table class="table table-striped">
-		<tr><th>Name</th><th>Image</th><th>Delete</th></tr>
+		<tr><th>Name</th><th>Course Name</th><th>Image</th><th>Delete</th></tr>
 		<tr ng-repeat='image in images'>
 			<td>{{image.name}}</td>
+			<td>{{image.courseName}}</td>
 			<td><img ng-src='{{image.url}}' width='50px'/></td>
 			<td><button class='btn btn-default' ng-click='deletePic(image.id)'>Delete</button></td>
 		</tr>
 	</table>
+	<form name="addImageForm">
 		<div class="">
             <label class="col-sm-2 control-label">Add Image:</label>
-            <input type="file" nv-file-select="" uploader="uploader" />
+            <input name="image_file" type="file" nv-file-select="" uploader="uploader" required/>
         </div>
-        <!-- <div class="">
-            <ul ng-repeat="item in uploader.queue">
-                <li>
-                    <div style='display: inline' ng-thumb="{ file: item._file, height: 100 }"> </div>
-                    <button type="button" class="btn btn-default" aria-label="Left Align">
-					  <span class="glyphicon glyphicon-remove" aria-hidden="true" ng-click='deletePic(item)'></span>
-					</button>
-                </li>
-                	
-            </ul>  
-        </div> -->
+        <div>
+        	<label class="col-sm-2 control-label">Select Course:</label>
+        	<select name="course_id" ng-model="selectedCourseId" required>
+        		<option ng-repeat="course in courseIdNames" value="{{course.id}}">
+        			{{course.name}}</option>
+        	</select>
+        </div>
+        
         <div class='btn-group row input-lg'>
-        	<button class='button btn btn-default' ng-click='submit()'>Submit</button>
+        	<button class='button btn btn-default' ng-disabled='addImageForm.$invalid' ng-click='submit()'>Submit</button>
         </div>
-	</div>
+    </form>
 
 </div>

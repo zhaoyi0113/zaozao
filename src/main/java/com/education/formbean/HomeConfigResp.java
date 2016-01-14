@@ -8,6 +8,7 @@ public class HomeConfigResp {
     private String image;
     private String fileName;
     private int courseId;
+    private String courseName;
 
     public HomeConfigResp() {
     }
@@ -49,5 +50,13 @@ public class HomeConfigResp {
 
     public void setCourseId(int courseId) {
         this.courseId = courseId;
+    }
+
+    public String getCourseName() {
+        return courseName;
+    }
+
+    public void setCourseName(String courseName) {
+        this.courseName = courseName;
     }
 }

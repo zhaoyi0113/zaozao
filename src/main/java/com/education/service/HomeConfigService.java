@@ -1,6 +1,8 @@
 package com.education.service;
 
+import com.education.db.entity.CourseEntity;
 import com.education.db.entity.HomeConfigEntity;
+import com.education.db.jpa.CourseRepository;
 import com.education.db.jpa.HomeConfigRepository;
 import com.education.formbean.HomeConfigResp;
 import com.education.ws.util.WSUtility;
@@ -22,6 +24,9 @@ public class HomeConfigService {
     @Autowired
     private HomeConfigRepository homeConfigRepository;
 
+    @Autowired
+    private CourseRepository courseRepository;
+
     @Value("#{config['home_image_path']}")
     private String homeImagePath;
 
@@ -32,9 +37,10 @@ public class HomeConfigService {
     private WSUtility wsUtility;
 
     @Transactional
-    public void createImage(String fileName, InputStream inputStream){
+    public void createImage(String fileName,int courseId, InputStream inputStream){
         HomeConfigEntity entity = new HomeConfigEntity();
         entity.setImage(fileName);
+        entity.setCourseId(courseId);
         homeConfigRepository.save(entity);
         wsUtility.writeFile(inputStream, homeImagePath, fileName);
     }
@@ -43,7 +49,12 @@ public class HomeConfigService {
         List<HomeConfigResp> imageUrls = new ArrayList<>();
         Iterable<HomeConfigEntity> entities = homeConfigRepository.findAll();
         for(HomeConfigEntity entity : entities){
-            imageUrls.add(new HomeConfigResp(entity.getId(), homeImageUrl+"/"+entity.getImage(), entity.getImage(), entity.getCourseId()));
+            HomeConfigResp config = new HomeConfigResp(entity.getId(), homeImageUrl + "/" + entity.getImage(), entity.getImage(), entity.getCourseId());
+            CourseEntity course = courseRepository.findOne(entity.getCourseId());
+            if(course != null){
+                config.setCourseName(course.getName());
+            }
+            imageUrls.add(config);
         }
         return imageUrls;
     }
