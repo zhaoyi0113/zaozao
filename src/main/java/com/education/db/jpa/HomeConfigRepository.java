@@ -16,5 +16,9 @@ public interface HomeConfigRepository extends CrudRepository<HomeConfigEntity, I
 
     List<HomeConfigEntity> findByOrderIndexGreaterThan(int index);
 
-    List<HomeConfigEntity> findByOrderIndexLessThan(int index);
+    List<HomeConfigEntity> findByOrderIndexLessThanOrderByOrderIndex(int index);
+
+    List<HomeConfigEntity> findByOrderIndexGreaterThanOrderByOrderIndex(int index);
+
+    HomeConfigEntity findTopByOrderByOrderIndexDesc();
 }

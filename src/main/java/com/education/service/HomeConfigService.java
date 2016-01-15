@@ -7,6 +7,7 @@ import com.education.db.jpa.HomeConfigRepository;
 import com.education.exception.BadRequestException;
 import com.education.exception.ErrorCode;
 import com.education.formbean.HomeConfigResp;
+import com.education.util.MoveAction;
 import com.education.ws.util.WSUtility;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -43,12 +44,19 @@ public class HomeConfigService {
     private WSUtility wsUtility;
 
     @Transactional
-    public void createImage(String fileName, int courseId, InputStream inputStream) {
+    public int createImage(String fileName, int courseId, InputStream inputStream) {
         HomeConfigEntity entity = new HomeConfigEntity();
         entity.setImage(fileName);
         entity.setCourseId(courseId);
-        homeConfigRepository.save(entity);
+        HomeConfigEntity top = homeConfigRepository.findTopByOrderByOrderIndexDesc();
+        if (top != null) {
+            entity.setOrderIndex(top.getOrderIndex() + 1);
+        } else {
+            entity.setOrderIndex(0);
+        }
+        HomeConfigEntity saved = homeConfigRepository.save(entity);
         wsUtility.writeFile(inputStream, homeImagePath, fileName);
+        return saved.getId();
     }
 
     public List<HomeConfigResp> getHomeImages() {
@@ -69,9 +77,9 @@ public class HomeConfigService {
     public void moveUp(int id) {
         HomeConfigEntity config = homeConfigRepository.findOne(id);
         if (config == null) {
-            throw new BadRequestException(ErrorCode.COURSE_NOT_FOUND);
+            throw new BadRequestException(ErrorCode.COMMON_NOT_FOUND);
         }
-        List<HomeConfigEntity> configBefore = homeConfigRepository.findByOrderIndexLessThan(config.getOrderIndex());
+        List<HomeConfigEntity> configBefore = homeConfigRepository.findByOrderIndexLessThanOrderByOrderIndex(config.getOrderIndex());
         if (configBefore.size() > 0) {
             HomeConfigEntity last = configBefore.get(configBefore.size() - 1);
             int order = config.getOrderIndex();
@@ -80,6 +88,37 @@ public class HomeConfigService {
             homeConfigRepository.save(last);
             homeConfigRepository.save(config);
         }
+    }
+
+    @Transactional
+    public void moveDown(int id) {
+        logger.info("move down " + id);
+        HomeConfigEntity config = homeConfigRepository.findOne(id);
+        if (config == null) {
+            throw new BadRequestException(ErrorCode.COMMON_NOT_FOUND);
+        }
+        List<HomeConfigEntity> items = homeConfigRepository.findByOrderIndexGreaterThanOrderByOrderIndex(config.getOrderIndex());
+        if (items.size() > 0) {
+            HomeConfigEntity item = items.get(0);
+            int order = item.getOrderIndex();
+            item.setOrderIndex(config.getOrderIndex());
+            config.setOrderIndex(order);
+            homeConfigRepository.save(item);
+            homeConfigRepository.save(config);
+        }
+    }
+
+    public void moveAction(int id, String action) {
+        MoveAction moveAction = MoveAction.valueOf(action);
+        switch (moveAction) {
+            case UP:
+                moveUp(id);
+                break;
+            case DOWN:
+                moveDown(id);
+                break;
+        }
+
     }
 
     @Transactional

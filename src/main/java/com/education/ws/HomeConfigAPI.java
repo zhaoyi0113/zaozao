@@ -37,7 +37,7 @@ public class HomeConfigAPI {
             @FormDataParam("file") FormDataContentDisposition disposition) {
         String fileName = WSUtility.getUtf8Character(disposition.getFileName());
         logger.info("upload file " + fileName);
-        homeConfigService.createImage(fileName,courseId, fileInputStream);
+        homeConfigService.createImage(fileName, courseId, fileInputStream);
         return Response.ok().build();
     }
 
@@ -50,8 +50,15 @@ public class HomeConfigAPI {
 
     @DELETE
     @Path("{id}")
-    public Response deleteHomeImage(@PathParam("id") int id){
+    public Response deleteHomeImage(@PathParam("id") int id) {
         homeConfigService.deleteImage(id);
+        return Response.ok().build();
+    }
+
+    @POST
+    @Path("/move")
+    public Response moveItem(@FormParam("id") int id, @FormParam("action") String action) {
+        homeConfigService.moveAction(id, action);
         return Response.ok().build();
     }
 }
