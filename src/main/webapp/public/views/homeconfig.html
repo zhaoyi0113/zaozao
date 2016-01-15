@@ -19,22 +19,24 @@
 	</div>  -->
 
 	<table class="table table-striped">
-		<tr><th>Name</th><th>Course Name</th><th>Image</th><th>Delete</th></tr>
+		<tr><th>Name</th><th>Course Name</th><th>Image</th><th>Change Order</th><th>Delete</th></tr>
 		<tr ng-repeat='image in images'>
 			<td>{{image.name}}</td>
 			<td>{{image.courseName}}</td>
 			<td><img ng-src='{{image.url}}' width='50px'/></td>
+			<td><button class='btn btn-default glyphicon glyphicon-arrow-up' ng-click='moveUp(image)'></button>
+			<button class='btn btn-default glyphicon glyphicon-arrow-down' ng-click='moveDown(image)'></button></td>
 			<td><button class='btn btn-default' ng-click='deletePic(image.id)'>Delete</button></td>
 		</tr>
 	</table>
 	<form name="addImageForm">
-		<div class="">
-            <label class="col-sm-2 control-label">Add Image:</label>
-            <input name="image_file" type="file" nv-file-select="" uploader="uploader" required/>
+		<div class="input-group">
+            <label class="input-group-addon">Add Image:</label>
+            <input name="image_file form-control" type="file" nv-file-select="" uploader="uploader" required/>
         </div>
-        <div>
-        	<label class="col-sm-2 control-label">Select Course:</label>
-        	<select name="course_id" ng-model="selectedCourseId" required>
+        <div class=" input-group">
+        	<label class="input-group-addon">Select Course:</label>
+        	<select class="form-control" name="course_id" ng-model="selectedCourseId" required>
         		<option ng-repeat="course in courseIdNames" value="{{course.id}}">
         			{{course.name}}</option>
         	</select>

@@ -2,14 +2,17 @@ define(['angular', 'jquery', 'angular-file-upload',
 		'angular-animate', 'hammerjs', 'bootstrap-carousel-swipe'
 	],
 	function(angular, $) {
-		var homeConfig = angular.module("homeConfigModule", ['angularFileUpload', 'ngAnimate']);
+		var homeConfig = angular.module("homeConfigModule", 
+			['angularFileUpload', 'ngAnimate']);
 
-		homeConfig.controller('HomeConfigController', ['$scope', '$http', '$location', '$state', 'FileUploader',
-			function($scope, $http, $location, $state, FileUploader) {
+		homeConfig.controller('HomeConfigController', 
+			['$scope', '$http', '$location', '$state', 'FileUploader','$httpParamSerializer',
+			function($scope, $http, $location, $state, FileUploader, $httpParamSerializer) {
 				$scope.uploader = new FileUploader({
 					url: $location.protocol() + '://' + $location.host() + ":" + $location.port() +
 						'/education/zaozao/homeconfig',
-					formData: []
+					formData: [],
+					removeAfterUpload: true
 				});
 
 				getHomeConfigImages($scope, $http, $location);
@@ -68,6 +71,32 @@ define(['angular', 'jquery', 'angular-file-upload',
 				$scope.swipeRight = function() {
 					console.log('swipe right');
 					$("#myCarousel").carousel('prev');
+				}
+				$scope.moveUp = function(image){
+					moveConfig(image, 'UP');
+				}
+				$scope.moveDown = function(image){
+					moveConfig(image, 'DOWN');
+				}
+
+				function moveConfig(image, action){
+					$http({
+						method: 'POST',
+						url: 'http://' + $location.host() + ":" + $location.port() + 
+						'/education/zaozao/homeconfig/move',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+                        },
+                        data: $httpParamSerializer({
+                        	id: image.id,
+                        	action: action
+                        })
+					})
+					.success(function(e){
+						getHomeConfigImages($scope, $http, $location);
+					}).error(function(e){
+
+					});
 				}
 			}
 		]);

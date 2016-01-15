@@ -8,7 +8,6 @@ require.config({
         'angular-file-upload': '/education/bower_components/angular-file-upload/dist/angular-file-upload.min',
         'angular-ui-date' : '/education/bower_components/angular-ui-date/src/date',
         'jquery-ui': '/education/bower_components/jquery-ui/jquery-ui.min',
-        jquery: '/education/bower_components/jquery/dist/jquery.min',
         'angular-bootstrap': '/education/bower_components/angular-bootstrap/ui-bootstrap.min',
         'angular-ui-bootstrap-datetimepicker':'/education/bower_components/angular-ui-bootstrap-datetimepicker/datetimepicker',
         'angular-bootstrap-tpls': '/education/bower_components/angular-bootstrap/ui-bootstrap-tpls.min',
@@ -28,8 +27,7 @@ require.config({
         'hammerjs': '/education/bower_components/hammerjs/hammer.min',
         'angular-gestures': '/education/bower_components/angular-gestures/gestures.min',
         'bootstrap-carousel-swipe': '/education/bower_components/bootstrap-carousel-swipe/carousel-swipe',
-        'bootstrap': '/education/bower_components/bootstrap/dist/js/bootstrap.min',
-        'angular-bootstrap': '/education/bower_components/angular-bootstrap/ui-bootstrap.min'
+        'bootstrap': '/education/bower_components/bootstrap/dist/js/bootstrap.min'
     },
     shim: {
         'angular': {
