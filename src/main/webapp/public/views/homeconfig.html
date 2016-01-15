@@ -36,12 +36,11 @@
         </div>
         <div class=" input-group">
         	<label class="input-group-addon">Select Course:</label>
-        	<select class="form-control" name="course_id" ng-model="selectedCourseId" required>
+        	<select class="selectpicker form-control" dropupAuto="true" selectpicker name="course_id" ng-model="selectedCourseId" data-live-search="true" required>
         		<option ng-repeat="course in courseIdNames" value="{{course.id}}">
         			{{course.name}}</option>
         	</select>
         </div>
-        
         <div class='btn-group row input-lg'>
         	<button class='button btn btn-default' ng-disabled='addImageForm.$invalid' ng-click='submit()'>Submit</button>
         </div>

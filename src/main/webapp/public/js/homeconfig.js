@@ -1,9 +1,11 @@
 define(['angular', 'jquery', 'angular-file-upload',
-		'angular-animate', 'hammerjs', 'bootstrap-carousel-swipe'
+		'angular-animate', 'hammerjs', 'bootstrap-carousel-swipe',
+		'bootstrap-select', 'angular-bootstrap-select'
 	],
 	function(angular, $) {
 		var homeConfig = angular.module("homeConfigModule", 
-			['angularFileUpload', 'ngAnimate']);
+			['angularFileUpload', 'ngAnimate','angular-bootstrap-select',
+  'angular-bootstrap-select.extra']);
 
 		homeConfig.controller('HomeConfigController', 
 			['$scope', '$http', '$location', '$state', 'FileUploader','$httpParamSerializer',
