@@ -5,9 +5,9 @@ import com.education.db.entity.UserEntity;
 import com.education.db.jpa.UserRepository;
 import com.education.exception.BadRequestException;
 import com.education.exception.ErrorCode;
-import com.education.service.LoginHistoryService;
 import com.education.service.WeChatService;
 import com.education.service.WeChatUserInfo;
+import com.education.service.converter.UserEntityConverter;
 import com.education.ws.util.ContextKeys;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -38,6 +38,9 @@ public class WeChatCodeAuthentication implements ContainerRequestFilter {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private UserEntityConverter userEntityConverter;
 
     @Override
     public void filter(ContainerRequestContext requestContext) throws IOException {
@@ -107,21 +110,7 @@ public class WeChatCodeAuthentication implements ContainerRequestFilter {
         if (!byUnionid.isEmpty()) {
             return byUnionid.get(0).getUserId();
         }
-        UserEntity entity = new UserEntity();
-        entity.setGroupid(userInfo.getGroupid());
-        entity.setRemark(userInfo.getRemark());
-        entity.setCity(userInfo.getCity());
-        entity.setCountry(userInfo.getCountry());
-        entity.setLanguage(userInfo.getLanguage());
-        entity.setHeadimageurl(userInfo.getHeadimgurl());
-        entity.setOpenid(userInfo.getOpenid());
-        entity.setSex(userInfo.getSex());
-        entity.setNickname(userInfo.getNickname());
-        entity.setUserName(userInfo.getNickname());
-        entity.setProvince(userInfo.getProvince());
-        entity.setSubscribe(userInfo.getSubscribe());
-        entity.setUnionid(userInfo.getUnionid());
-        entity.setSubscribe_time(userInfo.getSubscribe_time());
+        UserEntity entity = userEntityConverter.convert(userInfo);
         UserEntity saved = userRepository.save(entity);
         return saved.getUserId();
     }

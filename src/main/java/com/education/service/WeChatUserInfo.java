@@ -4,6 +4,8 @@ package com.education.service;
  * Created by yzzhao on 12/12/15.
  */
 public class WeChatUserInfo {
+    private int userId;
+
     private String subscribe;
 
     private String openid;
@@ -152,5 +154,13 @@ public class WeChatUserInfo {
 
     public void setErrmsg(String errmsg) {
         this.errmsg = errmsg;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 }

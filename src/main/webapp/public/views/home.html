@@ -16,7 +16,7 @@
 <div class="sidebar-nav">
    <ul>
       <li>
-         <a href='javascript:void(0)' class="nav-header" data-toggle="collapse" data-target=".course-folder">
+         <a href='#' class="nav-header" data-toggle="collapse" data-target="#course-folder" aria-expanded="true" aria-controls="course-folder">
             <i class="glyphicon glyphicon-wrench">
             </i>
             Course Management
@@ -26,7 +26,7 @@
     </li>
 </ul>
 <li>
- <ul class="course-folder nav nav-list collapse in"  ng-model="tab">
+ <ul id="course-folder" class="nav nav-list"  ng-model="tab">
     <li ng-repeat="tab in tabs">
        <a ui-sref='{{tab.url}}'>
           <span class="fa fa-caret-right">
@@ -36,6 +36,27 @@
   </li>
 </ul>
 </li>
+
+<li>
+    <a href='javascript:void(0)' class="nav-header" data-toggle="collapse" data-target="#online-folder">
+        <i class="glyphicon glyphicon-wrench">
+        </i>
+        Online Analytic
+    </a>
+</li>
+
+<li>
+    <ul id="online-folder" class="nav nav-list collapse in" ng-model="tab">
+        <li ng-repeat="tab in onlineTabs">
+            <a ui-sref='{{tab.url}}'>
+                <span class="fa fa-caret-right">
+                </span>
+                {{tab.label}}
+            </a>
+        </li>
+    </ul>
+</li>
+
 <li ng-show="showAdmin" >
     <a href='javascript:void(0)' class="nav-header" data-toggle="collapse" data-target=".course-admin-folder">
         <i class="glyphicon glyphicon-wrench">
@@ -54,6 +75,7 @@
         </li>
     </ul>
 </li>
+
 </div>
 </div>
 <div class="home_content" ui-view></div>

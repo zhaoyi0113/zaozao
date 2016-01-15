@@ -3,8 +3,6 @@ package com.education.aop;
 import com.education.db.entity.COURSE_ACCESS_FLAG;
 import com.education.db.entity.UserEntity;
 import com.education.service.UserCourseHistoryService;
-import com.education.service.WeChatUserInfo;
-import com.education.ws.UserEditBean;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;

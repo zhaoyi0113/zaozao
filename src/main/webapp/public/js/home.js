@@ -1,11 +1,13 @@
 define(['angular', 'user', 'login', 'course', 'courseplan',
-    'coursetag', 'homeconfig', 'user_service', 'login_service', 'course_video',
+    'coursetag', 'homeconfig', 'user_service', 'login_service', 
+    'course_video','angular-bootstrap','angular-bootstrap-tpls'
 ], function(angular) {
 
     'use strict';
-    var home = angular.module("homeModule", ['userModule', 'loginModule', 'courseModule', 'coursePlanModel',
+    var home = angular.module("homeModule", ['userModule', 
+        'loginModule', 'courseModule', 'coursePlanModel',
         'courseTagModule', 'homeConfigModule', 'userServiceModule', 
-        'loginServiceModule', 'courseVideoModule'
+        'loginServiceModule', 'courseVideoModule', 'ui.bootstrap'
     ]);
     home.controller('HomeController', ['$scope', '$http', '$rootScope', 'LoginService', '$state',
         function($scope, $http, $rootScope, loginService, $state) {
@@ -28,7 +30,7 @@ define(['angular', 'user', 'login', 'course', 'courseplan',
             }];
             $scope.adminTabs = [{
                 url: '.user',
-                label: 'User'
+                label: 'System User'
             }];
             $scope.showAdmin = false;
             loginService.isLogin().then(function(event) {
@@ -37,6 +39,14 @@ define(['angular', 'user', 'login', 'course', 'courseplan',
                 console.log('not login', error);
                 $scope.tabs[4].label = 'Login';
             });
+
+            $scope.onlineTabs = [
+                {
+                    url: '.onlineUser',
+                    label: 'Online User'
+                }
+            ];
+            
             $rootScope.$on('LOGIN', function(event, data) {
                 console.log('login service changed ', data);
 

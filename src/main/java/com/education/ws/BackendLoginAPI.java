@@ -26,9 +26,6 @@ public class BackendLoginAPI {
     @Autowired
     private BackendLoginService loginService;
 
-    @Autowired
-    private UserRepository userRepository;
-
     @POST
     public Response login(@Context HttpServletRequest request, @FormParam("userName") String userName, @FormParam("password") String password) {
         logger.info("login " + userName);
