@@ -130,6 +130,16 @@ public class HomeConfigService {
             logger.info("delete home config file " + path);
             File file = new File(path);
             file.delete();
+            reorder();
+        }
+    }
+
+    private void reorder(){
+        Iterable<HomeConfigEntity> entities = homeConfigRepository.findOrderByOrderIndex();
+        int index=0;
+        for(HomeConfigEntity entity: entities){
+            entity.setOrderIndex(index);
+            index++;
         }
     }
 }
