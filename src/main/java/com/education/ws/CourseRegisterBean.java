@@ -56,6 +56,9 @@ public class CourseRegisterBean {
     @FormParam("video_length")
     private double videoLength;
 
+    @FormParam("pv")
+    private long pv;
+
     public CourseRegisterBean() {
     }
 
@@ -206,6 +209,14 @@ public class CourseRegisterBean {
 
     public void setVideoLength(double videoLength) {
         this.videoLength = videoLength;
+    }
+
+    public long getPv() {
+        return pv;
+    }
+
+    public void setPv(long pv) {
+        this.pv = pv;
     }
 
     @Override

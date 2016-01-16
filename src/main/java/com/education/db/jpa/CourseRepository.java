@@ -1,19 +1,18 @@
 package com.education.db.jpa;
+
 import com.education.db.entity.CommonStatus;
 import com.education.db.entity.CourseEntity;
-import com.education.ws.CourseRegisterBean;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 
-import javax.ws.rs.QueryParam;
 import java.util.Date;
 import java.util.List;
 
 /**
  * Created by yzzhao on 11/11/15.
  */
-public interface CourseRepository extends CrudRepository<CourseEntity, Integer>{
+public interface CourseRepository extends PagingAndSortingRepository<CourseEntity, Integer> {
 
     @Query("select name from CourseEntity")
     List<String> findAllCourseNames();

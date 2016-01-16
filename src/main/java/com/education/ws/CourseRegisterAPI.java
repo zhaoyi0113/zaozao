@@ -5,9 +5,9 @@ import com.education.auth.Public;
 import com.education.db.entity.CourseEntity;
 import com.education.db.jpa.CourseRepository;
 import com.education.formbean.CourseQueryBean;
+import com.education.formbean.CourseUserAnalyticsBean;
 import com.education.service.CourseProposalService;
 import com.education.service.CourseService;
-import com.education.service.BackendLoginService;
 import com.education.ws.util.WSUtility;
 import org.glassfish.jersey.media.multipart.FormDataBodyPart;
 import org.glassfish.jersey.media.multipart.FormDataMultiPart;
@@ -196,5 +196,11 @@ public class CourseRegisterAPI {
         return Response.ok().build();
     }
 
-
+    @GET
+    @Path("/analytics")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getCourseAnalytics(@QueryParam("id") int courseId, @QueryParam("page_index") int pageIdx, @QueryParam("number") int number) {
+        List<CourseUserAnalyticsBean> courseList = courseService.getCourseUserAnalytics(courseId, pageIdx, number);
+        return Response.ok(courseList).build();
+    }
 }

@@ -33,9 +33,11 @@ public class CourseQueryBean {
 
     private CommonStatus status;
 
-    public String publishDate;
+    private String publishDate;
 
-    public double videoLength;
+    private double videoLength;
+
+    private long pv;
 
     public CourseQueryBean(CourseEntity courseEntity, WSUtility wsUtility){
         this.id = String.valueOf(courseEntity.getId());
@@ -49,6 +51,7 @@ public class CourseQueryBean {
         status=courseEntity.getStatus();
         publishDate = wsUtility.dateToString(courseEntity.getPublishDate());
         videoLength = courseEntity.getVideoLength();
+        pv  = courseEntity.getPv();
     }
 
     public String getId() {
@@ -145,5 +148,13 @@ public class CourseQueryBean {
 
     public void setVideoLength(double videoLength) {
         this.videoLength = videoLength;
+    }
+
+    public long getPv() {
+        return pv;
+    }
+
+    public void setPv(long pv) {
+        this.pv = pv;
     }
 }

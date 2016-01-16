@@ -30,6 +30,7 @@ public class CourseEntity {
     private CommonStatus status;
     private Date publishDate;
     private double videoLength;
+    private long pv;
 
     public CourseEntity() {
 
@@ -54,6 +55,7 @@ public class CourseEntity {
             status = CommonStatus.valueOf(bean.getStatus());
         }
         videoLength = bean.getVideoLength();
+        pv = bean.getPv();
     }
 
     @Id
@@ -212,5 +214,14 @@ public class CourseEntity {
 
     public void setVideoLength(double videoLength) {
         this.videoLength = videoLength;
+    }
+
+    @Column(name = "pv")
+    public long getPv() {
+        return pv;
+    }
+
+    public void setPv(long pv) {
+        this.pv = pv;
     }
 }

@@ -7,6 +7,7 @@ import com.education.db.jpa.CourseRepository;
 import com.education.db.jpa.CourseTagRelationRepository;
 import com.education.db.jpa.CourseTypeRepository;
 import com.education.formbean.CourseQueryBean;
+import com.education.formbean.CourseUserAnalyticsBean;
 import com.education.ws.CourseRegisterBean;
 import com.education.ws.util.WSUtility;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
@@ -66,7 +67,7 @@ public class CourseServiceTest extends AbstractServiceTest {
         int courseId = courseService.createCourse(courseBean);
         CourseQueryBean queryCourse = courseService.queryCourse(courseId + "");
         Assert.assertNotNull(queryCourse);
-        Assert.assertEquals(wsUtility.getResourcePath(courseId,"xxx"), queryCourse.getVideoUrl());
+        Assert.assertEquals(wsUtility.getResourcePath(courseId, "xxx"), queryCourse.getVideoUrl());
     }
 
     @Test
@@ -107,7 +108,7 @@ public class CourseServiceTest extends AbstractServiceTest {
     }
 
     @Test
-    public void testCreateCourseVideoLength(){
+    public void testCreateCourseVideoLength() {
         String name = System.currentTimeMillis() + "";
         CourseRegisterBean courseBean = createCourseBean(name);
         courseBean.setVideoLength(20.3);
@@ -115,7 +116,7 @@ public class CourseServiceTest extends AbstractServiceTest {
         courseBean.setPublishDate(WSUtility.dateToString(date));
         int courseId = courseService.createCourse(courseBean);
         CourseQueryBean course = courseService.queryCourse(String.valueOf(courseId));
-        Assert.assertEquals(20.3, course.getVideoLength(),0.1);
+        Assert.assertEquals(20.3, course.getVideoLength(), 0.1);
     }
 
     protected static CourseRegisterBean createCourseBean(String name) {
@@ -159,10 +160,49 @@ public class CourseServiceTest extends AbstractServiceTest {
     }
 
     @Test
-    @DatabaseSetup(value="classpath:/com/education/service/course_service_idnames_test.xml")
-    public void getAllIdAndNamesTest(){
+    @DatabaseSetup(value = "classpath:/com/education/service/course_service_idnames_test.xml")
+    public void getAllIdAndNamesTest() {
         Map<Integer, String> idNames = courseService.findCourseIdAndNames();
         Assert.assertEquals(5, idNames.size());
 
     }
+
+    @Test
+    public void setCoursePVTest() {
+
+        String name = System.currentTimeMillis() + "";
+        CourseRegisterBean courseBean = createCourseBean(name);
+        courseBean.setTags("1,2,3");
+        courseBean.setPv(999);
+        int id = courseService.createCourse(courseBean);
+        CourseQueryBean course = courseService.queryCourse(id + "");
+        Assert.assertEquals(999, course.getPv());
+
+        courseBean.setId(id + "");
+        courseBean.setPv(9999);
+        courseService.editCourse(courseBean);
+        course = courseService.queryCourse(id + "");
+        Assert.assertEquals(9999, course.getPv());
+    }
+    @Test
+    @DatabaseSetup(value = "classpath:/com/education/service/course_service_analytics_test.xml")
+    public void getCourseUserAnalyticsTest() {
+        List<CourseUserAnalyticsBean> beans = courseService.getCourseUserAnalytics(10000, 0, 3);
+        Assert.assertEquals(3, beans.size());
+        Assert.assertEquals(30001, beans.get(0).getUserInfo().getUserId());
+        Assert.assertEquals(30002, beans.get(1).getUserInfo().getUserId());
+        Assert.assertEquals(30001, beans.get(2).getUserInfo().getUserId());
+
+        beans = courseService.getCourseUserAnalytics(10000, 1, 3);
+        Assert.assertEquals(2, beans.size());
+        Assert.assertEquals(30001, beans.get(0).getUserInfo().getUserId());
+        Assert.assertEquals(30000, beans.get(1).getUserInfo().getUserId());
+
+        beans = courseService.getCourseUserAnalytics(10000, 2, 3);
+        Assert.assertEquals(0, beans.size());
+
+        beans = courseService.getCourseUserAnalytics(10000, 0, 30);
+        Assert.assertEquals(5, beans.size());
+    }
+
 }
