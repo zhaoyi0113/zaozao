@@ -1,21 +1,23 @@
 package com.education.service;
 
-import com.education.db.entity.*;
-import com.education.db.jpa.*;
+import com.education.db.entity.CommonStatus;
+import com.education.db.entity.CourseEntity;
+import com.education.db.entity.CourseTagEntity;
+import com.education.db.entity.CourseTagRelationEntity;
+import com.education.db.jpa.CourseRepository;
+import com.education.db.jpa.CourseTagRelationRepository;
+import com.education.db.jpa.CourseTagRepository;
 import com.education.exception.BadRequestException;
 import com.education.exception.ErrorCode;
 import com.education.formbean.CourseQueryBean;
 import com.education.formbean.CourseTagBean;
 import com.education.formbean.CourseUserAnalyticsBean;
-import com.education.service.converter.WeChatUserConverter;
 import com.education.ws.CourseRegisterBean;
 import com.education.ws.util.WSUtility;
 import jersey.repackaged.com.google.common.collect.Lists;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -41,9 +43,6 @@ public class CourseService {
     private CourseRepository courseRepository;
 
     @Autowired
-    private CourseTypeRepository courseTypeRepository;
-
-    @Autowired
     private WSUtility wsUtility;
 
     @Autowired
@@ -53,7 +52,7 @@ public class CourseService {
     private CourseTagRelationRepository courseTagRelationRepository;
 
     @Autowired
-    private UserCourseHistoryRepository courseHistoryRepository;
+    private UserCourseHistoryService userCourseHistoryService;
 
     @Autowired
     private CourseTagService tagService;
@@ -61,11 +60,6 @@ public class CourseService {
     @Value("#{config['course_image_path']}")
     private String courseImagePath;
 
-    @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
-    private WeChatUserConverter weChatUserConverter;
 
     @Transactional
     public int createCourse(CourseRegisterBean bean) {
@@ -223,20 +217,6 @@ public class CourseService {
     }
 
     public List<CourseUserAnalyticsBean> getCourseUserAnalytics(int courseId, int pageIdx, int number) {
-        PageRequest pageRequest = new PageRequest(pageIdx, number, new Sort(Sort.Direction.DESC, "timeCreated"));
-        List<UserCourseHistoryEntity> courses = courseHistoryRepository.findByCourseId(courseId, pageRequest);
-        List<CourseUserAnalyticsBean> beans = new ArrayList<>();
-        for (UserCourseHistoryEntity entity : courses) {
-            CourseUserAnalyticsBean bean = new CourseUserAnalyticsBean();
-            UserEntity user = userRepository.findOne(entity.getUserId());
-            if (user != null) {
-                WeChatUserInfo weChatUserInfo = weChatUserConverter.convert(user);
-                bean.setUserInfo(weChatUserInfo);
-            }
-            bean.setAccessDate(entity.getTimeCreated());
-            bean.setFlag(entity.getAccessFlag());
-            beans.add(bean);
-        }
-        return beans;
+        return userCourseHistoryService.getCourseUserAnalytics(courseId, pageIdx, number);
     }
 }

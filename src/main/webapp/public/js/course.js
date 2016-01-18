@@ -1,6 +1,6 @@
 define(['angular', 'angular-file-upload', 'directives', 'angular-ui-date', 'angular-bootstrap', 'angular-bootstrap-tpls',
     'ueditor-config', 'kindeditor', 'kindeditor-zh', 'login_service',
-    'angular-kindeditor', 'angular-datepicker', 'ng-dialog', 'admin_pwd_service','angular-bootstrap'
+    'angular-kindeditor', 'angular-datepicker', 'ng-dialog', 'admin_pwd_service'
 ], function(angular) {
     'use strict';
     var course = angular.module("courseModule", ['angularFileUpload', 'ngThumbModel',

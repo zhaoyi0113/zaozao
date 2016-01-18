@@ -1,0 +1,29 @@
+<div class="course">
+    <header class='header'>
+        <h2>Course Analytics</h2>
+    </header>
+
+    
+    <table class="table table-striped table-bordered">
+        <th ng-repeat="head in headers" ng-model="head"><p>{{head}}</p></th>
+
+        <tr ng-repeat="course in courses" ng-model="course">
+            <hr/>
+            <td>
+                <a ui-sref='home.courseedit({courseId: course.id})'><strong>{{course.name}}</strong></a>
+            </td>
+            <td>
+                {{course.publishDate}}
+            </td>
+            <td>
+               <input type="text" readonly="course.editable" value="{{course.pv}}"> </input>
+               <button class="btn btn-default" ng-model="course" ng-click="edit(course)">{{course.button}}</button>
+            </td>
+
+        </tr>
+    </table>
+    <uib-pagination total-items="totalCourseCount" ng-model="pageIdx" max-size="totalPages" class="pagination-sm" boundary-links="true" force-ellipses="true" boundary-link-numbers="true" num-pages="totalPages" ng-change="pageChanged()"></uib-pagination>
+    <hr/>
+</div>
+
+<div ui-view/>

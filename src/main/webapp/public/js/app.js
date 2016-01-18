@@ -77,6 +77,10 @@ define(['angular', 'ui-router', 'jquery-ui', 'home', 'wechat', 'login_service','
             url: '/course_video_edit?courseId',
             templateUrl: '/education/public/views/course_video_edit.html',
             controller: 'CourseVideoEditController'
+        }).state('home.course_analytics',{
+            url:'/course_analytics',
+            templateUrl: '/education/public/views/course_analytics.html',
+            controller: 'CourseAnalyticsController'
         });
         $urlRouterProvider.otherwise('/home');
 

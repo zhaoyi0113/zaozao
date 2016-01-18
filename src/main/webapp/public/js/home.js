@@ -1,13 +1,13 @@
 define(['angular', 'user', 'login', 'course', 'courseplan',
     'coursetag', 'homeconfig', 'user_service', 'login_service', 
-    'course_video','angular-bootstrap','angular-bootstrap-tpls'
+    'course_video','angular-bootstrap','angular-bootstrap-tpls','course_analytics'
 ], function(angular) {
 
     'use strict';
     var home = angular.module("homeModule", ['userModule', 
         'loginModule', 'courseModule', 'coursePlanModel',
         'courseTagModule', 'homeConfigModule', 'userServiceModule', 
-        'loginServiceModule', 'courseVideoModule', 'ui.bootstrap'
+        'loginServiceModule', 'courseVideoModule', 'ui.bootstrap','courseAnalyticsModule'
     ]);
     home.controller('HomeController', ['$scope', '$http', '$rootScope', 'LoginService', '$state',
         function($scope, $http, $rootScope, loginService, $state) {
@@ -44,6 +44,9 @@ define(['angular', 'user', 'login', 'course', 'courseplan',
                 {
                     url: '.onlineUser',
                     label: 'Online User'
+                },{
+                    url: '.course_analytics',
+                    label: 'Course Analytics'
                 }
             ];
             
