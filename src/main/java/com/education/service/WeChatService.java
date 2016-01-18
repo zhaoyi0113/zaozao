@@ -75,6 +75,9 @@ public class WeChatService {
     @Autowired
     private AccessTokenScheduler tokenScheduler;
 
+    @Autowired
+    private SignatureGenerator signatureGenerator;
+
     private static final Logger logger = Logger.getLogger(WeChatService.class.getName());
 
     private Map<String,String> jsapiTicketCache;
@@ -88,7 +91,7 @@ public class WeChatService {
             builder.append(tmpArr[i]);
         }
         String tmpStr = builder.toString();
-        String sha1 = getSha1String(tmpStr);
+        String sha1 = signatureGenerator.getSha1String(tmpStr);
 
         logger.info("get tmp str " + tmpStr);
         logger.info("get sha1 " + sha1);
@@ -136,7 +139,7 @@ public class WeChatService {
         StringBuilder builder =new StringBuilder("jsapi_ticket=");
         builder.append(jsTicket).append("&noncestr=").append(noncestr)
                 .append("&timestamp=").append(timestamp).append("&url=").append(url);
-        String signature = getSha1String(builder.toString());
+        String signature = signatureGenerator.getSha1String(builder.toString());
         Map<String, String> jsSingautre =new Hashtable<>();
         jsSingautre.put("noncestr", noncestr);
         jsSingautre.put("timestamp", timestamp);
@@ -408,31 +411,6 @@ public class WeChatService {
         StringBuffer builder = new StringBuffer(jsapiTicketUrl);
         builder.append("?access_token=").append(token).append("&type=jsapi");
         return builder.toString();
-    }
-
-    private static String getSha1String(String decript) {
-        try {
-            logger.info("sha1 on string:"+decript);
-            MessageDigest digest = java.security.MessageDigest
-                    .getInstance("SHA-1");
-            digest.update(decript.getBytes());
-            byte messageDigest[] = digest.digest();
-            // Create Hex String
-            StringBuffer hexString = new StringBuffer();
-            // 字节数组转换为 十六进制 数
-            for (int i = 0; i < messageDigest.length; i++) {
-                String shaHex = Integer.toHexString(messageDigest[i] & 0xFF);
-                if (shaHex.length() < 2) {
-                    hexString.append(0);
-                }
-                hexString.append(shaHex);
-            }
-            return hexString.toString();
-
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
-        return "";
     }
 
 }
