@@ -15,6 +15,7 @@ import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.Map;
 import java.util.logging.Logger;
 
 /**
@@ -34,8 +35,6 @@ public class WeChatPaymentAPI {
     @Path("request")
     @POST
     @TokenAccess(requireAccessToken = true)
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_XML)
     public Response requestPayment(@Context HttpServletRequest request,
                                    @Context ContainerRequestContext context,
                                    @FormParam("product_desc") String productDesc,
@@ -54,17 +53,16 @@ public class WeChatPaymentAPI {
         return Response.ok().build();
     }
 
-    @Path("request")
-    @GET
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_XML)
+    @Path("test")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
     public Response requestPayment(@Context HttpServletRequest request,
                                    @Context ContainerRequestContext context,
-                                   @QueryParam("openid") String openId,
-                                   @QueryParam("product_desc") String productDesc,
-                                   @QueryParam("product_detail") String productDetail,
-                                   @QueryParam("price") int price) {
-        payService.requestPay(openId, productDesc, productDetail, price, "10.01.10.10");
-        return Response.ok().build();
+                                   @FormParam("openid") String openId,
+                                   @FormParam("product_desc") String productDesc,
+                                   @FormParam("product_detail") String productDetail,
+                                   @FormParam("price") int price) {
+        Map<String, String> ret = payService.requestPay(openId, productDesc, productDetail, price, "10.17.11.111");
+        return Response.ok(ret).build();
     }
 }

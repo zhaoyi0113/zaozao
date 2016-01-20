@@ -10,7 +10,7 @@
         <tr ng-repeat="course in courses" ng-model="course">
             <hr/>
             <td>
-                <a ui-sref='home.courseedit({courseId: course.id})'><strong>{{course.name}}</strong></a>
+                <a ui-sref='home.course_analystic_detail({courseId: course.id})'><strong>{{course.name}}</strong></a>
             </td>
             <td>
                 {{course.publishDate}}

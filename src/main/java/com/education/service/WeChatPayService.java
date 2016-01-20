@@ -10,6 +10,10 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
+import org.dom4j.Document;
+import org.dom4j.DocumentException;
+import org.dom4j.DocumentHelper;
+import org.dom4j.Element;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -47,10 +51,13 @@ public class WeChatPayService {
     @Value("#{config['wechat_pay_notify_url']}")
     private String notifyUrl;
 
+    @Value("#{config['wechat_pay_secret']}")
+    private String paySecret;
+
     @Autowired
     private SignatureGenerator signatureGenerator;
 
-    public void requestPay(String openId, String proDesc, String proDetail, int price, String ip) {
+    public Map<String, String> requestPay(String openId, String proDesc, String proDetail, int price, String ip) {
         logger.info("request pay openId=" + openId + " description=" + proDesc + ", detail=" + proDetail + " price=" + price + " ip=" + ip);
         String xml = generatePayRequestXML(openId, proDesc, proDetail, price, ip);
         HttpPost httpPost = new HttpPost(payUrl);
@@ -62,7 +69,19 @@ public class WeChatPayService {
             HttpEntity entity = response.getEntity();
             String body = EntityUtils.toString(entity, "UTF-8").trim();
             logger.info("get pay request response " + body);
-
+            Map<String, String> ret = parseXML(body);
+            logger.info("parse response xml "+ret);
+            Map<String, String> returnMap = new Hashtable<>();
+            if(ret.containsKey("return_code")){
+                returnMap.put("return_code", ret.get("return_code"));
+                if(returnMap.get("return_code").equalsIgnoreCase("SUCCESS")) {
+                    returnMap.put("return_msg", ret.get("return_msg"));
+                    returnMap.put("result_code", ret.get("result_code"));
+                    returnMap.put("prepay_id", ret.get("prepay_id"));
+                    returnMap.put("sign", ret.get("sign"));
+                }
+            }
+            return returnMap;
         } catch (IOException e) {
             logger.log(Level.SEVERE, e.getMessage(), e);
             throw new BadRequestException(ErrorCode.PAY_FAILED);
@@ -95,7 +114,7 @@ public class WeChatPayService {
         payData.put("openid", openId);
         payData.put("sign", generateSign(payData).toUpperCase());
         String request = generateXMLRequest(payData);
-        logger.info("generated pay map "+payData);
+        logger.info("generated pay map " + payData);
         logger.info("generated pay request body:" + request);
         return request;
     }
@@ -112,7 +131,8 @@ public class WeChatPayService {
         for (Map.Entry<String, String> entry : treeMap.entrySet()) {
             buffer.append(entry.getKey()).append("=").append(entry.getValue()).append("&");
         }
-        String signStr = buffer.toString().substring(0, buffer.toString().length() - 1);
+        buffer.append("key").append("=").append(paySecret);
+        String signStr = buffer.toString();
         return signatureGenerator.getMD5String(signStr);
     }
 
@@ -147,5 +167,20 @@ public class WeChatPayService {
             logger.log(Level.SEVERE, e.getMessage(), e);
         }
         return null;
+    }
+
+    private static Map<String, String> parseXML(String xml) {
+        Map<String, String> map = new HashMap<String, String>();
+        try {
+            Document doc = DocumentHelper.parseText(xml);
+            Element root = doc.getRootElement();
+            List<Element> elements = root.elements();
+            for (Element element : elements) {
+                map.put(element.getName(), element.getStringValue());
+            }
+        } catch (DocumentException e) {
+            logger.log(Level.SEVERE, e.getMessage(), e);
+        }
+        return map;
     }
 }

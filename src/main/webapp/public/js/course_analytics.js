@@ -45,4 +45,10 @@ define(['angular', 'angular-bootstrap'], function(angular) {
 			}
 		}
 	]);
+
+	course.controller('CourseAnalyticsDetailController', ['$scope', '$http',
+		function($scope, $http) {
+
+		}
+	]);
 });
