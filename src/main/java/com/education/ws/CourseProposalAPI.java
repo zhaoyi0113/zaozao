@@ -1,7 +1,6 @@
 package com.education.ws;
 
 
-import com.education.auth.Public;
 import com.education.auth.TokenAccess;
 import com.education.db.entity.UserEntity;
 import com.education.formbean.CourseQueryBean;
@@ -17,7 +16,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import javax.ws.rs.*;
 import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.core.Context;

@@ -39,7 +39,7 @@ public class WeChatPayService {
     @Value("#{config['wechat_pay_url']}")
     private String payUrl;
 
-    @Value("#{config['wechat_appid']}")
+    @Value("#{config['wechat_service_appid']}")
     private String serviceAppId;
 
     @Value("#{config['wechat_mch_id']}")

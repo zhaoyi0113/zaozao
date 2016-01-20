@@ -18,8 +18,6 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -33,11 +31,11 @@ public class WeChatService {
     @Value("#{config['wechat_token']}")
     private String token;
 
-    @Value("#{config['wechat_appid']}")
-    private String appid;
+    @Value("#{config['wechat_service_appid']}")
+    private String srvAppId;
 
-    @Value("#{config['wechat_appsecret']}")
-    private String appSecret;
+    @Value("#{config['wechat_service_appsecret']}")
+    private String srvAppSecret;
 
     @Value("#{config['wechat_access_token_url']}")
     private String accessTokenUrl;
@@ -72,6 +70,12 @@ public class WeChatService {
     @Value("#{config['wechat_web_secret']}")
     private String webAppSecret;
 
+    @Value("#{config['wechat_sub_appid']}")
+    private String subAppId;
+
+    @Value("#{config['wechat_sub_appsecret']}")
+    private String subAppSecret;
+
     @Autowired
     private AccessTokenScheduler tokenScheduler;
 
@@ -80,7 +84,7 @@ public class WeChatService {
 
     private static final Logger logger = Logger.getLogger(WeChatService.class.getName());
 
-    private Map<String,String> jsapiTicketCache;
+    private Map<String, String> jsapiTicketCache;
 
     public boolean validateConnection(String signature, String timeStamp, String nonce) {
         logger.info("validate connection " + signature + ", " + timeStamp + ", " + nonce + ", " + token);
@@ -103,12 +107,12 @@ public class WeChatService {
 
     public WeChatUserInfo getWebUserInfo(String code, String state) {
         Map tokenMap = getWebSiteAccessToken(code, state);
-        if(tokenMap == null){
+        if (tokenMap == null) {
             return null;
         }
         String token = (String) tokenMap.get("access_token");
         String openid = (String) tokenMap.get("openid");
-        if(token == null || openid == null){
+        if (token == null || openid == null) {
             return null;
         }
         String url = buildWebUserInfoUrl(token, openid);
@@ -131,26 +135,25 @@ public class WeChatService {
         return null;
     }
 
-    public Map<String, String> getWebJSSignature(String url){
+    public Map<String, String> getWebJSSignature(String url, String state) {
         String noncestr = "zaozao";
-        String timestamp = System.currentTimeMillis()+"";
-//        Map<String, String> jsApiTicket = getJSApiTicket();
+        String timestamp = System.currentTimeMillis() + "";
         String jsTicket = tokenScheduler.getJsApiTicket();
-        StringBuilder builder =new StringBuilder("jsapi_ticket=");
+        StringBuilder builder = new StringBuilder("jsapi_ticket=");
         builder.append(jsTicket).append("&noncestr=").append(noncestr)
                 .append("&timestamp=").append(timestamp).append("&url=").append(url);
         String signature = signatureGenerator.getSha1String(builder.toString());
-        Map<String, String> jsSingautre =new Hashtable<>();
+        Map<String, String> jsSingautre = new Hashtable<>();
         jsSingautre.put("noncestr", noncestr);
         jsSingautre.put("timestamp", timestamp);
         jsSingautre.put("jsapi_ticket", jsTicket);
-        jsSingautre.put("appid", appid);
+        jsSingautre.put("appid", getAppId(WeChatAccessState.valueOf(state)));
         jsSingautre.put("signature", signature);
         return jsSingautre;
     }
 
     private Map getJSApiTicket() {
-        String accessToken = tokenScheduler.getAccessToken(WeChatAccessState.WECHAT);
+        String accessToken = tokenScheduler.getAccessToken(WeChatAccessState.WECHAT_SERVICE);
         String url = buildJSApiTicketUrl(accessToken);
         logger.info("get jsapi ticket url:" + url);
         HttpGet httpGet = new HttpGet(url);
@@ -171,7 +174,7 @@ public class WeChatService {
         return new Hashtable<>();
     }
 
-    public String getJSApiTicket(String accessToken){
+    public String getJSApiTicket(String accessToken) {
         String url = buildJSApiTicketUrl(accessToken);
         logger.info("get jsapi ticket url:" + url);
         HttpGet httpGet = new HttpGet(url);
@@ -213,7 +216,7 @@ public class WeChatService {
     }
 
     public WeChatUserInfo getUserInfo(String openid) {
-        String accessToken = tokenScheduler.getAccessToken(WeChatAccessState.WECHAT);
+        String accessToken = tokenScheduler.getAccessToken(WeChatAccessState.WECHAT_SERVICE);
         String url = buildGetUserInfoURL(accessToken, openid);
         logger.info("get user info url:" + url);
         HttpGet httpGet = new HttpGet(url);
@@ -237,14 +240,14 @@ public class WeChatService {
         String ticket = getQRBarTicket(code, state);
         logger.info("get qr bar ticket " + ticket);
         String url = buildQRCodeUrl(ticket);
-        logger.info("show qr bar url:"+url);
+        logger.info("show qr bar url:" + url);
         return url;
     }
 
-    public String getQrWebConnectUrl(){
+    public String getQrWebConnectUrl() {
         StringBuilder builder = new StringBuilder(qrWebConnectUrl);
         builder.append("?appid=").append(webAppId).append("&redirect_uri=").append("http://imzao.com&response_type=code&scope=snsapi_login&state=123#wechat_redirect");
-        logger.info("generate qr connect url "+builder.toString());
+        logger.info("generate qr connect url " + builder.toString());
         return builder.toString();
 
     }
@@ -275,7 +278,7 @@ public class WeChatService {
     }
 
     public List<String> getUserOpenIDList() {
-        String accessToken = tokenScheduler.getAccessToken(WeChatAccessState.WECHAT);
+        String accessToken = tokenScheduler.getAccessToken(WeChatAccessState.WECHAT_SERVICE);
         String uri = buildGetUserListURL(accessToken);
         logger.info("get user list url " + uri);
         HttpGet httpGet = new HttpGet(uri);
@@ -317,7 +320,7 @@ public class WeChatService {
         } catch (IOException e) {
             e.printStackTrace();
             logger.log(Level.SEVERE, e.getMessage(), e);
-        } catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             logger.log(Level.SEVERE, e.getMessage(), e);
         }
         return null;
@@ -325,25 +328,50 @@ public class WeChatService {
 
     private String buildAccessTokenURL(WeChatAccessState accessState) {
         StringBuilder builder = new StringBuilder();
-        String id = null;
-        String sec = null;
-        switch (accessState){
-            case WECHAT:
-                id =appid;
-                sec = appSecret;
+        String id = getAppId(accessState);
+        String sec = getAppSecret(accessState);
+        builder.append(accessTokenUrl).append("&appid=").append(id).append("&secret=").append(sec);
+        return builder.toString();
+    }
+
+    private String getAppId(WeChatAccessState state) {
+        String id = srvAppId;
+        switch (state) {
+            case WECHAT_SERVICE:
+                id = srvAppId;
+                break;
+            case WECHAT_SUBSCRIBER:
+                id = subAppId;
                 break;
             case WEB:
                 id = webAppId;
+                break;
+            case MOBILE:
+                break;
+            default:
+                id = srvAppId;
+        }
+        return id;
+    }
+
+    private String getAppSecret(WeChatAccessState state) {
+        String sec = srvAppSecret;
+        switch (state) {
+            case WECHAT_SERVICE:
+                sec = srvAppSecret;
+                break;
+            case WECHAT_SUBSCRIBER:
+                sec = subAppSecret;
+                break;
+            case WEB:
                 sec = webAppSecret;
                 break;
             case MOBILE:
                 break;
             default:
-                id = appid;
-                sec =appSecret;
+                sec = srvAppSecret;
         }
-        builder.append(accessTokenUrl).append("&appid=").append(id).append("&secret=").append(sec);
-        return builder.toString();
+        return sec;
     }
 
     private String buildGetUserListURL(String accessToken) {
@@ -360,30 +388,8 @@ public class WeChatService {
 
     private String buildWebAccessTokenURL(String code, String state) {
         StringBuilder builder = new StringBuilder();
-        String appId = appid;
-        String appSec = appSecret;
-        if(state != null){
-            try {
-                WeChatAccessState weChatAccessState = WeChatAccessState.valueOf(state);
-                switch (weChatAccessState){
-                    case WEB:
-                        appId = webAppId;
-                        appSec = webAppSecret;
-                        break;
-                    case WECHAT:
-                        appId = appid;
-                        appSec = appSecret;
-                        break;
-                    case MOBILE:
-                        break;
-                    default:
-                        appId = appid;
-                        appSec = appSecret;
-                }
-            }catch(IllegalArgumentException e){
-                logger.log(Level.SEVERE, e.getMessage(), e);
-            }
-        }
+        String appId = getAppId(WeChatAccessState.valueOf(state));
+        String appSec = getAppSecret(WeChatAccessState.valueOf(state));
         builder.append(webAccessTokenUrl).append("?appid=").append(appId).append("&secret=").append(appSec).append("&code=").append(code).append("&grant_type=authorization_code");
         return builder.toString();
     }

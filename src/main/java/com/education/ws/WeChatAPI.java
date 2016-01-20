@@ -1,6 +1,7 @@
 package com.education.ws;
 
 import com.education.auth.Public;
+import com.education.auth.WeChatAccessState;
 import com.education.exception.*;
 import com.education.exception.BadRequestException;
 import com.education.service.LoginHistoryService;
@@ -103,13 +104,15 @@ public class WeChatAPI {
     @Path("/jsapi")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getJsApiTicket(@Context ContainerRequestContext context, @QueryParam("url") String url) {
+    public Response getJsApiTicket(@Context ContainerRequestContext context,
+                                   @QueryParam("url") String url,
+                                   @DefaultValue("WECHAT_SERVICE") @QueryParam("state") String state) {
         URI baseUri = context.getUriInfo().getBaseUri();
         URI absolutePath = context.getUriInfo().getAbsolutePath();
 //        logger.info("base uri:" + baseUri.toString());
 //        logger.info("absout path:" + absolutePath.toString());
         logger.info("get url:"+url);
-        Map<String, String> webJSSignature = weChatService.getWebJSSignature(url);
+        Map<String, String> webJSSignature = weChatService.getWebJSSignature(url, state);
         logger.info("jsapi "+webJSSignature);
         return Response.ok(webJSSignature).build();
     }

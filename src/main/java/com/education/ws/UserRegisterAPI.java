@@ -1,9 +1,6 @@
 package com.education.ws;
 
 import com.education.auth.Public;
-import com.education.db.DBConnection;
-import com.education.db.entity.UserEntity;
-import com.education.db.jpa.UserRepository;
 import com.education.formbean.UserChildrenRegisterBean;
 import com.education.service.UserService;
 import com.education.service.WeChatUserInfo;

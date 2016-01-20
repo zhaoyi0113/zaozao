@@ -3,11 +3,11 @@ package com.education.scheduler;
 import com.education.auth.WeChatAccessState;
 import com.education.service.WeChatService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Map;
 import java.util.logging.Level;
@@ -21,7 +21,7 @@ public class AccessTokenScheduler {
 
     private static final Logger logger = Logger.getLogger(AccessTokenScheduler.class.getName());
 
-    private Map<WeChatAccessState, String> accessTokens = new Hashtable<>();
+    private Map<WeChatAccessState, String> accessTokens = new HashMap<>();
 
     private String jsApiTicket;
 
@@ -36,11 +36,13 @@ public class AccessTokenScheduler {
     @Scheduled(cron = "0 0 0/1 * * ?")
     public void getAccessTokenScheduler() {
         logger.info("access token scheduler");
-        String accessToken = weChatService.requestAccessToken(WeChatAccessState.WECHAT.name());
-        accessTokens.put(WeChatAccessState.WECHAT, accessToken);
+        String accessToken = weChatService.requestAccessToken(WeChatAccessState.WECHAT_SERVICE.name());
+        accessTokens.put(WeChatAccessState.WECHAT_SERVICE, accessToken);
         accessToken = weChatService.requestAccessToken(WeChatAccessState.WEB.name());
         accessTokens.put(WeChatAccessState.WEB, accessToken);
-        jsApiTicket = weChatService.getJSApiTicket(accessTokens.get(WeChatAccessState.WECHAT));
+        accessToken = weChatService.requestAccessToken(WeChatAccessState.WECHAT_SUBSCRIBER.name());
+        accessTokens.put(WeChatAccessState.WECHAT_SUBSCRIBER, accessToken);
+        jsApiTicket = weChatService.getJSApiTicket(accessTokens.get(WeChatAccessState.WECHAT_SERVICE));
         logger.info("get access token "+accessTokens);
     }
 
