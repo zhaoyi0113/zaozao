@@ -25,9 +25,6 @@ public class HomeConfigAPI {
     @Autowired
     private HomeConfigService homeConfigService;
 
-    @Autowired
-    private WSUtility wsUtility;
-
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.MULTIPART_FORM_DATA)

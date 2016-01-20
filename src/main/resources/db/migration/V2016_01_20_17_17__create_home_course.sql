@@ -1,0 +1,7 @@
+CREATE TABLE `home_course` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `course_id` INT NULL DEFAULT 0,
+  `order_index` INT NULL DEFAULT 0,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
