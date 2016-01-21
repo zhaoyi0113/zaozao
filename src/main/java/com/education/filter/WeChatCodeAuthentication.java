@@ -51,6 +51,9 @@ public class WeChatCodeAuthentication implements ContainerRequestFilter {
         String code = getWeChatCode(requestContext, annotation);
         String status = getWeChatState(requestContext);
         logger.info("get wechat code " + code+", state="+status);
+        if(code == null && status == null){
+            return;
+        }
         WeChatUserInfo webUserInfo = weChatService.getWebUserInfo(code, status);
         if (webUserInfo == null) {
             logger.severe("not able to find wechat user info");

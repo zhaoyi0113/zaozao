@@ -9,6 +9,7 @@ import com.education.service.WeChatService;
 import com.education.service.WeChatUserInfo;
 import com.education.ws.util.ContextKeys;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -21,6 +22,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @Path("/wechat")
@@ -33,6 +35,7 @@ public class WeChatAPI {
 
     @Autowired
     private LoginHistoryService historyService;
+
 
     @Path("/connect")
     @GET
@@ -71,12 +74,14 @@ public class WeChatAPI {
             logger.info("save user info session "+userInfo +", session id:"+session.getId());
             session.setAttribute(ContextKeys.WECHAT_USER, userInfo);
             String token = historyService.saveWeChatUserLogin(userInfo, state);
-            return Response.ok(token).build();
+            return Response.seeOther(weChatService.getRedirectUri(token)).build();
         }else{
             logger.severe("can't login through wechat");
         }
-        return Response.ok("aaaa").build();
+        return Response.seeOther(weChatService.getRedirectUri(null)).build();
     }
+
+
 
     @Path("/getopenid")
     @GET

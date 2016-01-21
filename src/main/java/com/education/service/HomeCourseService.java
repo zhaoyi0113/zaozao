@@ -9,6 +9,7 @@ import com.education.exception.ErrorCode;
 import com.education.formbean.HomeCourseBean;
 import com.education.service.converter.HomeCourseBeanConverter;
 import com.education.util.MoveAction;
+import com.education.ws.util.WSUtility;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,6 +31,9 @@ public class HomeCourseService {
 
     @Autowired
     private HomeCourseBeanConverter converter;
+
+    @Autowired
+    private WSUtility wsUtility;
 
     @Transactional
     public int addCourseOnHomePage(int courseId) {
@@ -92,11 +96,15 @@ public class HomeCourseService {
         List<HomeCourseBean> beans = new ArrayList<>();
         for (HomeCourseEntity entity : entities) {
             HomeCourseBean bean = converter.convert(entity);
-            beans.add(bean);
+            CourseEntity course = courseRepository.findOne(entity.getCourseId());
+            if (course != null) {
+                bean.setCourseName(course.getName());
+                bean.setImageUrl(wsUtility.getResourcePath(course.getId(), course.getTitleImagePath()));
+                beans.add(bean);
+            }
         }
         return beans;
     }
-
 
     public void moveAction(int id, String action) {
         MoveAction moveAction = MoveAction.valueOf(action);

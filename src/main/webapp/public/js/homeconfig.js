@@ -107,7 +107,7 @@ define(['angular', 'jquery', 'angular-file-upload',
 			$http.get($location.protocol() + "://" + $location.host() + ":" + $location.port() +
 					'/education/zaozao/homeconfig')
 				.success(function(e) {
-					console.log('get images ', e);
+					console.log('get home config images ', e);
 					$scope.images = new Array();
 					for (var i = 0; i < e.length; i++) {
 						$scope.images[i] = {

@@ -18,6 +18,8 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -75,6 +77,9 @@ public class WeChatService {
 
     @Value("#{config['wechat_sub_appsecret']}")
     private String subAppSecret;
+
+    @Value("#{config['wechat_redirect_uri']}")
+    private String redirectUri;
 
     @Autowired
     private AccessTokenScheduler tokenScheduler;
@@ -326,6 +331,21 @@ public class WeChatService {
         return null;
     }
 
+    public URI getRedirectUri(String token){
+        URI uri = null;
+        try {
+            if (token == null) {
+                uri = new URI(redirectUri);
+            }else{
+                uri = new URI(redirectUri+"?token="+token);
+            }
+        }catch (URISyntaxException e){
+            logger.log(Level.SEVERE, e.getMessage(),e);
+        }
+        return uri;
+
+    }
+
     private String buildAccessTokenURL(WeChatAccessState accessState) {
         StringBuilder builder = new StringBuilder();
         String id = getAppId(accessState);
@@ -388,8 +408,15 @@ public class WeChatService {
 
     private String buildWebAccessTokenURL(String code, String state) {
         StringBuilder builder = new StringBuilder();
-        String appId = getAppId(WeChatAccessState.valueOf(state));
-        String appSec = getAppSecret(WeChatAccessState.valueOf(state));
+        String appId =null;
+        String appSec=null;
+        try {
+             appId = getAppId(WeChatAccessState.valueOf(state));
+             appSec = getAppSecret(WeChatAccessState.valueOf(state));
+        }catch(IllegalArgumentException e){
+            appId = getAppId(WeChatAccessState.WECHAT_SERVICE);
+            appSec = getAppSecret(WeChatAccessState.WECHAT_SERVICE);
+        }
         builder.append(webAccessTokenUrl).append("?appid=").append(appId).append("&secret=").append(appSec).append("&code=").append(code).append("&grant_type=authorization_code");
         return builder.toString();
     }
