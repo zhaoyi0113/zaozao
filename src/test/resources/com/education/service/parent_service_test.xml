@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+
+    <user user_id="2000" user_name="c1" age="10"/>
+    <user user_id="2001" user_name="c2" age="5"/>
+    <user user_id="3000" user_name="c2" age="5" unionid="3000"/>
+
+    <children id="10000" parent_id="2000" age="10"/>
+    <children id="10001" parent_id="2000" age="10"/>
+    <children id="10002" parent_id="2000" age="10"/>
+    <children id="10003" parent_id="2000" age="10"/>
+</dataset>
