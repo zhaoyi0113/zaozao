@@ -58,7 +58,7 @@ define(['angular', 'jquery', 'angular-file-upload',
 				};
 				$scope.uploader.onBeforeUploadItem = function(item) {
 					item.formData.push({
-	                    course_id: $scope.selectedCourseId
+	                    course_id: $scope.selectedCourseId.id
 	                });
 				};
 				$scope.uploader.onCompleteAll = function() {

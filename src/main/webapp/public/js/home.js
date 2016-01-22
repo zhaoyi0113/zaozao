@@ -45,21 +45,21 @@ define(['angular', 'user', 'login', 'course', 'courseplan',
                 $scope.tabs[5].label = 'Login';
             });
 
-            $scope.onlineTabs = [
-                {
-                    url: '.onlineUser',
-                    label: 'Online User'
-                },{
-                    url: '.course_analytics',
-                    label: 'Course Analytics'
-                }
-            ];
+            // $scope.onlineTabs = [
+            //     {
+            //         url: '.onlineUser',
+            //         label: 'Online User'
+            //     },{
+            //         url: '.course_analytics',
+            //         label: 'Course Analytics'
+            //     }
+            // ];
             
             $rootScope.$on('LOGIN', function(event, data) {
                 console.log('login service changed ', data);
 
                 if (data === false) {
-                    $scope.tabs[4].label = 'Login';
+                    $scope.tabs[5].label = 'Login';
 
                 } else {
                     loginSuccess(data);

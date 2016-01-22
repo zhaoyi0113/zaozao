@@ -58,6 +58,13 @@ public class CourseProposalAPI {
     }
 
     @GET
+    @Path("/query_home_courses")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getHomeCourses(@Context ContainerRequestContext context){
+        return Response.ok(courseProposalService.queryHomeCourses()).build();
+    }
+
+    @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/query_by_date")
     public Response getCourseByDate(@Context HttpServletRequest request,

@@ -35,8 +35,11 @@ define(['angular', 'jquery',
 				})
 			}).success(function(e) {
 				getHomeCourses($scope, $http, $location);
-			}).error(function(e) {
-
+			}).error(function(data, status, headers, config) {
+				console.log('status:', status);
+				if(status == 10040){
+					alert('Duplicate Course');
+				}
 			});
 		}
 

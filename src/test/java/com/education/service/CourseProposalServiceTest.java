@@ -8,6 +8,7 @@ import com.education.db.jpa.CourseRepository;
 import com.education.db.jpa.CourseTagRelationRepository;
 import com.education.db.jpa.UserRepository;
 import com.education.formbean.CourseQueryBean;
+import com.github.springtestdbunit.annotation.DatabaseSetup;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -200,5 +201,15 @@ public class CourseProposalServiceTest extends AbstractServiceTest {
             }
         }
         Assert.assertFalse(found);
+    }
+
+    @Test
+    @DatabaseSetup(value = "classpath:/com/education/service/course_proposal_service_test.xml")
+    public void testQueryHomeCourses() {
+        List<CourseQueryBean> courseQueryBeans = courseProposalService.queryHomeCourses();
+        Assert.assertEquals(3, courseQueryBeans.size());
+        Assert.assertEquals(2000 + "", courseQueryBeans.get(0).getId());
+        Assert.assertEquals(2001 + "", courseQueryBeans.get(1).getId());
+        Assert.assertEquals(2002 + "", courseQueryBeans.get(2).getId());
     }
 }

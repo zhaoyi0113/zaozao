@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+
+    <course id="2000" name="c1"/>
+    <course id="2001" name="c2"/>
+    <course id="2002" name="c3"/>
+
+    <home_course id="10000"  course_id="2000" order_index="0"/>
+    <home_course id="10001" course_id="2001" order_index="1"/>
+    <home_course id="10002" course_id="2002" order_index="2"/>
+</dataset>

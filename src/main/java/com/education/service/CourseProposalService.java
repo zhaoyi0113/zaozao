@@ -5,6 +5,7 @@ import com.education.db.entity.CourseEntity;
 import com.education.db.entity.UserEntity;
 import com.education.db.jpa.CourseRepository;
 import com.education.db.jpa.CourseTypeRepository;
+import com.education.db.jpa.HomeCourseRepository;
 import com.education.formbean.CourseQueryBean;
 import com.education.formbean.CourseTagBean;
 import com.education.ws.util.WSUtility;
@@ -38,6 +39,9 @@ public class CourseProposalService {
     private CourseTagService tagService;
 
     @Autowired
+    private HomeCourseRepository homeCourseRepository;
+
+    @Autowired
     private CourseService courseService;
 
     public List<CourseQueryBean> queryCourses(WeChatUserInfo userInfo, int tagId, String status, int number, int pageIdx, int ignoreCourseId) {
@@ -56,6 +60,18 @@ public class CourseProposalService {
             if (number > 0 && courseBeanList.size() >= number) {
                 break;
             }
+        }
+        return courseBeanList;
+    }
+
+    public List<CourseQueryBean> queryHomeCourses(){
+        List<CourseEntity> allCourses = homeCourseRepository.findAllCourses();
+        List<CourseQueryBean> courseBeanList = new ArrayList<>();
+        for(CourseEntity entity: allCourses){
+            List<CourseTagBean> courseTags = tagService.getCourseTagsByCourseId(entity.getId());
+            CourseQueryBean bean = new CourseQueryBean(entity, wsUtility);
+            bean.setTags(courseTags);
+            courseBeanList.add(bean);
         }
         return courseBeanList;
     }

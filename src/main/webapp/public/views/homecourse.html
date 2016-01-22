@@ -12,7 +12,7 @@
 		</tr>
 	</table>
 
-	<div class="panel panel-default">
+	<!-- <div class="panel panel-default"> -->
 		<div class="panel-heading">
 	      <h3 class="panel-title">
 	         Add new course
@@ -21,7 +21,7 @@
 	   <form name="addCourseForm" class="panel-body">
 	   		<div class=" input-group">
 	        	<label class="input-group-addon">Select Course:</label>
-	        	<select class="selectpicker form-control" dropupAuto="true" selectpicker name="course_id" ng-model="selectedCourseId" data-live-search="true" ng-options="course as course.name for course in courseIdNames" required>
+	        	<select class="selectpicker form-control" dropupAuto="false" selectpicker name="course_id" ng-model="selectedCourseId" data-live-search="true" ng-options="course as course.name for course in courseIdNames" required>
 	        		<!-- <option ng-repeat="course in courseIdNames" value="{{course.id}}">
 	        			{{course.name}}</option> -->
 	        	</select>
@@ -30,5 +30,5 @@
 	        	<button class='button btn btn-default' ng-disabled='addCourseForm.$invalid' ng-click='submit()'>Submit</button>
 	        </div>
 	   </form>
-	</div>
+	<!-- </div> -->
 </div>
