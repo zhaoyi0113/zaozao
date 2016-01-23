@@ -1,9 +1,11 @@
 package com.education.ws;
 
 import com.education.auth.TokenAccess;
+import com.education.db.entity.COURSE_ACCESS_FLAG;
 import com.education.db.entity.UserEntity;
 import com.education.service.CourseInteractiveService;
 import com.education.service.LoginHistoryService;
+import com.education.service.UserFavoriteService;
 import com.education.ws.util.HeaderKeys;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -28,6 +30,9 @@ public class CourseInteractiveAPI {
 
     @Autowired
     private CourseInteractiveService interactiveService;
+
+    @Autowired
+    private UserFavoriteService favoriteService;
 
     @POST
     @TokenAccess

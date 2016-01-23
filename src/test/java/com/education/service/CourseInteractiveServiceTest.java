@@ -43,8 +43,9 @@ public class CourseInteractiveServiceTest extends AbstractServiceTest {
             }
         }
         Assert.assertNotNull(matchEntity);
-
-        interactiveService.activeCourse(null, 1000, COURSE_ACCESS_FLAG.FAVORITE.name());
+        UserEntity userEntity1 = new UserEntity();
+        userEntity1.setUnionid("30000");
+        interactiveService.activeCourse(userEntity1, 1000, COURSE_ACCESS_FLAG.FAVORITE.name());
         userList = historyRepository.findByCourseId(1000);
         matchEntity = null;
         for(UserCourseHistoryEntity entity: userList){

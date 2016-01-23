@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataset>
 
-    <user user_id="30000" age="10"/>
-    <user user_id="30001" age="10"/>
-    <user user_id="30002" age="10"/>
+    <user user_id="30000" age="10" unionid="30000"/>
+    <user user_id="30001" age="10" unionid="30001"/>
+    <user user_id="30002" age="10" unionid="30002"/>
     <course id="10000" name="1"/>
     <course id="10001" name="2"/>
     <course id="10002" name="3"/>
