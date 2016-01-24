@@ -11,6 +11,7 @@ import com.education.formbean.CourseQueryBean;
 import com.education.ws.util.WSUtility;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -31,6 +32,7 @@ public class UserFavoriteService {
     @Autowired
     private WSUtility wsUtility;
 
+    @Transactional
     public boolean addFavorite(String unionId, int courseId) {
         List<UserEntity> users = userRepository.findByUnionid(unionId);
         if (users.isEmpty()) {
@@ -45,7 +47,7 @@ public class UserFavoriteService {
             entity.setUserId(userEntity.getUserId());
             entity.setCourseId(courseId);
             entity.setTimeCreated(Calendar.getInstance().getTime());
-            UserFavoriteEntity save = userFavoriteRepository.save(entity);
+            userFavoriteRepository.save(entity);
             return true;
         }
     }
