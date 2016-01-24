@@ -331,16 +331,20 @@ public class WeChatService {
         return null;
     }
 
-    public URI getRedirectUri(String token){
+    public URI getRedirectUri(String token, String redirect) {
         URI uri = null;
         try {
             if (token == null) {
                 uri = new URI(redirectUri);
-            }else{
-                uri = new URI(redirectUri+"?token="+token);
+            } else {
+                if (redirect != null) {
+                    uri = new URI(redirect + "&token=" + token);
+                } else {
+                    uri = new URI(redirectUri + "?token=" + token);
+                }
             }
-        }catch (URISyntaxException e){
-            logger.log(Level.SEVERE, e.getMessage(),e);
+        } catch (URISyntaxException e) {
+            logger.log(Level.SEVERE, e.getMessage(), e);
         }
         return uri;
 
@@ -408,12 +412,12 @@ public class WeChatService {
 
     private String buildWebAccessTokenURL(String code, String state) {
         StringBuilder builder = new StringBuilder();
-        String appId =null;
-        String appSec=null;
+        String appId = null;
+        String appSec = null;
         try {
-             appId = getAppId(WeChatAccessState.valueOf(state));
-             appSec = getAppSecret(WeChatAccessState.valueOf(state));
-        }catch(IllegalArgumentException e){
+            appId = getAppId(WeChatAccessState.valueOf(state));
+            appSec = getAppSecret(WeChatAccessState.valueOf(state));
+        } catch (IllegalArgumentException e) {
             appId = getAppId(WeChatAccessState.WECHAT_SERVICE);
             appSec = getAppSecret(WeChatAccessState.WECHAT_SERVICE);
         }

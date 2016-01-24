@@ -1,15 +1,13 @@
 package com.education.ws;
 
 import com.education.auth.Public;
-import com.education.auth.WeChatAccessState;
-import com.education.exception.*;
 import com.education.exception.BadRequestException;
+import com.education.exception.ErrorCode;
 import com.education.service.LoginHistoryService;
 import com.education.service.WeChatService;
 import com.education.service.WeChatUserInfo;
 import com.education.ws.util.ContextKeys;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -22,7 +20,6 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @Path("/wechat")
@@ -66,21 +63,26 @@ public class WeChatAPI {
     @Public(requireWeChatCode = true, requireWeChatUser = false)
     public Response login(@Context HttpServletRequest request,
                           @Context ContainerRequestContext requestContext,
-                          @QueryParam("code") String code, @QueryParam("state") String state) {
-        logger.info(" login code=" + code + ", state= " + state+", "+requestContext);
+                          @QueryParam("code") String code,
+                          @QueryParam("state") String state) {
+        logger.info(" login code=" + code + ", state= " + state + ", " + requestContext);
+        String redirect = null;
+        if (state != null && state.contains("-")) {
+            redirect = state.split("-")[1];
+            state = state.split("-")[0];
+        }
         WeChatUserInfo userInfo = (WeChatUserInfo) requestContext.getProperty(ContextKeys.WECHAT_USER);
-        if(userInfo != null) {
+        if (userInfo != null) {
             HttpSession session = request.getSession(true);
-            logger.info("save user info session "+userInfo +", session id:"+session.getId());
+            logger.info("save user info session " + userInfo + ", session id:" + session.getId());
             session.setAttribute(ContextKeys.WECHAT_USER, userInfo);
             String token = historyService.saveWeChatUserLogin(userInfo, state);
-            return Response.seeOther(weChatService.getRedirectUri(token)).build();
-        }else{
+            return Response.seeOther(weChatService.getRedirectUri(token, redirect)).build();
+        } else {
             logger.severe("can't login through wechat");
         }
-        return Response.seeOther(weChatService.getRedirectUri(null)).build();
+        return Response.seeOther(weChatService.getRedirectUri(null, redirect)).build();
     }
-
 
 
     @Path("/getopenid")
@@ -116,9 +118,9 @@ public class WeChatAPI {
         URI absolutePath = context.getUriInfo().getAbsolutePath();
 //        logger.info("base uri:" + baseUri.toString());
 //        logger.info("absout path:" + absolutePath.toString());
-        logger.info("get url:"+url);
+        logger.info("get url:" + url);
         Map<String, String> webJSSignature = weChatService.getWebJSSignature(url, state);
-        logger.info("jsapi "+webJSSignature);
+        logger.info("jsapi " + webJSSignature);
         return Response.ok(webJSSignature).build();
     }
 
@@ -132,13 +134,13 @@ public class WeChatAPI {
     @Path("/qrurl")
     @GET
     @Produces(MediaType.MULTIPART_FORM_DATA)
-    public Response getQRUrl(@QueryParam("code") String code, @QueryParam("state") String state){
+    public Response getQRUrl(@QueryParam("code") String code, @QueryParam("state") String state) {
         return Response.ok(weChatService.getQRBarCodeURL(code, state)).build();
     }
 
     @Path("/qrwebconnect")
     @GET
-    public Response getQrWebConnectUrl(){
+    public Response getQrWebConnectUrl() {
         String qrConnectUrl = weChatService.getQrWebConnectUrl();
         try {
             return Response.seeOther(new URI(qrConnectUrl)).build();
