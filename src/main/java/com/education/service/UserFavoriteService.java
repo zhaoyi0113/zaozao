@@ -31,18 +31,23 @@ public class UserFavoriteService {
     @Autowired
     private WSUtility wsUtility;
 
-    public long addFavorite(String unionId, int courseId) {
+    public boolean addFavorite(String unionId, int courseId) {
         List<UserEntity> users = userRepository.findByUnionid(unionId);
         if (users.isEmpty()) {
             throw new BadRequestException(ErrorCode.NOT_LOGIN);
         }
-        UserFavoriteEntity entity = new UserFavoriteEntity();
-        UserEntity userEntity = users.get(0);
-        entity.setUserId(userEntity.getUserId());
-        entity.setCourseId(courseId);
-        entity.setTimeCreated(Calendar.getInstance().getTime());
-        UserFavoriteEntity save = userFavoriteRepository.save(entity);
-        return save.getId();
+        if(whetherAddFavorite(users.get(0).getUnionid(), courseId)){
+            userFavoriteRepository.deleteByUserIdAndCourseId(users.get(0).getUserId(), courseId);
+            return false;
+        }else {
+            UserFavoriteEntity entity = new UserFavoriteEntity();
+            UserEntity userEntity = users.get(0);
+            entity.setUserId(userEntity.getUserId());
+            entity.setCourseId(courseId);
+            entity.setTimeCreated(Calendar.getInstance().getTime());
+            UserFavoriteEntity save = userFavoriteRepository.save(entity);
+            return true;
+        }
     }
 
     public int getTotalFavoriteCount(int courseId) {

@@ -44,6 +44,9 @@ public class CourseProposalService {
     @Autowired
     private CourseService courseService;
 
+    @Autowired
+    private UserFavoriteService favoriteService;
+
     public List<CourseQueryBean> queryCourses(WeChatUserInfo userInfo, int tagId, String status, int number, int pageIdx, int ignoreCourseId) {
         List<CourseEntity> courseList = getCourseEntities(tagId, status);
         List<CourseQueryBean> courseBeanList = new ArrayList<>();
@@ -127,7 +130,12 @@ public class CourseProposalService {
     }
 
     public CourseQueryBean queryCourse(UserEntity userInfo, int courseId) {
-        return courseService.queryCourse(String.valueOf(courseId));
+        CourseQueryBean queryBean = courseService.queryCourse(String.valueOf(courseId));
+        if(userInfo != null) {
+            boolean b = favoriteService.whetherAddFavorite(userInfo.getUnionid(), courseId);
+            queryBean.setFavorited(b);
+        }
+        return queryBean;
     }
 
     private List<CourseEntity> getCourseEntities(int tagId, String status) {

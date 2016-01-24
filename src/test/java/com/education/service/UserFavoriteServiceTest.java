@@ -1,5 +1,6 @@
 package com.education.service;
 
+import com.education.db.entity.UserEntity;
 import com.education.formbean.CourseQueryBean;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import org.junit.Assert;
@@ -17,6 +18,9 @@ public class UserFavoriteServiceTest extends AbstractServiceTest {
 
     @Autowired
     private UserFavoriteService favoriteService;
+
+    @Autowired
+    private CourseProposalService proposalService;
 
     @Test
     @DatabaseSetup(value = "classpath:/com/education/service/user_favorite_service_test.xml")
@@ -48,16 +52,34 @@ public class UserFavoriteServiceTest extends AbstractServiceTest {
         Assert.assertTrue(b);
         b = favoriteService.whetherAddFavorite("2001", 2002);
         Assert.assertFalse(b);
-
+        UserEntity userInfo = new UserEntity();
+        userInfo.setUnionid("2000");
+        CourseQueryBean queryBean = proposalService.queryCourse(userInfo, 2000);
+        Assert.assertFalse(queryBean.isFavorited());
+        queryBean = proposalService.queryCourse(userInfo, 2002);
+        Assert.assertTrue(queryBean.isFavorited());
+        queryBean = proposalService.queryCourse(userInfo, 2003);
+        Assert.assertTrue(queryBean.isFavorited());
     }
 
     @Test
     @DatabaseSetup(value = "classpath:/com/education/service/user_favorite_service_test.xml")
-    public void testGetUserFavoritedCourses(){
+    public void testGetUserFavoritedCourses() {
         List<CourseQueryBean> courses = favoriteService.getUserFavoriteCourses("2001");
         Assert.assertEquals(3, courses.size());
         courses = favoriteService.getUserFavoriteCourses("2000");
         Assert.assertEquals(3, courses.size());
 
     }
+
+    @Test
+    @DatabaseSetup(value = "classpath:/com/education/service/user_favorite_service_test.xml")
+    public void testRemoveFavorite() {
+        boolean b = favoriteService.whetherAddFavorite("2001", 2000);
+        Assert.assertTrue(b);
+        favoriteService.addFavorite("2001", 2000);
+        b = favoriteService.whetherAddFavorite("2001", 2000);
+        Assert.assertFalse(b);
+    }
+
 }

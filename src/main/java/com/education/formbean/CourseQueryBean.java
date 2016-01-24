@@ -39,6 +39,8 @@ public class CourseQueryBean {
 
     private long pv;
 
+    private boolean favorited;
+
     public CourseQueryBean(CourseEntity courseEntity, WSUtility wsUtility){
         this.id = String.valueOf(courseEntity.getId());
         this.name = courseEntity.getName();
@@ -156,5 +158,13 @@ public class CourseQueryBean {
 
     public void setPv(long pv) {
         this.pv = pv;
+    }
+
+    public boolean isFavorited() {
+        return favorited;
+    }
+
+    public void setFavorited(boolean favorited) {
+        this.favorited = favorited;
     }
 }

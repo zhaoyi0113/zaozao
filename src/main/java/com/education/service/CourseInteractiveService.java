@@ -28,7 +28,7 @@ public class CourseInteractiveService {
     public void activeCourse(UserEntity userEntity, int courseId, String flag) {
         try {
             COURSE_ACCESS_FLAG courseAccessFlag = COURSE_ACCESS_FLAG.valueOf(flag);
-            if(courseAccessFlag.equals(COURSE_ACCESS_FLAG.FAVORITE)){
+            if (courseAccessFlag.equals(COURSE_ACCESS_FLAG.FAVORITE)) {
                 favoriteService.addFavorite(userEntity.getUnionid(), courseId);
             }
             historyService.saveUserAccessHistory(userEntity, courseId, courseAccessFlag);
