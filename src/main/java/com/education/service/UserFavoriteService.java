@@ -16,12 +16,15 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.logging.Logger;
 
 /**
  * Created by yzzhao on 1/22/16.
  */
 @Service("UserFavoriteService")
 public class UserFavoriteService {
+
+    private static final Logger logger = Logger.getLogger(UserFavoriteService.class.getName());
 
     @Autowired
     private UserFavoriteRepository userFavoriteRepository;
@@ -39,9 +42,11 @@ public class UserFavoriteService {
             throw new BadRequestException(ErrorCode.NOT_LOGIN);
         }
         if (whetherAddFavorite(userId, courseId)) {
+            logger.info("delete user favorite userId=" + userId + ", courseId=" + courseId);
             userFavoriteRepository.deleteByUserIdAndCourseId(userId, courseId);
             return false;
         } else {
+            logger.info("add user favorite userId=" + userId + ", courseId=" + courseId);
             UserFavoriteEntity entity = new UserFavoriteEntity();
             entity.setUserId(userEntity.getUserId());
             entity.setCourseId(courseId);
@@ -55,18 +60,18 @@ public class UserFavoriteService {
         return userFavoriteRepository.getCourseFavoriteCount(courseId);
     }
 
-    public List<CourseQueryBean> getUserFavoriteCourses(String unionId, int pageIdx, int number) {
-        List<UserEntity> users = userRepository.findByUnionid(unionId);
-        if (users.isEmpty()) {
+    public List<CourseQueryBean> getUserFavoriteCourses(int userId, int pageIdx, int number) {
+        UserEntity user = userRepository.findOne(userId);
+        if (user == null) {
             throw new BadRequestException(ErrorCode.NOT_LOGIN);
         }
-        List<CourseEntity> courses = userFavoriteRepository.findCoursesByUserId(users.get(0).getUserId());
+        List<CourseEntity> courses = userFavoriteRepository.findCoursesByUserId(userId);
         List<CourseQueryBean> courseQuery = new ArrayList<>();
         for (int i = pageIdx * number; i < courses.size(); i++) {
             CourseEntity entity = courses.get(i);
             CourseQueryBean bean = new CourseQueryBean(entity, wsUtility);
             courseQuery.add(0, bean);
-            if(courseQuery.size()>=number){
+            if (courseQuery.size() >= number) {
                 break;
             }
         }

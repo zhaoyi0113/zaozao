@@ -43,7 +43,7 @@ public class UserFavoriteAPI {
                                 @DefaultValue("5") @QueryParam("number") int number,
                                 @DefaultValue("0") @QueryParam("page_index") int pageIndex) {
         WeChatUserInfo userInfo = (WeChatUserInfo) context.getProperty(ContextKeys.WECHAT_USER);
-        return Response.ok(favoriteService.getUserFavoriteCourses(userInfo.getUnionid(), pageIndex, number)).build();
+        return Response.ok(favoriteService.getUserFavoriteCourses(userInfo.getUserId(), pageIndex, number)).build();
     }
 
 }
