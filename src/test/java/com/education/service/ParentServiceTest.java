@@ -29,26 +29,18 @@ public class ParentServiceTest extends AbstractServiceTest{
         child.setChildBirthdate(WSUtility.dateToString(Calendar.getInstance().getTime()));
         WeChatUserInfo userInfo = new WeChatUserInfo();
         userInfo.setUnionid("3000");
-        int id = parentService.registerUserChild(child, userInfo);
+        userInfo.setUserId(3000);
+        parentService.updateUserProfile(null, child, userInfo);
 
-        UserChildrenRegisterBean userChild = parentService.getUserChild(userInfo);
-        Assert.assertEquals(id, userChild.getId());
+        UserChildrenRegisterBean userChild = parentService.getUserChild(userInfo.getUserId());
         Assert.assertEquals(10, userChild.getAge());
 
         userChild.setAge(11);
-        parentService.editUserChild(userChild);
-        userChild = parentService.getUserChild(userInfo);
-        Assert.assertEquals(id, userChild.getId());
+        parentService.updateUserProfile(null, userChild, userInfo);
+        userChild = parentService.getUserChild(userInfo.getUserId());
         Assert.assertEquals(11, userChild.getAge());
 
         parentService.deleteUserChild(userInfo);
 
-        BadRequestException ex=null;
-        try {
-            parentService.getUserChild(userInfo);
-        }catch(BadRequestException e){
-            ex=e;
-        }
-        Assert.assertNotNull(ex);
     }
 }

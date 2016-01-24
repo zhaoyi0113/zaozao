@@ -7,7 +7,6 @@ import com.education.db.jpa.UserRepository;
 import com.education.exception.BadRequestException;
 import com.education.exception.ErrorCode;
 import com.education.formbean.UserChildrenRegisterBean;
-import com.education.service.converter.WeChatUserConverter;
 import com.education.ws.util.WSUtility;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,23 +31,34 @@ public class ParentService {
     @Autowired
     private ChildrenRepository childrenRepository;
 
-    @Transactional
-    public int registerUserChild(UserChildrenRegisterBean bean, WeChatUserInfo userInfo) {
-        List<UserEntity> userEntities = userRepository.findByUnionid(userInfo.getUnionid());
-        if (userEntities.isEmpty()) {
-            throw new BadRequestException(ErrorCode.NOT_LOGIN);
+    private int addUserChild(String userName, UserChildrenRegisterBean bean, UserEntity userEntity) {
+        if(userName != null){
+            userEntity.setUserName(userName);
+            userEntity.setNickname(userName);
+            userRepository.save(userEntity);
         }
-        UserEntity userEntity = userEntities.get(0);
         ChildrenEntity childrenEntity = createChildrenEntity(bean, userEntity.getUserId());
         ChildrenEntity save = childrenRepository.save(childrenEntity);
         return save.getId();
     }
 
     @Transactional
-    public void editUserChild(UserChildrenRegisterBean bean) {
-        ChildrenEntity entity = childrenRepository.findOne(bean.getId());
-        if (entity == null) {
-            throw new BadRequestException(ErrorCode.COMMON_NOT_FOUND);
+    public void updateUserProfile(String userName, UserChildrenRegisterBean bean, WeChatUserInfo userInfo) {
+        UserEntity userEntity = userRepository.findOne(userInfo.getUserId());
+        if (userEntity == null) {
+            throw new BadRequestException(ErrorCode.NOT_LOGIN);
+        }
+        List<ChildrenEntity> children = childrenRepository.findByParentId(userEntity.getUserId());
+        if(children.isEmpty()){
+            addUserChild(userName, bean, userEntity);
+            return;
+        }
+        ChildrenEntity entity = children.get(0);
+
+        if(userName != null){
+            userEntity.setUserName(userName);
+            userEntity.setNickname(userName);
+            userRepository.save(userEntity);
         }
         entity.setAge(bean.getAge());
         entity.setGender(bean.getGender());
@@ -67,14 +77,10 @@ public class ParentService {
         childrenRepository.deleteByParentId(userEntities.get(0).getUserId());
     }
 
-    public UserChildrenRegisterBean getUserChild(WeChatUserInfo userInfo) {
-        List<UserEntity> userEntities = userRepository.findByUnionid(userInfo.getUnionid());
-        if (userEntities.isEmpty()) {
-            throw new BadRequestException(ErrorCode.NOT_LOGIN);
-        }
-        List<ChildrenEntity> children = childrenRepository.findByParentId(userEntities.get(0).getUserId());
+    public UserChildrenRegisterBean getUserChild(int userId) {
+        List<ChildrenEntity> children = childrenRepository.findByParentId(userId);
         if (children.isEmpty()) {
-            throw new BadRequestException(ErrorCode.COMMON_NOT_FOUND);
+            return null;
         }
         UserChildrenRegisterBean bean = new UserChildrenRegisterBean();
         bean.setId(children.get(0).getId());

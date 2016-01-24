@@ -23,7 +23,7 @@ public class WeChatUserConverter implements Converter<UserEntity, WeChatUserInfo
         userInfo.setHeadimgurl(userEntity.getHeadimageurl());
         userInfo.setOpenid(userEntity.getOpenid());
         userInfo.setSex(userEntity.getSex());
-        userInfo.setNickname(userEntity.getNickname());
+        userInfo.setNickname(userEntity.getUserName());
         userInfo.setProvince(userEntity.getProvince());
         userInfo.setSubscribe(userEntity.getSubscribe());
         userInfo.setUnionid(userEntity.getUnionid());

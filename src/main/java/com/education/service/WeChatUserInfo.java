@@ -1,5 +1,7 @@
 package com.education.service;
 
+import com.education.formbean.UserChildrenRegisterBean;
+
 /**
  * Created by yzzhao on 12/12/15.
  */
@@ -35,6 +37,8 @@ public class WeChatUserInfo {
     private String errcode;
 
     private String errmsg;
+
+    private UserChildrenRegisterBean child;
 
     public String getSubscribe() {
         return subscribe;
@@ -162,5 +166,13 @@ public class WeChatUserInfo {
 
     public void setUserId(int userId) {
         this.userId = userId;
+    }
+
+    public UserChildrenRegisterBean getChild() {
+        return child;
+    }
+
+    public void setChild(UserChildrenRegisterBean child) {
+        this.child = child;
     }
 }

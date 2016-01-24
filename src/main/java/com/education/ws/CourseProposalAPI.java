@@ -60,7 +60,7 @@ public class CourseProposalAPI {
     @GET
     @Path("/query_home_courses")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getHomeCourses(@Context ContainerRequestContext context){
+    public Response getHomeCourses(@Context ContainerRequestContext context) {
         return Response.ok(courseProposalService.queryHomeCourses()).build();
     }
 
@@ -102,9 +102,9 @@ public class CourseProposalAPI {
     @GET
     @Path("/count")
     @Produces(MediaType.TEXT_PLAIN)
-    public Response getCourseCount(@DefaultValue("0") @QueryParam("course_tag_id") int tagId){
+    public Response getCourseCount(@DefaultValue("0") @QueryParam("course_tag_id") int tagId) {
         long count = courseProposalService.getCourseCount(tagId);
-        logger.info("get course count "+count+" for tag "+tagId);
+        logger.info("get course count " + count + " for tag " + tagId);
         return Response.ok(count).build();
 
     }

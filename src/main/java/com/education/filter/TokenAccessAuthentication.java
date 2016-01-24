@@ -1,9 +1,15 @@
 package com.education.filter;
 
 import com.education.auth.TokenAccess;
+import com.education.db.entity.UserEntity;
 import com.education.exception.BadRequestException;
 import com.education.exception.ErrorCode;
+import com.education.service.LoginHistoryService;
+import com.education.service.WeChatUserInfo;
+import com.education.service.converter.WeChatUserConverter;
+import com.education.ws.util.ContextKeys;
 import com.education.ws.util.HeaderKeys;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.container.ContainerRequestFilter;
@@ -26,6 +32,12 @@ public class TokenAccessAuthentication implements ContainerRequestFilter {
 
     @Context
     private ResourceInfo resourceInfo;
+
+    @Autowired
+    private LoginHistoryService historyService;
+
+    @Autowired
+    private WeChatUserConverter converter;
 
     @Override
     public void filter(ContainerRequestContext requestContext) throws IOException {
@@ -50,6 +62,11 @@ public class TokenAccessAuthentication implements ContainerRequestFilter {
         String token = tokens.get(0);
         logger.info("get token "+token);
         requestContext.setProperty(HeaderKeys.ACCESS_TOKEN, token);
+        if(token != null){
+            UserEntity userEntity = historyService.getUserByToken(token);
+            WeChatUserInfo user = converter.convert(userEntity);
+            requestContext.setProperty(ContextKeys.WECHAT_USER, user);
+        }
     }
 
 }

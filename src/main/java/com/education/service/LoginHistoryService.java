@@ -14,12 +14,15 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Logger;
 
 /**
  * Created by yzzhao on 12/21/15.
  */
 @Service("LoginHistory")
 public class LoginHistoryService {
+
+    private static final Logger logger = Logger.getLogger(LoginHistoryService.class.getName());
 
     @Autowired
     private LoginHistoryRepository loginHistoryRepository;
@@ -125,6 +128,7 @@ public class LoginHistoryService {
     public UserEntity getUserByToken(String token){
         List<LoginHistoryEntity> tokenList = loginHistoryRepository.findByToken(token);
         if(tokenList == null || tokenList.isEmpty()){
+            logger.severe("can't find user from token "+token);
             return null;
         }
         UserEntity user = userRepository.findOne(tokenList.get(0).getUserid());

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <user user_id="2001" user_name="c2" age="5" unionid="2001"/>
+    <user user_id="2000" user_name="c2" age="5" unionid="2000"/>
+</dataset>
