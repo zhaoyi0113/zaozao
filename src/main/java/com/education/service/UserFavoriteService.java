@@ -33,17 +33,16 @@ public class UserFavoriteService {
     private WSUtility wsUtility;
 
     @Transactional
-    public boolean addFavorite(String unionId, int courseId) {
-        List<UserEntity> users = userRepository.findByUnionid(unionId);
-        if (users.isEmpty()) {
+    public boolean addFavorite(int userId, int courseId) {
+        UserEntity userEntity = userRepository.findOne(userId);
+        if (userEntity == null) {
             throw new BadRequestException(ErrorCode.NOT_LOGIN);
         }
-        if(whetherAddFavorite(users.get(0).getUnionid(), courseId)){
-            userFavoriteRepository.deleteByUserIdAndCourseId(users.get(0).getUserId(), courseId);
+        if (whetherAddFavorite(userId, courseId)) {
+            userFavoriteRepository.deleteByUserIdAndCourseId(userId, courseId);
             return false;
-        }else {
+        } else {
             UserFavoriteEntity entity = new UserFavoriteEntity();
-            UserEntity userEntity = users.get(0);
             entity.setUserId(userEntity.getUserId());
             entity.setCourseId(courseId);
             entity.setTimeCreated(Calendar.getInstance().getTime());
@@ -56,27 +55,26 @@ public class UserFavoriteService {
         return userFavoriteRepository.getCourseFavoriteCount(courseId);
     }
 
-    public List<CourseQueryBean> getUserFavoriteCourses(String unionId) {
+    public List<CourseQueryBean> getUserFavoriteCourses(String unionId, int pageIdx, int number) {
         List<UserEntity> users = userRepository.findByUnionid(unionId);
         if (users.isEmpty()) {
             throw new BadRequestException(ErrorCode.NOT_LOGIN);
         }
         List<CourseEntity> courses = userFavoriteRepository.findCoursesByUserId(users.get(0).getUserId());
         List<CourseQueryBean> courseQuery = new ArrayList<>();
-        for (CourseEntity entity : courses) {
+        for (int i = pageIdx * number; i < courses.size(); i++) {
+            CourseEntity entity = courses.get(i);
             CourseQueryBean bean = new CourseQueryBean(entity, wsUtility);
             courseQuery.add(0, bean);
+            if(courseQuery.size()>=number){
+                break;
+            }
         }
         return courseQuery;
     }
 
-    public boolean whetherAddFavorite(String unionId, int courseId) {
-        List<UserEntity> users = userRepository.findByUnionid(unionId);
-        if (users.isEmpty()) {
-            throw new BadRequestException(ErrorCode.NOT_LOGIN);
-        }
-        List<UserFavoriteEntity> favoriteEntity = userFavoriteRepository.findByUserIdAndCourseId(users.get(0).getUserId(), courseId);
+    public boolean whetherAddFavorite(int userId, int courseId) {
+        List<UserFavoriteEntity> favoriteEntity = userFavoriteRepository.findByUserIdAndCourseId(userId, courseId);
         return !favoriteEntity.isEmpty();
     }
-
 }

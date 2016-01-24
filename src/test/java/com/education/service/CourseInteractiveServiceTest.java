@@ -45,6 +45,7 @@ public class CourseInteractiveServiceTest extends AbstractServiceTest {
         Assert.assertNotNull(matchEntity);
         UserEntity userEntity1 = new UserEntity();
         userEntity1.setUnionid("30000");
+        userEntity1.setUserId(30000);
         interactiveService.activeCourse(userEntity1, 1000, COURSE_ACCESS_FLAG.FAVORITE.name());
         userList = historyRepository.findByCourseId(1000);
         matchEntity = null;

@@ -132,7 +132,7 @@ public class CourseProposalService {
     public CourseQueryBean queryCourse(UserEntity userInfo, int courseId) {
         CourseQueryBean queryBean = courseService.queryCourse(String.valueOf(courseId));
         if(userInfo != null) {
-            boolean b = favoriteService.whetherAddFavorite(userInfo.getUnionid(), courseId);
+            boolean b = favoriteService.whetherAddFavorite(userInfo.getUserId(), courseId);
             queryBean.setFavorited(b);
         }
         return queryBean;

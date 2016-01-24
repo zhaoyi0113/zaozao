@@ -29,7 +29,7 @@ public class CourseInteractiveService {
         try {
             COURSE_ACCESS_FLAG courseAccessFlag = COURSE_ACCESS_FLAG.valueOf(flag);
             if (courseAccessFlag.equals(COURSE_ACCESS_FLAG.FAVORITE)) {
-                favoriteService.addFavorite(userEntity.getUnionid(), courseId);
+                favoriteService.addFavorite(userEntity.getUserId(), courseId);
             }
             historyService.saveUserAccessHistory(userEntity, courseId, courseAccessFlag);
         } catch (IllegalArgumentException e) {
