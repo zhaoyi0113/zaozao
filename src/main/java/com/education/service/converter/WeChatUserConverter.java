@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class WeChatUserConverter implements Converter<UserEntity, WeChatUserInfo> {
 
+
     @Override
     public WeChatUserInfo convert(UserEntity userEntity) {
         WeChatUserInfo userInfo = new WeChatUserInfo();

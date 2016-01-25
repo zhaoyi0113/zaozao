@@ -50,19 +50,18 @@ public class TokenAccessAuthentication implements ContainerRequestFilter {
         if (annotation == null) {
             return;
         }
-
         MultivaluedMap<String, String> pathParameters = requestContext.getHeaders();
         List<String> tokens = pathParameters.get(HeaderKeys.ACCESS_TOKEN);
         if (annotation.requireAccessToken() && (tokens == null || tokens.isEmpty())) {
             throw new BadRequestException(ErrorCode.NOT_LOGIN);
         }
-        if(tokens == null || tokens.isEmpty()){
+        if (tokens == null || tokens.isEmpty()) {
             return;
         }
         String token = tokens.get(0);
-        logger.info("get token "+token);
+        logger.info("get token " + token);
         requestContext.setProperty(HeaderKeys.ACCESS_TOKEN, token);
-        if(token != null){
+        if (token != null) {
             UserEntity userEntity = historyService.getUserByToken(token);
             WeChatUserInfo user = converter.convert(userEntity);
             requestContext.setProperty(ContextKeys.WECHAT_USER, user);

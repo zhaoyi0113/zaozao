@@ -54,7 +54,7 @@ public class WSUtility {
             format.format(date);
             return date;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, e.getMessage(),e);
         }
         return null;
     }

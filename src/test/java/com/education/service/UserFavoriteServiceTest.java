@@ -66,15 +66,15 @@ public class UserFavoriteServiceTest extends AbstractServiceTest {
     @Test
     @DatabaseSetup(value = "classpath:/com/education/service/user_favorite_service_test.xml")
     public void testGetUserFavoritedCourses() {
-        List<CourseQueryBean> courses = favoriteService.getUserFavoriteCourses(2001,0,100);
+        List<CourseQueryBean> courses = favoriteService.getUserFavoriteCourses(2001, 0, 100);
         Assert.assertEquals(3, courses.size());
-        courses = favoriteService.getUserFavoriteCourses(2000,0,100);
+        courses = favoriteService.getUserFavoriteCourses(2000, 0, 100);
         Assert.assertEquals(3, courses.size());
 
-        courses = favoriteService.getUserFavoriteCourses(2001,0,1);
+        courses = favoriteService.getUserFavoriteCourses(2001, 0, 1);
         Assert.assertEquals(1, courses.size());
 
-        courses = favoriteService.getUserFavoriteCourses(2000,1,2);
+        courses = favoriteService.getUserFavoriteCourses(2000, 1, 2);
         Assert.assertEquals(1, courses.size());
     }
 
@@ -88,4 +88,12 @@ public class UserFavoriteServiceTest extends AbstractServiceTest {
         Assert.assertFalse(b);
     }
 
+    @Test
+    @DatabaseSetup(value = "classpath:/com/education/service/user_favorite_service_test.xml")
+    public void testRemoveCourse() {
+        favoriteService.removeCourse(2000);
+        int count = favoriteService.getTotalFavoriteCount(2000);
+        Assert.assertEquals(0, count);
+
+    }
 }

@@ -60,6 +60,8 @@ public class CourseService {
     @Value("#{config['course_image_path']}")
     private String courseImagePath;
 
+    @Autowired
+    private UserFavoriteService favoriteService;
 
     @Transactional
     public int createCourse(CourseRegisterBean bean) {
@@ -196,6 +198,8 @@ public class CourseService {
             deleteFile(filePath);
         }
         courseTagRelationRepository.removeByCourseId(course.getId());
+//        remove from favorite
+        favoriteService.removeCourse(courseId);
     }
 
     private static void deleteFile(String filePath) {

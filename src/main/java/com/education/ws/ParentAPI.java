@@ -28,17 +28,6 @@ public class ParentAPI {
     @Autowired
     private ParentService parentService;
 
-//    @POST
-//    @Path("/child")
-//    @Public(requireWeChatCode = false, requireWeChatUser = true)
-//    public Response updateUserProfile(@FormParam("user_name") String userName,
-//                                      @BeanParam UserChildrenRegisterBean registerBean,
-//                                      @Context ContainerRequestContext context) {
-//        logger.info("register new child name " + registerBean.getChildName());
-//        parentService.addUserChild(userName, registerBean, (WeChatUserInfo) context.getProperty(ContextKeys.WECHAT_USER));
-//        return Response.ok().build();
-//    }
-
     @POST
     @TokenAccess
     public Response updateUserProfile(@FormParam("user_name") String userName,
@@ -47,7 +36,7 @@ public class ParentAPI {
         logger.info("edit child name " + registerBean.getChildName());
         WeChatUserInfo user = (WeChatUserInfo) context.getProperty(ContextKeys.WECHAT_USER);
         logger.info("update user id "+user.getUserId());
-        parentService.updateUserProfile(userName, registerBean, user);
+        parentService.updateUserProfile(userName, registerBean, user.getUserId());
         return Response.ok().build();
     }
 
@@ -60,11 +49,4 @@ public class ParentAPI {
         return Response.ok(userChild).build();
     }
 
-    @POST
-    @Path("/headimage")
-    @TokenAccess
-    public Response updateUserProfile(){
-
-        return Response.ok().build();
-    }
 }

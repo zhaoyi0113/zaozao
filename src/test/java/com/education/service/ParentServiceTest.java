@@ -30,17 +30,17 @@ public class ParentServiceTest extends AbstractServiceTest{
         WeChatUserInfo userInfo = new WeChatUserInfo();
         userInfo.setUnionid("3000");
         userInfo.setUserId(3000);
-        parentService.updateUserProfile(null, child, userInfo);
+        parentService.updateUserProfile(null, child, userInfo.getUserId());
 
         UserChildrenRegisterBean userChild = parentService.getUserChild(userInfo.getUserId());
         Assert.assertEquals(10, userChild.getAge());
 
         userChild.setAge(11);
-        parentService.updateUserProfile(null, userChild, userInfo);
+        parentService.updateUserProfile(null, userChild, userInfo.getUserId());
         userChild = parentService.getUserChild(userInfo.getUserId());
         Assert.assertEquals(11, userChild.getAge());
 
-        parentService.deleteUserChild(userInfo);
+        parentService.deleteUserChild(userInfo.getUserId());
 
     }
 }

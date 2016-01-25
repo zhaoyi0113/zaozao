@@ -82,4 +82,10 @@ public class UserFavoriteService {
         List<UserFavoriteEntity> favoriteEntity = userFavoriteRepository.findByUserIdAndCourseId(userId, courseId);
         return !favoriteEntity.isEmpty();
     }
+
+    @Transactional
+    public void removeCourse(int courseId) {
+        userFavoriteRepository.deleteByCourseId(courseId);
+    }
+
 }

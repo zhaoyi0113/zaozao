@@ -22,6 +22,9 @@ public class UserChildrenRegisterBean {
     @FormParam("age")
     private int age;
 
+    @FormParam("media_id")
+    private String mediaId;
+
     public String getGender() {
         return gender;
     }
@@ -60,5 +63,13 @@ public class UserChildrenRegisterBean {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    public String getMediaId() {
+        return mediaId;
+    }
+
+    public void setMediaId(String mediaId) {
+        this.mediaId = mediaId;
     }
 }

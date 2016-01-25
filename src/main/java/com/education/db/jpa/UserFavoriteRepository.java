@@ -22,4 +22,6 @@ public interface UserFavoriteRepository extends PagingAndSortingRepository<UserF
     List<CourseEntity> findCoursesByUserId(@Param("userId") int userId);
 
     List<Long> deleteByUserIdAndCourseId(int userId, int courseId);
+
+    List<Long> deleteByCourseId(int courseId);
 }

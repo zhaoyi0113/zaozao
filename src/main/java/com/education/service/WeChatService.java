@@ -157,28 +157,6 @@ public class WeChatService {
         return jsSingautre;
     }
 
-    private Map getJSApiTicket() {
-        String accessToken = tokenScheduler.getAccessToken(WeChatAccessState.WECHAT_SERVICE);
-        String url = buildJSApiTicketUrl(accessToken);
-        logger.info("get jsapi ticket url:" + url);
-        HttpGet httpGet = new HttpGet(url);
-        HttpClient httpClient = HttpClients.createDefault();
-        HttpResponse response = null;
-        try {
-            response = httpClient.execute(httpGet);
-            HttpEntity entity = response.getEntity();
-            String body = EntityUtils.toString(entity, "UTF-8").trim();
-            logger.info("get js api ticket response " + body);
-            Gson gson = new Gson();
-            Map<String, String> map = gson.fromJson(body, Map.class);
-            return map;
-        } catch (IOException e) {
-            e.printStackTrace();
-            logger.log(Level.SEVERE, e.getMessage(), e);
-        }
-        return new Hashtable<>();
-    }
-
     public String getJSApiTicket(String accessToken) {
         String url = buildJSApiTicketUrl(accessToken);
         logger.info("get jsapi ticket url:" + url);
