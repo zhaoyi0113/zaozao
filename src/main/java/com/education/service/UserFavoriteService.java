@@ -70,7 +70,7 @@ public class UserFavoriteService {
         for (int i = pageIdx * number; i < courses.size(); i++) {
             CourseEntity entity = courses.get(i);
             CourseQueryBean bean = new CourseQueryBean(entity, wsUtility);
-            courseQuery.add(0, bean);
+            courseQuery.add(bean);
             if (courseQuery.size() >= number) {
                 break;
             }

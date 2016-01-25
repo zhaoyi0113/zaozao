@@ -8,6 +8,8 @@ import com.education.db.jpa.CourseRepository;
 import com.education.db.jpa.UserCourseHistoryRepository;
 import com.education.db.jpa.UserRepository;
 import com.education.formbean.CourseUserAnalyticsBean;
+import com.education.formbean.UserCourseHistoryBean;
+import com.education.service.converter.UserCourseHistoryConverter;
 import com.education.service.converter.WeChatUserConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -18,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.function.Consumer;
 
 /**
  * Created by yzzhao on 1/10/16.
@@ -36,6 +39,9 @@ public class UserCourseHistoryService {
 
     @Autowired
     private WeChatUserConverter weChatUserConverter;
+
+    @Autowired
+    private UserCourseHistoryConverter converter;
 
     @Transactional
     public void saveUserAccessHistory(UserEntity userInfo, int courseId, COURSE_ACCESS_FLAG flag) {
@@ -58,8 +64,8 @@ public class UserCourseHistoryService {
         }
 
         CourseEntity course = courseRepository.findOne(courseId);
-        if(course != null){
-            course.setPv(course.getPv()+1);
+        if (course != null) {
+            course.setPv(course.getPv() + 1);
             courseRepository.save(course);
         }
     }
@@ -82,4 +88,19 @@ public class UserCourseHistoryService {
         }
         return beans;
     }
+
+    public List<UserCourseHistoryBean> getUserAccessHistory(int userId, int pageIdx, int number, COURSE_ACCESS_FLAG flag) {
+        PageRequest pageRequest = new PageRequest(pageIdx, number, new Sort(Sort.Direction.DESC, "timeCreated"));
+        List<UserCourseHistoryEntity> courses = historyRepository.findByUserIdAndAccessFlag(userId, flag.name(), pageRequest);
+        List<UserCourseHistoryBean> beans = new ArrayList<>();
+        courses.forEach(new Consumer<UserCourseHistoryEntity>() {
+            @Override
+            public void accept(UserCourseHistoryEntity userCourseHistoryEntity) {
+                UserCourseHistoryBean bean = converter.convert(userCourseHistoryEntity);
+                beans.add(bean);
+            }
+        });
+        return beans;
+    }
+
 }

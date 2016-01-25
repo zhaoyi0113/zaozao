@@ -33,7 +33,7 @@ public class UserAPI {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    @TokenAccess
+    @TokenAccess(requireAccessToken = true)
     public Response getUserInfo(@Context ContainerRequestContext context) {
         WeChatUserInfo userInfo  = (WeChatUserInfo) context.getProperty(ContextKeys.WECHAT_USER);
         UserChildrenRegisterBean child = parentService.getUserChild(userInfo.getUserId());

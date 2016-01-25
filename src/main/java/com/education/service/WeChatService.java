@@ -308,6 +308,7 @@ public class WeChatService {
     }
 
     public String requestAccessToken(String state) {
+        logger.info("request access token "+state);
         try {
             WeChatAccessState accessState = WeChatAccessState.valueOf(state);
             HttpGet httpGet = new HttpGet(buildAccessTokenURL(accessState));

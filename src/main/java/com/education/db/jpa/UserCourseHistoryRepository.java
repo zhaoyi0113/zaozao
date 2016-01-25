@@ -18,4 +18,6 @@ public interface UserCourseHistoryRepository extends PagingAndSortingRepository<
     List<UserCourseHistoryEntity> findByCourseId(int courseId, Pageable pageable);
 
     List<UserCourseHistoryEntity> findByCourseIdOrderByTimeCreatedDesc(int courseId);
+
+    List<UserCourseHistoryEntity> findByUserIdAndAccessFlag(int userId, String flag, Pageable pageable);
 }

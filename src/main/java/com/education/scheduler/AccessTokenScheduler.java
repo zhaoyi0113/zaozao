@@ -35,6 +35,16 @@ public class AccessTokenScheduler {
 
     @Scheduled(cron = "0 0 0/1 * * ?")
     public void getAccessTokenScheduler() {
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                requestAccessToken();
+            }
+        });
+        thread.start();
+    }
+
+    private void requestAccessToken(){
         logger.info("access token scheduler");
         String accessToken = weChatService.requestAccessToken(WeChatAccessState.WECHAT_SERVICE.name());
         accessTokens.put(WeChatAccessState.WECHAT_SERVICE, accessToken);
