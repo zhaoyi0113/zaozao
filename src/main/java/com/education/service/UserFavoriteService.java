@@ -8,6 +8,7 @@ import com.education.db.jpa.UserRepository;
 import com.education.exception.BadRequestException;
 import com.education.exception.ErrorCode;
 import com.education.formbean.CourseQueryBean;
+import com.education.formbean.CourseTagBean;
 import com.education.ws.util.WSUtility;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,6 +35,9 @@ public class UserFavoriteService {
 
     @Autowired
     private WSUtility wsUtility;
+
+    @Autowired
+    private CourseTagService tagService;
 
     @Transactional
     public boolean addFavorite(int userId, int courseId) {
@@ -71,6 +75,8 @@ public class UserFavoriteService {
             CourseEntity entity = courses.get(i);
             CourseQueryBean bean = new CourseQueryBean(entity, wsUtility);
             courseQuery.add(bean);
+            List<CourseTagBean> tags = tagService.getCourseTagsByCourseId(entity.getId());
+            bean.setTags(tags);
             if (courseQuery.size() >= number) {
                 break;
             }
