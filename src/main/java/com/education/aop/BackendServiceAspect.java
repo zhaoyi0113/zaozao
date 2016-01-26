@@ -170,7 +170,7 @@ public class BackendServiceAspect {
         Object[] args = joinPoint.getArgs();
         if (args != null && args.length > 1 && args[1] instanceof String) {
             String tagName = (String) args[1];
-            String comments = " create course tag " + tagName;
+            String comments = " edit course tag " + tagName;
             saveUserTracking(comments);
         }
     }
