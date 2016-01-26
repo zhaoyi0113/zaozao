@@ -80,6 +80,32 @@ public class UserFavoriteServiceTest extends AbstractServiceTest {
 
     @Test
     @DatabaseSetup(value = "classpath:/com/education/service/user_favorite_service_test.xml")
+    public void testGetUserFavoritedCoursesOrder() {
+        boolean b = favoriteService.addFavorite(2002, 2003);
+        Assert.assertTrue(b);
+        try {
+            Thread.sleep(1500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        favoriteService.addFavorite(2002, 2004);
+        List<CourseQueryBean> courses = favoriteService.getUserFavoriteCourses(2002, 0, 10);
+        Assert.assertEquals(2, courses.size());
+        Assert.assertEquals("2004", courses.get(0).getId());
+        Assert.assertEquals("2003", courses.get(1).getId());
+        try {
+            Thread.sleep(1500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        favoriteService.addFavorite(2002, 2001);
+        courses = favoriteService.getUserFavoriteCourses(2002, 0, 10);
+        Assert.assertEquals(3, courses.size());
+        Assert.assertEquals("2001", courses.get(0).getId());
+    }
+
+    @Test
+    @DatabaseSetup(value = "classpath:/com/education/service/user_favorite_service_test.xml")
     public void testRemoveFavorite() {
         boolean b = favoriteService.whetherAddFavorite(2001, 2000);
         Assert.assertTrue(b);

@@ -5,9 +5,11 @@
     <course id="2001" name="c1"/>
     <course id="2002" name="c1"/>
     <course id="2003" name="c1"/>
+    <course id="2004" name="c1"/>
 
     <user user_id="2001" user_name="c2" age="5" unionid="2001"/>
     <user user_id="2000" user_name="c2" age="5" unionid="2000"/>
+    <user user_id="2002" user_name="c2" age="5" unionid="2002"/>
 
     <user_favorite id="10000" course_id="2000" user_id="2001"/>
     <user_favorite id="10001" course_id="2001" user_id="2001"/>

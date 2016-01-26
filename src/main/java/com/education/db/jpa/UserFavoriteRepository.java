@@ -18,7 +18,7 @@ public interface UserFavoriteRepository extends PagingAndSortingRepository<UserF
 
     List<UserFavoriteEntity> findByUserIdAndCourseId(int userId, int courseId);
 
-    @Query("select c from CourseEntity as c, UserFavoriteEntity as u where u.userId = :userId and u.courseId = c.id ")
+    @Query("select c from CourseEntity as c, UserFavoriteEntity as u where u.userId = :userId and u.courseId = c.id order by u.timeCreated desc")
     List<CourseEntity> findCoursesByUserId(@Param("userId") int userId);
 
     List<Long> deleteByUserIdAndCourseId(int userId, int courseId);

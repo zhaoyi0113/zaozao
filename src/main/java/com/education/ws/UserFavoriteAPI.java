@@ -24,7 +24,7 @@ public class UserFavoriteAPI {
     private UserFavoriteService favoriteService;
 
     @POST
-    @TokenAccess
+    @TokenAccess(requireAccessToken = true)
     public Response addFavorite(@Context ContainerRequestContext context,
                                 @FormParam("course_id") int courseId) {
         WeChatUserInfo userInfo = (WeChatUserInfo) context.getProperty(ContextKeys.WECHAT_USER);
@@ -37,7 +37,7 @@ public class UserFavoriteAPI {
     }
 
     @GET
-    @TokenAccess
+    @TokenAccess(requireAccessToken = true)
     @Produces(MediaType.APPLICATION_JSON)
     public Response getFavorite(@Context ContainerRequestContext context,
                                 @DefaultValue("5") @QueryParam("number") int number,
