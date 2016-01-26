@@ -4,6 +4,7 @@ import com.education.auth.Login;
 import com.education.auth.Public;
 import com.education.exception.BadRequestException;
 import com.education.exception.ErrorCode;
+import com.education.ws.util.ContextKeys;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.container.ContainerRequestContext;
@@ -34,7 +35,7 @@ public class LoginAuthenticationFilter implements ContainerRequestFilter {
         if (annotation == null) {
             return;
         }
-        String userName = (String) servletRequest.getSession().getAttribute("user_name");
+        String userName = (String) servletRequest.getSession().getAttribute(ContextKeys.SESSION_USER);
         if(userName == null){
             throw new BadRequestException(ErrorCode.NOT_LOGIN);
         }

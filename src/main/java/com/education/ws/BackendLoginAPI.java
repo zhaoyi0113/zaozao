@@ -3,6 +3,7 @@ package com.education.ws;
 
 import com.education.db.jpa.UserRepository;
 import com.education.service.BackendLoginService;
+import com.education.ws.util.ContextKeys;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,7 +33,7 @@ public class BackendLoginAPI {
         if (loginService.login(userName, password)) {
             HttpSession session = request.getSession();
             logger.info("session interval:" + session.getMaxInactiveInterval());
-            session.setAttribute("user_name", userName);
+            session.setAttribute(ContextKeys.SESSION_USER, userName);
             return Response.ok().entity(loginService.getUserRole(userName, password)).build();
         }
         return Response.status(Response.Status.BAD_REQUEST).entity("login filed.").build();

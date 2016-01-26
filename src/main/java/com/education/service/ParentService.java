@@ -64,7 +64,7 @@ public class ParentService {
         if (userName != null) {
             userEntity.setUserName(userName);
             userEntity.setNickname(userName);
-            if(bean.getMediaId() !=null){
+            if (bean.getMediaId() != null) {
                 String fileName = downMediaFromWeChat(bean.getMediaId(), userEntity.getUserId());
                 userEntity.setHeadimageurl(fileName);
             }
@@ -97,7 +97,7 @@ public class ParentService {
         entity.setGender(bean.getGender());
         entity.setBirthdate(WSUtility.stringToDate(bean.getChildBirthdate()));
         entity.setName(bean.getChildName());
-        if(bean.getMediaId() != null){
+        if (bean.getMediaId() != null) {
             String fileName = downMediaFromWeChat(bean.getMediaId(), userId);
             userEntity.setHeadimageurl(fileName);
             userRepository.save(userEntity);
@@ -107,10 +107,7 @@ public class ParentService {
     }
 
     private String downMediaFromWeChat(String mediaId, int userId) {
-        // test media-id = 6llm4VWwa_UVEk5WrVoaNcAlh7_VF7KCq3518YLx211u1ViFL7ZnHTdS5Syre_by
-        if (mediaId == null) {
-            mediaId = "6llm4VWwa_UVEk5WrVoaNcAlh7_VF7KCq3518YLx211u1ViFL7ZnHTdS5Syre_by";
-        }
+        logger.info("download media " + mediaId + " for user " + userId);
         String accessToken = tokenScheduler.getAccessToken(WeChatAccessState.WECHAT_SERVICE);
         if (accessToken == null) {
             return null;
@@ -124,7 +121,7 @@ public class ParentService {
             InputStream inputStream = entity.getContent();
             String dir = userHeadImageDir;
             wsUtility.writeFile(inputStream, dir, String.valueOf(userId));
-            return userHeadImageUrl+"/"+userId;
+            return userHeadImageUrl + "/" + userId;
         } catch (IOException e) {
             logger.log(Level.SEVERE, e.getMessage(), e);
         }

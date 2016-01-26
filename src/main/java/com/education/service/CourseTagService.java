@@ -72,8 +72,6 @@ public class CourseTagService {
         courseTagRepository.save(courseTag);
     }
 
-
-
     public List<CourseTagBean> getCourseTags() {
         Iterable<CourseTagEntity> all = courseTagRepository.findAll();
         List<CourseTagBean> allTags = new ArrayList<>();
@@ -107,7 +105,7 @@ public class CourseTagService {
     }
 
     @Transactional
-    public void deleteCourseTag(int courseTagId) {
+    public CourseTagEntity deleteCourseTag(int courseTagId) {
         CourseTagEntity courseTag = courseTagRepository.findOne(courseTagId);
         if (courseTag == null) {
             throw new BadRequestException(ErrorCode.COURSE_TAG_NOT_EXIST);
@@ -118,6 +116,7 @@ public class CourseTagService {
         logger.info("delete course tag image "+path);
         File file = new File(path);
         file.delete();
+        return courseTag;
     }
 
     private CourseTagBean createCourseTagBean(CourseTagEntity courseTag) {

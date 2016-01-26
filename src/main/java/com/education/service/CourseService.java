@@ -187,7 +187,7 @@ public class CourseService {
     }
 
     @Transactional
-    public void deleteCourse(int courseId) {
+    public CourseEntity deleteCourse(int courseId) {
         CourseEntity course = courseRepository.findOne(courseId);
         if (course == null) {
             throw new com.education.exception.BadRequestException(ErrorCode.COURSE_NOT_FOUND);
@@ -200,6 +200,7 @@ public class CourseService {
         courseTagRelationRepository.removeByCourseId(course.getId());
 //        remove from favorite
         favoriteService.removeCourse(courseId);
+        return course;
     }
 
     private static void deleteFile(String filePath) {
