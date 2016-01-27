@@ -39,7 +39,9 @@ public class SignatureGenerator {
                 }
                 hexString.append(shaHex);
             }
-            return hexString.toString();
+            String sign = hexString.toString();
+            logger.info("generate:"+sign);
+            return sign;
 
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();

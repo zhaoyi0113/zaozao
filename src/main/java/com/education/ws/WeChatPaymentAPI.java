@@ -49,7 +49,8 @@ public class WeChatPaymentAPI {
             throw new BadRequestException(ErrorCode.NOT_LOGIN);
         }
 
-        payService.requestPay(userInfo.getOpenid(), productDesc, productDetail, price, request.getRemoteAddr());
+        String openid = userInfo.getOpenid();
+        payService.requestPay(openid, productDesc, productDetail, price, request.getRemoteAddr());
         return Response.ok().build();
     }
 
@@ -62,6 +63,7 @@ public class WeChatPaymentAPI {
                                    @FormParam("product_desc") String productDesc,
                                    @FormParam("product_detail") String productDetail,
                                    @FormParam("price") int price) {
+//        String openid = "oylrrviRhbTDqnuHkStG8m-S5IIA";
         Map<String, String> ret = payService.requestPay(openId, productDesc, productDetail, price, "10.17.11.111");
         return Response.ok(ret).build();
     }

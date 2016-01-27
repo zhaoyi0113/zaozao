@@ -78,7 +78,10 @@ public class WeChatPayService {
                     returnMap.put("return_msg", ret.get("return_msg"));
                     returnMap.put("result_code", ret.get("result_code"));
                     returnMap.put("prepay_id", ret.get("prepay_id"));
-                    returnMap.put("sign", ret.get("sign"));
+                    Map<String, String> paySign = generatePaysign(ret.get("prepay_id"));
+                    returnMap.put("sign", paySign.get("sign"));
+                    returnMap.put("timestamp", paySign.get("timestamp"));
+                    returnMap.put("nonce_str", paySign.get("nonce_str"));
                 }
             }
             return returnMap;
@@ -87,6 +90,21 @@ public class WeChatPayService {
             throw new BadRequestException(ErrorCode.PAY_FAILED);
         }
 
+    }
+
+    private Map<String, String> generatePaysign(String prepayId){
+        String timeStamp = String.valueOf(System.currentTimeMillis());
+        String nonceStr = String.valueOf(System.currentTimeMillis());
+        StringBuffer buffer = new StringBuffer();
+        buffer.append("appId=").append(serviceAppId).append("&nonceStr=").append(nonceStr)
+                .append("&package=").append(prepayId).append("&signType=MD5&timeStamp=")
+                .append(timeStamp).append("&key=").append(paySecret);
+        String md5 = signatureGenerator.getMD5String(buffer.toString());
+        Map<String, String> sign = new Hashtable<>();
+        sign.put("timestamp", timeStamp);
+        sign.put("sign", md5.toUpperCase());
+        sign.put("nonce_str", nonceStr);
+        return sign;
     }
 
     private String generatePayRequestXML(String openId, String proDesc,
