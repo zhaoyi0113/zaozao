@@ -1,7 +1,7 @@
 define(['angular', 'user', 'login', 'course', 'courseplan',
     'coursetag', 'homeconfig', 'user_service', 'login_service', 
     'course_video','angular-bootstrap','angular-bootstrap-tpls',
-    'course_analytics', 'homecourse'
+    'course_analytics', 'homecourse', 'user_privilege'
 ], function(angular) {
 
     'use strict';
@@ -9,7 +9,7 @@ define(['angular', 'user', 'login', 'course', 'courseplan',
         'loginModule', 'courseModule', 'coursePlanModel',
         'courseTagModule', 'homeConfigModule', 'userServiceModule', 
         'loginServiceModule', 'courseVideoModule', 'ui.bootstrap',
-        'courseAnalyticsModule', 'homeCourseModule'
+        'courseAnalyticsModule', 'homeCourseModule', 'userPrivilegeModule'
     ]);
     home.controller('HomeController', ['$scope', '$http', '$rootScope', 'LoginService', '$state',
         function($scope, $http, $rootScope, loginService, $state) {
@@ -30,6 +30,9 @@ define(['angular', 'user', 'login', 'course', 'courseplan',
                 url: '.homecourse',
                 label: 'Home Page Courses'
             },{
+                url: '.user_profile_privilege',
+                label: 'User Privilege'
+            },{
                 url: '.login',
                 label: 'Login'
             }];
@@ -42,7 +45,7 @@ define(['angular', 'user', 'login', 'course', 'courseplan',
                 loginSuccess(event);
             }, function(error) {
                 console.log('not login', error);
-                $scope.tabs[5].label = 'Login';
+                $scope.tabs[$scope.tabs.length-1].label = 'Login';
             });
 
             // $scope.onlineTabs = [
@@ -59,7 +62,7 @@ define(['angular', 'user', 'login', 'course', 'courseplan',
                 console.log('login service changed ', data);
 
                 if (data === false) {
-                    $scope.tabs[5].label = 'Login';
+                    $scope.tabs[$scope.tabs.length-1].label = 'Login';
 
                 } else {
                     loginSuccess(data);
@@ -70,7 +73,7 @@ define(['angular', 'user', 'login', 'course', 'courseplan',
             });
 
             function loginSuccess(event) {
-                $scope.tabs[5].label = 'Logout';
+                $scope.tabs[$scope.tabs.length-1].label = 'Logout';
                 if (event === 'admin') {
                     console.log('login as admin');
                     $scope.showAdmin = true;

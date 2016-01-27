@@ -89,6 +89,10 @@ define(['angular', 'ui-router', 'jquery-ui', 'home', 'wechat', 'login_service','
             url: '/homecourse',
             templateUrl: '/education/public/views/homecourse.html',
             controller: 'HomeCourseController'
+        }).state('home.user_profile_privilege',{
+            url: '/user_privilege',
+            templateUrl: '/education/public/views/user_privilege.html',
+            controller: 'UserPrivilegeController'
         });
         $urlRouterProvider.otherwise('/home');
 

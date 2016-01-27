@@ -78,7 +78,8 @@ public class WeChatPayService {
                     returnMap.put("return_msg", ret.get("return_msg"));
                     returnMap.put("result_code", ret.get("result_code"));
                     returnMap.put("prepay_id", ret.get("prepay_id"));
-                    Map<String, String> paySign = generatePaysign(ret.get("prepay_id"));
+                    Map<String, String> paySign = generatePaysign(ret);
+//                    returnMap.put("sign", ret.get("sign"));
                     returnMap.put("sign", paySign.get("sign"));
                     returnMap.put("timestamp", paySign.get("timestamp"));
                     returnMap.put("nonce_str", paySign.get("nonce_str"));
@@ -92,12 +93,12 @@ public class WeChatPayService {
 
     }
 
-    private Map<String, String> generatePaysign(String prepayId){
+    private Map<String, String> generatePaysign(Map<String, String> returnMap){
         String timeStamp = String.valueOf(System.currentTimeMillis());
-        String nonceStr = String.valueOf(System.currentTimeMillis());
+        String nonceStr = returnMap.get("nonce_str");
         StringBuffer buffer = new StringBuffer();
         buffer.append("appId=").append(serviceAppId).append("&nonceStr=").append(nonceStr)
-                .append("&package=").append(prepayId).append("&signType=MD5&timeStamp=")
+                .append("&package=prepay_id=").append(returnMap.get("prepay_id")).append("&signType=MD5&timeStamp=")
                 .append(timeStamp).append("&key=").append(paySecret);
         String md5 = signatureGenerator.getMD5String(buffer.toString());
         Map<String, String> sign = new Hashtable<>();

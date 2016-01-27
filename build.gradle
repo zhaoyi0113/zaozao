@@ -101,6 +101,7 @@ dependencies {
     compile('commons-io:commons-io:2.4')
     compile('jmagick:jmagick:6.2.4')
     compile('dom4j:dom4j:1.6.1')
+    compile('commons-collections:commons-collections:3.2.1')
 
     def tomcatVersion = '7.0.65'
     tomcat "org.apache.tomcat.embed:tomcat-embed-core:${tomcatVersion}",
