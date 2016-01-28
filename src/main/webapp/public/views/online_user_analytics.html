@@ -1,0 +1,19 @@
+<div>
+	<h2>User History</h2>
+	<table class="table table-striped table-bordered">
+        <th ng-repeat="head in headers" ng-model="head"><p>{{head}}</p></th>
+
+        <tr ng-repeat="user in users" ng-model="user">
+            <hr/>
+            <td>
+                <!-- <a ui-sref='home.online_user_analystic_detail({userId: user.userId})'><strong>{{user.nickname}}</strong></a> -->
+                <strong>{{user.nickname}}</strong>
+            </td>
+            <td>
+                {{user.subscribe_time}}
+            </td>
+            
+        </tr>
+    </table>
+
+</div>

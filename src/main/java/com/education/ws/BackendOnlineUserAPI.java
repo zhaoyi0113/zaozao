@@ -5,12 +5,7 @@ import com.education.service.BackendOnlineUserService;
 import com.education.service.WeChatUserInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.Context;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
@@ -31,9 +26,26 @@ public class BackendOnlineUserAPI {
     @Path("/allusers")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response queryAllUsers(@Context HttpServletRequest request, @QueryParam("page_index") int pageIdx, @QueryParam("number") int number) {
+    public Response queryAllUsers(@QueryParam("page_index") int pageIdx, @QueryParam("number") int number) {
         List<WeChatUserInfo> userList = userService.getUserList(pageIdx, number);
         return Response.ok(userList).build();
     }
+
+    @Path("/user_count")
+    @GET
+    public Response queryAllUsersCount() {
+        return Response.ok(userService.getUserCount()).build();
+    }
+
+    @Path("/user_access_history")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getUserAccessCourseHistory(@QueryParam("user_id") int userId,
+                                               @QueryParam("page_index") int pageIdx,
+                                               @QueryParam("number") int number,
+                                               @QueryParam("flag") String flag) {
+        return Response.ok(userService.getUserAccessCourseHistory(userId, pageIdx, number, flag)).build();
+    }
+
 
 }

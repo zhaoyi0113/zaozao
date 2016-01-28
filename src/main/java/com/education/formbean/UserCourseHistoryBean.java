@@ -13,6 +13,7 @@ public class UserCourseHistoryBean {
     private int courseId;
     private Date timeCreated;
     private COURSE_ACCESS_FLAG accessFlag;
+    private CourseQueryBean course;
 
     public long getId() {
         return id;
@@ -52,5 +53,13 @@ public class UserCourseHistoryBean {
 
     public void setAccessFlag(COURSE_ACCESS_FLAG accessFlag) {
         this.accessFlag = accessFlag;
+    }
+
+    public CourseQueryBean getCourse() {
+        return course;
+    }
+
+    public void setCourse(CourseQueryBean course) {
+        this.course = course;
     }
 }

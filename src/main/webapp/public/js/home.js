@@ -1,7 +1,7 @@
 define(['angular', 'user', 'login', 'course', 'courseplan',
     'coursetag', 'homeconfig', 'user_service', 'login_service', 
     'course_video','angular-bootstrap','angular-bootstrap-tpls',
-    'course_analytics', 'homecourse', 'user_privilege'
+    'course_analytics', 'homecourse', 'user_privilege', 'online_user_analytics'
 ], function(angular) {
 
     'use strict';
@@ -9,7 +9,8 @@ define(['angular', 'user', 'login', 'course', 'courseplan',
         'loginModule', 'courseModule', 'coursePlanModel',
         'courseTagModule', 'homeConfigModule', 'userServiceModule', 
         'loginServiceModule', 'courseVideoModule', 'ui.bootstrap',
-        'courseAnalyticsModule', 'homeCourseModule', 'userPrivilegeModule'
+        'courseAnalyticsModule', 'homeCourseModule', 'userPrivilegeModule',
+        'onlineUserAnalyticsModule'
     ]);
     home.controller('HomeController', ['$scope', '$http', '$rootScope', 'LoginService', '$state',
         function($scope, $http, $rootScope, loginService, $state) {
@@ -50,7 +51,7 @@ define(['angular', 'user', 'login', 'course', 'courseplan',
 
             $scope.onlineTabs = [
                 {
-                    url: '.onlineUser',
+                    url: '.online_user',
                     label: 'Online User'
                 },{
                     url: '.course_analytics',

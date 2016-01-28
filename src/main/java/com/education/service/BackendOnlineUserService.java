@@ -1,7 +1,9 @@
 package com.education.service;
 
+import com.education.db.entity.COURSE_ACCESS_FLAG;
 import com.education.db.entity.UserEntity;
 import com.education.db.jpa.UserRepository;
+import com.education.formbean.UserCourseHistoryBean;
 import com.education.service.converter.WeChatUserConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -26,9 +28,12 @@ public class BackendOnlineUserService {
     @Autowired
     private WeChatUserConverter weChatUserConverter;
 
-    public List<WeChatUserInfo> getUserList(int pageIdx, int number){
+    @Autowired
+    private UserCourseHistoryService historyService;
+
+    public List<WeChatUserInfo> getUserList(int pageIdx, int number) {
         Page<UserEntity> entities = userRepository.findAll(createPagable(pageIdx, number));
-        List<WeChatUserInfo> userInfoList =new ArrayList<>();
+        List<WeChatUserInfo> userInfoList = new ArrayList<>();
         Page<WeChatUserInfo> map = entities.map(weChatUserConverter);
         map.forEach(new Consumer<WeChatUserInfo>() {
             @Override
@@ -39,7 +44,23 @@ public class BackendOnlineUserService {
         return userInfoList;
     }
 
-    private Pageable createPagable(int pageIdx, int number){
+    public long getUserCount() {
+        return userRepository.count();
+    }
+
+    public List<UserCourseHistoryBean> getUserAccessCourseHistory(int userId, int pageIdx,
+                                                                  int number, String flag) {
+        COURSE_ACCESS_FLAG courseAccessFlag = null;
+        if(flag != null){
+            try {
+                courseAccessFlag = COURSE_ACCESS_FLAG.valueOf(flag);
+            } catch (IllegalArgumentException e) {
+            }
+        }
+        return historyService.getUserAccessHistory(userId, pageIdx, number, courseAccessFlag);
+    }
+
+    private Pageable createPagable(int pageIdx, int number) {
         return new PageRequest(pageIdx, number, new Sort(Sort.Direction.DESC, "userId"));
     }
 }

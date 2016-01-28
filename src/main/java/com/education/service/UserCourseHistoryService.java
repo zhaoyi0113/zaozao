@@ -7,6 +7,7 @@ import com.education.db.entity.UserEntity;
 import com.education.db.jpa.CourseRepository;
 import com.education.db.jpa.UserCourseHistoryRepository;
 import com.education.db.jpa.UserRepository;
+import com.education.formbean.CourseQueryBean;
 import com.education.formbean.CourseUserAnalyticsBean;
 import com.education.formbean.UserCourseHistoryBean;
 import com.education.service.converter.UserCourseHistoryConverter;
@@ -42,6 +43,9 @@ public class UserCourseHistoryService {
 
     @Autowired
     private UserCourseHistoryConverter converter;
+
+    @Autowired
+    private CourseService courseService;
 
     @Transactional
     public void saveUserAccessHistory(UserEntity userInfo, int courseId, COURSE_ACCESS_FLAG flag) {
@@ -96,12 +100,19 @@ public class UserCourseHistoryService {
 
     public List<UserCourseHistoryBean> getUserAccessHistory(int userId, int pageIdx, int number, COURSE_ACCESS_FLAG flag) {
         PageRequest pageRequest = new PageRequest(pageIdx, number, new Sort(Sort.Direction.DESC, "timeCreated"));
-        List<UserCourseHistoryEntity> courses = historyRepository.findByUserIdAndAccessFlag(userId, flag.name(), pageRequest);
+        List<UserCourseHistoryEntity> courses = null;
+        if(flag == null){
+            courses = historyRepository.findByUserId(userId, pageRequest);
+        }else{
+            courses = historyRepository.findByUserIdAndAccessFlag(userId, flag.name(), pageRequest);
+        }
         List<UserCourseHistoryBean> beans = new ArrayList<>();
         courses.forEach(new Consumer<UserCourseHistoryEntity>() {
             @Override
             public void accept(UserCourseHistoryEntity userCourseHistoryEntity) {
                 UserCourseHistoryBean bean = converter.convert(userCourseHistoryEntity);
+                CourseQueryBean course = courseService.queryCourse("" + userCourseHistoryEntity.getCourseId());
+                bean.setCourse(course);
                 beans.add(bean);
             }
         });
