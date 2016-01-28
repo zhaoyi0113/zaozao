@@ -3,6 +3,7 @@ package com.education.service;
 import com.education.auth.WeChatAccessState;
 import com.education.scheduler.AccessTokenScheduler;
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 import com.google.gson.internal.LinkedTreeMap;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -131,10 +132,28 @@ public class WeChatService {
             String body = EntityUtils.toString(entity, "UTF-8").trim();
             logger.info("get web user info response " + body);
             Gson gson = new Gson();
-            WeChatUserInfo weChatUserInfo = gson.fromJson(body, WeChatUserInfo.class);
+            WeChatUserGsonData gsonData = gson.fromJson(body, WeChatUserGsonData.class);
+            WeChatUserInfo weChatUserInfo = new WeChatUserInfo();
+            weChatUserInfo.setUnionid(gsonData.getUnionid());
+            weChatUserInfo.setSubscribe(gsonData.getSubscribe());
+            weChatUserInfo.setOpenid(gsonData.getOpenid());
+            weChatUserInfo.setNickname(gsonData.getNickname());
+            weChatUserInfo.setCity(gsonData.getCity());
+            weChatUserInfo.setSex(gsonData.getSex());
+            weChatUserInfo.setLanguage(gsonData.getLanguage());
+            weChatUserInfo.setProvince(gsonData.getProvince());
+            weChatUserInfo.setCountry(gsonData.getCountry());
+            weChatUserInfo.setHeadimgurl(gsonData.getHeadimgurl());
+            weChatUserInfo.setSubscribe_time(gsonData.getSubscribe_time());
+            weChatUserInfo.setRemark(gsonData.getRemark());
+            weChatUserInfo.setGroupid(gsonData.getGroupid());
+            weChatUserInfo.setErrcode(gsonData.getErrcode());
+            weChatUserInfo.setErrmsg(gsonData.getErrmsg());
+
             return weChatUserInfo;
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, e.getMessage(), e);
+        } catch (JsonSyntaxException e){
             logger.log(Level.SEVERE, e.getMessage(), e);
         }
         return null;

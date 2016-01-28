@@ -8,7 +8,7 @@ define(['angular', 'angular-bootstrap'], function(angular) {
 		function($scope, $location, $state, $http) {
 			$scope.pageIdx = 1;
 			$scope.number = 20;
-			$scope.headers = ['Name', 'Register Date'];
+			$scope.headers = ['Name'];
 			loadUsers();
 
 			$http.get($location.protocol() + "://" + $location.host() + ":" +
