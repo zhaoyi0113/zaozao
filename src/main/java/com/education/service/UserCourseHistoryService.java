@@ -89,6 +89,11 @@ public class UserCourseHistoryService {
         return beans;
     }
 
+    public int getCourseUserAnalyticsCount(int courseId){
+        List<UserCourseHistoryEntity> courses = historyRepository.findByCourseId(courseId);
+        return courses.size();
+    }
+
     public List<UserCourseHistoryBean> getUserAccessHistory(int userId, int pageIdx, int number, COURSE_ACCESS_FLAG flag) {
         PageRequest pageRequest = new PageRequest(pageIdx, number, new Sort(Sort.Direction.DESC, "timeCreated"));
         List<UserCourseHistoryEntity> courses = historyRepository.findByUserIdAndAccessFlag(userId, flag.name(), pageRequest);

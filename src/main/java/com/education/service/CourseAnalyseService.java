@@ -1,6 +1,7 @@
 package com.education.service;
 
 import com.education.db.jpa.CourseRepository;
+import com.education.formbean.UserChildrenRegisterBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +18,9 @@ public class CourseAnalyseService {
     @Autowired
     private CourseRepository courseRepository;
 
+    @Autowired
+    private UserCourseHistoryService historyService;
+
     public Map<Integer, Long> getCoursePreviewCount() {
         List<Object[]> courseCount = courseRepository.findCourseViewCount();
         Map<Integer, Long> courses = getIntegerCountMap(courseCount);
@@ -28,8 +32,6 @@ public class CourseAnalyseService {
         Map<Integer, Long> courses = getIntegerCountMap(courseCount);
         return courses;
     }
-
-
 
     private Map<Integer, Long> getIntegerCountMap(List<Object[]> courseCount) {
         Map<Integer, Long> courses = new Hashtable<Integer, Long>();

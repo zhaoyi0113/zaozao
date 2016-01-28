@@ -48,15 +48,15 @@ define(['angular', 'user', 'login', 'course', 'courseplan',
                 $scope.tabs[$scope.tabs.length-1].label = 'Login';
             });
 
-            // $scope.onlineTabs = [
-            //     {
-            //         url: '.onlineUser',
-            //         label: 'Online User'
-            //     },{
-            //         url: '.course_analytics',
-            //         label: 'Course Analytics'
-            //     }
-            // ];
+            $scope.onlineTabs = [
+                {
+                    url: '.onlineUser',
+                    label: 'Online User'
+                },{
+                    url: '.course_analytics',
+                    label: 'Course Analytics'
+                }
+            ];
             
             $rootScope.$on('LOGIN', function(event, data) {
                 console.log('login service changed ', data);

@@ -199,8 +199,16 @@ public class CourseRegisterAPI {
     @GET
     @Path("/analytics")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getCourseAnalytics(@QueryParam("id") int courseId, @QueryParam("page_index") int pageIdx, @QueryParam("number") int number) {
+    public Response getCourseAnalytics(@QueryParam("id") int courseId,
+                                       @DefaultValue("0") @QueryParam("page_index") int pageIdx,
+                                       @DefaultValue("10") @QueryParam("number") int number) {
         List<CourseUserAnalyticsBean> courseList = courseService.getCourseUserAnalytics(courseId, pageIdx, number);
         return Response.ok(courseList).build();
+    }
+
+    @GET
+    @Path("/analytics_count")
+    public Response getCourseAnalyticsCount(@QueryParam("id") int courseId) {
+        return Response.ok(courseService.getcourseUserAnalyticsCount(courseId)).build();
     }
 }

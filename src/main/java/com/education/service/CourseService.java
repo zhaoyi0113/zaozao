@@ -224,4 +224,8 @@ public class CourseService {
     public List<CourseUserAnalyticsBean> getCourseUserAnalytics(int courseId, int pageIdx, int number) {
         return userCourseHistoryService.getCourseUserAnalytics(courseId, pageIdx, number);
     }
+
+    public int getcourseUserAnalyticsCount(int courseId){
+        return userCourseHistoryService.getCourseUserAnalyticsCount(courseId);
+    }
 }
