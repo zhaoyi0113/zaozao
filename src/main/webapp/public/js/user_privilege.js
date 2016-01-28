@@ -13,6 +13,7 @@ define(['angular', 'user_service', 'ui-router', 'jquery', 'login_service'], func
 				$scope.userImage = !!e.userImage;
 				$scope.childName = !!e.childName;
 				$scope.childBirthdate = !!e.childBirthdate;
+				$scope.childGender = !!e.childGender;
 			}).error(function(e){
 
 			});
@@ -28,11 +29,12 @@ define(['angular', 'user_service', 'ui-router', 'jquery', 'login_service'], func
                     data: $httpParamSerializer({
                         user_name: $scope.userName?1:0,
                         user_image: $scope.userImage?1:0,
-                        child_name: $scope.child_name?1:0,
-                        child_birthdate: $scope.childBirthdate?1:0
+                        child_name: $scope.childName?1:0,
+                        child_birthdate: $scope.childBirthdate?1:0,
+                        child_gender: $scope.childGender?1:0
                     })
                 }).success(function(e){
-
+                	$state.go('home');
                 }).error(function(e){
 
                 });

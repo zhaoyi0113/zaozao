@@ -21,6 +21,9 @@ public class UserProfilePrivilegeBean {
     @FormParam("child_birthdate")
     private int childBirthdate;
 
+    @FormParam("child_gender")
+    private int childGender;
+
     public int getId() {
         return id;
     }
@@ -59,5 +62,13 @@ public class UserProfilePrivilegeBean {
 
     public void setChildBirthdate(int childBirthdate) {
         this.childBirthdate = childBirthdate;
+    }
+
+    public int getChildGender() {
+        return childGender;
+    }
+
+    public void setChildGender(int childGender) {
+        this.childGender = childGender;
     }
 }

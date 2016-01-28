@@ -32,6 +32,8 @@ public class UserProfilePrivilegeService {
         entity.setUserName(bean.getUserName());
         entity.setUserImage(bean.getUserImage());
         entity.setChildName(bean.getChildName());
+        entity.setChildGender(bean.getChildGender());
+        repository.save(entity);
     }
 
     public UserProfilePrivilegeBean getUserProfilePrivilege() {
@@ -40,7 +42,7 @@ public class UserProfilePrivilegeService {
         return converter.convert(entity);
     }
 
-    private UserProfilePrivilegeEntity findEntity(){
+    private UserProfilePrivilegeEntity findEntity() {
         Iterable<UserProfilePrivilegeEntity> all = repository.findAll();
         List<UserProfilePrivilegeEntity> list = Lists.newArrayList(all);
         if (list.isEmpty()) {

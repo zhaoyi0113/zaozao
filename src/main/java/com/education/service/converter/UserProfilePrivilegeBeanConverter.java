@@ -18,6 +18,7 @@ public class UserProfilePrivilegeBeanConverter implements Converter<UserProfileP
         bean.setId(source.getId());
         bean.setUserImage(source.getUserImage());
         bean.setUserName(source.getUserName());
+        bean.setChildGender(source.getChildGender());
         return bean;
     }
 }

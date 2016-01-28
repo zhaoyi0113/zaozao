@@ -1,6 +1,7 @@
 package com.education.service;
 
 import com.education.formbean.UserChildrenRegisterBean;
+import com.education.formbean.UserProfilePrivilegeBean;
 
 /**
  * Created by yzzhao on 12/12/15.
@@ -39,6 +40,8 @@ public class WeChatUserInfo {
     private String errmsg;
 
     private UserChildrenRegisterBean child;
+
+    private UserProfilePrivilegeBean privilege;
 
     public String getSubscribe() {
         return subscribe;
@@ -174,5 +177,13 @@ public class WeChatUserInfo {
 
     public void setChild(UserChildrenRegisterBean child) {
         this.child = child;
+    }
+
+    public UserProfilePrivilegeBean getPrivilege() {
+        return privilege;
+    }
+
+    public void setPrivilege(UserProfilePrivilegeBean privilege) {
+        this.privilege = privilege;
     }
 }

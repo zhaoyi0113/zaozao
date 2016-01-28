@@ -3,6 +3,7 @@ package com.education.ws;
 import com.education.auth.TokenAccess;
 import com.education.formbean.UserChildrenRegisterBean;
 import com.education.service.ParentService;
+import com.education.service.UserProfilePrivilegeService;
 import com.education.service.UserService;
 import com.education.service.WeChatUserInfo;
 import com.education.ws.util.ContextKeys;
@@ -31,6 +32,9 @@ public class UserAPI {
     @Autowired
     private ParentService parentService;
 
+    @Autowired
+    private UserProfilePrivilegeService privilegeService;
+
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @TokenAccess(requireAccessToken = true)
@@ -38,6 +42,7 @@ public class UserAPI {
         WeChatUserInfo userInfo  = (WeChatUserInfo) context.getProperty(ContextKeys.WECHAT_USER);
         UserChildrenRegisterBean child = parentService.getUserChild(userInfo.getUserId());
         userInfo.setChild(child);
+        userInfo.setPrivilege(privilegeService.getUserProfilePrivilege());
         return Response.ok(userInfo).build();
     }
 
