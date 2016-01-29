@@ -60,6 +60,10 @@ public class BackendOnlineUserService {
         return historyService.getUserAccessHistory(userId, pageIdx, number, courseAccessFlag);
     }
 
+    public int getUserAccessCount(int userId){
+        return historyService.getUesrAccessCount(userId);
+    }
+
     private Pageable createPagable(int pageIdx, int number) {
         return new PageRequest(pageIdx, number, new Sort(Sort.Direction.DESC, "userId"));
     }

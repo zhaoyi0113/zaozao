@@ -6,8 +6,7 @@
         <tr ng-repeat="user in users" ng-model="user">
             <hr/>
             <td>
-                <!-- <a ui-sref='home.online_user_analystic_detail({userId: user.userId})'><strong>{{user.nickname}}</strong></a> -->
-                <strong>{{user.nickname}}</strong>
+                <a ui-sref='home.online_user_detail({userId: user.userId, userName: user.nickname})'><strong>{{user.nickname}}</strong></a>
             </td>
             <!-- <td>
                 {{user.subscribe_time}}
@@ -15,5 +14,6 @@
             
         </tr>
     </table>
-
+    <uib-pagination total-items="totalCourseCount" ng-model="pageIdx" max-size="5" class="pagination-sm" boundary-links="true" force-ellipses="true" boundary-link-numbers="true" num-pages="totalPages" ng-change="pageChanged()"></uib-pagination>
+    <hr/>
 </div>

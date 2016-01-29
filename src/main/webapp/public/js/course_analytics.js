@@ -5,7 +5,7 @@ define(['angular', 'angular-bootstrap'], function(angular) {
 
 	course.controller('CourseAnalyticsController', ['$scope', '$location', '$state', '$http',
 		function($scope, $location, $state, $http) {
-			$scope.number = 20;
+			$scope.number = 10;
 			$scope.pageIdx = 1;
 			$scope.headers = ['Name', 'Publish Date', 'PV(Page View)'];
 			loadCourseAnalytics();
@@ -15,6 +15,8 @@ define(['angular', 'angular-bootstrap'], function(angular) {
 					$scope.totalCourseCount = e;
 					$scope.totalPages = Math.round(e / $scope.number + 0.5);
 					console.log('total pages ', $scope.totalPages);
+					console.log('total items ', $scope.totalCourseCount);
+					
 				});
 			$scope.pageChanged = function() {
 				loadCourseAnalytics();
@@ -50,7 +52,7 @@ define(['angular', 'angular-bootstrap'], function(angular) {
 		function($scope, $http, $stateParams, $location) {
 			$scope.courseId = $stateParams.courseId;
 			$scope.pageIdx = 1;
-			$scope.number = 20;
+			$scope.number = 10;
 			loadCourseAnalytics();
 			$scope.headers=['User Name', 'Date', 'Access Type'];
 			$scope.userAccessList = [{flag:'aaa'}];

@@ -1,21 +1,18 @@
 <div>
-	<h2>Course: {{course.name}} User Access List</h2>
-	<table class="table table-striped table-bordered">
-        <tr><th ng-repeat="head in headers" ng-model="head"><p>{{head}}</p></th></tr>
+	<h2>{{userName}}</h2>
 
-        
-        <tr ng-repeat="access in userAccessList" ng-model="access">
+	<table class="table table-striped table-bordered">
+        <th ng-repeat="head in headers" ng-model="head"><p>{{head}}</p></th>
+
+        <tr ng-repeat="user in users" ng-model="user">
             
             <td>
-                {{access.userInfo.nickname}}
+                <strong>{{user.course.name}}</strong>
             </td>
             <td>
-                {{access.accessDate}}
+            	{{user.timeCreated}}
             </td>
-            <td>
-               {{access.flag}}
-            </td>
-
+            <td>{{user.accessFlag}}</td>
         </tr>
     </table>
     <uib-pagination total-items="totalCourseCount" ng-model="pageIdx" max-size="5" class="pagination-sm" boundary-links="true" force-ellipses="true" boundary-link-numbers="true" num-pages="totalPages" ng-change="pageChanged()"></uib-pagination>

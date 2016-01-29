@@ -119,4 +119,7 @@ public class UserCourseHistoryService {
         return beans;
     }
 
+    public int getUesrAccessCount(int userId){
+        return historyRepository.findByUserId(userId).size();
+    }
 }

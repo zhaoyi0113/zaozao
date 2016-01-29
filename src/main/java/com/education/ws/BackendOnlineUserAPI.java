@@ -47,5 +47,9 @@ public class BackendOnlineUserAPI {
         return Response.ok(userService.getUserAccessCourseHistory(userId, pageIdx, number, flag)).build();
     }
 
-
+    @Path("/user_access_count")
+    @GET
+    public Response getUserAccessCount(@QueryParam("user_id") int userId){
+        return Response.ok(userService.getUserAccessCount(userId)).build();
+    }
 }
