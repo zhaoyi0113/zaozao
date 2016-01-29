@@ -1,1 +1,0 @@
-alter table `course` change COLUMN `index` `day_number` int default 0;

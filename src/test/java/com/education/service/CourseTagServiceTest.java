@@ -80,6 +80,6 @@ public class CourseTagServiceTest extends AbstractServiceTest {
         courseBean.setTags(courseTagId + ",2,3");
         int courseId = courseService.createCourse(courseBean);
         List<CourseTagBean> tags = courseTagService.getCourseTagsByCourseId(courseId);
-        Assert.assertEquals(3, tags.size());
+        Assert.assertEquals(1, tags.size());
     }
 }

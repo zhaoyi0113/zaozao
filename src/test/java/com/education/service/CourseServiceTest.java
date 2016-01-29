@@ -173,7 +173,6 @@ public class CourseServiceTest extends AbstractServiceTest {
 
         String name = System.currentTimeMillis() + "";
         CourseRegisterBean courseBean = createCourseBean(name);
-        courseBean.setTags("1,2,3");
         courseBean.setPv(999);
         int id = courseService.createCourse(courseBean);
         CourseQueryBean course = courseService.queryCourse(id + "");

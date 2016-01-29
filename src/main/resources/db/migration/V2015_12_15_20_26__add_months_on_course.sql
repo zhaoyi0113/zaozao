@@ -1,2 +1,0 @@
-ALTER TABLE `course` ADD COLUMN `months` int NULL;
-ALTER TABLE `course` ADD COLUMN `tags` VARCHAR(100) NULL;

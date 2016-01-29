@@ -1,1 +1,0 @@
-ALTER TABLE `user_profile_privilege` ADD COLUMN `child_gender` int DEFAULT 1;

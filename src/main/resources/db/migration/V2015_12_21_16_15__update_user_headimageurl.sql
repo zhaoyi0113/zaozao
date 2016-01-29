@@ -1,1 +1,0 @@
-ALTER TABLE `user` change COLUMN `headimageurl` `headimageurl` VARCHAR (255);

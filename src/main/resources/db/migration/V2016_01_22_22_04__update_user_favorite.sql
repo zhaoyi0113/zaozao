@@ -1,2 +1,0 @@
-ALTER TABLE `user_favorite`
-CHANGE COLUMN `id` `id` INT(10) NOT NULL AUTO_INCREMENT ;

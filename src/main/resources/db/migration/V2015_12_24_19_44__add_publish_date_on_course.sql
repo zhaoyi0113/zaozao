@@ -1,1 +1,0 @@
-ALTER  TABLE `course` ADD COLUMN `publishDate` date DEFAULT null;

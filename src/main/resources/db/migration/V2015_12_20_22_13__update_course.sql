@@ -1,1 +1,0 @@
-alter table `course` drop column `months`
