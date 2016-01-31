@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 
+import javax.ws.rs.QueryParam;
 import java.util.Date;
 import java.util.List;
 
@@ -48,4 +49,7 @@ public interface CourseRepository extends PagingAndSortingRepository<CourseEntit
 
     @Query("select id, name from CourseEntity")
     List<Object[]> findIdAndNames();
+
+    @Query("select sum(pv) from CourseEntity")
+    long getTotalPv();
 }

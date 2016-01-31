@@ -211,4 +211,10 @@ public class CourseRegisterAPI {
     public Response getCourseAnalyticsCount(@QueryParam("id") int courseId) {
         return Response.ok(courseService.getcourseUserAnalyticsCount(courseId)).build();
     }
+
+    @GET
+    @Path("/total_course_pv")
+    public Response getTotalCoursePV(){
+        return Response.ok(courseService.getTotalCoursePV()).build();
+    }
 }

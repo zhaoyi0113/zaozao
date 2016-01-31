@@ -18,6 +18,13 @@ define(['angular', 'angular-bootstrap'], function(angular) {
 					console.log('total items ', $scope.totalCourseCount);
 					
 				});
+			$http.get($location.protocol() + "://" + $location.host() + ":" +
+					$location.port() + '/education/zaozao/course/total_course_pv')
+				.success(function(e) {
+					$scope.totalPV = e;
+					
+					
+				});
 			$scope.pageChanged = function() {
 				loadCourseAnalytics();
 			}

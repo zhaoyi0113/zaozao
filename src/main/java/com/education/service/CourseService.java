@@ -228,4 +228,8 @@ public class CourseService {
     public int getcourseUserAnalyticsCount(int courseId){
         return userCourseHistoryService.getCourseUserAnalyticsCount(courseId);
     }
+
+    public long getTotalCoursePV(){
+        return courseRepository.getTotalPv();
+    }
 }
