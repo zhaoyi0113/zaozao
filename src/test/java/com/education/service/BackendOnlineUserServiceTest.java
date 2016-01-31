@@ -4,12 +4,14 @@ import com.github.springtestdbunit.annotation.DatabaseSetup;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 /**
  * Created by yzzhao on 1/15/16.
  */
+@Transactional
 public class BackendOnlineUserServiceTest extends AbstractServiceTest{
 
     @Autowired
