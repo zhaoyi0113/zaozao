@@ -33,6 +33,7 @@ public class UserProfilePrivilegeService {
         entity.setUserImage(bean.getUserImage());
         entity.setChildName(bean.getChildName());
         entity.setChildGender(bean.getChildGender());
+        entity.setBloodType(bean.getBloodType());
         repository.save(entity);
     }
 

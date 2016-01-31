@@ -14,6 +14,7 @@ define(['angular', 'user_service', 'ui-router', 'jquery', 'login_service'], func
 				$scope.childName = !!e.childName;
 				$scope.childBirthdate = !!e.childBirthdate;
 				$scope.childGender = !!e.childGender;
+				$scope.childBloodType = !!e.bloodType;
 			}).error(function(e){
 
 			});
@@ -31,7 +32,8 @@ define(['angular', 'user_service', 'ui-router', 'jquery', 'login_service'], func
                         user_image: $scope.userImage?1:0,
                         child_name: $scope.childName?1:0,
                         child_birthdate: $scope.childBirthdate?1:0,
-                        child_gender: $scope.childGender?1:0
+                        child_gender: $scope.childGender?1:0,
+                        blood_type: $scope.childBloodType?1:0
                     })
                 }).success(function(e){
                 	$state.go('home');

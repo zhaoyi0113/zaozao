@@ -16,7 +16,7 @@ public class ChildrenEntity {
     private Date birthdate;
     private int parentId;
     private String gender;
-
+    private String bloodType;
 
     @Id
     @GeneratedValue
@@ -72,5 +72,14 @@ public class ChildrenEntity {
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+    @Column(name = "bloodType")
+    public String getBloodType() {
+        return bloodType;
+    }
+
+    public void setBloodType(String bloodType) {
+        this.bloodType = bloodType;
     }
 }

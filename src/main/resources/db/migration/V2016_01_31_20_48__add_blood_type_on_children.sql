@@ -1,0 +1,2 @@
+ALTER TABLE `children`
+ADD COLUMN `bloodType` VARCHAR(45) NULL DEFAULT NULL AFTER `gender`;

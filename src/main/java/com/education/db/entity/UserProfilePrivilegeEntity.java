@@ -15,6 +15,7 @@ public class UserProfilePrivilegeEntity {
     private int childName;
     private int childBirthdate;
     private int childGender;
+    private int bloodType;
 
     @Id
     @GeneratedValue
@@ -70,5 +71,14 @@ public class UserProfilePrivilegeEntity {
 
     public void setChildGender(int childGender) {
         this.childGender = childGender;
+    }
+
+    @Column(name = "blood_type")
+    public int getBloodType() {
+        return bloodType;
+    }
+
+    public void setBloodType(int bloodType) {
+        this.bloodType = bloodType;
     }
 }

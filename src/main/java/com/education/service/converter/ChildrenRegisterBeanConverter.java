@@ -20,6 +20,7 @@ public class ChildrenRegisterBeanConverter implements Converter<ChildrenEntity, 
         bean.setChildName(source.getName());
         bean.setGender(source.getGender());
         bean.setAge(source.getAge());
+        bean.setBloodType(source.getBloodType());
         return bean;
     }
 }

@@ -97,6 +97,7 @@ public class ParentService {
         entity.setGender(bean.getGender());
         entity.setBirthdate(WSUtility.stringToDate(bean.getChildBirthdate()));
         entity.setName(bean.getChildName());
+        entity.setBloodType(bean.getBloodType());
         if (bean.getMediaId() != null) {
             String fileName = downMediaFromWeChat(bean.getMediaId(), userId);
             userEntity.setHeadimageurl(fileName);
@@ -154,6 +155,7 @@ public class ParentService {
         entity.setGender(bean.getGender());
         entity.setParentId(parentId);
         entity.setAge(bean.getAge());
+        entity.setBloodType(bean.getBloodType());
         return entity;
     }
 

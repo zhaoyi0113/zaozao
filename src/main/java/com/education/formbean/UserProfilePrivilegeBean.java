@@ -24,6 +24,9 @@ public class UserProfilePrivilegeBean {
     @FormParam("child_gender")
     private int childGender;
 
+    @FormParam("blood_type")
+    private int bloodType;
+
     public int getId() {
         return id;
     }
@@ -70,5 +73,14 @@ public class UserProfilePrivilegeBean {
 
     public void setChildGender(int childGender) {
         this.childGender = childGender;
+    }
+
+
+    public int getBloodType() {
+        return bloodType;
+    }
+
+    public void setBloodType(int bloodType) {
+        this.bloodType = bloodType;
     }
 }

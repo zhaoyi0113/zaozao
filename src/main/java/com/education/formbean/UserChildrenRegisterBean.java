@@ -25,6 +25,9 @@ public class UserChildrenRegisterBean {
     @FormParam("media_id")
     private String mediaId;
 
+    @FormParam("blood_type")
+    private String bloodType;
+
     public String getGender() {
         return gender;
     }
@@ -71,5 +74,13 @@ public class UserChildrenRegisterBean {
 
     public void setMediaId(String mediaId) {
         this.mediaId = mediaId;
+    }
+
+    public String getBloodType() {
+        return bloodType;
+    }
+
+    public void setBloodType(String bloodType) {
+        this.bloodType = bloodType;
     }
 }
