@@ -1,13 +1,19 @@
 package com.education.ws;
 
 import com.education.auth.Login;
+import com.education.auth.TokenAccess;
 import com.education.service.BackendOnlineUserService;
+import com.education.service.OnlineUserInfo;
 import com.education.service.WeChatUserInfo;
+import com.education.ws.util.ContextKeys;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.ws.rs.*;
+import javax.ws.rs.container.ContainerRequestContext;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -27,7 +33,7 @@ public class BackendOnlineUserAPI {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response queryAllUsers(@QueryParam("page_index") int pageIdx, @QueryParam("number") int number) {
-        List<WeChatUserInfo> userList = userService.getUserList(pageIdx, number);
+        List<OnlineUserInfo> userList = userService.getUserList(pageIdx, number);
         return Response.ok(userList).build();
     }
 
@@ -52,4 +58,5 @@ public class BackendOnlineUserAPI {
     public Response getUserAccessCount(@QueryParam("user_id") int userId){
         return Response.ok(userService.getUserAccessCount(userId)).build();
     }
+
 }

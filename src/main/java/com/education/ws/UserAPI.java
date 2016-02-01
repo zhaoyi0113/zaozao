@@ -7,7 +7,6 @@ import com.education.service.UserProfilePrivilegeService;
 import com.education.service.UserService;
 import com.education.service.WeChatUserInfo;
 import com.education.ws.util.ContextKeys;
-import com.education.ws.util.HeaderKeys;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.ws.rs.GET;
@@ -39,12 +38,11 @@ public class UserAPI {
     @Produces(MediaType.APPLICATION_JSON)
     @TokenAccess(requireAccessToken = true)
     public Response getUserInfo(@Context ContainerRequestContext context) {
-        WeChatUserInfo userInfo  = (WeChatUserInfo) context.getProperty(ContextKeys.WECHAT_USER);
+        WeChatUserInfo userInfo = (WeChatUserInfo) context.getProperty(ContextKeys.WECHAT_USER);
         UserChildrenRegisterBean child = parentService.getUserChild(userInfo.getUserId());
         userInfo.setChild(child);
         userInfo.setPrivilege(privilegeService.getUserProfilePrivilege());
         return Response.ok(userInfo).build();
     }
-
 
 }

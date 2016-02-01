@@ -16,14 +16,14 @@ define(['angular', 'angular-bootstrap'], function(angular) {
 					$scope.totalPages = Math.round(e / $scope.number + 0.5);
 					console.log('total pages ', $scope.totalPages);
 					console.log('total items ', $scope.totalCourseCount);
-					
+
 				});
 			$http.get($location.protocol() + "://" + $location.host() + ":" +
 					$location.port() + '/education/zaozao/course/total_course_pv')
 				.success(function(e) {
 					$scope.totalPV = e;
-					
-					
+
+
 				});
 			$scope.pageChanged = function() {
 				loadCourseAnalytics();
@@ -61,42 +61,51 @@ define(['angular', 'angular-bootstrap'], function(angular) {
 			$scope.pageIdx = 1;
 			$scope.number = 10;
 			loadCourseAnalytics();
-			$scope.headers=['User Name', 'Date', 'Access Type'];
-			$scope.userAccessList = [{flag:'aaa'}];
+			$scope.headers = ['User Name', 'Date', 'Access Type'];
+			$scope.userAccessList = [{
+				flag: 'aaa'
+			}];
 			$http.get($location.protocol() + "://" + $location.host() + ":" + $location.port() +
-						'/education/zaozao/course/querycourse/'+ $scope.courseId)
-					.success(function(e) {
-						console.log('get course:', e);
-						$scope.course = e;
-					}).error(function(e) {
+					'/education/zaozao/course/querycourse/' + $scope.courseId)
+				.success(function(e) {
+					console.log('get course:', e);
+					$scope.course = e;
+				}).error(function(e) {
 
-					});
+				});
 			$http.get($location.protocol() + "://" + $location.host() + ":" + $location.port() +
-						'/education/zaozao/course/analytics_count?id='+ $scope.courseId)
-					.success(function(e) {
-						console.log('get course count:', e);
-						$scope.totalCourseCount = e;
-						$scope.totalPages = Math.round(e / $scope.number +0.5);
-						console.log('total page:',$scope.totalPages);
-					}).error(function(e) {
+					'/education/zaozao/course/analytics_count?id=' + $scope.courseId)
+				.success(function(e) {
+					console.log('get course count:', e);
+					$scope.totalCourseCount = e;
+					$scope.totalPages = Math.round(e / $scope.number + 0.5);
+					console.log('total page:', $scope.totalPages);
+				}).error(function(e) {
 
-					});
+				});
+
 			function loadCourseAnalytics() {
 				$http.get($location.protocol() + "://" + $location.host() + ":" + $location.port() +
 						'/education/zaozao/course/analytics?id=' + $scope.courseId + '&page_index=' + ($scope.pageIdx - 1) + '&number=' + $scope.number)
 					.success(function(e) {
 						console.log('get course analytics:', e);
 						$scope.userAccessList = e;
-						for(var i=0; i<e.length;i++){
-							$scope.userAccessList[i].accessDate = new Date(e[i].accessDate);
+						for (var i = 0; i < e.length; i++) {
+							$scope.userAccessList[i].accessDate =
+								new Date(e[i].accessDate);
+							var date = new Date();
+							var utc = $scope.userAccessList[i].accessDate.getTime() + date.getTimezoneOffset() * 60000;
+							var calcTime = utc + 3600000 * 8;
+							$scope.userAccessList[i].accessDate = (new Date(calcTime)).toLocaleString();
+
 						}
 					}).error(function(e) {
 
 					});
 			}
 
-			$scope.pageChanged = function(){
-				console.log('page changed to '+$scope.pageIdx);
+			$scope.pageChanged = function() {
+				console.log('page changed to ' + $scope.pageIdx);
 				loadCourseAnalytics();
 			}
 		}

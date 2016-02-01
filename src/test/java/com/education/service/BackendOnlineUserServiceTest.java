@@ -20,7 +20,7 @@ public class BackendOnlineUserServiceTest extends AbstractServiceTest{
     @Test
     @DatabaseSetup(value = "classpath:/com/education/service/backend_online_user_service_test.xml")
     public void testGetUserList(){
-        List<WeChatUserInfo> userList = userService.getUserList(0, 5);
+        List<OnlineUserInfo> userList = userService.getUserList(0, 5);
         Assert.assertEquals(5, userList.size());
         Assert.assertEquals(100010, userList.get(0).getUserId());
         userList = userService.getUserList(1, 5);

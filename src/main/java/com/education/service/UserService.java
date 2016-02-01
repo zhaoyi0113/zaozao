@@ -1,6 +1,5 @@
 package com.education.service;
 
-import com.education.db.entity.LoginHistoryEntity;
 import com.education.db.entity.UserEntity;
 import com.education.db.jpa.UserRepository;
 import com.education.exception.BadRequestException;
